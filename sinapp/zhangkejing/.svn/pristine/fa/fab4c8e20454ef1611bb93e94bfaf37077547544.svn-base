@@ -1,1 +1,0 @@
-﻿<?phpinclude("getTileToJson.php");function getUnexistTile($Tile_config){	$id = $_GET['tile'];	$arr = explode("_", $id);	$nx = (int)$arr[0];	$ny = (int)$arr[1];	$bx = $Tile_config['width'];	$by = $Tile_config['height'];	$x1 = $nx * $bx;	$y1 = $ny * $by;	$x2 = ($nx+1) * $bx;	$y2 = ($ny+1) * $by;		return getTileToJson($x1, $y1, $x2, $y2, $Tile_config);}?>

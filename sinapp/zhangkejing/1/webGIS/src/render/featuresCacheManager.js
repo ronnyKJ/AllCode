@@ -1,1 +1,0 @@
-//--------------- zkj 20120414--------------------var FeaturesCacheManager = {	cache : {},	renderedTileCount : 0,	onRenderTileOver : function(l)	{		if(++this.renderedTileCount >= l) // render finished			this.cache = {};	}	};
