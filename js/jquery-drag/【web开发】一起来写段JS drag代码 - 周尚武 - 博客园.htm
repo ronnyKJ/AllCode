@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>【web开发】一起来写段JS drag代码 - 周尚武 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/style.css">
+<link type="text/css" rel="stylesheet" href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/common2.css">
+<link type="text/css" rel="stylesheet" href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/shStyle.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/275095923/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/275095923/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/275095923/wlwmanifest.xml"> 
+<script type="text/javascript" async="" src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/ga.js"></script><script async="" type="text/javascript" src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/gpt.js"></script><script src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/common.js" type="text/javascript"></script>
+<script src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/json2.js" type="text/javascript"></script>
+<script type="text/javascript" src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/syntaxHighlighter.js"></script>
+<script async="" type="text/javascript" src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/google_ads_gpt.js"></script></head>
+<body>
+<a name="top"></a>
+<form method="post" action="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/【web开发】一起来写段JS drag代码 - 周尚武 - 博客园.htm" id="Form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+var currentBlogApp='275095923';
+//]]>
+</script>
+
+    
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/275095923/">275095923</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="MyLinks1_HomeLink" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="MyLinks1_MyHomeLink" class="menu" href="http://www.cnblogs.com/275095923/">首页</a></li>
+<li><a class="menu" href="http://q.cnblogs.com/">博问</a></li>
+<li><a class="menu" href="http://home.cnblogs.com/ing/">闪存</a></li>
+<li><a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://www.cnblogs.com/275095923/admin/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="MyLinks1_ContactLink" class="menu" rel="nofollow" href="http://space.cnblogs.com/msg/send/%e5%91%a8%e5%b0%9a%e6%ad%a6">联系</a></li>
+<li><a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/275095923/rss">订阅</a>
+<!--<a id="MyLinks1_XMLLink" class="aHeaderXML" href="http://www.cnblogs.com/275095923/rss"><img src="/Skins/Custom/images/rss.gif" alt="订阅" /></a>--></li>
+<li><a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://www.cnblogs.com/275095923/admin/EditPosts.aspx">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			
+<!--done-->
+随笔-41&nbsp;
+文章-4&nbsp;
+评论-19&nbsp;
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+				
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/【web开发】一起来写段JS drag代码 - 周尚武 - 博客园.htm">【web开发】一起来写段JS drag代码</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>记得几年前刚接触前端的时候，觉得能在网页上拖移元素是一件很爽的事，能写一段这样的代码是件很了不起的事情，于是乎google,baidu蛮多代码来学习，大致明白了思路，总结如下：</p>
+<p>1、为要被拖移三个事件,onmousedown,onmousemove,onmouseup</p>
+<p>2、在onmousemove事件中来处理被拖移元素的位置的变化，其实说白了元素要移动的距离就是鼠标两次移动之间的距离。</p>
+<p>3、其中还包括setCapture,releaseCapture，目的就是为了被搬移的元素始终能拥有焦点。</p>
+<p>以前大致就是以前的认识，可以参见<a href="http://heshengyu84a.blog.163.com/blog/static/34640681200711268630756/">http://heshengyu84a.blog.163.com/blog/static/34640681200711268630756/</a>这个实现，后来随着工作要求的提高，做的工作都是要跨浏览器的，所以就重新构思并参考一些开源代码做了实现。</p>
+<p>现在大致思路可分析为以下几步，我一一为您展现。</p>
+<p>1、&nbsp;我们是为了拖移而搬移吗？当然不是，如google地图，当每次搬移后他的目的是为了计算当前空间坐标来加载地理信息。所以我这里设计了几个常见事件。以下是事件列表</p>
+<p>onDragStart ：元素发生拖移时，如果注册该事件，触发时会接收到两个参数x,y分别为被搬移元素发生拖移时的坐标</p>
+<p>onDrag ：&nbsp;&nbsp; 元素拖移过程中，如果注册该事件，触发时会接收到两个参数nx,ny拖移过程中坐标发生的偏移量 </p>
+<p>onDragEnd ：元素发生结束时，如果注册该事件，触发时会接收到两个参数x,y分别为被搬移元素的当前坐标</p>
+<p>2、&nbsp;onmousedown事件应该绑定给谁?以前我都是绑定给被拖移元素的，后来发现很不灵活，现在设计为可绑定给任意不相关的元素同时实现该元素的拖动。</p>
+<p>3、&nbsp;如何来实现元素搬移过程中一直拥有焦点？因为要跨浏览器，所以就不再用setCapture之类的方法，这里换种思维，为什么元素元素搬移过程中没有了焦点呢，主要是我们把onmousemove事件注册到了被拖移的元素上，而这并不是必需的，所以当元素触发onmousedown事件后，我把onmousemove、onmouseup事件直接注册到document上，这样鼠标移到哪都会有焦点。</p>
+<p>说完了这么多，直接看代码结构吧！</p>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<div><div id="highlighter_96636" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div><div class="line number48 index47 alt1">48</div><div class="line number49 index48 alt2">49</div><div class="line number50 index49 alt1">50</div><div class="line number51 index50 alt2">51</div><div class="line number52 index51 alt1">52</div><div class="line number53 index52 alt2">53</div><div class="line number54 index53 alt1">54</div><div class="line number55 index54 alt2">55</div><div class="line number56 index55 alt1">56</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">Drag = {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">obj: </code><code class="javascript keyword">null</code><code class="javascript plain">,</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">init: </code><code class="javascript keyword">function</code> <code class="javascript plain">(options) {</code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">options.handler.onmousedown = </code><code class="javascript keyword">this</code><code class="javascript plain">.start;</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">options.handler.root = options.root || options.handler;</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">root = options.handler.root;</code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">root.onDragStart = options.dragStart || </code><code class="javascript keyword">new</code> <code class="javascript plain">Function();</code></div><div class="line number8 index7 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">root.onDrag = options.onDrag || </code><code class="javascript keyword">new</code> <code class="javascript plain">Function();</code></div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">root.onDragEnd = options.onDragEnd || </code><code class="javascript keyword">new</code> <code class="javascript plain">Function();</code></div><div class="line number10 index9 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">},</code></div><div class="line number11 index10 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">start: </code><code class="javascript keyword">function</code> <code class="javascript plain">(e) {</code><code class="javascript comments">//此时的this是handler</code></div><div class="line number12 index11 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">obj = Drag.obj = </code><code class="javascript keyword">this</code><code class="javascript plain">;</code></div><div class="line number13 index12 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">obj.style.cursor = </code><code class="javascript string">'move'</code><code class="javascript plain">;</code></div><div class="line number14 index13 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">e = e || Drag.fixEvent(window.event);</code></div><div class="line number15 index14 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">ex = e.pageX;</code></div><div class="line number16 index15 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">ey = e.pageY;</code></div><div class="line number17 index16 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">obj.lastMouseX = ex;</code></div><div class="line number18 index17 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">obj.lastMouseY = ey;</code></div><div class="line number19 index18 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">x = obj.root.offsetLeft;</code></div><div class="line number20 index19 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">y = obj.root..offsetTop;</code></div><div class="line number21 index20 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">obj.root.style.left = x + </code><code class="javascript string">"px"</code><code class="javascript plain">;</code></div><div class="line number22 index21 alt1"><code class="javascript plain">obj.root.style.top = y + </code><code class="javascript string">"px"</code><code class="javascript plain">;</code></div><div class="line number23 index22 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">document.onmouseup = Drag.end;</code></div><div class="line number24 index23 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">document.onmousemove = Drag.drag;</code></div><div class="line number25 index24 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">obj.root.onDragStart(x, y);</code></div><div class="line number26 index25 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">},</code></div><div class="line number27 index26 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">drag: </code><code class="javascript keyword">function</code> <code class="javascript plain">(e) {</code></div><div class="line number28 index27 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">e = e || Drag.fixEvent(window.event);</code></div><div class="line number29 index28 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">ex = e.pageX;</code></div><div class="line number30 index29 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">ey = e.pageY;</code></div><div class="line number31 index30 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">root = Drag.obj.root;</code></div><div class="line number32 index31 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">x = root.style.left ? parseInt(root.style.left) : 0;</code></div><div class="line number33 index32 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">y = root.style.top ? parseInt(root.style.top) : 0;</code></div><div class="line number34 index33 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">nx = ex - Drag.obj.lastMouseX + x;</code></div><div class="line number35 index34 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">ny = ey - Drag.obj.lastMouseY + y;</code></div><div class="line number36 index35 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">root.style.left = nx + </code><code class="javascript string">"px"</code><code class="javascript plain">;</code></div><div class="line number37 index36 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">root.style.top = ny + </code><code class="javascript string">"px"</code><code class="javascript plain">;</code></div><div class="line number38 index37 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">Drag.obj.root.onDrag(nx, ny);</code></div><div class="line number39 index38 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">Drag.obj.lastMouseX = ex;</code></div><div class="line number40 index39 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">Drag.obj.lastMouseY = ey;</code></div><div class="line number41 index40 alt2">&nbsp;</div><div class="line number42 index41 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">},</code></div><div class="line number43 index42 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">end: </code><code class="javascript keyword">function</code> <code class="javascript plain">(e) {</code></div><div class="line number44 index43 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">x = Drag.obj.root.style.left ? parseInt(Drag.obj.root.style.left) : 0;</code></div><div class="line number45 index44 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">y = Drag.obj.root.style.top ? parseInt(Drag.obj.root.style.top) : 0;</code></div><div class="line number46 index45 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">Drag.obj.root.onDragEnd(x, y);</code></div><div class="line number47 index46 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">document.onmousemove = </code><code class="javascript keyword">null</code><code class="javascript plain">;</code></div><div class="line number48 index47 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">document.onmouseup = </code><code class="javascript keyword">null</code><code class="javascript plain">;</code></div><div class="line number49 index48 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">Drag.obj = </code><code class="javascript keyword">null</code><code class="javascript plain">;</code></div><div class="line number50 index49 alt1"><code class="javascript plain">},</code></div><div class="line number51 index50 alt2"><code class="javascript plain">fixEvent: </code><code class="javascript keyword">function</code> <code class="javascript plain">(e) {</code></div><div class="line number52 index51 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">e.pageX = e.clientX + document.documentElement.scrollLeft;</code></div><div class="line number53 index52 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">e.pageY = e.clientY + document.documentElement.scrollTop;</code></div><div class="line number54 index53 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">return</code> <code class="javascript plain">e;</code></div><div class="line number55 index54 alt2"><code class="javascript plain">}</code></div><div class="line number56 index55 alt1"><code class="javascript plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<p>上面init主要处理一些初如化工作，如记录onDragStart、onDrag、onDragEnd三个事件, handler为处理拖动事件的那个元素，root为被拖动的元素。</p>
+<p>当在handler上点击后触发Drag.start方法，Drag.start主要为记录住鼠标相对整个页面的位置;给document注册onmouseup、onmousemove事件，及触发onDragStart事件。</p>
+<p>Drag.drag方法也很简单，主要作用就是更新被搬移元素位置，同时记录住鼠标相对整个页面的位置。</p>
+<p>Drag.end方法就更简单了，就是做一些收尾工作。</p>
+<p>&nbsp;</p>
+<p>最后给大家附段使用的代码吧,祝大家学习愉快！</p>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<div><div id="highlighter_707753" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">Drag.init({</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">handler: document.getElementById(</code><code class="javascript string">"handler"</code><code class="javascript plain">),</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">root:document.getElementById(</code><code class="javascript string">"root"</code><code class="javascript plain">);</code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="javascript plain">&lt;div id=</code><code class="javascript string">"root"</code><code class="javascript plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">&lt;h2 id=</code><code class="javascript string">"handler"</code><code class="javascript plain">&gt;&lt;/h2&gt;</code></div><div class="line number8 index7 alt1"><code class="javascript plain">&lt;/div&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div></div>
+<script type="text/javascript">
+if ($ != jQuery) {
+	$ = jQuery.noConflict();
+}
+var isLogined = false;
+var cb_blogId = 47644;
+var cb_entryId = 1901352;
+var cb_blogApp = "275095923";
+var cb_blogUserGuid = "dc00470b-63cf-dd11-9e4d-001cf0cd104b";
+var cb_entryCreatedDate = '2010/12/9 15:32:00';
+</script>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/275095923/category/269847.html">Javascript经验</a></div>
+<div id="EntryTag"></div>
+<div id="green_channel" style="">
+绿色通道：<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(cb_entryId,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a><a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a><a id="green_channel_favorite" onclick="AddToWz(1901352);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/%e5%91%a8%e5%b0%9a%e6%ad%a6" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/icon_sina.gif" alt=""></a>
+</div>
+<div id="digg_block">
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/275095923/">周尚武</a><br><a href="http://home.cnblogs.com/u/275095923/followees">关注 - 0</a><br><a href="http://home.cnblogs.com/u/275095923/followers">粉丝 - 0</a></div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor"></div>
+<div id="author_profile_follow"><a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a></div>
+</div>
+<div id="div_digg" style="">										
+	<div class="diggit" onclick="DiggIt(cb_entryId,cb_blogId,1)"> 
+		<span class="diggnum" id="digg_count">4</span>
+	</div>
+	<div class="buryit" onclick="DiggIt(cb_entryId,cb_blogId,2)"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">(请您对文章做出评价)</div>	
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/275095923/archive/2010/12/08/1900563.html" class="p_n_p_prefix">« </a> 博主前一篇：<a href="http://www.cnblogs.com/275095923/archive/2010/12/08/1900563.html" title="发布于2010-12-08 18:53">【web开发】教您去掉ie网页加载进度条</a><br><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901566.html" class="p_n_p_prefix">» </a> 博主后一篇：<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901566.html" title="发布于2010-12-09 19:57">【web开发】为超链接加上disabled后的故事</a><br></div>
+</div>
+<script type="text/javascript">
+LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+</script>
+
+
+
+
+		</div>
+		<div class="postDesc">posted @ 2010-12-09 15:32 <a href="http://www.cnblogs.com/275095923/">周尚武</a> 阅读(2042) <a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">评论(7)</a>  <a href="javascript:void(0)" onclick="location.href=&#39;http://www.cnblogs.com/275095923/admin/EditPosts.aspx?postid=1901352&#39;" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="AddToWz(1901352);return false;">收藏</a></div>
+	</div>
+	<img src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/1901352.html" width="1px" height="1px" alt="">
+	
+</div><!--end: topics 文章、评论容器-->
+<a name="pagedcomment"></a>
+<!--done-->
+<br>
+<div class="feedback_area_title">发表评论</div>
+<div class="feedbackNoItems"><span id="span_comment_maxid" style="display:none">2112668</span></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;johngeng&quot;,1982639,&quot;SfwlukmUWZPtqnvCEgWUS29qoHu1EnmgrlnhTj86f+oR79Rtf2/zDg==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(1982639,&quot;SfwlukmUWZPtqnvCEgWUS29qoHu1EnmgrlnhTj86f+oR79Rtf2/zDg==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=johngeng" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_0" href="javascript:__doPostBack('Comments1$CommentList$ctl00$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_0" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982639">#1楼</a><a name="1982639" id="comment_anchor_1982639"></a> <span class="comment_date">2010-12-09 15:58</span> <a id="Comments1_CommentList_NameLink_0" rel="nofllow" href="http://home.cnblogs.com/u/27720/" target="_blank">johngeng</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/johngeng" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_1982639" class="blog_comment_body">jquery的drag and drop 插件满天飞了都。。</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;铃兰草&quot;,1982681,&quot;X6A6wU+bYrdDL11XOYfp/BmSN2ksP6YeU6zwrdw5vdKL91fXPDg8zg==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(1982681,&quot;X6A6wU+bYrdDL11XOYfp/BmSN2ksP6YeU6zwrdw5vdKL91fXPDg8zg==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=%e9%93%83%e5%85%b0%e8%8d%89" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_1" href="javascript:__doPostBack('Comments1$CommentList$ctl01$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_1" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982681">#2楼</a><a name="1982681" id="comment_anchor_1982681"></a> <span class="comment_date">2010-12-09 16:26</span> <a id="Comments1_CommentList_NameLink_1" rel="nofllow" href="http://home.cnblogs.com/u/23263/" target="_blank">铃兰草</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/%e9%93%83%e5%85%b0%e8%8d%89" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_1982681" class="blog_comment_body">鼠标移到文档外面的时候会不正常<br>我也还没去解决这个问题<br>move到了body外面，然后mouseup了再到body上面</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;周尚武&quot;,1982772,&quot;rQqE8WfR5fQPYW9Q5hI1emTaAW8IsjxkKzauZblnOjs3cvv/6yLjiQ==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(1982772,&quot;rQqE8WfR5fQPYW9Q5hI1emTaAW8IsjxkKzauZblnOjs3cvv/6yLjiQ==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=%e5%91%a8%e5%b0%9a%e6%ad%a6" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_2" href="javascript:__doPostBack('Comments1$CommentList$ctl02$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_2" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982772">#3楼</a><a name="1982772" id="comment_anchor_1982772"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2010-12-09 17:12</span> <a id="Comments1_CommentList_NameLink_2" rel="nofllow" href="http://home.cnblogs.com/u/44060/" target="_blank">周尚武</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/%e5%91%a8%e5%b0%9a%e6%ad%a6" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_1982772" class="blog_comment_body"><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982639" title="查看所回复的评论">@</a>johngeng<br>是蛮多的，我并不是要大家用这个，而是为了一起学习学习背后的东西。</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;周尚武&quot;,1982777,&quot;rQqE8WfR5fQPYW9Q5hI1emTaAW8IsjxkKzauZblnOjs3cvv/6yLjiQ==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(1982777,&quot;rQqE8WfR5fQPYW9Q5hI1emTaAW8IsjxkKzauZblnOjs3cvv/6yLjiQ==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=%e5%91%a8%e5%b0%9a%e6%ad%a6" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_3" href="javascript:__doPostBack('Comments1$CommentList$ctl03$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_3" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982777">#4楼</a><a name="1982777" id="comment_anchor_1982777"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2010-12-09 17:14</span> <a id="Comments1_CommentList_NameLink_3" rel="nofllow" href="http://home.cnblogs.com/u/44060/" target="_blank">周尚武</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/%e5%91%a8%e5%b0%9a%e6%ad%a6" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_1982777" class="blog_comment_body"><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982681" title="查看所回复的评论">@</a>铃兰草<br>我这个方法是可以解决你说的那个问题的。</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;异影&quot;,1983119,&quot;IkzsyuqTr8lmFQjClbRiF8Gp9zfeh3oi5hh8Zmv+WLuk4SmRunvVRA==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(1983119,&quot;IkzsyuqTr8lmFQjClbRiF8Gp9zfeh3oi5hh8Zmv+WLuk4SmRunvVRA==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=%e5%bc%82%e5%bd%b1" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_4" href="javascript:__doPostBack('Comments1$CommentList$ctl04$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_4" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1983119">#5楼</a><a name="1983119" id="comment_anchor_1983119"></a> <span class="comment_date">2010-12-10 00:55</span> <a id="Comments1_CommentList_NameLink_4" rel="nofllow" href="http://home.cnblogs.com/u/230798/" target="_blank">异影</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/%e5%bc%82%e5%bd%b1" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_1983119" class="blog_comment_body">不错~  我最近也在研究怎么写拖拽，和动态增删DOM~~</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;铃兰草&quot;,2093245,&quot;X6A6wU+bYrdDL11XOYfp/BmSN2ksP6YeU6zwrdw5vdKL91fXPDg8zg==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(2093245,&quot;X6A6wU+bYrdDL11XOYfp/BmSN2ksP6YeU6zwrdw5vdKL91fXPDg8zg==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=%e9%93%83%e5%85%b0%e8%8d%89" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_5" href="javascript:__doPostBack('Comments1$CommentList$ctl05$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_5" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#2093245">#6楼</a><a name="2093245" id="comment_anchor_2093245"></a> <span class="comment_date">2011-05-11 16:41</span> <a id="Comments1_CommentList_NameLink_5" rel="nofllow" href="http://home.cnblogs.com/u/23263/" target="_blank">铃兰草</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/%e9%93%83%e5%85%b0%e8%8d%89" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_2093245" class="blog_comment_body"><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982777" title="查看所回复的评论">@</a>周尚武<br>最近重构自己的drag<br>down，然后move到body外面，再up，然后再回到body上<br>发现在chrome下面是可以的，Opera、FF不行，IE没测，应该也不行。<br>body以外的鼠标事件，chrome会通知js引擎，所以事件能得到响应。</span><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					　<a onclick="ReplyComment(&quot;larui&quot;,2112668,&quot;9R+3Oe4TAgrlE/ct1UDzPS90O9QfvJ7+1wHXx9hGZUN/V5QhhKm2cA==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">回复</a>　<a onclick="QuoteComment(2112668,&quot;9R+3Oe4TAgrlE/ct1UDzPS90O9QfvJ7+1wHXx9hGZUN/V5QhhKm2cA==&quot;)" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#commentform">引用</a>　<a title="查看该作者发表过的评论" href="http://www.cnblogs.com/CommentsByAuthor.aspx?author=larui" target="_blank">查看</a>　<a id="Comments1_CommentList_DeleteLink_6" href="javascript:__doPostBack('Comments1$CommentList$ctl06$DeleteLink','')"></a>&nbsp;&nbsp;<a id="Comments1_CommentList_EditLink_6" causesvalidation="False"></a>
+				</div>
+				<a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#2112668">#7楼</a><a name="2112668" id="comment_anchor_2112668"></a><a name="Post"></a> <span class="comment_date">2011-06-01 16:29</span> <a id="Comments1_CommentList_NameLink_6" rel="nofllow" href="http://home.cnblogs.com/u/305413/" target="_blank">larui</a>&nbsp;<a href="http://space.cnblogs.com/msg/send/larui" title="给此人发送站内短消息" class="sendMsg2This">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<span id="comment_body_2112668" class="blog_comment_body">这个我用了怎么没效果？</span><br>
+			</div>
+		</div>
+	
+<div id="comment_form" class="commentform">
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return RefreshCommentList(cb_entryId);" name="commentform" id="lnk_RefreshComments">刷新评论列表</a><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login();">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+
+<script type="text/javascript">
+    commentManager.loadCommentForm();
+</script>
+
+<div class="ad_text_commentbox"><a href="http://q.cnblogs.com/" target="_blank">程序员问答社区，解决您的IT难题</a></div>
+<div id="clear_read_link"><a href="http://archive.cnblogs.com/a/1901352/" target="_blank">简洁阅读版式</a></div>
+<script type="text/javascript">
+    $("#clear_read_link").html('<a href="http://archive.cnblogs.com/a/' + cb_entryId + '/" target="_blank">简洁阅读版式</a>')
+</script>
+<div id="site_nav_under">
+<a href="http://www.cnblogs.com/" target="_blank" title="程序员的网上家园">网站首页</a><a href="http://q.cnblogs.com/" target="_blank" title="程序员问答社区">博问</a><a href="http://news.cnblogs.com/" target="_blank" title="IT新闻">新闻</a><a href="http://home.cnblogs.com/ing/" target="_blank">闪存</a><a href="http://job.cnblogs.com/" target="_blank">程序员招聘</a><a href="http://kb.cnblogs.com/" target="_blank">知识库</a> 
+<div id="site_editor_opt"></div>
+<script type="text/javascript">
+    if (isLogined) {
+        showEditorOpt();
+    }
+</script>
+</div>
+
+
+<script type="text/javascript">
+    var enableGoogleAd = true;
+    if ($("#cnblogs_post_body").text().length < 500) {
+        enableGoogleAd = false;
+    }
+</script>
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            gads.src = 'http://common.cnblogs.com/script/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</script>
+<script type="text/javascript">
+    if (enableGoogleAd) {
+        try {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1', [300, 250], 'div-gpt-ad-1320933818841-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1320933818841-1').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        } catch (e) { }
+    }
+</script>
+
+<div id="google_ad_c1" class="c_ad_block">
+<!-- cnblogs_blogpost_C1 -->
+<div id="div-gpt-ad-1320933818841-0" style="width:300px; height:250px;">
+<script type="text/javascript">
+    if (enableGoogleAd) {
+        try {
+            googletag.cmd.push(function () { googletag.display('div-gpt-ad-1320933818841-0'); });
+        } catch (e) { }
+    }
+</script>
+<iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; "></iframe><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_0__hidden__" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; visibility: hidden; display: none; "></iframe></div>
+</div>
+
+<div class="itnews c_ad_block">
+<b>最新IT新闻</b>:<br>
+
+          ·  <a href="http://news.cnblogs.com/n/138035/" target="_blank">Tesla：硅谷 Geek 造电动汽车</a><br>
+	
+          ·  <a href="http://news.cnblogs.com/n/138034/" target="_blank">程序员真的很懒</a><br>
+	
+          ·  <a href="http://news.cnblogs.com/n/138033/" target="_blank">OLPC令人失望：未能提高儿童数学及阅读水平</a><br>
+	
+          ·  <a href="http://news.cnblogs.com/n/138032/" target="_blank">苹果iPad商标之忧：成平板电脑代名词</a><br>
+	
+          ·  <a href="http://news.cnblogs.com/n/138031/" target="_blank">功能手机库存成包袱 批发价降至百元</a><br>
+	
+» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a>
+</div>
+
+
+<div class="itnews c_ad_block" id="kb_block">
+<b>最新知识库文章</b>:<br>
+<div id="kb_recent">
+
+·  <a href="http://kb.cnblogs.com/page/137951/" target="_blank">五个非常重要的移动Web内容适应设计理念</a><br>
+
+·  <a href="http://kb.cnblogs.com/page/137867/" target="_blank">函数式编程初探</a><br>
+
+·  <a href="http://kb.cnblogs.com/page/135415/" target="_blank">心如止水的程序员</a><br>
+
+·  <a href="http://kb.cnblogs.com/page/135736/" target="_blank">解决「问题」，不要解决问题</a><br>
+
+·  <a href="http://kb.cnblogs.com/page/137524/" target="_blank">你所知道的学习方法，都是错的！</a><br>
+
+</div>
+» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a>
+</div>
+
+<div id="google_ad_c2" class="c_ad_block">
+<!-- cnblogs_blogpost_C2 -->
+<div id="div-gpt-ad-1320933818841-1" style="width:468px; height:60px;">
+<script type="text/javascript">
+    if (enableGoogleAd) {
+        try {
+            googletag.cmd.push(function () { googletag.display('div-gpt-ad-1320933818841-1'); });
+        } catch (e) { }
+
+    }
+</script>
+<iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; "></iframe></div>
+</div>
+<div id="ad_under_comment2" class="c_ad_block" style="">
+<a href="http://www.china-pub.com/STATIC07/1107/2011chinapub_6810_110718/2011chinapub_6810_110718.asp" target="_blank" rel="nofollow"><img src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/china-pub.jpg" alt="" style="border:0px;"></a><br>
+<a href="http://www.china-pub.com/STATIC07/1107/zh_autumntb_110725/zh_autumntb_110725.asp" target="_blank" rel="nofollow">China-pub 2011秋季教材巡展</a><br>
+<a href="http://www.china-pub.com/static07/0901/zh_jueba_090121.asp" target="_blank" rel="nofollow">China-Pub 计算机绝版图书按需印刷服务</a><br>
+</div>
+<script type="text/javascript">
+    if (enableGoogleAd) {
+        if (document.getElementById("ad_under_comment2")) {
+            $("#ad_under_comment2").show();
+        }
+    }
+    else {
+        $("#google_ad_c1").hide();
+        $("#google_ad_c2").hide();
+    }
+</script>
+
+<div id="HistoryToday" class="c_ad_block">
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    });
+</script>
+</div>
+
+
+
+
+			
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/275095923/">周尚武</a><br>园龄：<a href="http://home.cnblogs.com/u/275095923/" title="入园时间：2008-11-16">3年4个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/275095923/followers/">0</a><br>关注：<a href="http://home.cnblogs.com/u/275095923/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;dc00470b-63cf-dd11-9e4d-001cf0cd104b&#39;)">+加关注</a></div><script type="text/javascript">cnblogs.UserManager.GetFollowStatus('dc00470b-63cf-dd11-9e4d-001cf0cd104b')</script></div>
+</div>
+
+			<div id="calendar"><table id="Calendar1_entryCal" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:__doPostBack('Calendar1$entryCal','V3957')" style="color:Black" title="Go to the previous month">&lt;</a></td><td align="center">2010年12月</td><td class="CalNextPrev" align="right"><a href="javascript:__doPostBack('Calendar1$entryCal','V4018')" style="color:Black" title="Go to the next month">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/275095923/archive/2010/12/4.html"><u>4</u></a></td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center"><a href="http://www.cnblogs.com/275095923/archive/2010/12/8.html"><u>8</u></a></td><td align="center"><a href="http://www.cnblogs.com/275095923/archive/2010/12/9.html"><u>9</u></a></td><td align="center"><a href="http://www.cnblogs.com/275095923/archive/2010/12/10.html"><u>10</u></a></td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center"><a href="http://www.cnblogs.com/275095923/archive/2010/12/14.html"><u>14</u></a></td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td></tr><tr><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td></tr>
+</tbody></table>
+</div>
+			
+			<div id="leftcontentcontainer">
+				
+<script type="text/javascript">
+    var blogapp = '275095923';
+</script>
+<div class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="SingleColumn1_ctl00_widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+
+
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+
+		<li><a id="SingleColumn1_ctl01_rptMainLinks_lnkLinkItem_0" href="http://www.cnblogs.com/275095923/MyPosts.html">我的随笔</a></li>
+	
+		<li><a id="SingleColumn1_ctl01_rptMainLinks_lnkLinkItem_1" href="http://www.cnblogs.com/275095923/MyComments.html">我的评论</a></li>
+	
+		<li><a id="SingleColumn1_ctl01_rptMainLinks_lnkLinkItem_2" title="我发表过评论的随笔" href="http://www.cnblogs.com/275095923/OtherPosts.html">我的参与</a></li>
+	
+		<li><a id="SingleColumn1_ctl01_rptMainLinks_lnkLinkItem_3" href="http://www.cnblogs.com/275095923/RecentComments.html">最新评论</a></li>
+	
+		<li><a id="SingleColumn1_ctl01_rptMainLinks_lnkLinkItem_4" href="http://www.cnblogs.com/275095923/tag/">我的标签</a></li>
+	
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div>
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/275095923/category/269804.html">android整理</a> <a id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_0" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return open_link(&#39;http://feed.cnblogs.com/blog/u/47644/category/269804/rss&#39;);">(rss)</a></li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/275095923/category/269816.html">css经验(1)</a> <a id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_1" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return open_link(&#39;http://feed.cnblogs.com/blog/u/47644/category/269816/rss&#39;);">(rss)</a></li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/275095923/category/269847.html">Javascript经验(9)</a> <a id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_2" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return open_link(&#39;http://feed.cnblogs.com/blog/u/47644/category/269847/rss&#39;);">(rss)</a></li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/275095923/category/269858.html">Java学习笔记(5)</a> <a id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_3" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return open_link(&#39;http://feed.cnblogs.com/blog/u/47644/category/269858/rss&#39;);">(rss)</a></li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/275095923/archive/2012/01.html">2012年1月 (1)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/275095923/archive/2011/12.html">2011年12月 (5)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/275095923/archive/2011/11.html">2011年11月 (2)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/275095923/archive/2011/10.html">2011年10月 (2)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/275095923/archive/2011/09.html">2011年9月 (2)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/275095923/archive/2010/12.html">2010年12月 (8)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/275095923/archive/2010/11.html">2010年11月 (10)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/275095923/archive/2010/10.html">2010年10月 (5)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/275095923/archive/2010/09.html">2010年9月 (2)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/275095923/archive/2010/08.html">2010年8月 (1)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/275095923/archive/2010/07.html">2010年7月 (5)</a> </li>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/275095923/archive/2008/12.html">2008年12月 (1)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListArticleCategory">
+<h3 class="catListTitle">文章分类</h3>
+
+<ul>
+
+<li><a id="SingleColumn1_Categories_CatList_LinkList_2_Link_0" href="http://www.cnblogs.com/275095923/category/269810.html">android整理(1)</a> <a id="SingleColumn1_Categories_CatList_LinkList_2_RssLink_0" href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#" onclick="return open_link(&#39;http://feed.cnblogs.com/blog/u/47644/category/269810/rss&#39;);">(rss)</a></li>
+
+</ul>
+
+</div>
+
+
+
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+	<div id="RecentCommentsBlock"><ul>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/275095923/archive/2012/01/12/2320817.html#2345395">1. Re:android下载安装APK</a></li>
+    <li class="recent_comment_body">咋没早看到呢，真好。</li>
+    <li class="recent_comment_author">--freedragon</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/275095923/archive/2011/10/25/2223421.html#2279380">2. Re:曾经花掉过我时间的C#正则式</a></li>
+    <li class="recent_comment_body">谢谢，由于第一次使用正则，同样的问题搞了一个晚上，最后用了你的正则搞掂。</li>
+    <li class="recent_comment_author">--林发</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#2112668">3. Re:【web开发】一起来写段JS drag代码</a></li>
+    <li class="recent_comment_body">这个我用了怎么没效果？</li>
+    <li class="recent_comment_author">--larui</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#2093245">4. Re:【web开发】一起来写段JS drag代码</a></li>
+    <li class="recent_comment_body"><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901352.html#1982777" title="查看所回复的评论">@</a>周尚武<br>最近重构自己的drag<br>down，然后move到body外面，再up，然后再回到body上<br>发现在chrome下面是可以的，Opera、FF不行，IE没测，应该也不行。<br>body以外的鼠标事件，chrome会通知js引擎，所以事件能得到响应。</li>
+    <li class="recent_comment_author">--铃兰草</li>
+</ul>
+</div>
+</div>
+
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/【web开发】一起来写段JS drag代码 - 周尚武 - 博客园.htm">1. 【web开发】一起来写段JS drag代码(2042)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/10/1902251.html">2. 【web开发】Javascript点点小技巧(1423)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/14/1905970.html">3. 【web开发】关于Javascript事件注册的那些事(953)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2011/09/05/2167958.html">4. android杀进程方法(804)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901566.html">5. 【web开发】为超链接加上disabled后的故事(458)</a></li></ul></div>
+</div>
+
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/【web开发】一起来写段JS drag代码 - 周尚武 - 博客园.htm">1. 【web开发】一起来写段JS drag代码(7)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/10/1902251.html">2. 【web开发】Javascript点点小技巧(7)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901566.html">3. 【web开发】为超链接加上disabled后的故事(3)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2011/10/25/2223421.html">4. 曾经花掉过我时间的C#正则式(1)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2012/01/12/2320817.html">5. android下载安装APK(1)</a></li></ul></div>
+</div>
+
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/10/1902251.html">1. 【web开发】Javascript点点小技巧(4)</a></li><li><a href="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/【web开发】一起来写段JS drag代码 - 周尚武 - 博客园.htm">2. 【web开发】一起来写段JS drag代码(4)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/11/23/1885479.html">3. 如何去掉点击链接时周围的虚线框(1)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2010/12/09/1901566.html">4. 【web开发】为超链接加上disabled后的故事(1)</a></li><li><a href="http://www.cnblogs.com/275095923/archive/2011/10/25/2223421.html">5. 曾经花掉过我时间的C#正则式(1)</a></li></ul></div>
+</div>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2012 周尚武
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</form> 
+<script type="text/javascript">
+    if (!isSyntaxHighlighted) {
+        try {
+            SyntaxHighlighter.all();
+        } catch (e) { }
+    }
+</script>
+<script type="text/javascript" src="./【web开发】一起来写段JS drag代码 - 周尚武 - 博客园_files/ShowHidden.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-476124-1']);
+    _gaq.push(['_setDomainName', 'cnblogs.com']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+
+</body></html>

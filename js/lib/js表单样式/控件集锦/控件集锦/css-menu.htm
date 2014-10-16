@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=gb2312" />
+<meta http-equiv="content-language" content="zh-cn" />
+<meta name="robots" content="all" />
+<meta name="keywords" content="关键字描述" />
+<meta name="description" content="站点描述" />
+<meta name="author" content="顾振宇,zy.e@163.com" />
+<meta name="copyright" content="版权所有" />
+<link rel="stylesheet" type="text/css" title="通用样式" href="***.css" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="bookmark" href="/favicon.ico" type="image/x-icon" />
+<title>css+js无限级菜单</title>
+<style type="text/css">
+*{ margin:0; padding:0; border:0;}
+body{font:12px/130% verdana,geneva,arial,helvetica,sans-serif,宋体;}li{list-style:none;}
+.clearfix:after{content:"&nbsp;";display:block;height:0;clear:both;visibility:hidden;}.clearfix{display:inline-block;}
+a:link{ color:#000; text-decoration:none; }
+a:visited{ color:#000; text-decoration:none; }
+a:hover{ color:#000; text-decoration:none; }
+.menu{ width:778px; height:26px; background:#fff; margin:0 auto;}
+.menusel{ float:left;width:100px; position:relative; height:25px; background:#ddd; line-height: 25px; margin-left: 1px; *margin-left: 0px;_margin-left: -1px;}
+.menusel h2{ font-size:12px; }
+.menusel a{ display: block;text-align:center; width:100px;border:1px solid #a4a4a4; height:25px; border-bottom:1px solid #a4a4a4; position:relative; z-index:2;}
+.menusel a:hover{ border:1px solid #a4a4a4; border-bottom:1px dashed #eeeeee; position:relative; z-index:2; height:25px;}
+.ahover a{border-bottom:1px dashed #eeeeee; background:#eeeeee; }
+.position{ position:absolute; z-index:1;}
+.menusel ul{width:125px; background:#eee; border:1px solid #a4a4a4; margin-top: -1px; position:relative; z-index:1; display:none;}
+.menusel .block{ display:block;}
+.typeul li{border-bottom:1px dashed #a4a4a4;width:125px; position:relative; float:left; }
+.typeul li a{ border:none;width:125px; }
+.typeul li a:hover{ border:none; background:#ddd;}
+.typeul{  margin-left:0;  }
+.typeul ul{left:125px; top:0; position:absolute;}
+.fli{ margin-left: -1px; border-left:#eeeeee solid 1px;}
+.menusel .lli{ border:none; }
+</style>
+<script type="text/javascript">document.execCommand("BackgroundImageCache", false, true);</script><!-- IE6背景图片闪烁问题  -->
+</head>
+<body>
+<div class="menu">
+	<div id="menu1" class="menusel">
+		<h2><a href="">我是菜单1</a></h2>
+			<div class="position">
+				<ul class="clearfix typeul">
+					<li><a href="">我是菜单选项1-2</a></li>
+					<li>
+						<a href="">我是菜单选项1-2</a>
+						<ul>
+							<li class="fli"><a href="">我是菜单选项1-2-1</a></li>
+							<li class="lli"><a href="">我是菜单选项1-2-2</a></li>
+						</ul>
+					</li>
+					<li><a href="">我是菜单选项1-2</a></li>
+					<li class="lli"><a href="">我是菜单选项1-2</a></li>
+				</ul>
+			</div><!-- position -->
+		</div><!-- menusel -->
+
+		<div id="menu2" class="menusel">
+		<h2><a href="">我是菜单2</a></h2>
+		<div class="position">
+		<ul class="clearfix typeul">
+		<li><a href="">我是菜单选项2-2</a></li>
+		<li><a href="">我是菜单选项2-2</a>
+		<ul>
+		<li class="fli"><a href="">我是菜单选项2-2-1</a></li>
+		<li class="lli"><a href="">我是菜单选项2-2-2</a>
+		<ul>
+		<li class="fli"><a href="">我是菜单选项2-2-1</a></li>
+		<li class="lli"><a href="">我是菜单选项2-2-2</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li><a href="">我是菜单选项2-2</a></li>
+		<li class="lli"><a href="">我是菜单选项2-2</a></li>
+		</ul>
+		</div><!-- position -->
+		</div><!-- menusel -->
+		<div id="menu3" class="menusel">
+		<h2><a href="">我是菜单3</a></h2>
+		<div class="position">
+		<ul class="clearfix typeul">
+		<li><a href="">我是菜单选项3-2</a></li>
+		<li><a href="">我是菜单选项3-2</a>
+		<ul>
+		<li class="fli"><a href="">我是菜单选项3-2-1</a></li>
+		<li class="lli"><a href="">我是菜单选项3-2-2</a>
+		<ul>
+		<li class="fli"><a href="">我是菜单选项3-2-1</a></li>
+		<li class="lli"><a href="">我是菜单选项3-2-2</a>
+		<ul>
+		<li class="fli"><a href="">我是菜单选项3-2-1</a></li>
+		<li class="lli"><a href="">我是菜单选项3-2-2</a></li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li><a href="">我是菜单选项3-2</a></li>
+		<li class="lli"><a href="">我是菜单选项3-2</a></li>
+		</ul>
+		</div><!-- position -->
+	</div><!-- menusel -->
+</div><!-- menu -->
+	<script type="text/javascript">
+	for(var x = 1; x < 4; x++)
+	{
+	var menuid = document.getElementById("menu"+x);
+	menuid.num = x;
+	type();
+	}
+	function type()
+	{
+	var menuh2 = menuid.getElementsByTagName("h2");
+	var menuul = menuid.getElementsByTagName("ul");
+	var menuli = menuul[0].getElementsByTagName("li");
+	menuh2[0].onmouseover = show;
+	menuh2[0].onmouseout = unshow;
+	menuul[0].onmouseover = show;
+	menuul[0].onmouseout = unshow;
+	function show()
+	{
+	menuul[0].className = "clearfix typeul block"
+	}
+	function unshow()
+	{
+	menuul[0].className = "typeul"
+	}
+	for(var i = 0; i < menuli.length; i++)
+	 {
+	 menuli[i].num = i;
+	 var liul = menuli[i].getElementsByTagName("ul")[0];
+	  if(liul)
+	  {
+	  typeshow()
+	  }
+	 }
+	function typeshow()
+	{
+	menuli[i].onmouseover = showul;
+	menuli[i].onmouseout = unshowul;
+	}
+	function showul()
+	{
+	menuli[this.num].getElementsByTagName("ul")[0].className = "block";
+	}
+	function unshowul()
+	{
+	menuli[this.num].getElementsByTagName("ul")[0].className = "";
+	}
+	}
+	</script>
+
+
+</body>
+</html>

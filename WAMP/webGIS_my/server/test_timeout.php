@@ -1,0 +1,1 @@
+<?php$opts = array(	'http'=>array(		'method'=>"GET",		'timeout'=>0.1,	));$context = stream_context_create($opts);$n=0;while($n<5){	$html = file_get_contents('http://blog.sina.com/mirze', false, $context);	if($html)		break;	$n++;}if($html)	file_put_contents('test_timeout.html', $html);echo $n.'<br><br><br>'.$html;?>

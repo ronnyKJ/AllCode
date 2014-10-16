@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>HTML5 Local Storage</title>
+</head>
+ 
+<body>
+<h1>你好，<span id="name">我好像不认识你</span></h1>
+<p><button type="button" onclick="rmMem()">忘记我吧！</button></p>
+<script type="text/javascript">
+<!--
+window.onload=function(){
+	if(('localStorage' in window) && window['localStorage'] !== null){
+		var name=localStorage.getItem('name');
+		if(name==null){
+			name=prompt("你的名字是？",'丸子');
+			if(name!=null){
+				localStorage.setItem('name',name);
+				document.getElementById('name').innerHTML=name;
+			}
+		}else{
+			document.getElementById('name').innerHTML=name;
+		}
+	}else{
+		alert('天啊，你还在用这么土的浏览器！');
+	}
+}
+function rmMem(){
+	document.getElementById('name').innerHTML='我好像不认识你';
+	localStorage.removeItem('name');
+	alert('清除记忆成功！');
+}
+//-->
+</script>
+</body>
+</html>

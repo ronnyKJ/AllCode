@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><title>test</title></head>
+<body></body>
+<script>
+var obj = (function(n, a){
+	return {name:n, age:a};
+})('Tom', 3);
+
+var People = function(n, a)
+{
+	this.name = n;
+	this.age = a;
+}
+
+People.prototype = {country: '-'};
+var obj1 = new People('Mary', 4);
+console.log(obj);
+console.log(obj1);
+
+var Counter = function()
+{
+	var count = 0;
+	this.set = function(n){
+		count = n;
+	};
+	this.get = function(){
+		return count;
+	};
+}
+
+var cnt = new Counter();
+cnt.set(3);
+console.log(cnt.get());
+</script>
+</html>

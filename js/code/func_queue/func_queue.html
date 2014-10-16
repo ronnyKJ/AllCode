@@ -1,0 +1,29 @@
+﻿<html>
+<head><title>Function Queue</title>
+<script type="text/javascript">
+var queue = [
+	function(){document.body.innerHTML += '1';},
+	function(){document.body.innerHTML += '2';},
+	function(){document.body.innerHTML += '3';},
+	function(){document.body.innerHTML += '4';}
+];
+
+function Queue(arr, time){
+	function s(a, t)
+	{
+		if(!a[0]) return;
+		(arr.shift())();
+		setTimeout(function(){
+			s(a, t);
+		},t);
+	}
+	s(arr, time);
+}
+function init(){
+	Queue(queue, 500);
+}</script>
+</head>
+<body onload='init()'>
+
+</body>
+</html>

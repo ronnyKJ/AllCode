@@ -1,0 +1,52 @@
+﻿<html>
+<head><title></title>
+<script type="text/javascript">
+function add(a, b, c){alert(a+b+c);}
+function minus(a, b){alert(a-b);}
+function multi(a, b){alert(a*b);}
+
+function cl(callback)
+{
+	if(typeof callback == "function")
+	{
+		callback();
+	}
+}
+//cl(add);
+//cl(add(1,4,3));
+//cl(function(){add(1,5,3);minus(5,3);});
+//cl(minus(5,3));
+//cl(multi(4,3));
+function x()
+{
+	this.a = 3;
+	this.b = 5;
+}
+
+function y()
+{
+
+}
+
+//var z={c:5};
+//x.call(z);
+//alert(z.a+z.c);
+
+var y1 =  new y();
+var y2 =  new y();
+x.call(y1);
+//alert(y1.a + "  " + y2.a);
+
+arr1 = [11,22];
+arr2 = [3,4,5];
+//Array.prototype.push.apply(arr2, arr1);
+Array.prototype.conjoin = function(arr)
+{
+	Array.prototype.push.apply(this, arr);
+}
+arr2.conjoin(arr1);
+alert(arr2);
+</script>
+</head>
+<body></body>
+</html>

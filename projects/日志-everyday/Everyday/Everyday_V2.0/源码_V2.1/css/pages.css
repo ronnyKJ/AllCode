@@ -1,0 +1,14 @@
+body #middle
+{
+	background-image:none;
+}
+
+ul.ulStyle
+{
+	list-style:circle;
+}
+
+ul.ulStyle li
+{
+	margin:20px 20px 20px 30px;
+}

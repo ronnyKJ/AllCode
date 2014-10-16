@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Canvas</title>
+ </head>
+ 
+ <body>
+	<canvas id="my_canvas" width="200" height="200" style="border:1px solid #ff0000"></canvas>
+	<script type="text/javascript">
+		var elem = document.getElementById("my_canvas");
+		if (elem && elem.getContext)  {
+			var context = elem.getContext("2d");
+			//shadowOffsetX 和 shadowOffsetY：阴影的 x 和 y 偏移量，单位是像素。 
+			context.shadowOffsetX = 15;    
+			context.shadowOffsetY = 15;    
+			//hadowBlur：设置阴影模糊程度。此值越大，阴影越模糊。其效果和 Photoshop 的高斯模糊滤镜相同。
+			context.shadowBlur    = 10;    
+			//shadowColor：阴影颜色。其值和 CSS 颜色值一致。
+			//context.shadowColor   = 'rgba(255, 0, 0, 0.5)';  或下面的十六进制的表示方法
+			context.shadowColor = '#f00';
+			context.fillStyle     = '#00f';    
+			context.fillRect(20, 20, 150, 100); 
+		}
+	</script>
+ </body>
+</html>

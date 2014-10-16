@@ -1,0 +1,156 @@
+﻿/*-------------------------------*/
+/*-------------布局--------------*/
+/*-------------------------------*/
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+#pic_container
+{
+	margin: 1px 1px 75px 1px;
+}
+
+.words, #edit
+{
+	margin-bottom: 20px;
+}
+
+#bottom
+{
+	position:fixed;
+	/*background: url('../img/phone-bottom.png');*/
+	bottom: 0;
+	left: -10%;
+	width: 120%;
+	height: 54px;
+	z-index: 5;
+}
+
+#left_btn, #right_btn
+{
+	position: absolute;
+	display: block;
+	width: 40px;
+	height: 100%;
+}
+
+#left_btn
+{
+	/*background: url('../img/phone-arrow.png')  no-repeat 0px 0px;*/
+	left: 8%;
+}
+
+#right_btn
+{
+	/*background: url('../img/phone-arrow.png')  no-repeat -40px 0px;*/
+	right: 8%;
+}
+
+#current_date
+{
+	margin-top: 18px;
+	text-align: center;
+	/*color: #b8daea;
+	font-size: 20px;
+	font-weight:bold;
+	text-shadow: 0px -1px 1px rgba(75, 102, 114, 0.8);*/
+}
+
+#mask
+{
+	display: none;
+	position:fixed;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	/*background-color: rgba(0, 0, 0, 0.6);*/
+}
+
+#pick_date
+{
+	position: absolute;
+	display: none;
+	top: 0;
+	z-index: 2;
+	width: 100%;
+}
+
+#pick_date a
+{
+	display: block;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	/*background: url('../img/phone-link.png')  no-repeat right center;
+	color: #fff;
+	font-weight:bold;
+	font-size: 20px;
+	border-bottom: 1px solid #999;
+	text-decoration: none;*/
+}
+
+
+/*-------------------------------*/
+/*-------------风格--------------*/
+/*-------------------------------*/
+#bottom
+{
+	background: url('../img/phone-bottom.png');
+}
+
+#left_btn
+{
+	background: url('../img/phone-arrow.png')  no-repeat 0px 0px;
+}
+
+#right_btn
+{
+	background: url('../img/phone-arrow.png')  no-repeat -40px 0px;
+}
+
+#left_btn:hover
+{
+	background: url('../img/phone-arrow.png')  no-repeat 0px -54px;
+}
+
+#right_btn:hover
+{
+	background: url('../img/phone-arrow.png')  no-repeat -40px -54px;
+}
+
+#current_date
+{
+	color: #b8daea;
+	font-size: 20px;
+	font-weight:bold;
+	text-shadow: 0px -1px 1px rgba(75, 102, 114, 0.8);
+}
+
+#current_date:hover
+{
+	color: #f6f9fb;
+}
+
+#mask
+{
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#pick_date a
+{
+	background: url('../img/phone-link.png')  no-repeat right center;
+	color: #fff;
+	font-weight:bold;
+	font-size: 20px;
+	border-bottom: 1px solid #999;
+	text-decoration: none;
+}
+
+#pick_date a:hover
+{
+	background-color: rgba(255, 255, 255, 0.6);
+}

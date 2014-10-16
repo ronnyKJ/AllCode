@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CSS Selectors</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+<style type="text/css">
+td { line-height:1.5em}
+</style>
+</head>
+<body>
+<h1>CSS 选择符</h1>
+<p class="p">$ 函数可以根据传入的 ID 取得元素，但对于结构复杂的页面，单传入一个 ID 难于精确取到相应的元素，myJSFrame 参考 CSS 2.0 选择符概念与 JQuery 框架中 CSS 选择符的引用形式，实现了自有的 CSS 选择符支持方式。支持大部分常见的 CSS 选择符。</p>
+<p class="p">由于符合 CSS 选择符的元素可能有多个，因此 $ 函数的返回值可能不止一个 DOM 元素，一般来说，其返回值是符合选择符的 DOM 元素组成的数组。但为保留并兼容 $ 函数的返回值类型，经典的 $(ID) 返回值仍为 DOM 元素，而 $(CSS Selectors) 返回值为元素数组。</p>
+<p class="p">$ 函数的 CSS 选择符功能够更方便、迅速、准确地找到页面元素。 </p>
+<p class="p">目前 myJSFrame 已经支持的选择符有：
+</p>
+	<ul style=" margin-left:4em; list-style-position:inside">
+		<li>通配选择符</li>
+		<li>属性选择符</li>
+		<li>包含选择符</li>
+		<li>ID 选择符</li>
+		<li>类选择符</li>
+		<li>选择符分组</li>
+	</ul>
+<p class="p">不支持的通配符有：</p>
+	<ul style=" margin-left:4em; list-style-position:inside">
+		<li>子对象选择符</li>
+		<li>伪类及伪对象选择符</li>
+	</ul>
+<p class="p">如果传入 $ 函数的参数中带有空格（两端的空格无效）、逗号或小数点都将被认作 CSS 选择符，空格是包含选择符，逗号是选择符分组，小数点是类选择符。除此之外，都被认作是元素 ID ，返回值是一个 DOM 元素。如果要获取页面中所有的 li 元素，$(&quot;li&quot;) 是错误的，因为 $ 函数会认为要获取 ID 为 li 的元素，正确的方法是 $(&quot;body li&quot;) 。</p>
+<h2>参数</h2>	
+	<dl class="p">
+		<dt><em>通配选择符</em></dt>
+		<dd>获取某范围里的所有元素。通配符匹配到的元素范围广，取得的结果相对较大，效率略低，建议少用。</dd>
+		<dt><em>属性选择符</em></dt>
+		<dd>匹配元素的属性与其值都符合的元素。属性选择符的格式为：[属性名=属性值] 或者 [属性名!=属性值]。 属性选择符可以有多重，比如 input[type=text][className=username]。</dd>
+		<dt><em>包含选择符</em></dt>
+		<dd>一个选择符被另一选择符所包含。如 $(&quot;div a&quot;) 表示 div 元素中包含的 a 元素。</dd>
+		<dt><em>ID 选择符</em></dt>
+		<dd>根据ID属性匹配元素，$(&quot;id&quot;) 与 $(&quot;#id&quot;) 完全等效。返回类型都是 DOM 元素。$(&quot;body div #id&quot;) 是不必要的写法，其返回值是数组，但长度为 1。 </dd>
+		<dt><em>类选择符</em></dt>
+		<dd>根据元素的类名查找元素。$(&quot;div.content&quot;) 表示查找页面中类名为 content 的元素。类选择符是属性选择符的特例，相当于 $(&quot;div[className=content]&quot;)，但不建议用属性选择符来查找类名，因为元素的类名可以有多个（类名间用空格分割）。</dd>
+		<dt><em>选择符分组</em></dt>
+		<dd>多个选择符组合在一起可以是一个复合选择符，多个复合选择符或多个单一选择符可以是多组选择符（用逗号分割）。如：$(&quot;div.content,a&quot;) 表示页面中所有类名为 content 的 div 元素与页面中所有的 a 元素组合在一起作返回值数组。 </dd>
+	</dl>
+<h2>返回值</h2>
+<p class="p">由 DOM 元素组成的一维数组。如果传入 $ 函数的选择符在页面中查找不到符合条件的元素，返回值为空数组（长度为0）。</p>
+<h2>示例</h2>
+<p class="code">&lt;div class=&quot;titleList&quot; id=&quot;newsTitle&quot;&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp; &lt;ul class=&quot;list black&quot;&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href=&quot;http://localhost/olympic.asp?id=2000&quot;&gt;2000年悉尼奥运会&lt;/a&gt;&lt;/li&gt;<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href=&quot;http://localhost/olympic.asp?id=1996&quot;&gt;1996年亚特兰大奥运会&lt;/a&gt;&lt;/li&gt;    <br />
+  &nbsp;&nbsp;&nbsp;&nbsp; &lt;/ul&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp; &lt;ul class=&quot;list gray&quot;&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href=&quot;http://localhost/olympic.asp?id=1992&quot;&gt;1992巴塞罗那奥运会&lt;/a&gt;&lt;/li&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href=&quot;http://localhost/olympic.asp?id=1988&quot;&gt;1988汉城奥运会&lt;/a&gt;&lt;/li&gt;  <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ul&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class=&quot;info&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;checkbox&quot; value=&quot;read&quot; id=&quot;hasReadThsRule&quot; /&gt;已阅读<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type=&quot;checkbox&quot; id=&quot;suggest&quot;&gt;我有更好的建议 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;input type=&quot;button&quot; value=&quot;确定&quot; /&gt; <br />    
+&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/div&gt;
+<br />
+&lt;/div&gt;</p>
+<p class="p">
+<table width="96%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#98c0f4">
+  <tr>
+    <th width="9%" align="center" bgcolor="#eeeeee">选择符</th>
+    <th width="32%" align="center" bgcolor="#eeeeee">示例代码</th>
+    <th width="46%" align="center" bgcolor="#eeeeee">说明</th>
+    <th width="13%" align="center" bgcolor="#eeeeee">返回值长度<br />
+    （数组长度）</th>
+  </tr>
+  <tr>
+    <th align="center" bgcolor="#eeeeee">通配选择符</th>
+    <td align="center" bgcolor="#FFFFFF">$(&quot;#<span class="code">newsTitle</span> *&quot;)</td>
+    <td align="center" bgcolor="#FFFFFF">#<span class="code">newsTitle </span>元素下面的所有元素</td>
+    <td align="center" bgcolor="#FFFFFF">14<br />
+    （ul*2 + li*4 + a*4 + div*1 + input*3）</td>
+  </tr>
+  <tr>
+    <th align="center" bgcolor="#eeeeee">属性选择符</th>
+    <td align="center" bgcolor="#FFFFFF">$(&quot;#newsTitle input[type=checkbox][value!=read]&quot;)</td>
+    <td align="center" bgcolor="#FFFFFF">#<span class="code">newsTitle </span>元素下面标签名为 input，其 type 为 checkbox，且其 value 不等于read的元素</td>
+    <td align="center" bgcolor="#FFFFFF">1</td>
+  </tr>
+  <tr>
+    <th align="center" bgcolor="#eeeeee">包含选择符</th>
+    <td align="center" bgcolor="#FFFFFF">$(&quot;ul li a&quot;)</td>
+    <td align="center" bgcolor="#FFFFFF">返回页面中所有 ul 中的所有 li 里的所有 a 的数组</td>
+    <td align="center" bgcolor="#FFFFFF">4</td>
+  </tr>
+  <tr>
+    <th align="center" bgcolor="#eeeeee">ID 选择符</th>
+    <td align="center" bgcolor="#FFFFFF">$(&quot;#newsTitle&quot;)</td>
+    <td align="center" bgcolor="#FFFFFF">返回 #newsTitle 元素</td>
+    <td align="center" bgcolor="#FFFFFF">1</td>
+  </tr>
+  <tr>
+    <th align="center" bgcolor="#eeeeee">类选择符</th>
+    <td align="center" bgcolor="#FFFFFF">$(&quot;ul.list&quot;)</td>
+    <td align="center" bgcolor="#FFFFFF">页面中所有类名包含 list 的 ul 元素</td>
+    <td align="center" bgcolor="#FFFFFF">2</td>
+  </tr>
+  <tr>
+    <th align="center" bgcolor="#eeeeee">选择符分组</th>
+    <td align="center" bgcolor="#FFFFFF">$(&quot;a,input[type=checkbox]&quot;)</td>
+    <td align="center" bgcolor="#FFFFFF">页面中所有 a 与勾选框的数组</td>
+    <td align="center" bgcolor="#FFFFFF">6</td>
+  </tr>
+</table>
+ </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

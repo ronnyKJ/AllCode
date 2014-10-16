@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<script type="text/javascript">
+/*
+(function m(a){
+	alert(a);
+})("mm");
+
+m("out");
+
+(function(a){
+	alert(a);
+})("nn");
+*/
+
+(function(){
+
+var 
+	// Will speed up references to window, and allows munging its name.
+	window = this,
+	// Will speed up references to undefined, and allows munging its name.
+	undefined,
+	// Map over jQuery in case of overwrite
+	_jQuery = window.jQuery,
+	// Map over the $ in case of overwrite
+	_$ = window.$,
+
+	jQuery = window.jQuery = window.$ = function( selector, context ) {
+		// The jQuery object is actually just the init constructor 'enhanced'
+		return new jQuery.hs.init( selector, context );
+	};
+var a=0;
+	jQuery.hs = jQuery.prototype = {
+		init: function( selector, context ) {
+			// Make sure that a selection was provided
+			selector = selector || document;
+
+			// Handle $(DOMElement)
+			if ( selector.nodeType ) {
+				this[0] = selector;
+				this.length = 1;
+				this.context = selector;
+				return this;
+			}
+		},
+	
+		say: function()
+		{
+			alert(++a);
+		}
+	};
+	
+	// Give the init function the jQuery prototype for later instantiation
+	jQuery.hs.init.prototype = jQuery.hs;
+})()
+
+</script>
+</HEAD>
+
+<BODY>
+<div id="d" style="height: 50px; background: #EEE;"></div>
+<script type="text/javascript">
+alert($(document.getElementById("d")).say("dsdss"));
+</script>
+</BODY>
+</HTML>

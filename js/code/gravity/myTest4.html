@@ -1,0 +1,127 @@
+﻿<html>
+<head><title>Gravity</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+	background: #333;
+}
+
+#c
+{
+	display: block;
+	background: #000;
+	margin: 100px auto;
+}
+
+#r
+{
+	position: relative;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: #AAA;
+	margin-top: 0px;
+	text-align: center;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas><div id="r">-- By Ronny 2011 --</div></body>
+<script type="text/javascript">
+var x=y=tmpX=tmpY=0;
+var g=4;
+var cellArray = [];
+var count = 1;
+r = Math.random;
+
+var initYSpeed = 1-2.5*r();
+var cell = 
+{
+	xs: 6,//2*r(),
+	oys: initYSpeed,
+	ys: initYSpeed,
+	x: 50,
+	y: 100*r(),
+	ro: 0.1,
+	tRo: 0,
+	t: 0
+};
+
+with(document.body)
+{
+	C = document.getElementById('c');
+	rr = document.getElementById('r');
+	var w = 500;
+	C.width = w;
+	C.height = 400;
+	t = C.getContext("2d");
+	C.onmousemove = function()
+	{
+		tmpX = event.layerX-x;
+		tmpY = event.layerY-y;
+		x = event.layerX;
+		y = event.layerY;
+	}
+}
+
+timer = 0;
+setInterval(function(){
+	C.width = w;
+	timer+=0.4;
+
+		cell.t+=0.04;
+		cell.ys = cell.t*g+cell.oys
+		cell.y += cell.ys;
+		cell.x += cell.xs;
+		//边缘碰撞
+		if(cell.x > C.width-30)
+		{
+			cell.x = C.width-30;
+			cell.xs *= -1;
+			cell.ro *= 0.6;
+		}
+		else if(cell.x < 30)
+		{
+			cell.x = 30;
+			cell.xs *= -1;
+			cell.ro *= 0.6;
+		}
+		//边缘碰撞
+		if(cell.y > 350)
+		{
+			cell.y = 350;
+			cell.oys = cell.ys*0.8*(-1);
+			cell.t = 0;
+			cell.ro *= 0.8;
+			cell.xs *= 0.99;
+		}
+		
+		if(cell.y == 350 && cell.ys < 0.089)
+		{
+			if(cell.xs*cell.tRo>0)
+			{
+				cell.ro *= 0.6;
+			}
+			else
+			{
+				cell.ro = 0.2;
+			}
+		}
+				
+		t.save();
+		t.translate(cell.x, cell.y);
+		t.rotate(cell.tRo+=cell.ro);
+		t.fillStyle = '#A9EA00';
+		t.arc(0, 0, 30, 0, 360, true);
+		t.fill();
+		t.beginPath();
+		t.strokeStyle = "#F00";
+		t.moveTo(0, 0);
+		t.lineTo(0, 30);
+		t.stroke();
+		t.closePath();
+		t.restore();
+}, 10);
+</script>
+</html>

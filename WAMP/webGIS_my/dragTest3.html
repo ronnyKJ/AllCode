@@ -1,0 +1,58 @@
+﻿<html>
+<head><title>scale</title>
+<style>
+#root
+{
+	background: #0AD;
+	width: 400px;
+	height: 150px;
+	border: 1px #000 solid;
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script>
+var movedX = 0, movedY = 0;
+Drag = {
+    obj: null,
+    init: function (options) {
+        options.root.onmousedown = this.start;
+    },
+    start: function (e) {//此时的e是handler
+        var obj = Drag.obj = this;//此时的this是handler
+		
+        obj.lastMouseX = e.clientX;
+        obj.lastMouseY = e.clientY;
+		
+        document.onmouseup = Drag.end;
+        document.onmousemove = Drag.drag;
+    },
+    drag: function () {
+		var mx = event.clientX, my = event.clientY;
+		var deltaX = mx - Drag.obj.lastMouseX, deltaY = my - Drag.obj.lastMouseY;	
+        movedX += deltaX, movedY += deltaY;	
+        Drag.obj.lastMouseX = mx, Drag.obj.lastMouseY = my;
+		
+		//do
+		var root = Drag.obj;
+		root.style.webkitTransform = 'translate('+movedX+'px, '+movedY+'px)';
+    },
+    end: function () {
+        var x = Drag.obj.style.left ? parseInt(Drag.obj.style.left) : 0;
+        var y = Drag.obj.style.top ? parseInt(Drag.obj.style.top) : 0;
+		
+        document.onmousemove = null;
+        document.onmouseup = null;
+        Drag.obj = null;
+	}
+}
+
+
+Drag.init({
+	handler: document.getElementById("handler"),
+	root:document.getElementById("root")
+});
+</script>
+</html>

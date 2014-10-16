@@ -1,0 +1,36 @@
+
+<!-- saved from url=(0088)http://spcode.baidu.com/spcode/spstyle/style1301.jsp?tn=zengwuhang_sp&ctn=0&styleid=1301 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script language="javascript">
+function BaiduQueryString(qs){
+var s = location.href;
+s = s.replace(/</g,'&lt;');
+s = s.replace(/>/g,'&gt;');
+s = s.replace(/"/g, "&quot;");
+s = s.replace(/'/g, "&#39;");
+s = s.replace("?","?&").split("&");
+var re = "";
+for(i=1;i<s.length;i++)
+if(s[i].indexOf(qs+"=")==0)
+re = s[i].replace(qs+"=","");
+return re;}
+var tn=BaiduQueryString("tn");
+if(tn==""){ tn="baidu_unsp"; }
+var ctn=BaiduQueryString("ctn");
+if(ctn==""){ ctn="0"; }
+var styleid=BaiduQueryString("styleid");if(styleid==""){ styleid="1301"; }
+function BaiduReplaceStr(){
+var str=document.body.innerHTML;
+str=str.replace(/\$\{tn\}/g,tn)
+str=str.replace(/\$\{ctn\}/g,ctn);
+str=str.replace(/\$\{styleid\}/g,styleid);
+str=str.replace(/\$\%7Btn\%7D/g,tn);
+str=str.replace(/\$\%7Bctn\%7D/g,ctn);
+str=str.replace(/\$\%7Bstyleid\%7D/g,styleid);
+document.body.innerHTML=str;}
+</script>
+</head><body marginwidth="0" marginheight="0"><a href="http://spcode.baidu.com/spcode/spClick?tn=zengwuhang_sp&ctn=0&styleid=1301&tourl=http://partner.funshion.com/partner/downbaidu.php?"><img src="80_80.gif" border="0"></a>
+
+<script language="javascript">
+BaiduReplaceStr();
+</script></body></html>

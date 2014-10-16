@@ -1,0 +1,103 @@
+<html>
+<head><title></title>
+<style>
+body
+{
+	font-family: "Arial";
+	-webkit-perspective: 900px;
+}
+
+#container
+{
+	width: 200px;
+	height: 200px;
+	margin: 0px auto 0;
+	line-height: 200px;
+	background: rgba(0, 0, 0, 0.5);
+	-webkit-transform: translateZ(-2200px);
+}
+
+#well
+{
+	width: 200px;
+	height: 200px;
+	background: rgba(0, 255, 0, 0.5);
+	border-radius: 16px;
+	color: #FFF;
+	text-align: center;
+	font-size: 50px;
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: go 1s 2 linear;
+}
+</style>
+</head>
+<body onload="">
+<span id="data"></span>
+<div id="container">
+	<p id="well">Well</p>
+</div>
+<span id="wrong">Wrong</span><span id="a1">1111111</span><span id="a2">2222222</span>
+</body>
+<script>
+d = document;
+_ = function(id)
+{
+	return document.getElementById(id);
+}
+
+//var t = d.createTextNode("body{background: rgba(0, 0, 0, 0.5);}");
+//var index = 0;
+_("well").onclick = function()
+{
+	setWebkitAnimation(this, "go", "100%{-webkit-transform: rotateX(360deg) rotateY(-360deg);}", "1s", "1", "ease");
+	var s = "";
+	for(j in window._ANIMATION_INDEX)
+	{
+		s += j + ": " + window._ANIMATION_INDEX[j] + "__ ";
+		_("data").innerText = s;
+	}
+}
+
+_("wrong").onclick = function()
+{
+	setWebkitAnimation(this, "bdA", "100%{background: rgba(0, 255, 0, 0.5);}", "1s", "1", "ease");
+	var s = "";
+	for(j in window._ANIMATION_INDEX)
+	{
+		s += j + ": " + window._ANIMATION_INDEX[j] + "__ ";
+		_("data").innerText = s;
+	}
+}
+
+_("a1").onclick = function()
+{
+	setWebkitAnimation(this, "a1", "100%{background: rgba(0, 0, 0, 0.5);}", "1s", "1", "ease");
+}
+
+_("a2").onclick = function()
+{
+	setWebkitAnimation(this, "a2", "100%{background: rgba(255, 0, 0, 1);}", "1s", "1", "ease");
+}
+
+function setWebkitAnimation(obj, name, animation, time, loop, ease)
+{
+	if(!window._ANIMATION_INDEX)
+	{
+		window._ANIMATION_INDEX = {};
+	}
+	if(window._ANIMATION_INDEX[name] == undefined)
+		window._ANIMATION_INDEX[name] = 0;
+	
+	var anim = d.createTextNode("@-webkit-keyframes " + name + "" + window._ANIMATION_INDEX[name] + "{" + animation + "}");
+	var style = d.getElementsByTagName("style")[0];
+	style.appendChild(anim);
+	obj.style.webkitAnimation = name + "" + window._ANIMATION_INDEX[name] +" " + time + " " + loop + " " + ease;
+	if(window._ANIMATION_INDEX[name] > 0)
+	{
+		var l = style.childNodes.length;
+		style.removeChild(style.childNodes[l-2]);
+	}
+	window._ANIMATION_INDEX[name]++;
+}
+</script>
+</html>

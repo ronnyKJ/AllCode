@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>String.trim</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>String.trim(<em>strORreg</em>)</h1>
+<p class="info">去除字符串左右两端的空白字符(包括空格、制表符、换页符等)。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>strORreg</em></dt>
+		<dd>可选项。默认值是空白字符。当该参数是其他字符时，trim 方法将在字符串两端去除指定的字符<em>strORreg</em>。<em>strORreg</em> 还可以是正则表达式直接量，trim 方法将在字符串里作正则匹配替换。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">两端去除空格后的新字符串。</p>	
+    <h2>描述</h2>
+	<p class="p">该方法主要用于去除字符串左右两端的空格，为了扩展，也支持传入参数，用于精确匹配字符串的两端。</p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var  title = &quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; myJSFrame&nbsp;&nbsp;&nbsp;&nbsp; &quot;;<br />
+alert( title.trim() ); <span class="comment">//myJSFrame</span><br />
+var author = &quot;===acai=======&quot;;<br />
+alert( author.trim(&quot;=&quot;) ); <span class="comment">//acai</span><br />
+var build = &quot;.2.0.1.&quot;;<br />
+alert( build.trim(/(^\.*)|(\.*$)/g) ); <span class="comment">//2.0.1</span> <br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

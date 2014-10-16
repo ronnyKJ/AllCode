@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.0.2">
+ <bounds minlat="30.5295000" minlon="114.3545000" maxlat="30.5300000" maxlon="114.3550000"/>
+ <node id="1204185538" lat="30.5292855" lon="114.3545019" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175418190" lat="30.5292974" lon="114.3544795" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:36Z"/>
+ <node id="1175418245" lat="30.5293852" lon="114.3545492" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:36Z"/>
+ <node id="1175418228" lat="30.5292235" lon="114.3543132" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:36Z"/>
+ <node id="1204185517" lat="30.5294178" lon="114.3545645" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175418235" lat="30.5297964" lon="114.3541415" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:36Z"/>
+ <node id="1175417961" lat="30.5297456" lon="114.3545117" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:31Z"/>
+ <node id="1175418074" lat="30.5297179" lon="114.3536748" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:34Z"/>
+ <node id="1175418068" lat="30.5298057" lon="114.3542220" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:33Z"/>
+ <node id="1175418029" lat="30.5294915" lon="114.3537928" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:33Z"/>
+ <node id="1204185514" lat="30.5292855" lon="114.3545644" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1204185497" lat="30.5292711" lon="114.3548876" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175417944" lat="30.5297964" lon="114.3539377" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:31Z"/>
+ <node id="1175417988" lat="30.5297918" lon="114.3540718" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:32Z"/>
+ <node id="1522494884" lat="30.5296416" lon="114.3548098" user="utopia" uid="38120" visible="true" version="1" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1204185530" lat="30.5291482" lon="114.3545018" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175418130" lat="30.5294822" lon="114.3545814" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:35Z"/>
+ <node id="1204185531" lat="30.5292711" lon="114.3548108" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175418276" lat="30.5293944" lon="114.3538626" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:37Z"/>
+ <node id="1204185492" lat="30.5291481" lon="114.3548107" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175418027" lat="30.5297826" lon="114.3536855" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:33Z"/>
+ <node id="1175417972" lat="30.5291819" lon="114.3541737" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:31Z"/>
+ <node id="1369724929" lat="30.5297935" lon="114.3540970" user="陽光遐想" uid="414582" visible="true" version="1" changeset="8795344" timestamp="2011-07-22T08:13:50Z"/>
+ <node id="1369722890" lat="30.5297381" lon="114.3547271" user="陽光遐想" uid="414582" visible="true" version="1" changeset="8795344" timestamp="2011-07-22T08:06:20Z">
+  <tag k="name" v="武汉大学出版社读者服务部"/>
+  <tag k="shop" v="books"/>
+ </node>
+ <node id="1175418032" lat="30.5295793" lon="114.3545975" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:33Z"/>
+ <node id="1175418110" lat="30.5297918" lon="114.3537821" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:34Z"/>
+ <node id="1522494886" lat="30.5296405" lon="114.3547115" user="utopia" uid="38120" visible="true" version="1" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1522494883" lat="30.5297150" lon="114.3547084" user="utopia" uid="38120" visible="true" version="1" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1204185585" lat="30.5296404" lon="114.3546455" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1369724915" lat="30.5294466" lon="114.3538251" user="陽光遐想" uid="414582" visible="true" version="1" changeset="8795344" timestamp="2011-07-22T08:13:49Z"/>
+ <node id="1522494887" lat="30.5297136" lon="114.3548080" user="utopia" uid="38120" visible="true" version="1" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1204185527" lat="30.5294178" lon="114.3546454" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <node id="1175417940" lat="30.5297964" lon="114.3544795" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:31Z"/>
+ <node id="1175418147" lat="30.5292281" lon="114.3539913" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:35Z"/>
+ <node id="1175418215" lat="30.5292235" lon="114.3544527" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:36Z"/>
+ <node id="1175418249" lat="30.5298334" lon="114.3543239" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:37Z"/>
+ <node id="1175418071" lat="30.5296578" lon="114.3545438" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7403593" timestamp="2011-02-26T19:40:33Z"/>
+ <node id="1204185520" lat="30.5296403" lon="114.3548878" user="utopia" uid="38120" visible="true" version="2" changeset="9983965" timestamp="2011-11-29T01:31:40Z"/>
+ <way id="101817150" user="陽光遐想" uid="414582" visible="true" version="2" changeset="8795344" timestamp="2011-07-22T08:13:52Z">
+  <nd ref="1175417988"/>
+  <nd ref="1175417944"/>
+  <nd ref="1175418110"/>
+  <nd ref="1175418027"/>
+  <nd ref="1175418074"/>
+  <nd ref="1175418029"/>
+  <nd ref="1369724915"/>
+  <nd ref="1175418276"/>
+  <nd ref="1175418147"/>
+  <nd ref="1175417972"/>
+  <nd ref="1175418228"/>
+  <nd ref="1175418215"/>
+  <nd ref="1175418190"/>
+  <nd ref="1175418245"/>
+  <nd ref="1175418130"/>
+  <nd ref="1175418032"/>
+  <nd ref="1175418071"/>
+  <nd ref="1175417961"/>
+  <nd ref="1175417940"/>
+  <nd ref="1175418249"/>
+  <nd ref="1175418068"/>
+  <nd ref="1175418235"/>
+  <nd ref="1369724929"/>
+  <nd ref="1175417988"/>
+  <tag k="name" v="星湖"/>
+  <tag k="natural" v="water"/>
+ </way>
+ <way id="104372407" user="utopia" uid="38120" visible="true" version="4" changeset="9983965" timestamp="2011-11-29T01:31:41Z">
+  <nd ref="1204185530"/>
+  <nd ref="1204185492"/>
+  <nd ref="1204185531"/>
+  <nd ref="1204185497"/>
+  <nd ref="1204185520"/>
+  <nd ref="1522494884"/>
+  <nd ref="1522494887"/>
+  <nd ref="1522494883"/>
+  <nd ref="1522494886"/>
+  <nd ref="1204185585"/>
+  <nd ref="1204185527"/>
+  <nd ref="1204185517"/>
+  <nd ref="1204185514"/>
+  <nd ref="1204185538"/>
+  <nd ref="1204185530"/>
+  <tag k="addr:housename" v="LIESMARS"/>
+  <tag k="addr:postcode" v="430079"/>
+  <tag k="addr:street" v="129 Luoyu road"/>
+  <tag k="alt_name" v="LIESMARS"/>
+  <tag k="building" v="yes"/>
+  <tag k="int_name" v="State Key Laboratory of Inforamtion Engineering in Surveying, Mapping and Remote Sensing"/>
+  <tag k="name" v="测绘遥感信息工程国家重点实验室"/>
+ </way>
+</osm>

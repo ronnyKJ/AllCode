@@ -1,0 +1,70 @@
+<html>
+<head><title></title>
+<style>
+body
+{
+	font-family: "Arial";
+}
+
+#clock
+{
+	position: relative;
+	width: 60px;
+	text-align: center;
+	margin: 100px auto;
+	-webkit-perspective: 9000px;
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: rotate 50s infinite linear;
+	-webkit-animation-direction: alternate;
+}
+
+.core
+{
+	width: 60px;
+	height: 60px;
+	/*background: #DDD;*/
+	margin-top: 10px;
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: spinL 20s infinite linear;
+}
+
+.core p
+{
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	background: rgba(30, 250, 0, 0.6);
+	border-radius: 10px;
+	margin: 0;
+}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+<div id="clock"></div>
+</body>
+<script type="text/javascript">
+var d = document, m=1, n=8;
+var c = d.getElementById("clock");
+for(var i=0; i<m; i++)
+{
+	var core = d.createElement("div");
+	core.className = "core";
+	if(i%2==0)
+	{
+		core.style.webkitAnimation = "spinR 20s infinite linear";
+	}
+	c.appendChild(core);
+	for(var j=0; j<n; j++)
+	{
+		var p = d.createElement("p");
+		p.innerText = i+""+j;
+		p.style.webkitTransform = "rotateY("+360/n*j+"deg) translateZ(140px)";
+		core.appendChild(p);
+	}
+}
+</script>
+</html>

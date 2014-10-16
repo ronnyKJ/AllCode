@@ -1,0 +1,18 @@
+﻿<html>
+<head>
+<title>event</title>
+</head>
+<body>
+<input type="button" value="go" />
+</body>
+<script type="text/javascript">
+document.body.onclick = function(event)
+{
+	//alert(event.target + "    " + event.currentTarget);
+	var e = event || window.event; 
+	alert(window.event.srcElement.value);
+	//var target = e.relatedTarget || e.toElement;
+	//alert(target);
+}
+</script>
+</html>

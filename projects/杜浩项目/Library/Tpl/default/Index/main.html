@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Library</title>
+<link rel='stylesheet' type='text/css' href='__ROOT__/css/style.css'>
+</head>
+<body>
+<h1>Library</h1>
+<include file="userdata" />
+<if condition="$usertype eq 0">
+	<include file="bookAdminUnauthorized" />
+<elseif condition="$usertype eq 1" />
+	<include file="bookAdminAuthorized" />
+<else/>
+	<include file="borrowedBookList" />
+</if>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/** 动态获取图片的宽度和高度的像素值 
+ * 
+ * @param sUrl 图片的url 
+ * @param fCallback 回调函数，fCallback至少有一个类型为object类型的参数用来接收图片的宽、高、url 
+ *  
+ * usage: 
+ * var url = "http://mat1.gtimg.com/datalib_img//11-05-26/c/c21ff1138e7349859b49b99312d05baf.jpg"; 
+ * FGetImg(url, function(img){alert('width:'+img.width+";height:"+img.height+";url:"+img.url);}); 
+ * 
+ */  
+var FGetImg = function(sUrl, fCallback)  
+{     
+    var img = new Image();  
+    img.src = sUrl + '?t=' + Math.random();    //IE下，ajax会缓存，导致onreadystatechange函数没有被触发，所以需要加一个随机数  
+    if (FBrowser.isIE)  
+    {  
+        img.onreadystatechange = function()  
+        {  
+            if (this.readyState=="loaded" || this.readyState=="complete")  
+            {  
+                fCallback({width:img.width, height:img.height, url:sUrl});  
+            }  
+        };  
+    }else if (FBrowser.isFirefox || FBrowser.isSafari || FBrowser.isOpera || FBrowser.isChrome)  
+    {  
+        img.onload = function()  
+        {  
+            fCallback({width:img.width, height:img.height, url:sUrl});  
+        };  
+    }  
+    else  
+    {  
+        fCallback({width:img.width, height:img.height, url:sUrl});  
+    }  
+}; 

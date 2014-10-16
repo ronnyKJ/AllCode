@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Workers example: Multiviewer</title>
+<script>
+var n=0;
+function openViewer()
+{
+	//window.open('viewer.html', '');
+	window.open ('viewer.html',"_blank","channelmode=yes, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=400, height=300");
+}
+</script>
+</head>
+<body>
+	<p><button type=button onclick="openViewer()">Open a new viewer</button></p>
+	<p>Each viewer opens in a new window. You can have as many viewers as you like, they all view the same data.</p>
+</body>
+</html>

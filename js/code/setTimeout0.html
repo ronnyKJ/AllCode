@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>setTimeout</title>
+<script type="text/javascript" >
+(function(){
+  
+  function get(id){
+   return document.getElementById(id);
+  }
+  
+  window.onload = function(){
+   get('makeinput').onmousedown = function(){
+    var input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('value', 'test1');
+    get('inpwrapper').appendChild(input);
+    input.focus();
+    input.select();
+   }
+   get('makeinput2').onmousedown = function(){
+    var input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('value', 'test1');
+    get('inpwrapper2').appendChild(input);
+    setTimeout(function(){
+     input.focus();
+     input.select();
+    }, 0);
+   }
+   get('input1').onkeypress = function(){
+    get('preview1').innerHTML = this.value;
+   }
+   get('input2').onkeypress = function(){
+	   setTimeout(function(){
+		get('preview2').innerHTML = get('input2').value;
+	   },0 );
+   }
+  }
+ })();
+</script>
+</head>
+<body>
+ <h1><code>DEMO1</code></h1>
+ <h2>1、未使用 <code>setTimeout</code>（未选中文本框内容）</h2>
+ <button id="makeinput">生成 input</button>
+ <p id="inpwrapper"></p>
+ <h2>2、使用 <code>setTimeout</code>（立即选中文本框内容）</h2>
+ <button id="makeinput2">生成 input</button></h2>
+ <p id="inpwrapper2"></p>
+
+ <h1><code>DEMO2</code></h1>
+ <h2>1、未使用 <code>setTimeout</code>(只有输入第二个字符时，前一个字符才显示出来)</h2>
+ <input type="text" id="input1" value=""/><div id="preview1"></div>
+ <h2>2、使用 <code>setTimeout</code>(输入时，字符同时显示出来)</h2>
+<input type="text" id="input2" value=""/><div id="preview2"></div>
+</body>
+</html>

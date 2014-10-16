@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+Q=document;B=Q.body;A=B.clientWidth/2;D=B.clientHeight/2;T=R=20;t=f=l=0;L=10;V=1000;M=Math;S=M.sin;C=M.cos;a=[];for(i=T*R;i--;)B.appendChild(a[i]=e=Q.createElement('p')),e.innerHTML='~';b=[];k=[];for(i=T;i--;){b[i]=v=[];for(j=R;j--;)v[j]=[2,6,9,11,14,16,18,19,19,15,14,13,12,10,8,6,4,6,6,10][i];if(4<i&&i<10)v[0]=v[5]=v[15]=10+3*i;k[i]=[i*L,0,V]}function n(X){s=0;for(d in X)s+=X[d]*X[d];s=M.sqrt(s);for(d in X)X[d]/=s;return s}function G(a,b){return[a[0]-b[0],a[1]-b[1],a[2]-b[2]]}setInterval(function(){z=t/D;if(n(v=G([z*(l-A),z*(t-D),z*V],k[0]))>L){for(i=T;i--;)k[i+1]=G(k[i],[0,0,0]);i=C(o=S(f++/3)/2);j=S(o);n(v=[v[0]*i+v[2]*j,v[1],v[2]*i+v[0]*j]);for(d in v)k[0][d]+=v[d]*L;for(i=T;i--;)for(j=R;j--;){n(Z=G(k[i+1],k[i]));n(X=[-Z[2],0,Z[0]]);w=[];for(d in Y=[-X[2]*Z[1],X[2]*Z[0]-X[0]*Z[2],X[0]*Z[1]])w[d]=(X[d]*S(o=6.28*j/R)/(i>10?i:1)+Y[d]*C(o))*b[i][j];w=G(k[i],w);e=a[i*R+j].style;e.position='absolute';e.left=A+V*w[0]/w[2]+'px';e.top=D+V*w[1]/w[2]+'px'}}},20);onmousemove=function(e){l=e.clientX;t=e.clientY}
+</script>
+</html>

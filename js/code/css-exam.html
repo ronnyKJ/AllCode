@@ -1,0 +1,47 @@
+﻿<html>
+<head><title></title>
+<style>
+#left
+{
+	height: 100px;
+	width: 200px;
+	background: #F00;
+	float: left;
+}
+
+#right
+{
+	height: 100px;
+	background: #0F0;
+	margin-left: 200px;
+}
+body
+{
+	text-align: center;
+}
+#center
+{
+	background: #00F;
+	margin: auto;
+	height: 100px;
+	width: 200px;
+}
+</style>
+</head>
+<body><div id="left"></div><div id="right"></div><div id="center"></div></body>
+<script type="text/javascript">
+var r = document.getElementById("right");
+var d;
+setInterval(function(){
+	var d1 = new Date();
+	var y = d1.getFullYear();
+	var d2 = new Date(y,11,31,23,59,59);	
+	var l = (d2 - d1)/1000;
+	var d = Math.floor(l/(24*3600));
+	var h = Math.floor((l%(24*3600))/(3600));
+	var m = Math.floor((l%(3600))/(60));
+	var s = Math.floor(l%60);
+	r.innerText = "距"+y+"年还剩"+d+"天"+h+"时"+m+"分"+s+"秒";
+}, 500);
+</script>
+</html>

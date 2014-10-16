@@ -1,0 +1,89 @@
+﻿<html>
+<head><title>Cube</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+w=63;
+b=255;
+d=document;
+h=d.body.style;
+h.backgroundColor="#333";
+h.textAlign="center";
+C=d.getElementById("c");
+var pw = 6;//一个点的宽度
+C.width=w*pw;
+C.height=w*pw;
+t=C.getContext("2d");
+
+M=Math;
+Max=M.max;
+V=13;
+v=-V;
+color=[];
+i=w+1;
+f=[i];
+s=0;
+
+while(i--)
+{
+	color[i]=i*4+",0,0)";//从黑到红
+	color[i+63]="255,"+i*4+",0)";//从红到黄
+	color[i+127]="255,255,"+i*4+")";//从黄到白
+	f[i]=[];
+}
+
+function L(l,m,n,o)
+{
+	k=(o-m)/(n-l);
+	m=m-l*k;
+	for(i=M.min(l,n);i<Max(l,n);i+=1/Max(1,M.abs(k)))
+		f[i&b][(k*i+m)&b]=b;
+}
+alert(-2&63);
+function D(l,m,n,o,p,q)
+{
+	P=[l,o];
+	R=[m,p];
+	S=[n,q];
+	X=[];
+	Y=[];
+	for(i=0;i<2;i++)
+	{
+		Z=(-P[i]*Cos*Cos-R[i]*Sin*Cos+S[i]*Sin)+w;
+		X[i]=w*((-P[i]*Sin+R[i]*Cos)/Z)+(w/2);
+		Y[i]=w*((-P[i]*Cos*Sin-R[i]*Sin*Sin-S[i]*Cos)/Z)+(w/2);
+	}
+	L(X[0],Y[0],X[1],Y[1]);
+}
+
+setInterval(function()
+{
+	Sin=M.sin(s+=0.04);
+	Cos=M.cos(s);
+	for(var i=0;i<w;i++)
+	{
+		for(var j=0;j<w;j++)
+		{
+			f[j][i]=((f[(j-1)&w][i+1]+f[j][i+1]+f[j+1][i+1]+f[j][(i+2)&w])<<5)/170;
+			t.fillStyle="rgb("+color[f[j][i]&b];
+			t.fillRect(j*pw,i*pw,pw,pw)
+		}
+	}
+	
+	D(v,v,v,V,v,v);
+	D(V,v,v,V,V,v);
+	D(V,V,v,v,V,v);
+	D(v,V,v,v,v,v);
+	D(v,v,V,V,v,V);
+	D(V,v,V,V,V,V);
+	D(V,V,V,v,V,V);
+	D(v,V,V,v,v,V);
+	D(v,v,V,v,v,v);
+	D(V,v,V,V,v,v);
+	D(V,V,V,V,V,v);
+	D(v,V,V,v,V,v);
+},25)
+</script>
+</html>

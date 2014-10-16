@@ -1,0 +1,134 @@
+﻿<html>
+<head><title></title>
+<script type="text/javascript">
+/*********caller test**********/
+function fa()
+{
+	//return fa.caller;
+	return arguments.callee.caller;
+}
+
+function fat()
+{
+	document.write(fa());
+}
+
+fat();
+
+/*********extending method 1**********/
+function Animal() {
+	this.species = "animal";
+}
+function Cat(name, color) {
+	this.name = name;
+	this.color = color;
+}
+
+Cat.prototype = new Animal();
+Cat.prototype.constructor = Cat;
+
+   
+var c = new Cat("猫", "灰色");
+document.write('<br>');
+document.write(c.species+" "+c.name+" "+c.color);
+
+/*********extending method 2**********/
+function Fish(kind) {
+	this.kind = kind;
+	Animal.apply(this, []);
+	this.show = function(){
+		document.write('<br>');
+		document.write(this.species + ' ' + this.kind);
+	}
+}
+
+var fish = new Fish("大尾巴金鱼");
+fish.show();
+/*******************用prototype*********************/
+function F(){}
+
+var xy = {
+	x: "XX",
+	y: function(){return "YY";}
+}
+
+function ef()
+{
+	this.e = "EE";
+	this.f = function(){return "FF";}
+}
+
+F.prototype = xy;//用prototype = {}的方式会将前面prototype的内容全部覆盖掉
+F.prototype.e = new ef().e;
+F.prototype.f = new ef().f;
+//F.prototype = xy;
+
+var f1 = new F();
+
+document.write('<br>');
+document.write(f1.x + " " + f1.y() + " " + f1.e + " " + f1.f());
+
+/*******************模仿Array的join*********************/
+function _join()
+{
+	var s = Array.prototype.join.call(arguments, "-");
+	document.write('<br>');
+	document.write(s);
+}
+
+_join("q", "w", "e");
+
+/*******************多态*********************/
+function BaseClass(name)
+{
+    this.TypeName = name;
+    this.writeName = writeName;
+    function writeName()
+    {
+		document.write("<br />");
+        document.write("Base Name: ");
+        document.write(this.TypeName);
+        document.write("<br />");
+        //document.write(this.constructor);
+        document.write("<br />");
+     }
+ }
+ 
+function DeriveClass(name)
+{
+    var base = new BaseClass("Cat");
+    base.Name = name;
+    base.writeName = writeName;
+    function writeName()
+    {
+		document.write("<br />");
+        document.write("Derived Name: ");
+        document.write(base.Name);
+        document.write("<br />");
+        //document.write(this.constructor);
+        document.write("<br />");
+     }
+     return base;
+}
+
+var base = new BaseClass("Cat");
+base.writeName();
+var derive = new DeriveClass("Tom");
+derive.writeName();
+
+function add(a,b,c){return a+b+c;}
+function minus(a,b){return a-b;}
+function multiple(a,b){return a*b;}
+
+var caculate = function(fn)
+{
+	return fn.name + " " + fn.length;
+}
+
+var c = caculate(add);
+alert(c);
+
+</script>
+</head>
+<body></body>
+</html>

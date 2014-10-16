@@ -1,0 +1,92 @@
+﻿<html>
+<head><title>Input placeholder</title>
+<style>
+.ipt
+{
+	color: #AAA;
+}
+</style>
+<script type="text/javascript">
+// 方法1
+var f = {
+	elementFocused: function(ele, value)
+	{
+		if(!ele.isDefautTxt)
+		{
+			ele.isDefautTxt = 1;//默认文本
+		}
+		if(ele.isDefautTxt == 1)
+		{
+			ele.value = "";
+			ele.style.color = "#000";
+		}
+	},
+
+	elementBlured: function(ele, value)
+	{
+		if(!ele.value || ele.value.replace(/\s/g,"") == "")
+		{
+			ele.value = value;
+			ele.isDefautTxt = 1;//默认文本
+			ele.style.color = "#AAA";
+		}
+		else
+		{
+			ele.isDefautTxt = 2;//非默认文本
+		}
+	}
+}
+//方法2
+var setPlaceHolder = function(id, defaultTxt)
+{
+	var ele = document.getElementById(id);
+	ele.value = defaultTxt;
+	ele.style.color = "#AAA";
+	ele.isDefautTxt = 1;
+	ele.onfocus = function()
+	{
+		if(ele.isDefautTxt == 1)
+		{
+			ele.value = "";
+			ele.style.color = "#000";
+		}	
+	};
+	
+	ele.onblur = function()
+	{
+		if(!ele.value || ele.value.replace(/\s/g,"") == "")
+		{
+			ele.value = defaultTxt;
+			ele.isDefautTxt = 1;//默认文本
+			ele.style.color = "#AAA";
+		}
+		else
+		{
+			ele.isDefautTxt = 2;//非默认文本
+		}
+	}
+}
+
+function init()
+{
+	setPlaceHolder("p1", "1-method:2");
+	setPlaceHolder("p2", "2-method:2");
+	setPlaceHolder("p3", "3-method:2");
+}
+</script>
+</head>
+<body onload="init()">
+<form>
+<input type="input" placeholder="A html5 placeholder" /><br>
+<!--方法1-->
+<input class="ipt alala" type="input" value="1-Not a html5 placeholder" onfocus="f.elementFocused(this, '1-Not a html5 placeholder')" onblur="f.elementBlured(this, '1-Not a html5 placeholder')" /><br>
+<input class="ipt" type="input" value="2-Not a html5 placeholder" onfocus="f.elementFocused(this, '2-Not a html5 placeholder')" onblur="f.elementBlured(this, '2-Not a html5 placeholder')" /><br>
+<input class="ipt" type="input" value="3-Not a html5 placeholder" onfocus="f.elementFocused(this, '3-Not a html5 placeholder')" onblur="f.elementBlured(this, '3-Not a html5 placeholder')" /><br>
+<!--方法2-->
+<input id="p1" class="ipt" type="input" /><br>
+<input id="p2" class="ipt" type="input" /><br>
+<input id="p3" class="ipt" type="input" /><br>
+<input type="submit" value="Submit" />
+</form>
+</body>
+</html>

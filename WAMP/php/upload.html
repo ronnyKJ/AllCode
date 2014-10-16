@@ -1,0 +1,27 @@
+<html>
+<body>
+
+<form action="getUploadFile.php" method="post"
+enctype="multipart/form-data">
+<label for="file">Filename:</label>
+<input type="file" name="file" id="file" /> 
+<br />
+<input type="submit" name="submit" value="Submit" />
+</form>
+
+
+
+<form action="radio_checkbox.php" method="get">
+	<input type="radio" value="0" name="sex" checked />Male<br>
+	<input type="radio" value="1" name="sex" />Female<br><br>
+
+	<input type="checkbox" value="Ronny" name="nickname[]" />Ronny<br>
+	<input type="checkbox" value="Tim" name="nickname[]" />Tim<br>
+	<input type="checkbox" value="Cole" name="nickname[]" />Cole<br>
+	<input type="checkbox" value="Messi" name="nickname[]" />Messi<br>
+	<input type="checkbox" value="Doran" name="nickname[]" />Doran
+
+	<input type="submit" value="post" />
+</form>
+</body>
+</html>

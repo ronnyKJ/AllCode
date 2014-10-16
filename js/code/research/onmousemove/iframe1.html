@@ -1,0 +1,39 @@
+<html>
+ <head>
+  <TITLE></TITLE>
+ </head>
+ <body>
+  <form name=exf1>
+   <table border=1>
+    <tr><td colspan=2>Position Of Cursor</td></tr>
+    <tr>
+     <td>X <input type='text' name='x' value="<unknown>"></td>
+     <td>Y <input type='text' name='y' value="<unknown>"></td>
+    </tr>
+   </table>
+  </form>
+  <IFRAME name="test" id="test" height="110" width="280" frameborder="1" src="iframe2.html" noresize></IFRAME>
+  <script type=text/javascript>
+   var isIE = document.all ? true : false;
+   if (!isIE)
+    document.captureEvents(Event.MOUSEMOVE);
+   document.onmousemove = getMousePosition;
+   
+   function getMousePosition(e) {
+    var _x;
+    var _y;
+    if (!isIE) {
+     _x = e.pageX;
+     _y = e.pageY;
+    }
+    if (isIE) {
+     _x = event.clientX + document.body.scrollLeft;
+     _y = event.clientY + document.body.scrollTop;
+    }
+    document.exf1.x.value=_x;
+    document.exf1.y.value=_y;
+    return true;
+   }
+  </script>
+ </body>
+</html>

@@ -1,0 +1,51 @@
+﻿<html>
+<head><title>sub menu</title>
+<style>
+ul
+{
+	list-style: none;
+}
+
+a.container
+{
+	display: block;
+	width: 150px;
+	height: 100px;
+	background: #DDD;
+}
+
+a.container ul
+{
+	display: inline-block;
+}
+
+a.container .sub
+{
+	display: none;
+}
+
+a.container:hover sub
+{
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+<ul>
+	<li>
+		<a class="container" href="#">fggdf
+			<ul class="main">
+				<li><a href="#">Main Item1111</a></li>
+				<li><a href="#">Main Item2</a></li>
+				<li><a href="#">Main Item3</a></li>
+			</ul>
+			<ul class="sub">
+				<li><a href="#">Sub Item1</a></li>
+				<li><a href="#">Sub Item2</a></li>
+				<li><a href="#">Sub Item3</a></li>
+			</ul>
+		</a>
+	</li>
+</ul>
+</body>
+</html>

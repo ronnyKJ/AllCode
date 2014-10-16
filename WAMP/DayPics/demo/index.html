@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>DayPics</title>
+<link rel='stylesheet' type='text/css' href='../css/pc.css'>
+<link rel='stylesheet' type='text/css' href='../css/demo.css'>
+</head>
+<body>
+<div id="header">
+	<img id="logo-100" alt="DayPics" src="../img/logo-100.png" />
+	<img id="logo" alt="DayPics" src="../img/demos.png" />
+	<span id="subheading" class="second_font">Let's make it amazing!</span>
+	<p id="current_date"></p>
+	<ul id="menu">
+		<li><a href="http://ronny-i.com/index.php">Home</a></li>
+		<li><a href="http://ronny-i.com/index.php/Labs">Labs</a></li>
+		<li><a href="http://ronny-i.com/index.php/Drawing">Drawing</a></li>
+		<li><a href="http://ronny-i.com/index.php/About">About Me</a></li>
+	</ul>
+</div>
+<div id="main">
+	<ul id="demo">
+		<li><a href="supermario/supermario.html" img="mario"></a><span class="left">超级马里奥</span><span class="right">Css3</span></li>
+		<li><a href="3D-3.html" img="3d"></a><span class="left">3D密室</span><span class="right">Canvas</span></li>
+		<li><a href="easeMode/ease.html" img="ease"></a><span class="left">缓动函数</span><span class="right">Canvas</span></li>
+		<li><a href="meteor/meteor.html" img="meteor"></a><span class="left">陨石</span><span class="right">Canvas</span></li>
+		<li><a href="ball-v2.html" img="earth"></a><span class="left">地球</span><span class="right">Css3</span></li>
+		<li><a href="ball-v4.html" img="earthline"></a><span class="left">经纬线</span><span class="right">Css3</span></li>
+		<li><a href="statics.html" img="chart"></a><span class="left">统计图表</span><span class="right">Canvas</span></li>
+	</ul>
+</div>
+
+<div id="bottom" class="second_font">-- By Ronaldinho 2011 --</div>
+<script type="text/javascript">
+var li = document.getElementById("demo").getElementsByTagName("li");
+var a = document.getElementById("demo").getElementsByTagName("a");
+for(var i=0; i<li.length; i++)
+{
+	if(i%3==0&&i>0)
+		li[i-1].style.marginRight = "0";
+	a[i].style.backgroundImage = 'url(/DayPics/demo/thumb/'+a[i].getAttribute('img')+'.png)';
+	
+}
+</script>
+</body>
+</html>

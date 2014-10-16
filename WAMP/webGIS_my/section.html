@@ -1,0 +1,63 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<style>
+canvas{background:#aaa;margin: 0;float:left}
+</style>
+<script type='text/javascript' src="js/jquery-1.7.2.js"></script>
+<script type='text/javascript' src="js/util.js"></script>
+<script type='text/javascript' src="js/geoData.js"></script>
+<script type='text/javascript' src="js/canvas.js"></script>
+<script type='text/javascript' src="js/geometryRender.js"></script>
+<script type='text/javascript' src="js/osm2geo.js"></script>
+<script type='text/javascript' src="js/debug.js"></script>
+</head>
+<body>
+	<canvas id="map1" width="600" height="400"></canvas>
+	<canvas id="map2" width="600" height="400"></canvas>
+</body>
+<script type="text/javascript">
+var d1, b1=[114.33912,30.53560,114.343225,30.53991];
+var d2, b2=[114.343225,30.53560,114.34733,30.53991];
+
+Debug.trace("xml2json",function(){ 
+	d1 = GeoData.retrieveData(b1, false);
+	d2 = GeoData.retrieveData(b2, false);
+});
+
+var m1 = $('#map1')[0], ctx1 = m1.getContext('2d');
+var m2 = $('#map2')[0], ctx2 = m2.getContext('2d');
+
+function mapConfig(canvas, geoData){
+	var bb = U.copyArray(geoData.bbox), x1 = bb[0], y1 = bb[1], x2 = bb[2], y2 = bb[3];
+	var cw = canvas.width, ch = canvas.height;
+	var gw = x2-x1, gh = y2-y1;
+	return {
+		bbox: bb,
+		x1: bb[0],
+		y1: bb[1],
+		x2: bb[2],
+		y2: bb[3],
+		width: cw,
+		height: ch,
+		geoWidth: gw,
+		geoHeight: gh,
+		x_scale: cw/gw,
+		y_scale: ch/gh
+	}
+}
+
+var cfg1 = mapConfig(m1, d1);
+var cfg2 = mapConfig(m2, d2);
+
+Debug.trace("revise",function(){ 
+	GeoData.geoToMapAll(d1, cfg1);//经纬度 转化为 xy像素
+	GeoData.geoToMapAll(d2, cfg2);//经纬度 转化为 xy像素
+});
+
+Debug.trace("render",function(){ 
+	GeoRender.renderMap(d1, ctx1);//渲染地图
+	GeoRender.renderMap(d2, ctx2);//渲染地图
+});
+
+</script>
+</html>

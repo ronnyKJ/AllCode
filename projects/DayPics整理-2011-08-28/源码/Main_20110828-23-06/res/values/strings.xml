@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DayPics</string>
+    <string name="domain_name">http://ronaldinho.imblog.in:1987</string>
+    <string name="upload_action">/index.php/Index/receive</string>
+    <string name="phone_action">/index.php/Index/phone</string>
+</resources>

@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>WebSocket</title>
+<style>
+#chat{height:300px;max-height:400px;width:500px;overflow-y:auto;display:none;}
+.txtBox{width:450px;}
+#form,#start{display:none;}
+</style>
+</head>
+<body onload="init()">
+<div id='init'>Connecting...</div>
+<div id="start">Connected! Enter your name.	<br><input type="text" id="username"><button onclick="submitName(username.value);username.value='';">Go</button></div>
+<div id="chat"></div>
+<form id="form" onsubmit="message.value&&sendMsg(message.value); message.value = ''; return false;">
+	<input class='txtBox' type="text" name="message">
+	<button>Say</button>
+</form>
+</body>
+<script>
+function _(id)
+{
+	return document.getElementById(id);
+}
+
+var ch = _("chat"), start = _("start"), initial = _("init"), username = _("username"), form = _('form');
+
+var socket;
+function init()
+{
+	var host = "ws://localhost:8000/";
+	try{
+		socket = new WebSocket(host);
+		socket.onopen = function(msg){
+			initial.style.display = "none";
+			start.style.display = "block";
+		};
+		socket.onmessage = function(msg){
+			var msg = JSON.parse(msg.data);
+			switch(msg.exe)
+			{
+				case "initUser":
+					window.user = msg;
+				break;
+				case "chat":
+					log(msg.message);
+				break;
+				default:
+			}
+			ch.scrollTop = ch.scrollHeight;
+		};
+		socket.onclose = function(msg){ch.innerHTML = "Disconnected!<br>";};
+	}
+	catch(ex)
+	{
+		log(ex);
+	}
+}
+
+window.onbeforeunload=function(){
+	try{
+		socket.send(JSON.stringify({"exe":"quit","id": window.user.id})); 
+		//socket.close();
+		socket=null;
+		return confirm("a","b");
+	}
+	catch(ex){ 
+		log(ex);
+	}
+};
+
+function log(msg)
+{
+	ch.innerHTML += "> " + msg + "<br>";
+}
+
+function submitName(name)
+{
+	window.user.name = name;
+	socket.send(JSON.stringify({
+		"exe": "name",
+		"name":name
+	}));
+	start.style.display = "none";
+	ch.style.display = "block";
+	form.style.display = "block";
+}
+
+function sendMsg(msg)
+{
+	var obj = 
+	{
+		"exe": "chat",
+		"id": window.user.id,
+		"name": window.user.name,
+		"message": msg
+	};
+	socket.send(JSON.stringify(obj))
+}
+</script>
+</html>

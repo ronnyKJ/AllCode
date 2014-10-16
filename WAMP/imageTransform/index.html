@@ -1,0 +1,51 @@
+﻿<html>
+<head><title>Image Transform</title>
+<style>
+body
+{
+	background: #CCC;
+}
+
+#img
+{
+	display: none;
+}
+</style>
+</head>
+<body><canvas id="c" width='500' height='594'></canvas><img id='img' src='img.jpg' /></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var t = c.getContext("2d");
+var img = d.getElementById("img");
+//-----code-------
+img.onload = function(){
+	t.drawImage(img,0,0,500,594);
+	var data = t.getImageData(0,0,500,594).data;
+	t.fillStyle = "#FFF";
+	t.fillRect(0,0,500,594);
+	var newData = [], color=[], n;
+	var unit = 16, intervalLength = unit*4;
+	
+	for(var i=0,l=data.length;i<l;i+=intervalLength)
+	{
+		color.push("rgb("+data[i],data[i+1],data[i+2]+")");
+		n = Math.floor(i/4/500);
+		if(n%unit==0)
+		{
+			t.beginPath();
+			t.fillStyle = color.join(',');
+			//t.fillRect((i/4%500),n,unit,unit);
+			t.arc((i/4%500),n,unit/2,0,360,true);
+			t.fill();
+		}
+		color=[];
+	}
+}
+
+</script>
+</html>

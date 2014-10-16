@@ -1,0 +1,177 @@
+﻿<html>
+<head><title>Sort</title>
+</head>
+<body>
+Origin:<span id="origin"></span><br>
+Sorted:<span id="sorted"></span>
+</body>
+<script type="text/javascript">
+var _ = function(id)
+{
+	return document.getElementById(id);
+}
+
+var arr = [1,6,3,9,2,10,45,4,2];
+//var arr = [8,7,6,5,4,3,2,1];
+//var arr = [1,2,3,4,5,6,7,8];
+
+var mark = function()
+{
+	var l = arguments.length, i = 0;
+	var grids = _("sorted").getElementsByClassName("grid");
+	for(; i<l; i++)
+	{
+		grids[arguments[i]].className += " mark";
+	}
+}
+
+//插入排序
+var Dir_Insert = function(arr)  //直接插入排序
+{
+    var j,t,N=arr.length;
+    for(var i=1;i<N;i++)
+    {
+        t=arr[i];
+        j=i-1;
+        while(arr[j]>t)
+        {
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=t;
+    }
+}
+
+//直接选择排序
+var Dir_Choose = function(A)
+{
+    var k,t,n=A.length;
+    for(var i=0;i<n-1;i++)
+    {
+        k=i;
+        for(var j=i+1;j<n;j++)
+        {
+            if(A[k]>A[j]) 
+			{
+				k=j;
+			}
+        }
+        if(k!=i)
+        {
+            t=A[i];
+            A[i]=A[k];
+            A[k]=t;
+        }
+    }
+}
+
+//冒泡排序
+var Bubble = function(A)
+{
+	var i=0,j=A.length, tmp;
+	while(j>0)
+	{
+		for(i=0; i<j-1; i++)
+		{
+			if(A[i]>A[i+1])
+			{
+				tmp = A[i+1];
+				A[i+1] = A[i];
+				A[i] = tmp;
+			}
+		}
+		j--;
+	}
+}
+
+//快速排序
+var quickSort = function(array)
+{
+	var arr = array;
+	var i = 0;
+	var j = arr.length-1;
+	var qSort = function(i, j)
+	{
+		if( i == j ){ return }// 当前组仅有一个元素则结束
+		var ai = arr[i];//取出的主元
+		var ii = i;//记录i的开始位置
+		var jj = j;//记录J的开始位置
+		while( i < j ){
+			if( arr[j] >= ai){
+				j--;    
+			}else{                       
+				arr[i] = arr[j];
+				i++;
+				
+				while( i < j){
+					if(arr[i] > ai){
+						arr[j] = arr[i];
+						break;
+					}else{
+						i++;
+					}
+				}
+			}
+		
+		}
+		if( ii == i){
+			qSort(++i, jj);
+			return ;
+		}
+		arr[i] = ai;
+		
+		qSort(ii, i);//第一组排序
+		qSort(j, jj);//第二组排序
+	}
+	qSort(i,j);
+}
+
+var my_Selection = function(A)
+{
+	var i=k=0, l=A.length, tmp;
+	for(; i<l; i++)
+	{
+		k=i;
+		for(j=1+i; j<l; j++)
+		{
+			if(A[k]>A[j])
+			{
+				k=j;
+			}
+		}
+		if(k!=i)
+		{
+			tmp = A[k];
+			A[k] = A[i];
+			A[i] = tmp;
+		}
+	}
+}
+
+var my_Insert = function(A)
+{
+	var i=1, j=0, l=A.length, tmp;
+	for(; i<l; i++)
+	{
+		j=i-1;
+		tmp=A[i];
+		while(A[j]>tmp)
+		{
+			A[j+1]=A[j];
+			j--;
+		}
+		A[++j]=tmp;
+	}
+}
+
+//显示
+_("origin").innerText = arr;
+//Dir_Insert(arr);
+//Dir_Choose(arr);
+//Bubble(arr);
+//my_Selection(arr);
+//my_Insert(arr);
+quickSort(arr);
+_("sorted").innerText = arr;
+</script>
+</html>

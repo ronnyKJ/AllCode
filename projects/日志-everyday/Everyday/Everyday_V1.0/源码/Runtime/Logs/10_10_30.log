@@ -1,0 +1,433 @@
+[ 2010-10-30T00:06:00+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002893s ]
+[ 2010-10-30T00:06:00+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000420s ]
+[ 2010-10-30T00:06:00+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002906s ]
+[ 2010-10-30T00:06:00+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000182s ]
+[ 2010-10-30T00:06:01+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002396s ]
+[ 2010-10-30T00:06:01+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000539s ]
+[ 2010-10-30T00:06:02+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002617s ]
+[ 2010-10-30T00:06:02+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.000118s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002277s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002372s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: UPDATE `think_userevent` SET `date`='2010-10-26',`title`='看书看书22',`starttime`='11:00:00',`endtime`='15:00:00' WHERE id=74 [ RunTime:0.001043s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;2;' WHERE aid=41 [ RunTime:0.000289s ]
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: username 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 31 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: cate 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 36 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: cate 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 71 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: list 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 75 行.
+[ 2010-10-30T00:06:05+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;2;' WHERE aid=42 [ RunTime:0.093049s ]
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at E:\WAMP5\Everyday\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at E:\WAMP5\Everyday\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at E:\WAMP5\Everyday\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: username 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 31 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: cate 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 36 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: cate 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 71 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: list 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 75 行.
+[ 2010-10-30T00:06:05+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;2;' WHERE aid=43 [ RunTime:0.043431s ]
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at E:\WAMP5\Everyday\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at E:\WAMP5\Everyday\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at E:\WAMP5\Everyday\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: username 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 31 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: cate 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 36 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: cate 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 71 行.
+[ 2010-10-30T00:06:05+08:00 ] NOTIC: [8] Undefined variable: list 7a1b7962f8ac36f8d7085f8ba86d0f9d.php 第 75 行.
+[ 2010-10-30T00:06:05+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.004010s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=undefined [ RunTime:0.000406s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002286s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=undefined [ RunTime:0.000615s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002154s ]
+[ 2010-10-30T00:06:05+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=undefined [ RunTime:0.000649s ]
+[ 2010-10-30T00:06:36+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.005186s ]
+[ 2010-10-30T00:06:36+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000171s ]
+[ 2010-10-30T00:06:36+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.003466s ]
+[ 2010-10-30T00:06:36+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001256s ]
+[ 2010-10-30T00:06:36+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002533s ]
+[ 2010-10-30T00:06:36+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000345s ]
+[ 2010-10-30T00:06:38+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002896s ]
+[ 2010-10-30T00:06:38+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.000441s ]
+[ 2010-10-30T00:06:45+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002327s ]
+[ 2010-10-30T00:06:45+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002494s ]
+[ 2010-10-30T00:06:45+08:00 ] SQL: UPDATE `think_userevent` SET `date`='2010-10-26',`title`='看书看书22',`starttime`='11:00:00',`endtime`='15:00:00' WHERE id=74 [ RunTime:0.000509s ]
+[ 2010-10-30T00:06:45+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=41 [ RunTime:0.046362s ]
+[ 2010-10-30T00:06:45+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='1;' WHERE aid=42 [ RunTime:0.032787s ]
+[ 2010-10-30T00:06:45+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=43 [ RunTime:0.032994s ]
+[ 2010-10-30T00:06:48+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002924s ]
+[ 2010-10-30T00:06:48+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000157s ]
+[ 2010-10-30T00:06:48+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002729s ]
+[ 2010-10-30T00:06:48+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001093s ]
+[ 2010-10-30T00:06:48+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002331s ]
+[ 2010-10-30T00:06:48+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000791s ]
+[ 2010-10-30T00:07:58+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003059s ]
+[ 2010-10-30T00:07:58+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000154s ]
+[ 2010-10-30T00:07:58+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002537s ]
+[ 2010-10-30T00:07:58+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000457s ]
+[ 2010-10-30T00:07:58+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002365s ]
+[ 2010-10-30T00:07:58+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000715s ]
+[ 2010-10-30T00:07:59+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002658s ]
+[ 2010-10-30T00:07:59+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.000992s ]
+[ 2010-10-30T00:08:04+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002564s ]
+[ 2010-10-30T00:08:04+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002334s ]
+[ 2010-10-30T00:08:04+08:00 ] SQL: UPDATE `think_userevent` SET `date`='2010-10-26',`title`='看书看书22',`starttime`='11:00:00',`endtime`='15:00:00' WHERE id=74 [ RunTime:0.000338s ]
+[ 2010-10-30T00:08:04+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;' WHERE aid=41 [ RunTime:0.101716s ]
+[ 2010-10-30T00:08:04+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;' WHERE aid=42 [ RunTime:0.066114s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;' WHERE aid=43 [ RunTime:0.032976s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002513s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000525s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.001917s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001470s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002952s ]
+[ 2010-10-30T00:08:05+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000174s ]
+[ 2010-10-30T00:08:09+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.004000s ]
+[ 2010-10-30T00:08:09+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.001329s ]
+[ 2010-10-30T00:11:20+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002334s ]
+[ 2010-10-30T00:11:20+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000740s ]
+[ 2010-10-30T00:11:20+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002108s ]
+[ 2010-10-30T00:11:20+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000622s ]
+[ 2010-10-30T00:11:20+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002300s ]
+[ 2010-10-30T00:11:20+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000553s ]
+[ 2010-10-30T00:11:21+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002220s ]
+[ 2010-10-30T00:11:21+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.000542s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002133s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.030409s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: UPDATE `think_userevent` SET `date`='2010-10-26',`title`='看书看书22',`starttime`='11:00:00',`endtime`='15:00:00' WHERE id=74 [ RunTime:0.001092s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=41 [ RunTime:0.118484s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=42 [ RunTime:0.032769s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=43 [ RunTime:0.032784s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002287s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000595s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002253s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001654s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002294s ]
+[ 2010-10-30T00:11:25+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000712s ]
+[ 2010-10-30T00:11:28+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.003793s ]
+[ 2010-10-30T00:11:28+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.000524s ]
+[ 2010-10-30T00:11:34+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002255s ]
+[ 2010-10-30T00:11:34+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002366s ]
+[ 2010-10-30T00:11:34+08:00 ] SQL: UPDATE `think_userevent` SET `date`='2010-10-26',`title`='看书看书22',`starttime`='11:00:00',`endtime`='15:00:00' WHERE id=74 [ RunTime:0.002468s ]
+[ 2010-10-30T00:11:34+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;' WHERE aid=41 [ RunTime:0.074692s ]
+[ 2010-10-30T00:11:34+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=42 [ RunTime:0.000436s ]
+[ 2010-10-30T00:11:34+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;2;' WHERE aid=43 [ RunTime:0.032134s ]
+[ 2010-10-30T00:11:35+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002717s ]
+[ 2010-10-30T00:11:35+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000582s ]
+[ 2010-10-30T00:11:35+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002359s ]
+[ 2010-10-30T00:11:35+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001763s ]
+[ 2010-10-30T00:11:35+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002597s ]
+[ 2010-10-30T00:11:35+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000219s ]
+[ 2010-10-30T00:11:37+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002592s ]
+[ 2010-10-30T00:11:37+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.001264s ]
+[ 2010-10-30T00:11:46+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002828s ]
+[ 2010-10-30T00:11:46+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002957s ]
+[ 2010-10-30T00:11:46+08:00 ] SQL: UPDATE `think_userevent` SET `date`='2010-10-26',`title`='看书看书22',`starttime`='11:00:00',`endtime`='15:00:00' WHERE id=74 [ RunTime:0.000350s ]
+[ 2010-10-30T00:11:46+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;2;4;' WHERE aid=41 [ RunTime:0.056643s ]
+[ 2010-10-30T00:11:46+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;2;4;6;' WHERE aid=42 [ RunTime:0.099021s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;2;' WHERE aid=43 [ RunTime:0.065700s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002863s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000133s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002202s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001995s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002202s ]
+[ 2010-10-30T00:11:47+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000243s ]
+[ 2010-10-30T00:11:48+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002529s ]
+[ 2010-10-30T00:11:48+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 74 [ RunTime:0.000864s ]
+[ 2010-10-30T00:12:02+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002386s ]
+[ 2010-10-30T00:12:02+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000427s ]
+[ 2010-10-30T00:12:02+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002150s ]
+[ 2010-10-30T00:12:02+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000504s ]
+[ 2010-10-30T00:12:03+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002433s ]
+[ 2010-10-30T00:12:03+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000594s ]
+[ 2010-10-30T00:12:16+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002902s ]
+[ 2010-10-30T00:12:16+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000426s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002226s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002107s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=73 [ RunTime:0.000480s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='2;3;4;' WHERE aid=38 [ RunTime:0.034585s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='2;3;4;5;6;' WHERE aid=39 [ RunTime:0.032509s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='2;' WHERE aid=40 [ RunTime:0.033062s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002316s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000440s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002248s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001454s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002213s ]
+[ 2010-10-30T00:12:31+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000361s ]
+[ 2010-10-30T00:12:34+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002234s ]
+[ 2010-10-30T00:12:34+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000824s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002430s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002290s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=73 [ RunTime:0.000484s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=38 [ RunTime:0.069264s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='2;3;4;5;6;' WHERE aid=39 [ RunTime:0.000540s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='2;' WHERE aid=40 [ RunTime:0.000440s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002116s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000462s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002133s ]
+[ 2010-10-30T00:12:40+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001495s ]
+[ 2010-10-30T00:12:41+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002746s ]
+[ 2010-10-30T00:12:41+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000436s ]
+[ 2010-10-30T00:12:42+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002287s ]
+[ 2010-10-30T00:12:42+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000701s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002199s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002207s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=73 [ RunTime:0.000504s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=38 [ RunTime:0.000214s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=39 [ RunTime:0.046869s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=40 [ RunTime:0.033159s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002401s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000462s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.001884s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001465s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002880s ]
+[ 2010-10-30T00:12:58+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000320s ]
+[ 2010-10-30T00:12:59+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002415s ]
+[ 2010-10-30T00:12:59+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000768s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.003062s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002184s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=73 [ RunTime:0.000495s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;' WHERE aid=38 [ RunTime:0.059551s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=39 [ RunTime:0.000605s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=40 [ RunTime:0.000534s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002570s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000519s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002510s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001454s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002305s ]
+[ 2010-10-30T00:13:04+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000333s ]
+[ 2010-10-30T00:13:06+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002317s ]
+[ 2010-10-30T00:13:06+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000760s ]
+[ 2010-10-30T00:14:10+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002701s ]
+[ 2010-10-30T00:14:10+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000531s ]
+[ 2010-10-30T00:14:10+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002636s ]
+[ 2010-10-30T00:14:10+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000464s ]
+[ 2010-10-30T00:14:10+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002307s ]
+[ 2010-10-30T00:14:10+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000508s ]
+[ 2010-10-30T00:14:12+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002348s ]
+[ 2010-10-30T00:14:12+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000449s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002203s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002594s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=73 [ RunTime:0.000605s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;' WHERE aid=38 [ RunTime:0.000199s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='' WHERE aid=39 [ RunTime:0.000161s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='2;' WHERE aid=40 [ RunTime:0.095874s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003037s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000504s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.003099s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001324s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002158s ]
+[ 2010-10-30T00:14:15+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000272s ]
+[ 2010-10-30T00:14:17+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002210s ]
+[ 2010-10-30T00:14:17+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000706s ]
+[ 2010-10-30T00:14:45+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002402s ]
+[ 2010-10-30T00:14:45+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000259s ]
+[ 2010-10-30T00:14:45+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.001997s ]
+[ 2010-10-30T00:14:45+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000561s ]
+[ 2010-10-30T00:14:46+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002327s ]
+[ 2010-10-30T00:14:46+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000572s ]
+[ 2010-10-30T00:14:47+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002483s ]
+[ 2010-10-30T00:14:47+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000736s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002970s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002146s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=73 [ RunTime:0.000468s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;1;' WHERE aid=38 [ RunTime:0.091839s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='1;' WHERE aid=39 [ RunTime:0.071507s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0;2;' WHERE aid=40 [ RunTime:0.066110s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002364s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000999s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002315s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001368s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002203s ]
+[ 2010-10-30T00:14:53+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000329s ]
+[ 2010-10-30T00:14:55+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002292s ]
+[ 2010-10-30T00:14:55+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 73 [ RunTime:0.000731s ]
+[ 2010-10-30T00:16:14+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.021568s ]
+[ 2010-10-30T00:16:14+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000619s ]
+[ 2010-10-30T00:16:14+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002165s ]
+[ 2010-10-30T00:16:14+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001330s ]
+[ 2010-10-30T00:16:14+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002211s ]
+[ 2010-10-30T00:16:14+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000372s ]
+[ 2010-10-30T00:16:17+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002546s ]
+[ 2010-10-30T00:16:17+08:00 ] SQL: INSERT INTO `think_userevent` (`date`,`title`,`starttime`,`endtime`,`categoryid`,`userid`) VALUES ('','','','','32','6') [ RunTime:0.038170s ]
+[ 2010-10-30T00:16:17+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.003408s ]
+[ 2010-10-30T00:16:17+08:00 ] SQL: INSERT INTO `think_attribute_content` (`eventid`,`content`,`attributeid`) VALUES (76,'0','undefined') [ RunTime:0.029340s ]
+[ 2010-10-30T00:20:19+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002773s ]
+[ 2010-10-30T00:20:19+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000427s ]
+[ 2010-10-30T00:20:19+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002315s ]
+[ 2010-10-30T00:20:19+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001334s ]
+[ 2010-10-30T00:20:19+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.003191s ]
+[ 2010-10-30T00:20:19+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000404s ]
+[ 2010-10-30T00:25:58+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003045s ]
+[ 2010-10-30T00:25:58+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000524s ]
+[ 2010-10-30T00:25:58+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002367s ]
+[ 2010-10-30T00:25:58+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000616s ]
+[ 2010-10-30T00:25:58+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002266s ]
+[ 2010-10-30T00:25:58+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000775s ]
+[ 2010-10-30T00:29:17+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002374s ]
+[ 2010-10-30T00:29:17+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000489s ]
+[ 2010-10-30T00:29:17+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.001944s ]
+[ 2010-10-30T00:29:17+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000566s ]
+[ 2010-10-30T00:29:17+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002639s ]
+[ 2010-10-30T00:29:17+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000586s ]
+[ 2010-10-30T00:29:20+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002472s ]
+[ 2010-10-30T00:29:20+08:00 ] SQL: INSERT INTO `think_userevent` (`date`,`title`,`starttime`,`endtime`,`categoryid`,`userid`) VALUES ('','','','','32','6') [ RunTime:0.045538s ]
+[ 2010-10-30T00:29:20+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.004418s ]
+[ 2010-10-30T00:29:20+08:00 ] SQL: INSERT INTO `think_attribute_content` (`eventid`,`content`,`attributeid`) VALUES (77,'0','') [ RunTime:0.039219s ]
+[ 2010-10-30T00:30:47+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002493s ]
+[ 2010-10-30T00:30:47+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000629s ]
+[ 2010-10-30T00:30:47+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002333s ]
+[ 2010-10-30T00:30:47+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001180s ]
+[ 2010-10-30T00:30:47+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002398s ]
+[ 2010-10-30T00:30:47+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000510s ]
+[ 2010-10-30T00:31:16+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003149s ]
+[ 2010-10-30T00:31:16+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000305s ]
+[ 2010-10-30T00:31:16+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002471s ]
+[ 2010-10-30T00:31:16+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.000489s ]
+[ 2010-10-30T00:31:16+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002813s ]
+[ 2010-10-30T00:31:16+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000176s ]
+[ 2010-10-30T00:31:24+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002283s ]
+[ 2010-10-30T00:31:24+08:00 ] SQL: INSERT INTO `think_userevent` (`date`,`title`,`starttime`,`endtime`,`categoryid`,`userid`) VALUES ('','','','','32','6') [ RunTime:0.044423s ]
+[ 2010-10-30T00:31:24+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002440s ]
+[ 2010-10-30T00:31:24+08:00 ] SQL: INSERT INTO `think_attribute_content` (`eventid`,`content`,`attributeid`) VALUES (78,'0','undefined') [ RunTime:0.041734s ]
+[ 2010-10-30T00:33:56+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003068s ]
+[ 2010-10-30T00:33:56+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000812s ]
+[ 2010-10-30T00:33:56+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002586s ]
+[ 2010-10-30T00:33:56+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001979s ]
+[ 2010-10-30T00:33:56+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002374s ]
+[ 2010-10-30T00:33:56+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000545s ]
+[ 2010-10-30T00:33:58+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003660s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: INSERT INTO `think_userevent` (`date`,`title`,`starttime`,`endtime`,`categoryid`,`userid`) VALUES ('','','','','32','6') [ RunTime:0.228535s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.005569s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: INSERT INTO `think_attribute_content` (`eventid`,`content`,`attributeid`) VALUES (79,'0','42') [ RunTime:0.087373s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: INSERT INTO `think_attribute_content` (`eventid`,`content`,`attributeid`) VALUES (79,'1','43') [ RunTime:0.083428s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.003745s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000403s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.003268s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001443s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002561s ]
+[ 2010-10-30T00:33:59+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000467s ]
+[ 2010-10-30T00:34:04+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002622s ]
+[ 2010-10-30T00:34:04+08:00 ] SQL: SELECT * FROM think_attribute_content
+													LEFT JOIN think_category_attributes ON think_attribute_content.attributeid = think_category_attributes.attrid
+													WHERE eventid = 79 [ RunTime:0.000816s ]
+[ 2010-10-30T00:34:07+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002887s ]
+[ 2010-10-30T00:34:07+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002786s ]
+[ 2010-10-30T00:34:07+08:00 ] SQL: UPDATE `think_userevent` SET `date`='0000-00-00',`title`='',`starttime`='00:00:00',`endtime`='00:00:00' WHERE id=79 [ RunTime:0.000470s ]
+[ 2010-10-30T00:34:07+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='1' WHERE aid=44 [ RunTime:0.084218s ]
+[ 2010-10-30T00:34:07+08:00 ] SQL: UPDATE `think_attribute_content` SET `content`='0' WHERE aid=45 [ RunTime:0.060586s ]
+[ 2010-10-30T00:34:08+08:00 ] SQL: SHOW COLUMNS FROM think_userevent [ RunTime:0.002612s ]
+[ 2010-10-30T00:34:08+08:00 ] SQL: SELECT cid, categoryname, count FROM think_category WHERE uid="6" [ RunTime:0.000646s ]
+[ 2010-10-30T00:34:08+08:00 ] SQL: SHOW COLUMNS FROM think_attribute_content [ RunTime:0.002628s ]
+[ 2010-10-30T00:34:08+08:00 ] SQL: SELECT * FROM think_attribute_content
+								LEFT JOIN think_userevent ON think_attribute_content.eventid = think_userevent.id
+								LEFT JOIN think_category ON think_userevent.categoryid = think_category.cid 
+								WHERE think_category.uid =6 ORDER BY id DESC, aid ASC [ RunTime:0.001793s ]
+[ 2010-10-30T00:34:08+08:00 ] SQL: SHOW COLUMNS FROM think_category_attributes [ RunTime:0.002290s ]
+[ 2010-10-30T00:34:08+08:00 ] SQL: SELECT * FROM `think_category_attributes` WHERE categoryid=32 [ RunTime:0.000195s ]

@@ -1,0 +1,147 @@
+<html>
+<head><title></title>
+<style>
+body
+{
+	font-family: "Arial";
+	-webkit-perspective: 9000px;
+	background: #000;
+}
+
+#box
+{
+	position: relative;
+	width: 402px;
+	height: 402px;
+	text-align: center;
+	margin: 100px auto;
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: spin 50s infinite linear;
+}
+
+@-webkit-keyframes spin
+{
+	100%{-webkit-transform: rotateX(360deg) rotateY(-360deg);}
+}
+
+#box p
+{
+	position: absolute;
+	width: 400px;
+	height: 400px;
+	line-height: 40px;
+	/*background: rgba(30, 250, 0, 0.5);*/
+	border: 1px rgba(255, 255, 0, 0.5) solid;
+	border-radius: 200px;
+	margin: 0;
+}
+
+p.n1
+{
+	-webkit-transform: rotateY(0deg);
+}
+p.n2
+{
+	-webkit-transform: rotateY(30deg);
+}
+p.n3
+{
+	-webkit-transform: rotateY(60deg);
+}
+p.n4
+{
+	-webkit-transform: rotateY(90deg);
+}
+p.n5
+{
+	-webkit-transform: rotateY(120deg);
+}
+p.n6
+{
+	-webkit-transform: rotateY(150deg);
+}
+p.n7
+{
+	-webkit-transform: rotateY(180deg);
+}
+p.n8
+{
+	-webkit-transform: rotateY(210deg);
+}
+p.n9
+{
+	-webkit-transform: rotateY(240deg);
+}
+p.n10
+{
+	-webkit-transform: rotateY(270deg);
+}
+p.n11
+{
+	-webkit-transform: rotateY(300deg);
+}
+p.n12
+{
+	-webkit-transform: rotateY(330deg);
+}
+#box p.m1
+{
+	-webkit-transform: rotateX(90deg)
+	border: 1px rgba(255, 0, 0, 1) solid;
+}
+#box p.m2
+{
+	-webkit-transform: rotateX(90deg) translateZ(173px);
+	border: 1px rgba(0, 255, 0, 0.5) solid;
+	margin: 100px;
+	width: 200px;
+	height: 200px;
+}
+#box p.m3
+{
+	-webkit-transform: rotateX(90deg) translateZ(100px);;
+	border: 1px rgba(0, 255, 0, 0.5) solid;
+	margin: 26px;
+	width: 346px;
+	height: 346px;
+}
+#box p.m4
+{
+	-webkit-transform: rotateX(90deg);
+	border: 1px rgba(0, 255, 0, 0.5) solid;
+	background: rgba(255, 0, 0, 0.1);
+}
+#box p.m5
+{
+	-webkit-transform: rotateX(90deg) translateZ(-100px);;
+	border: 1px rgba(0, 255, 0, 0.5) solid;
+	margin: 26px;
+	width: 346px;
+	height: 346px;
+}
+#box p.m6
+{
+	-webkit-transform: rotateX(90deg) translateZ(-173px);;
+	border: 1px rgba(0, 255, 0, 0.5) solid;
+	margin: 100px;
+	width: 200px;
+	height: 200px;
+}
+#box p.m7
+{
+	-webkit-transform: rotateX(90deg);
+	border: 1px rgba(255, 0, 0, 1) solid;
+}
+</style>
+<script>
+
+</script>
+</head>
+<body onload="">
+<div id="box">
+	<p class="n1">1</p><p class="n2">2</p><p class="n3">3</p><p class="n4">4</p><p class="n5">5</p><p class="n6">6</p>
+	<p class="n7">7</p><p class="n8">8</p><p class="n9">9</p><p class="n10">10</p><p class="n11">11</p><p class="n12">12</p>
+	<p class="m1"><></p><p class="m2"></p><p class="m3"></p><p class="m4"></p><p class="m5"></p><p class="m6"></p><p class="m7"></p>
+</div>
+</body>
+</html>

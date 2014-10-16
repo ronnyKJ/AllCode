@@ -1,0 +1,13 @@
+﻿<html>
+<head><title></title>
+</head>
+<body></body>
+<script type="text/javascript">
+var request =  new XMLHttpRequest();
+request.open("GET", "http://127.0.0.1/ajax.php", true);
+request.send("d");
+request.onreadystatechange = function(){
+	alert(request.responseText);
+}
+</script>
+</html>

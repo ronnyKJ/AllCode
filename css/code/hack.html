@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>CSS Hack</title>
+<style>
+p{ 
+	height:60px;
+	text-align:center;
+	line-height:60px;
+	border:1px dashed #bbb;
+	font:15px;
+
+	background:#000000;      /* 区别出FF,OP，所有浏览器能识别*/
+	background:#0000FF\9;    /* 区别出IE8，只有IE6/7/8能识别*/
+	[;background:#00FF00;    /* 区别出SF,CH，只有SF,CH,IE6/7能识别*/
+	*background:#FFFF00;     /* 区别出IE7，只有IE6/7能识别 */
+	_background:#FF0000;     /* 区别出IE6 ，只有IE6能识别*/
+} 
+</style>
+</head>
+<body><p>CSS HACK</p>
+<!--[if IE 8]>IE8<![endif]--> 
+<!--[if IE 7]>IE7<![endif]--> 
+<!--[if IE 6]>IE6<![endif]--> 
+<br><br><br>
+查看源代码，文档头部一定要如此声明，否则CSS Hack无效，CSS书写顺序如下，Chrome、FireFox、IE8/7/6测试。
+</body>
+</html>

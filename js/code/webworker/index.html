@@ -1,0 +1,15 @@
+﻿<html>
+<head><title>Web Worker</title>
+</head>
+<body>
+<span id='msg'></span>
+</body>
+<script type="text/javascript">
+var msg = document.getElementById("msg");
+var worker = new Worker("worker.js");
+worker.onmessage = function(event)
+{
+	msg.innerText = event.data;
+}
+</script>
+</html>

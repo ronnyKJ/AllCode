@@ -1,0 +1,55 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<style>
+#see
+{
+	width:300px;
+	height:160px;
+	overflow:hidden;
+}
+
+#map
+{
+	background:#EEE;
+}
+</style>
+<script type='text/javascript' src="jquery-1.7.2.js"></script>
+<script type='text/javascript' src="debug.js"></script>
+</head>
+<body>
+<div id='main'>
+	x1 : <input id="x1" value='116.37443'/><br>
+	y1 : <input id="y1" value='39.86552' /><br>
+	x2 : <input id="x2" value='116.40727' /><br>
+	y2 : <input id="y2" value='39.92624' /><br>
+	<button id='btn'>Get tiles data</button>
+</div>
+</body>
+<script type="text/javascript">
+var _ = function(id)
+{
+	return document.getElementById(id);
+}
+
+var main = _('main');
+var btn = _('btn');
+var x1 = _('x1'), y1 = _('y1'), x2 = _('x2'), y2 = _('y2');
+
+function getTilesData()
+{
+	var vX1 = x1.value, vY1 = y1.value, vX2 = x2.value, vY2 = y2.value;
+	$.ajax({
+		async: true,
+		type: 'GET',
+		url: 'server/server.php?x1='+vX1+'&y1='+vY1+'&x2='+vX2+'&y2='+vY2,
+		dataType: 'text',
+		success: function(text)
+		{
+			Debug.print(text);
+		}
+	});
+}
+
+btn.onclick = getTilesData;
+</script>
+</html>

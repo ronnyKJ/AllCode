@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> 日历面板 </title>
+<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+<style type="text/css">
+body {
+	font-family:"宋体", sans-serif;
+	font-size:12px;
+	margin:0;
+}
+img {
+	border:0px;
+}
+
+/*统一设定ul ,li样式*/
+ul , li {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+li {
+	line-height:21px;
+}
+
+/*单元格视图样式*/
+#content {
+	width:750px;
+	margin:0 auto;
+	border-left: 1px solid #CCDDEE;
+}
+#content .weekTitle {
+	color:#53504D;
+	background:#F1FFE3;
+	height:20px;
+	border-bottom: 1px solid #B8E78B;
+}
+#content .weekTitle td {
+	text-align:center;
+}
+#content #render {
+	color:#6A6A6B;
+}
+#content #render td {
+	height:90px;
+	vertical-align: top;
+	border-right: 1px solid #CCDDEE;
+	border-bottom: 1px solid #CCDDEE;
+}
+.dayStyle {
+	color:#6A6A6B;
+	padding-right:2px;
+	padding-top:2px;
+	height:15px;
+	background:#E8EEF7;
+	text-align:right;
+	display:block;
+}
+.currDay {
+	background:#FFFFCC;
+}
+.disableText {
+	color:#BABDC4;
+}
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+
+/**************************************************
+* * 根据class属性返回对象
+* * 2008-6-22
+* **************************************************
+* * msn:danxinju@hotmail.com
+* * author:淡新举
+***************************************************/	
+var getElementsByClassName = function(className){
+	var alls = document.getElementsByTagName("*");
+	var rets = new Array();
+
+	for (var i=0;i<alls.length ; i++)
+	{
+		if (alls[i].className == className)
+		{
+			rets.push(alls[i]);
+		}
+	}
+
+	return rets;
+};
+
+var Calendar = {
+	model:function(){} ,
+	controller:function(){} ,
+	view:function(){}
+};	
+
+//视图层
+Calendar.view = function(){
+	this.currDate = new Date();
+	this.tds = null;
+	this.days = null;
+
+	this.backNode = null;
+	this.disableDays = new Array();
+};
+
+//根据年份返回每月天数
+Calendar.view.getMonthDays = function(year){
+	var feb = (year % 4 == 0)? 29:28; 
+	return new Array(31, feb , 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+};
+
+//初始化
+Calendar.view.prototype.init = function(){
+	this.setCurrMonth(new Date().getFullYear() ,new Date().getMonth());
+	this.addEventForTd();
+};
+
+//为单元格注册事件
+Calendar.view.prototype.addEventForTd = function(){
+	for (var i=0;i<this.tds.length ;i++ )
+	{
+		this.tds[i].onclick = function(){
+			var arr = this.getAttribute("dateValue").split("-");
+			//alert(arr)
+			alert(arr[0] +"-"+ (parseInt(arr[1])+1) +"-"+ arr[2]);
+		};
+	}
+};
+
+//设定当前版面
+Calendar.view.prototype.setCurrMonth = function(y ,m){
+
+	this.currDate.setFullYear(y);
+	this.currDate.setMonth(m);
+	this.currDate.setDate(1);
+	
+	this.loadDaysByMonth(y ,m);
+};
+
+//标示当前天
+Calendar.view.prototype.markCurrDate = function(bDay ,eDay){
+	var temp = new Date();
+	if (this.currDate.getFullYear() == temp.getFullYear() 
+						&& this.currDate.getMonth() == temp.getMonth())
+	{
+		for (var i=bDay;i<eDay ;i++ )
+		{
+			if (this.tds[i].getAttribute("dateValue").split("-")[2] == temp.getDate())
+			{
+				if (this.backNode)
+				{
+					this.backNode.className = "";
+				}
+				this.tds[i].className = "currDay";
+				this.backNode = this.tds[i];
+				return false;
+			}
+		}
+	}
+};
+
+//复位版面状态
+Calendar.view.prototype.reInState = function(){
+	this.tds[35].parentNode.style.display = "none";
+	if (this.backNode)
+	{
+		this.backNode.className = "";
+	}
+	for (var i=0;i<this.disableDays.length ;i++ )
+	{
+		this.disableDays[i].className = "dayStyle";
+	}
+	this.disableDays.length = 0;
+};
+
+//根据年月加载当前视图
+Calendar.view.prototype.loadDaysByMonth = function(y ,m){
+	y = parseInt(y) ,m = parseInt(m);
+	this.reInState();	//复位版面状态
+
+	//参数定位
+	var beginDay = this.currDate.getDay();
+	var _m = (m == 0)?11 : (m-1);
+	var m_ = (m == 11)?0 : (m+1);
+	var _y = (m == 0)?(y-1) : y;
+	var y_ = (m == 11)?(y+1) : y;
+	
+	var prevMonthDays = Calendar.view.getMonthDays(_y)[_m];
+	var currMonthDays = Calendar.view.getMonthDays(y)[m];
+	var prevFlag = prevMonthDays - beginDay + 1 ,currFlag = 1 ,nextFlag = 1;
+
+	//加载上月信息
+	for (var i=0;i<beginDay ;i++ )
+	{
+		this.tds[i].setAttribute("dateValue" ,_y +"-"+ _m +"-"+ prevFlag);
+		this.days[i].innerHTML = prevFlag;
+		this.days[i].className = "dayStyle disableText";
+		this.disableDays.push(this.days[i]);
+		prevFlag++;
+	}
+	
+	//加载当月信息
+	for (var i=beginDay;i<currMonthDays+beginDay ;i++ )
+	{
+		this.tds[i].setAttribute("dateValue" ,y +"-"+ m +"-"+ currFlag);
+		this.days[i].innerHTML = currFlag;
+		currFlag++;
+	}
+	
+	//加载下月信息
+	for (var i=currMonthDays+beginDay;i<this.days.length ;i++ )
+	{
+		this.tds[i].setAttribute("dateValue" ,y_ +"-"+ m_ +"-"+ nextFlag);
+		this.days[i].innerHTML = nextFlag;
+		this.days[i].className = "dayStyle disableText";
+		this.disableDays.push(this.days[i]);
+		nextFlag++;
+	}
+	
+	//若当月数据显示到第7行，那么显示它
+	if (this.tds[35].getAttribute("dateValue"))
+	{
+		if (this.tds[35].getAttribute("dateValue").split("-")[2] > 20)
+		{
+			this.tds[35].parentNode.style.display = "";
+		}
+	}
+
+	//标示当前天
+	this.markCurrDate(beginDay ,currMonthDays+beginDay);
+};
+
+window.onload = function(){
+	view = new Calendar.view();
+	view.tds = document.getElementById("render").getElementsByTagName("td");
+	view.days = getElementsByClassName("dayStyle");
+	view.init();
+	
+	
+	document.getElementById("testButton").onclick = function(){
+		view.setCurrMonth(document.getElementById("testYear").value
+							,document.getElementById("testMonth").value);
+	};
+};
+
+
+//]]>
+</script>
+</head>
+<body>
+
+<div id="content">
+
+	<select id="testYear">
+		<option value="2005">2005</option>
+		<option value="2006">2006</option>
+		<option value="2007">2007</option>
+		<option value="2008" selected="selected">2008</option>
+		<option value="2009">2009</option>
+		<option value="2010">2010</option>
+		<option value="2011">2011</option>
+	</select>年
+	<select id="testMonth">
+		<option value="0">1</option>
+		<option value="1">2</option>
+		<option value="2">3</option>
+		<option value="3">4</option>
+		<option value="4">5</option>
+		<option value="5">6</option>
+		<option value="6">7</option>
+		<option value="7">8</option>
+		<option value="8">9</option>
+		<option value="9" selected="selected">10</option>
+		<option value="10">11</option>
+		<option value="11">12</option>
+	</select>月
+	<input type="button" value="设定日期" id="testButton" />
+
+	<table width="100%" cellpadding="0" cellspacing="0" class="weekTitle">
+		<tr>
+			<td>日</td>
+			<td>一</td>
+			<td>二</td>
+			<td>三</td>
+			<td>四</td>
+			<td>五</td>
+			<td>六</td>
+		</tr>
+	</table>
+
+	<table width="100%" cellpadding="0" cellspacing="0" id="render">
+		<tr>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+		</tr>
+		<tr>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+		</tr>
+		<tr>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+		</tr>
+		<tr>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+		</tr>
+		<tr>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+		</tr>
+		<tr style="display:none;">
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+			<td><span class="dayStyle"></span><div id="pros"></div></td>
+		</tr>
+	</table>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>String.format</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>String.format(<em>string1</em>,<em>string2</em>,<em>string3</em>,<em>string4</em>,......,<em>stringn</em>)</h1>
+<p class="info">用传入的参数替换字符串内的标记（{0},{1},{2},......,{n}）。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>stringn</em></dt>
+		<dd>替换的字符串。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">替换后的新字符串。</p>	
+    <h2>描述</h2>
+	<p class="p">该方法是从 C# 语言吸取过来。它的作用是建立一个动态字符串（StringBuilder），也可以看作是一个字符串模板，该模板中有些区域可以随意被替换。本方法识别字符串中包含正整数的大括号，如：{n}，大括号中间的数字 n 表示此标记将被 format 方法的<strong>第 n+1 个</strong>参数替换，即 <strong>arguments[n]</strong>。例如 &quot;One {0}, One {1}&quot;.format(&quot;World&quot;,&quot;Dream&quot;)，返回的新字符串就是：One World,One Dream ； </p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+  var dataArr = [&quot;啊蔡|男&quot;,&quot;啊黄|女&quot;]; <br />
+  var str =&quot;&lt;table border=1 cellspacing=1 cellpadding=0&gt;&lt;tr&gt;&lt;th&gt;姓名：&lt;/th&gt;&lt;td&gt;{0}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;性别：&lt;/th&gt;&lt;td&gt;{1}&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;;<br />
+  var html = new StringBuffer();<br />
+  dataArr.each(function(people){<br />
+var info = people.split(&quot;|&quot;); <br />
+html.append( str.format(info[0],info[1]) );<br />
+}); <br />
+document.write( html.toString() );<br />
+html.clear();<br />
+&lt;/script&gt;<br /><br />结果如下：
+<table border=1 cellspacing=1 cellpadding=0><tr><th>姓名：</th><td>啊蔡</td></tr><tr><th>性别：</th><td>男</td></tr></table>
+<table border=1 cellspacing=1 cellpadding=0><tr><th>姓名：</th><td>啊黄</td></tr><tr><th>性别：</th><td>女</td></tr></table>
+</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

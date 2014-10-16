@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$A</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$A(<em>Collection</em>)</h1>
+<p class="info">&nbsp;把集合转化为新数组。<em> </em></p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>Collection</em></dt>
+		<dd>集合对象。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">新数组。</p>	
+    <h2>描述</h2>
+	<p class="p">该方法通过枚举集合的内容，并把每项内容初始化到新数组中去。 </p>
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var divs = $A( document.body.getElementsByTagName(&quot;div&quot;) );&nbsp; <span class="comment">//现在divs是个数组</span><br />
+alert(divs.pop().innerHTML); <span class="comment">//移除数组中最后一个div，并返回它的 innerHTML</span> <br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

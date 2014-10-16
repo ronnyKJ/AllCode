@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Redirect</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$.Redirect(<em>URL</em>,<em>QueryString</em>)</h1>
+<p class="info">&nbsp;重定向到指定的URL。</p>
+<h2>参数</h2>
+	<dl class="p">
+	    <dt><em>URL</em></dt>
+		<dd>必选项。定向的目标位置。</dd>
+		<dt><em>QueryString</em></dt>
+		<dd>可选项。参数名称。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">无</p>	
+    <h2>描述</h2>
+	<p class="p">该方法主要是模拟后台程序(asp/asp.net)的 Response.Redirect 方法，获取URL中的参数，它是通过组合 location.href 
+        中的查询参数而实现。</p>
+    <h2>示例</h2>
+<p class="code"><span class="comment">//假如当前页面的URL地址为：http://localhost/product.asp?type=cd
+    (卖CD的列表页面)</span>
+    <br />
+    &lt;script type=&quot;text/javascript&quot;&gt;<br />
+    $.Redirect(location.href,&quot;type=clothes&amp;page=2&quot;)&nbsp; <span class="comment">//卖衣服的列表页面，并转到第2页。</span><br />
+    &lt;/script&gt;<br />
+    <span class="comment">//产品搜索</span><br />
+    &lt;input type=&quot;text&quot; id=&quot;productName&quot; /&gt;<br />
+        &lt;input type=&quot;button&quot; value=&quot;搜索&quot; 
+    <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onclick=&quot;$.Redirect(location.href,$.Form.serialize(&#39;name&#39;:$V(&#39;productName&#39;)))&quot; 
+    /&gt; <br /><span class="comment">
+    //跳转的url是:http://localhost/product.asp?type=cd&amp;name=<em>value</em></span><br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

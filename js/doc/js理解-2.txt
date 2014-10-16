@@ -1,0 +1,17 @@
+js是弱类型语言，即变量没有固定的数据类型，任何变量名都是引用，所以var a = 1;可理解为指针a指向数据Number对象1。
+
+function b(x, y, a) {
+
+a = 10;
+
+alert(arguments[2] );
+
+}
+或
+function b(x, y, a) {
+
+arguments[2] = 10;
+alert(a);
+}
+
+b(1, 2, 3);//结果都是10，因为a都指向arguments[2]，3作为实参传值即是new Number(3)

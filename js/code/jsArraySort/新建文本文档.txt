@@ -1,0 +1,83 @@
+//一维数组的排序
+// type 参数 
+// 0 字母顺序（默认） 
+// 1 大小 比较适合数字数组排序
+// 2 拼音 适合中文数组
+// 3 乱序 有些时候要故意打乱顺序，呵呵
+// 4 带搜索 str 为要搜索的字符串 匹配的元素排在前面
+function Array.prototype.SortBy(type,str)
+{ 
+switch (type)
+{ 
+     case 0:this.sort(); break;
+     case 1:this.sort(function(a,b){ return a-b; }); break;
+     case 2:this.sort(function(a,b){ return a.localeCompare(b) }); break;
+     case 3:this.sort(function(){ return Math.random()>0.5?-1:1; }); break;
+     case 4:this.sort(function(a,b){ return a.indexOf(str)==-1?1:-1; }); break;
+     default:this.sort();
+    }
+} 
+
+
+
+
+
+
+随机数组
+<script>
+var ars=['金','木','水','火','土','仁','义','礼','志','贤'];
+for(var i=ars.length-1;i>0;i--)
+ars.push(ars.splice(Math.round(Math.random()*i), 1))
+alert(ars)
+</script>
+
+
+
+
+<script>
+//随机重排数组,by kill,20:39 03-4-14
+
+//产生随机数：
+rnd.today=new Date();
+rnd.seed=rnd.today.getTime();
+function rnd()
+{
+　　rnd.seed = (rnd.seed*9301+49297) % 233280; 
+　　return rnd.seed/(233280.0); 
+}
+　　function rand(number) {return Math.ceil(rnd()*number);}
+
+//原数组
+var arr = new Array("1","2","3","4","5","6","7","8","9","10");
+
+out_put(arr);
+document.write("<hr width=180 align=left><input type='button' onclick='location.reload()' value='      refresh      '></input><br><br>");
+
+//随机重排数组后输出：
+for(var i=0;i<10;i++)
+{
+ arr_rand(arr);
+ out_put(arr);
+}
+
+//数组输出函数
+function out_put(arr)
+{
+ for(var i=0;i<arr.length;i++)
+  document.write(" "+arr[i]);
+ document.write("<br>");
+}
+
+//数组重组函数，将每个元素与一随机元素换位：
+function arr_rand(arr)
+{
+ for(var i=0;i<arr.length;i++)
+ {
+  var tem,ranarr=rand(arr.length-1);
+  tem=arr[i];
+  arr[i]=arr[ranarr];
+  arr[ranarr]=tem;
+ }
+}
+
+</script>

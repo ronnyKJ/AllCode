@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Request</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$.Request(<em>QueryString</em>)</h1>
+<p class="info">&nbsp;获取URL中的参数。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>QueryString</em></dt>
+		<dd>必选项。参数名称。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">参数值或空字符。</p>	
+    <h2>描述</h2>
+	<p class="p">该方法主要是模拟后台程序(asp/asp.net)的 Request.QueryString 方法，获取URL中的参数，它是通过查找 
+        location.href 中的关键字匹配而来。</p>
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+    alert($.Request(&quot;id&quot;));<br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

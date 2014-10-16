@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../JavaScript/myJSFrame.js" type="text/javascript"></script>
+<script type="text/javascript">
+function oldmethod(){
+	$("v1").innerHTML = "";
+	var timer_1 = new Date();
+	
+	var html = "<ol>";
+	for (var i=0; i<2000; i++){
+		html += "<li><table cellspacing=1 cellpadding=5 border=1><tr><td>1</td><td>2</td></tr></table></li>";
+	}
+	html += "</ol>";	
+	$("v1").innerHTML = html;
+	
+	var timer_2 = new Date();
+	alert("传统方法耗时："+(timer_2-timer_1)+"毫秒");
+}
+function newmethod(){
+	$("v2").innerHTML = "";
+	var timer_1 = new Date();
+	
+	var html = new StringBuffer();
+	html.append("<ol>");
+	for (var i=0; i<2000; i++){
+		html.append("<li><table cellspacing=1 cellpadding=5 border=1><tr><td>1</td><td>2</td></tr></table></li>");
+	}
+	html.append("</ol>");	
+	$("v2").innerHTML = html.toString();
+	html.clear();
+	
+	var timer_2 = new Date();
+	alert("传统方法耗时："+(timer_2-timer_1)+"毫秒");
+}
+</script>
+<title>StringBuffer 性能测试</title>
+</head>
+
+<body>
+<h1>StringBuffer 性能测试</h1>
+<table width="100%" border="1" cellpadding="5" cellspacing="2">
+  <tr>
+    <th width="50%" bgcolor="#eeeeee">传统 += 接连方法</th>
+    <th bgcolor="#eeeeee">使用 StringBuffer 方法</th>
+  </tr>
+  <tr>
+    <td>var html = &quot;&quot;;<br />
+      html += &quot;&lt;ol&gt;&quot;;<br />
+      for(var i=0; i&lt;2000; i++){<br />
+      &nbsp;&nbsp; html += &quot;&lt;li&gt;&lt;table cellspacing=1 cellpadding=5 border=1&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/li&gt;&quot;; <br />
+      }<br />
+      html +=&quot;&lt;/ol&gt;&quot;; <br />
+      $(&quot;v1&quot;).innerHTML = html; </td>
+    <td>var html = new StringBuffer();<br />
+      html.append(&quot;&lt;ol&gt;&quot;);<br />
+      for(var i=0; i&lt;2000; i++){<br />
+      &nbsp;&nbsp; html.append(&quot;&lt;li&gt;&lt;table cellspacing=1 cellpadding=5 border=1&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/li&gt;&quot;); <br />
+      }<br />
+      html.append(&quot;&lt;/ol&gt;&quot;);<br />
+      $(&quot;v2&quot;).innerHTML = html.toString(); </td>
+  </tr>
+  <tr>
+    <td align="center"><input type="button" name="Submit" value="开始" onclick="oldmethod()" /></td>
+    <td align="center"><input type="button" name="Submit2" value="开始" onclick="newmethod()" /></td>
+  </tr>
+  <tr>
+    <td align="center" id="v1">&nbsp;</td>
+    <td align="center" id="v2">&nbsp;</td>
+  </tr>
+</table>
+<p align="right"><a href="www.happyshow.org" target="_blank">happyshow.org</a></p>
+</body>
+</html>

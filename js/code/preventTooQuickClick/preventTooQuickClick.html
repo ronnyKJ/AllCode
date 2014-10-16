@@ -1,0 +1,33 @@
+﻿<html>
+<head><title>Prevent too quick click</title>
+<style>
+.cube{background:#AAA; border:1px #EEE solid;}
+</style>
+<script type="text/javascript" src='qw.js'></script>
+</head>
+<body>
+<div id='d'>
+	<p class='cube'><input class='btn' type='button' value='click111' /></p>
+	<p class='cube'><input class='btn' type='button' value='click' /></p>
+	<p class='cube'><input class='btn' type='button' value='click' /></p>
+</div>
+<div id='txt'></div>
+</body>
+<script type="text/javascript">
+var txt = document.getElementById('txt');
+var isClickable = 1;
+var el = "<p class='cube' style='opacity: 0'><input class='btn' type='button' value='click' /></p>";
+W('#d').delegate('.btn', 'click', function(){
+	if(!isClickable) return;
+	isClickable = 0;
+	var p = W(this).parentNode();
+	p.fadeOut(500, function(){
+		var qw = W(el);
+		p.replaceNode(qw);
+		qw.fadeIn(500, function(){
+			isClickable = 1;
+		});
+	});
+});
+</script>
+</html>

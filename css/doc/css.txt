@@ -1,0 +1,4 @@
+position: fixed;父元素是body
+vertical-align 指的是 内联元素
+position: absolute相对其祖先元素中设定position的元素的左上角而言
+%大小一般指的是父元素

@@ -1,0 +1,190 @@
+﻿<html>
+<head><title></title>
+<style>
+/*我的方法， IE hack有一个，但是元素多*/
+#d
+{
+	width: 200px;
+	height: 200px;
+	background: #DDD;
+}
+
+#d span
+{
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	overflow: visible;
+}
+/*别人的方法， 元素最省，但是有IE hack*/
+#d img
+{
+	position: relative;
+	left: -50%;
+	top: -50%;
+	margin-top: -50%;
+	*margin-top: 0;
+}
+
+.box {
+	background: #DD0;
+	display: table-cell;
+	vertical-align:middle;
+	width:200px;
+	height:200px;
+	text-align:center;
+	/* hack for ie */
+	*display: block;
+	*font-size: 175px;
+	/* end */
+}
+.box img {
+	vertical-align:middle;
+}
+
+/*我的方法，综合得出，完美解决，多款浏览器测试通过，元素最少，无hack，兼容性强*/
+#d2
+{
+	width: 200px;
+	height: 200px;
+	background: #DDD;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 150px;
+}
+
+/********position的测试*******/
+#l1
+{
+	width: 200px;
+	height: 200px;
+	background: #DDD;
+	margin-left: 100px;
+	position: absolute;
+}
+
+#l2
+{
+	width: 100px;
+	height: 100px;
+	background: #CCC;
+	position: relative;
+	top: 40px;
+	left: 40px;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+#l3
+{
+	width: 50px;
+	height: 50px;
+	background: #BBB;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+</style>
+</head>
+<body>
+<div id="d"><span><img alt="" src="pink.gif" /></span></div>
+<div class="box"><img src="pink.gif" alt="" /></div>
+<div id="d2"><img src="pink.gif" alt="" /></div>
+<div id="l1"><div id="l2"><div id="l3"></div></div></div>
+<ul id="test"><li>这是第一条</li><li>这是第二条</li><li>这是第三条</li></ul>
+</body>
+<script type="text/javascript">
+function b(x, y, a) {
+a = 10;
+alert(arguments[2]);
+}
+//b(1, 2, 3);
+var url = "http://www.taobao.com/index.php?key0=0&key1=1&key2=2";
+function parseQueryString(url)
+{
+	url = url.substr(url.indexOf("?")+1);
+	var paras = url.split("&");
+	var obj = {};
+	var tmp;
+	for(var i=0; i<paras.length; i++)
+	{
+		tmp = paras[i].split("=");
+		obj[tmp[0]] = tmp[1];
+	}
+	return obj;
+}
+
+var obj = parseQueryString(url);
+//alert(obj.key0+" "+obj.key1+" "+obj.key2);
+
+var t = document.getElementById("test");
+var list = t.getElementsByTagName("li");
+for(i=0;i<list.length;i++)
+{
+	//list[i].onclick = new Function("this.innerText="+i+";");//方法1
+	//list[i].onclick = function(){alert(this)};//方法2
+	list[i].onclick = getI(i);//方法3
+	//list[i].onclick = (function() //方法4 是不成功的，跟方法3相比有什么不同
+	//{
+	//	return function(){alert(i);}
+	//})();
+}
+
+function getI(i)
+{
+	return function(){alert(i);}
+}
+
+function a(){
+	var i=0;
+	function b(){
+		alert(++i);
+	}
+	return b;
+}
+var c = a();
+//c();c();c();
+
+function Dog() {
+	this.wow = function() {
+		alert("wow");
+	}
+	this.yelp = function() {
+		this.wow();
+	}
+}
+
+function MadDog()
+{
+	Dog.apply(this, arguments);
+	var t = this;
+	this.yelp = function(){
+		setInterval(function(){
+			t.wow();
+		}, 500);
+	}
+}
+
+//var md = new MadDog();
+//md.yelp();
+
+
+Array.prototype.deduplicate = function(){
+	var obj = {}, arr = [], i=0;
+	for(;i<this.length;i++)
+	{
+		if(!obj[this[i]])
+		{
+			obj[this[i]] = true;
+			arr.push(this[i]);
+		}
+	}
+	return arr;
+}
+
+var arr = ["1","2","2","3","4","3","5","2","1","1","6"];
+alert(arr.deduplicate());
+</script>
+</html>

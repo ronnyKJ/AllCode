@@ -1,0 +1,38 @@
+div.topic_page, a {
+  color: #e9650e;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: white;
+}
+
+div.app_nav, div#page, .comment_title, tr.mouse_over {
+  background-color: #fef0e7;
+}
+
+div#local, div#main, .blog_main, .pagination a:hover, .pagination a:active {
+  background-color: white;
+  border-color: #e9650e;
+}
+
+div#app_list div.decorate, a:hover, div#branding, input.button, input.submit, td.buttons a, .pagination span.current {
+  background-color: #e9650e;
+}
+
+.blog_bottom li {
+  border-right-color: #e9650e;
+  color: #e9650e;
+}
+
+table.admin thead, .pagination a, .pagination a:visited {
+  color: #e9650e;
+}
+
+div.app_nav, .pagination span.current {
+  border-color: #e9650e;
+}
+
+.blog_comment, div.picture_full {
+  border-top-color: #e9650e;
+}

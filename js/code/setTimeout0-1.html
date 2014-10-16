@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<title>setTimeout为0的应用</title> 
+<style type="text/css"> 
+body { background:url(images/page-bg.gif); font-size:14px;} 
+</style> 
+</head> 
+
+<body> 
+<h1>setTimeout为0的应用</h1> 
+<p>在下面两个输入框里输入字符，看看有什么不同？</p> 
+<p> 
+A：<input type="text" id="t1" name="t1" 
+onkeydown="document.getElementById('t1text').innerHTML='你输入了：'+this.value;" value="" />没有使用setTimeout 
+
+</P> 
+<div id="t1text">你输入了：</div> 
+<p> 
+B：<input type="text" id="t2" name="t2" 
+onkeydown="var t2=this;setTimeout(function(){document.getElementById('t2text').innerHTML='你输入了：'+t2.value},0);" 
+value="" />setTimeout为0</p> 
+<div id="t2text">你输入了：</div> 
+</body> 
+</html> 

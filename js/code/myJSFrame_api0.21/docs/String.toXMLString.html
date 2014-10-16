@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>String.toXMLString</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>String.toXMLString(<em>rootTagName</em>)</h1>
+<p class="info">把一定格式的字符串转换为 XML 格式的字符串。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>rootTagName</em></dt>
+		<dd>可选项。XML 的根节点标记名称。默认值为 root 。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">XML 格式的字符串。</p>	
+    <h2>描述</h2>
+	<p class="p">把 URL 参数格式的字符串转换为 XML 格式字符串，该 XML 的根节点标记可自定义，默认值为 &lt;root&gt; ，每个节点的都包含 CDATA 安全区段。该方法常用于把获取到的表单值字符串转换成 XML 格式，指明 Content-Type 为 text/xml 的请求头部(setRequestHeader)， 异步传输 XML 数据到服务端。</p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var formValue = &quot;name=acai&amp;password=123456&amp;sex=male&amp;age=27&quot;;<br />
+var myAjax = new Ajax.Request(<br />
+&nbsp;&nbsp; &quot;http://localhost/reg.aspx&quot;,<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; method:&quot;post&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setRequestHeader:{&quot;Content-Type&quot;:&quot;text/xml; charset=utf-8&quot;} <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; parameters:formValue.toXMLString(), <span class="comment">//&lt;root&gt;&lt;name&gt;&lt;![CDATA[acai]]&gt;&lt;/name&gt;&lt;password&gt;&lt;![CDATA[123456]]&gt;&lt;/password&gt;&lt;sex&gt;&lt;![CDATA[male]]&gt;&lt;/sex&gt;&lt;age&gt;&lt;![CDATA[27]]&gt;&lt;/age&gt;&lt;/root&gt;</span> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+onComplete:function(x){alert(x.responseText;)}
+<br />
+&nbsp;&nbsp;
+}<br />
+); 
+<br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

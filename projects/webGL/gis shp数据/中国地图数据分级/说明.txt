@@ -1,0 +1,29 @@
+GIS 地图 shap格式中国地图 .shp格式
+
+国界:bou1_4m.zip
+
+国界与省界:bou2_4m.zip
+
+首都和省级行政中心:res1_4m.zip
+
+地市级以上居民地:res2_4m.zip
+
+一级河流:hyd1_4m.zip
+
+三级以上河流:hyd2_4m.zip
+
+主要公路:roa_4m.zip
+
+主要铁路:rai_4m.zip
+
+地级行政界线:bou3_4m.zip
+
+县级行政界线:bou4_4m.zip
+
+县级居民地:res4_4m.zip
+
+四级河流:hyd4_4m.zip
+
+五级河流:hyd5_4m.zip
+
+arcGiS格式的地图 如果不熟悉地图的同学，可用udig来调试样式，保证中文显示等。

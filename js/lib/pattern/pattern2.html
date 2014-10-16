@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+var pattern = document.createElement('canvas');
+pattern.width = 40;
+pattern.height = 40;
+ctx = pctx = pattern.getContext('2d');
+
+pctx.beginPath();
+pctx.moveTo(0.0, 40.0);
+pctx.lineTo(26.9, 36.0);
+pctx.bezierCurveTo(31.7, 36.0, 36.0, 32.1, 36.0, 27.3);
+pctx.lineTo(40.0, 0.0);
+pctx.lineTo(11.8, 3.0);
+pctx.bezierCurveTo(7.0, 3.0, 3.0, 6.9, 3.0, 11.7);
+pctx.lineTo(0.0, 40.0);
+pctx.closePath();
+pctx.fillStyle = "rgb(188, 222, 178)";
+pctx.fill();
+pctx.lineWidth = 0.8;
+pctx.strokeStyle = "rgb(0, 156, 86)";
+pctx.lineJoin = "miter";
+pctx.miterLimit = 4.0;
+pctx.stroke();
+
+var pattern1 = ctx.createPattern(pctx, "repeat");
+ctx.rect(0,0,200,200);
+ctx.fillStyle = pattern1;
+ctx.fill();
+</script>
+</head>
+<body>
+</body>
+</html>

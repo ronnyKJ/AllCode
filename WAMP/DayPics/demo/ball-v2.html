@@ -1,0 +1,136 @@
+﻿<html>
+<head><title>ball-v2</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des">球体表面物体模拟</span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+canvasW = getOdd(canvasW);
+canvasH = getOdd(canvasH);
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+var O = {x: canvasW/2, y: canvasH/2};
+var rdm = Math.random;
+//球体及坐标轴
+var R = 300;
+function basement(){
+	c.width = canvasW;
+	t.fillStyle = "#FF0";
+	t.arc(O.x,O.y,1,0,360,true);
+	t.fill();
+	t.beginPath();
+	t.strokeStyle = "rgba(255, 0, 0, 0.5)";
+	t.arc(O.x,O.y,R,0,360,true);
+	t.stroke();
+	t.closePath();
+
+	t.beginPath();
+	t.strokeStyle = "rgba(0, 0, 255, 0.5)";
+	t.moveTo(O.x-R-50,O.y);
+	t.lineTo(O.x+R+50,O.y);
+	t.moveTo(O.x,O.y-R-50);
+	t.lineTo(O.x,O.y+R+50);
+	t.stroke();
+	t.closePath();
+}
+basement();
+//坐标
+var xy = d.getElementById("xy");
+var x=y=z=0;
+var object = 10+60*rdm();
+var pace = 3+10*rdm();
+var angle = 2*Math.PI*rdm();
+var xp = Math.cos(angle)*pace;
+var yp = Math.sin(angle)*pace;
+var ifFront = true;
+setInterval(function()
+{
+	basement();//清空
+
+	//跟踪线
+	/*t.beginPath();
+	t.strokeStyle = "rgba(0, 255, 0, 0.7)";
+	t.moveTo(O.x,O.y);
+	t.lineTo(O.x+x,O.y-y);
+	t.moveTo(O.x,O.y);
+	t.lineTo(O.x+x,O.y-y);
+	t.stroke();
+	t.closePath();*/
+	
+	//球面物体
+	t.beginPath();
+	var alpha = 0;
+	if(ifFront)
+	{
+		//坐标计算
+		x += xp
+		y += yp;
+		z = Math.pow(R*R-x*x-y*y, 0.5)||0;
+		alpha = getSideValue(1).front;
+		t.fillStyle = "rgba(169, 234, 0, " + alpha + ")";
+		t.arc(O.x+x,O.y-y,getSideValue(object).front,0,360,true);//正面
+	}
+	else
+	{
+		//坐标计算
+		x -= xp
+		y -= yp;
+		z = Math.pow(R*R-x*x-y*y, 0.5)||0;
+		alpha = getSideValue(1).back;
+		t.fillStyle = "rgba(169, 234, 0, " + alpha + ")";
+		t.arc(O.x+x,O.y-y,getSideValue(object).back,0,360,true);//背面
+	}
+	t.fill();
+	t.closePath();
+	
+	(z<1)&&(ifFront=!ifFront);
+	
+	//参数显示
+	xy.innerHTML = "x:" + x + " y:" + y + " z:" + z + "<br>alpha:" + alpha;
+},17);
+
+
+//函数定义
+function getOdd(a)
+{
+	(a%2==1)&&(a--);
+	return a;
+}
+
+function getSideValue(obj)
+{
+	var pMax = 1, pMin = 0.2;
+	var pMid = (pMax+pMin)/2;
+	var v={};
+	v.front = obj*(pMid+(pMax-pMid)*z/R);
+	v.back = obj*(pMid-((pMid-pMin)*z/R))
+	return v;
+}
+</script>
+</html>

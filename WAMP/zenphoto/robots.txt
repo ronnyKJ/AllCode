@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /zenPhoto/albums/
+Disallow: /zenPhoto/cache/
+Disallow: /zenPhoto/themes/
+Disallow: /zenPhoto/zp-core/
+Disallow: /zenPhoto/zp-data/
+Disallow: /zenPhoto/page/search/
+Disallow: /zenPhoto/uploaded/
+Disallow: /zenPhoto/rss.php
+Disallow: /zenPhoto/rss-comments.php
+Disallow: /zenPhoto/README.html
+Disallow: /zenPhoto/rss-news-comments.php
+Disallow: /zenPhoto/rss-news.php

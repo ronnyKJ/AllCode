@@ -1,0 +1,17 @@
+﻿.tips
+{
+	position:absolute;
+	display:none;
+	background:url('../image/theme_1/tips.png') no-repeat 8px -24px;
+	padding:13px 12px 0;
+	width:200px;
+	opacity: 0.8;
+}
+
+.tips .word
+{
+	color:#FFF;
+	background:#000;
+	-webkit-border-radius:3px;
+	padding:8px 8px 9px;
+}

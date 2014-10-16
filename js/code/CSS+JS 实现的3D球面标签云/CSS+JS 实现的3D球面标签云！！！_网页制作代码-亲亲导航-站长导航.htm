@@ -1,0 +1,776 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0071)http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1938.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<title>CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航</title>
+<meta name="keywords" content="标签,云,球面,3D,实现,CSS+JS,">
+<meta name="description" content="CSS+JS 实现的3D球面标签云">
+<link href="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/bluestyle.css" type="text/css" rel="stylesheet">
+<link href="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/dedecms.css" rel="stylesheet" media="screen" type="text/css">
+<link rel="stylesheet" href="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/null.css" type="text/css" id="cssfile">
+<link rel="stylesheet" type="text/css" href="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/tui18_style.css"><link rel="stylesheet" type="text/css" href="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/2008_style.css">
+
+<script language="javascript" type="text/javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/j.js"></script>
+<script language="javascript" type="text/javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/jquery.cookie.js"></script>
+<script language="javascript" type="text/javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/changeSkin.js"></script>
+<script language="javascript" type="text/javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/dedeajax2.js"></script>
+<script language="javascript" type="text/javascript">
+<STYLE>#ad_taobao {
+	FLOAT: left; HEIGHT: 24px
+}
+.taobao_ad2 {
+	DISPLAY: block; BACKGROUND: url(images/sp6.gif) no-repeat; FLOAT: left; MARGIN: 2px 5px 0px 2px; WIDTH: 79px; HEIGHT: 22px
+}
+.queryborder2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 3px; FONT-SIZE: 14px; FLOAT: left; WIDTH: 310px; HEIGHT: 18px
+}
+#taobao_kw {
+	BORDER-RIGHT: #edf2f6 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #edf2f6 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 14px; BORDER-LEFT: #edf2f6 1px solid; WIDTH: 168px; BORDER-BOTTOM: #edf2f6 1px solid; HEIGHT: 16px
+}
+#search_sb2 {
+	
+}
+#key_div2 {
+	BORDER-RIGHT: #aaccee 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #aaccee 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 13px; BACKGROUND: #f0f8ff 0px 0px; PADDING-BOTTOM: 2px; MARGIN: 3px; BORDER-LEFT: #aaccee 1px solid; WIDTH: 772px; PADDING-TOP: 2px; BORDER-BOTTOM: #aaccee 1px solid; HEIGHT: 27px; TEXT-ALIGN: center
+}
+.in {
+	BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BORDER-LEFT: #afccec 1px solid; WIDTH: 300px; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 22px
+}
+</STYLE>
+<!--
+function CheckLogin(){
+	  var taget_obj = document.getElementById('_ajax_feedback');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/member/ajax_feedback.php");
+	  DedeXHTTP = null;
+}
+function postBadGood(ftype,fid)
+{
+	var taget_obj = document.getElementById(ftype+fid);
+	var saveid = GetCookie('badgoodid');
+	if(saveid != null)
+	{
+		var saveids = saveid.split(',');
+		var hasid = false;
+		saveid = '';
+		j = 1;
+		for(i=saveids.length-1;i>=0;i--)
+		{
+			if(saveids[i]==fid && hasid) continue;
+			else {
+				if(saveids[i]==fid && !hasid) hasid = true;
+				saveid += (saveid=='' ? saveids[i] : ','+saveids[i]);
+				j++;
+				if(j==10 && hasid) break;
+				if(j==9 && !hasid) break;
+			}
+		}
+		if(hasid) { alert('您刚才已表决过了喔！'); return false;}
+		else saveid += ','+fid;
+		SetCookie('badgoodid',saveid,1);
+	}
+	else
+	{
+		SetCookie('badgoodid',fid,1);
+	}
+	myajax = new DedeAjax(taget_obj,false,false,'','','');
+	myajax.SendGet2("/plus/feedback.php?aid="+fid+"&action="+ftype+"&fid="+fid);
+}
+function postDigg(ftype,aid)
+{
+	var taget_obj = document.getElementById('newdigg');
+	var saveid = GetCookie('diggid');
+	if(saveid != null)
+	{
+		var saveids = saveid.split(',');
+		var hasid = false;
+		saveid = '';
+		j = 1;
+		for(i=saveids.length-1;i>=0;i--)
+		{
+			if(saveids[i]==aid && hasid) continue;
+			else {
+				if(saveids[i]==aid && !hasid) hasid = true;
+				saveid += (saveid=='' ? saveids[i] : ','+saveids[i]);
+				j++;
+				if(j==20 && hasid) break;
+				if(j==19 && !hasid) break;
+			}
+		}
+		if(hasid) { alert("您已经顶过该帖，请不要重复顶帖 ！"); return; }
+		else saveid += ','+aid;
+		SetCookie('diggid',saveid,1);
+	}
+	else
+	{
+		SetCookie('diggid',aid,1);
+	}
+	myajax = new DedeAjax(taget_obj,false,false,'','','');
+	var url = "/plus/digg_ajax.php?action="+ftype+"&id="+aid;
+	myajax.SendGet2(url);
+}
+function getDigg(aid)
+{
+	var taget_obj = document.getElementById('newdigg');
+	myajax = new DedeAjax(taget_obj,false,false,'','','');
+	myajax.SendGet2("/plus/digg_ajax.php?id="+aid);
+	DedeXHTTP = null;
+}
+function check(){
+		if(document.formsearch.searchtype.value=="")
+		document.formsearch.action="http://www.google.cn/custom"
+		else
+		document.formsearch.action="/plus/search.php"
+	} 
+-->
+</script>
+</head>
+<body class="articleview">
+<div id="topdiv">
+<form class="fl" id="frmLogin" name="frmLogin" method="post" target="_blank"><label for="Musername">用户名</label>   <label style="PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px"><input class="inbox" id="usr" name="usr"> </label>   <label for="Mpwd">密　码</label> 
+  <label style="PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px"><input class="inbox" id="pwd" type="password" name="pwd"> </label>   <label for="maillist">目标</label>   <select id="lstMail" name="lstMail"> <optgroup label="邮箱"> <option value="163.com">@163.com 网易</option> <option value="126.com" selected="">@126.com 网易</option> <option value="sina.com">@sina.com 
+    新浪</option> <option value="yahoo.com.cn">@yahoo.com.cn</option> <option value="yahoo.cn">@yahoo.cn</option> <option value="gmail.com">@gmail.com</option> <option value="sohu.com">@sohu.com 
+    搜狐</option> <option value="tom.com">@tom.com</option> <option value="188.com">@188.com</option> <option value="21cn.com">@21cn.com</option> 
+    <option value="yeah.net">@yeah.net</option> </optgroup> <optgroup label="其它帐号服务"> 
+    <option value="baidu">百度帐号</option> <option value="chinaren">ChinaRen校友录</option> <option value="xiaonei">校内网</option> 
+    <option value="51com">51.com</option> </optgroup>
+</select> <input id="other1" type="hidden" name=""> <input id="other2" type="hidden" name=""> <input class="btn" onclick="mbDocument.mailVerify();" type="button" value="登录">  <a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/qta/youxiang.html">申请邮箱</a> 
+</form>
+<div class="fr ">
+<ul class="fl" style="WIDTH: 260px">
+  <li class="fl noli" style="WIDTH: 65px"><a onclick="javascript:if(document.all){this.style.behavior=&#39;url(#default#homepage)&#39;;this.setHomePage(&#39;http://&#39;+document.location.host+&#39;/index.htm&#39;); }else{setHomePage(&#39;http://&#39;+document.location.host+&#39;/index.htm&#39;)}" href="javascript:;">设为首页</a> </li>
+  <li class="fl noli" style="WIDTH: 65px"><a onclick="mbDocument.addBookmark(&#39;亲亲导航网址导航--上网就上亲亲导航!&#39;,&#39;&#39;);" href="javascript:;">加入收藏</a> </li>
+  <li class="fl noli" style="WIDTH: 65px"><a href="http://sighttp.qq.com/cgi-bin/check?sigkey=4de23d7485265fbf24d0ff24556b46525bac355396dfeb9cc1ae36a0f27e29ff" ;="" target="_blank;" onclick="var tempSrc=&#39;http://sighttp.qq.com/wpa.js?rantime=&#39;+Math.random()+&#39;&amp;sigkey=4de23d7485265fbf24d0ff24556b46525bac355396dfeb9cc1ae36a0f27e29ff&#39;;var oldscript=document.getElementById(&#39;testJs&#39;);var newscript=document.createElement(&#39;script&#39;);newscript.setAttribute(&#39;type&#39;,&#39;text/javascript&#39;); newscript.setAttribute(&#39;id&#39;, &#39;testJs&#39;);newscript.setAttribute(&#39;src&#39;,tempSrc);if(oldscript == null){document.body.appendChild(newscript);}else{oldscript.parentNode.replaceChild(newscript, oldscript);}return false;"><img border="0" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/pa" alt="有事请点我！！"></a> 
+</li></ul></div></div>
+<div id="logodiv">
+<div id="logo"><a href="">logo</a> </div>
+<div id="logo_button">
+<iframe id="baiduSpFrame" border="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" framespacing="0" frameborder="0" scrolling="no" width="80" height="80" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/style1301.htm"></iframe>
+</div>
+<div id="logo_button"><script type="text/javascript"> 
+cpro_client='zengwuhang_cpr';
+cpro_at='text_image'; 
+cpro_161=2; 
+cpro_flush=4; 
+cpro_w=468; 
+cpro_h=60; 
+cpro_template='text_default_468_60'; 
+cpro_cbd='#FFFFFF'; 
+cpro_cbg='#FFFFFF'; 
+cpro_ctitle='#0000ff'; 
+cpro_cdesc='#444444'; 
+cpro_curl='#008000'; 
+cpro_cflush='#e10900'; 
+cpro_uap=1;
+cpro_cad=1;
+</script>
+<script language="JavaScript" type="text/javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/cp.js"></script><div style="display:none">-</div><iframe align="center,center" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" width="468" height="60" allowtransparency="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/uijs.htm"></iframe></div>
+<div id="logo_weather" style="CURSOR: pointer" onclick="window.open(&#39;/images/weather.htm&#39;)">
+<div class="fl" style="MARGIN: 0px 4px px; WIDTH: 15px"> </div>
+<div class="fl" id="dayweather" style="BORDER-RIGHT: #d8e8fb 1px solid; MARGIN: 1px; WIDTH: 106px"> <iframe src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/weather.htm" width="92" height="60" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe> </div>
+<div class="fl" id="lunar" onmouseover="this.style.display=&#39;none&#39;;document.getElementById(&#39;lunar2&#39;).style.display=&#39;&#39;;" style="DISPLAY: block; BORDER-LEFT: #fff 1px solid; WIDTH: 60px; CURSOR: pointer; HEIGHT: 60px"></div>
+<div class="fl" id="lunar2" style="PADDING-RIGHT: 2px; DISPLAY: none; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; BORDER-LEFT: #fff 1px solid; WIDTH: 56px; CURSOR: pointer; PADDING-TOP: 2px; HEIGHT: 56px" onmouseout="this.style.display=&#39;none&#39;;document.getElementById(&#39;lunar&#39;).style.display=&#39;&#39;;"></div></div></div>
+<div>
+<script type="text/javascript"> 
+<!--//--><![CDATA[//><!-- 
+function menuFix() { 
+var sfEls = document.getElementById("nav").getElementsByTagName("li"); 
+for (var i=0; i<sfEls.length; i++) { 
+sfEls[i].onmouseover=function() { 
+this.className+=(this.className.length>0? " ": "") + "sfhover"; 
+} 
+sfEls[i].onMouseDown=function() { 
+this.className+=(this.className.length>0? " ": "") + "sfhover"; 
+} 
+sfEls[i].onMouseUp=function() { 
+this.className+=(this.className.length>0? " ": "") + "sfhover"; 
+} 
+sfEls[i].onmouseout=function() { 
+this.className=this.className.replace(new RegExp("( ?|^)sfhover\\b"), 
+""); 
+} 
+} 
+} 
+window.onload=menuFix; 
+//--><!]]> 
+</script>
+<!--导航 -->
+<center>
+<div id="navigation" class="Area">
+<div class="row1">
+<div class="w73 fc_ffffff"><a href="http://www.1122sw.cn/">首页</a></div>
+<div class="w877 fc_ffffff fb">
+<ul id="nav">
+  <li><a href="http://1122sw.cn/zhanchangxinwen/">新闻<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> </li>
+  <li><a href="http://1122sw.cn/tuiguangrumen/">推广入门<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/youlian_wailian/">友链/外链</a> </li>
+    <li><a href="http://1122sw.cn/xianxiatuiguang/">线下推广</a> </li>
+    <li><a href="http://1122sw.cn/qitafangfa/">其它方法</a> 
+</li>
+    <li><a href="http://1122sw.cn/qitafangfa/">综合应用</a> 
+  </li></ul></li>
+  <li><a href="http://1122sw.cn/wangzhantuiguang/">网站推广<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/gerenjianzhan/">个人站推广</a> </li>
+    <li><a href="http://1122sw.cn/qiyezhantuiguang/">企业站推广</a> </li>
+    <li><a href="http://1122sw.cn/xingyezhantuiguang/">行业站推广</a> </li>
+    <li><a href="http://1122sw.cn/difangzhantuiguang/">地方站推广</a> </li>
+    <li><a href="http://1122sw.cn/luntantuiguang/">论坛推广</a> </li>
+    <li><a href="http://1122sw.cn/boketuiguang/">博客推广</a> </li>
+    <li><a href="http://1122sw.cn/wangdiantuiguang/">网店推广</a> </li>
+    <li><a href="http://1122sw.cn/waimaotuiguang/">外贸推广</a> 
+  </li></ul></li>
+  <li><a href="http://1122sw.cn/wangluoyingxiao/">网络营销<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/pinpaiyingxiao/">品牌营销</a> </li>
+    <li><a href="http://1122sw.cn/koubeiyingxiao/">口碑营销</a> </li>
+    <li><a href="http://1122sw.cn/bingduyingxiao/">病毒营销</a> </li>
+    <li><a href="http://1122sw.cn/shequyingxiao/">社区营销</a> </li>
+    <li><a href="http://1122sw.cn/bokeyingxiao/">博客营销</a> </li>
+    <li><a href="http://1122sw.cn/shijianyingxiao/">事件营销</a> </li>
+    <li><a href="http://1122sw.cn/youjianyingxiao/">邮件营销</a> </li>
+    <li><a href="http://1122sw.cn/qiyeyingxiao/">企业营销</a> 
+  </li></ul></li>
+  <li><a href="http://1122sw.cn/ruanwenyingxiao/">软文营销<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/ruanwenyanjiu/">软文研究</a> </li>
+    <li><a href="http://1122sw.cn/ruanwenxiezuo/">软文写作</a> </li>
+    <li><a href="http://1122sw.cn/IThulianwangruanwen/">IT互联网软文</a> </li>
+    <li><a href="http://1122sw.cn/jiadianqicheruanwen/">家电汽车软文</a> </li>
+    <li><a href="http://1122sw.cn/caijingzhengquanruanwen/">财经证券软文</a> 
+</li>
+    <li><a href="http://1122sw.cn/fangchanloushiruanwen/">房产楼市软文</a> </li>
+    <li><a href="http://1122sw.cn/yiliaobaojianruanwen/">医疗保健软文</a> </li>
+    <li><a href="http://1122sw.cn/shipinyanjiuruanwen/">食品烟酒软文</a> </li>
+    <li><a href="http://1122sw.cn/fuzhuangwujinruanwen/">服装五金软文</a> </li>
+    <li><a href="http://1122sw.cn/qitaxingyeruanwen/">其他行业软文</a> 
+  </li></ul></li>
+  <li><a href="http://1122sw.cn/SEOyouhua/">SEO优化<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/SEOyouhua/wangzhanyouhua/">网站优化</a> </li>
+    <li><a href="http://1122sw.cn/SEOyouhua/">SEO优化</a> </li>
+    <li><a href="http://1122sw.cn/SEOyouhua/baiduyouhua/">百度优化</a> </li>
+    <li><a href="http://1122sw.cn/SEOyouhua/googleyouhua/">google优化</a> </li>
+    <li><a href="http://1122sw.cn/qitasousuo/">其它搜索</a> </li>
+    <li><a href="http://1122sw.cn/guanjianciyouhua/">关键字优化</a> </li>
+    <li><a href="http://1122sw.cn/SEOyouhua/tigaoPR/">提高PR值</a> </li>
+    <li><a href="http://1122sw.cn/Kzhan_jiefeng/">K站/解封</a> 
+  </li></ul></li>
+  <li><a href="http://1122sw.cn/guanggaotoufang/">广告投放<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> </li>
+  <li><a href="http://1122sw.cn/jiejuefangan/">解决方案<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/wangzhanfangancehua/">网站方案策划</a> </li>
+    <li><a href="http://1122sw.cn/tuiguangfangancehua/">推广方案策划</a> </li>
+    <li><a href="http://1122sw.cn/huodongfangancehua/">活动方案策划</a> </li>
+    <li><a href="http://1122sw.cn/wangzhanyouhua_seofangan/">网站优化/seo方案</a> 
+  </li></ul></li>
+  <li><a href="http://1122sw.cn/tuozhanrenmai/">拓展人脉<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> </li>
+  <li><a href="http://1122sw.cn/renwu/">人物<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> </li>
+  <li><a href="http://1122sw.cn/guancha/">观察<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635.gif" width="2" height="24"></a> </li>
+  <li><a href="http://1122sw.cn/ziyuanxiazai/">下载<img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664635_1.gif" width="0" height="24"></a> 
+  <ul>
+    <li><a href="http://1122sw.cn/zonghequnfa/">综合群发</a> </li>
+    <li><a href="http://1122sw.cn/youjianqunfa/">邮件群发</a> </li>
+    <li><a href="http://1122sw.cn/IM_QQqunfa/">IM/QQ群发</a> </li>
+    <li><a href="http://1122sw.cn/luntanqunfa/">论坛群发</a> </li>
+    <li><a href="http://1122sw.cn/bokequnfa/">博客群发</a> </li>
+    <li><a href="http://1122sw.cn/gongqiuliuyan/">供求留言</a> </li>
+    <li><a href="http://1122sw.cn/SEOgongju/">SEO工具</a> </li>
+    <li><a href="http://1122sw.cn/qitagongju/">其它工具</a> </li>
+    <li><a href="http://1122sw.cn/fanganmobanPPT/">方案模板PPT</a> 
+</li></ul></li></ul></div>
+<div class="clear"></div></div>
+<div class="row2">
+<div class="w73 fc_004488"><a href="http://1122sw.cn/jiejuefangan/">解决方案</a></div>
+<div class="w877 fc_004488"><span>
+<div class="search">
+      <form name="formsearch" action="" onsubmit="check();">
+      <input type="hidden" name="domains" value="www.dedecms.com">
+        <div class="form">
+           <input type="hidden" name="kwtype" value="0">
+           <input name="q" type="text" class="search-keyword" id="search-keyword" value="建站从这里开始..." onfocus="if(this.value==&#39;建站从这里开始...&#39;){this.value=&#39;&#39;;}" onblur="if(this.value==&#39;&#39;){this.value=&#39;建站从这里开始...&#39;;}">
+           <select name="searchtype" class="search-option" id="search-option">
+               <option value="titlekeyword" selected="1">站内搜索</option>
+			   <option value="">google搜索</option>
+           </select>
+          <button type="submit" class="search-submit">搜索</button>
+        </div>
+        <input type="hidden" name="client" value="pub-9280232748837488">
+        <input type="hidden" name="forid" value="1">
+    	<input type="hidden" name="ie" value="GB2312">
+    	<input type="hidden" name="oe" value="GB2312">
+    	<input type="hidden" name="safe" value="active">
+    	<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1">
+    	<input type="hidden" name="hl" value="zh-CN">
+        </form>
+       
+    </div><!-- //search --></span>
+ <a href="http://1122sw.cn/wangzhanfangancehua/">网站策划方案</a><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/tuiguangfangancehua/">推广方案</a><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/huodongfangancehua/">活动方案</a><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/wangzhanyouhua_seofangan/">网站优化/seo方案</a><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/luntanqunfa/" target="_blank">论坛资源下载</a>
+</div>
+<div class="clear"></div></div>
+<div class="row2">
+<div class="w73 fc_004488"><a href="http://1122sw.cn/wangzhantuiguang/" target="_blank">网络推广</a></div>
+<div class="w877 fc_004488"><a href="http://www.1122sw.cn/ask" target="_blank">有问必答</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://www.1122sw.cn/ask" target="_blank">网站诊断</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/" target="_blank">经验分享</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/guanggaotoufang/" target="_blank">推广杂谈</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/guanggaotoufang/">合作专区</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/" target="_blank">任务交易区</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://1122sw.cn/guanggaotoufang/" target="_blank">广告专区</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://www.1122sw.cn/" target="_blank">休闲灌水</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a href="http://www.1122sw.cn/ask" target="_blank">意见反馈</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a class="style1" href="http://www.1122sw.cn/" target="_blank">活动</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a class="style1" href="http://www.1122sw.cn/" target="_blank">招聘</a><img alt="" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/Img253664932.gif" width="1" height="11"><a class="style1" href="http://www.1122sw.cn/data/sitemap.html" target="_blank"><font color="red">网站地图</font></a></div>
+<ul></ul></div></div></center>
+<center><div> 
+<style type="text/css">
+.nava_box {MARGIN: 0px 0px -10px 0px; WIDTH: 1003px; HEIGHT: 58px; OVERFLOW: hidden}
+#main {MARGIN-BOTTOM: 10px; BACKGROUND: url(/images/nv.bmp) no-repeat; HEIGHT: 58px; OVERFLOW: hidden}
+#navsa {PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; MARGIN-BOTTOM: 10px; HEIGHT: 50px; OVERFLOW: hidden; PADDING-TOP: 0px}
+#navsa LI {TEXT-ALIGN: center; WIDTH: 148px; FLOAT: left; HEIGHT: 50px}
+#navsa1 {MARGIN: 5px 10px 5px 50px; _margin: 5px 10px 5px 23px}
+#navsa2 {MARGIN: 5px 5px 5px 38px}
+#navsa3 {MARGIN: 5px 5px 5px 45px}
+#navsa4 {MARGIN: 5px 5px 5px 45px}
+#navsa5 {MARGIN: 5px 5px 5px 45px}
+#navsa LI A {LINE-HEIGHT: 20px; WIDTH: 70px; DISPLAY: block; FLOAT: left; HEIGHT: 20px; text-shadow: #fff 1px 1px; _line-height: 22px}
+#nava IMG {FLOAT: left}
+</style>
+<div class="nava_box">
+<ul id="main">
+  <li id="navsa">
+  <ul>
+    <li id="navsa1"><a title="IIS服务器" href="http://www.1122sw.cn/fuwuqijiashe/IISxiadeWebfuwuqijiashe/" target="_blank">IIS服务器</a> 
+    <a title="Apache服务器" href="http://www.1122sw.cn/fuwuqijiashe/ApachexiadeWebfuwuqijiashe/" target="_blank">Apache服</a> <a title="Linux服务器" href="http://www.1122sw.cn/fuwuqijiashe/LinuxxiadeWebfuwuqijiashe/" target="_blank">Linux服务</a> 
+    <a title="私服服务器" href="http://www.1122sw.cn/fuwuqijiashe/sifufuwuqijiashe/" target="_blank">私服架设</a> </li>
+    <li id="navsa2"><a title="ASP网站程序" href="http://www.1122sw.cn/wangzhanchengxu/ASPwangzhanchengxu/" target="_blank">ASP程序</a> 
+    <a title="PHP程序" href="http://www.1122sw.cn/wangzhanchengxu/PHPwangzhanchengxu/" target="_blank">PHP程序</a> <a title="NET程序" href="http://www.1122sw.cn/wangzhanchengxu/NETwangzhanchengxu/" target="_blank">NET程序</a> 
+    <a title="网店程序" href="http://www.1122sw.cn/wangzhanchengxu/shangdianchengxu/" target="_blank">网店程序</a> </li>
+    <li id="navsa3"><a title="论坛程序" href="http://www.1122sw.cn/wangzhanchengxu/luntanchengxu/" target="_blank">论坛程序</a> 
+    <a title="织梦程序" href="http://www.1122sw.cn/wangzhanchengxu/zhimengchengxu/" target="_blank">织梦程序</a> <a title="帝国程序" href="http://www.1122sw.cn/wangzhanchengxu/diguochengxu/" target="_blank">帝国程序</a> 
+    <a title="网页制作教程" href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuojiaocheng/" target="_blank">网页教程</a> </li>
+    <li id="navsa4"><a title="网页代码" href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/" target="_blank">网页代码</a> 
+    <a title="网页模板" href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuomoban/" target="_blank">网页模板</a> <a title="网站推广" href="http://www.1122sw.cn/wangzhantuiguang/wangzhantuiguang/" target="_blank">网站推广</a> 
+    <a title="网络营销" href="http://www.1122sw.cn/wangzhantuiguang/wangluoyingxiao/" target="_blank">网络营销</a> </li>
+    <li id="navsa5"><a title="SEO优化" href="http://www.1122sw.cn/wangzhantuiguang/SEOyouhua/" target="_blank">SEO优化</a> 
+    <a title="建站问答" href="http://www.1122sw.cn/ask" target="_blank">建站问答</a> <a title="网站导航" href="http://www.1122sw.cn/data/sitemap.html" target="_blank">网站导航</a> <a title="友情链接" href="http://www.1122sw.cn/zhanchangxinwen/jianzhanxinwen/" target="_blank">业界新闻</a> </li></ul></li>
+</ul></div>
+</div>
+</center>
+<div class="clear" id="searchdiv">
+<div class="clear" style="BACKGROUND: url(/images/bg.png) repeat-x 0px -242px; WIDTH: 1004px; HEIGHT: 31px"><span style="PADDING-RIGHT: 2px; BACKGROUND: url(/images/bg.png) no-repeat right -151px; FLOAT: right; WIDTH: 398px; LINE-HEIGHT: 31px; HEIGHT: 31px; TEXT-ALIGN: right"></span>
+<ul class="tags" id="tags">
+  <li><a class="focu" onclick="mbDocument.ToggerSearch(this)" href="javascript://">网页</a> </li>
+  <li><a onclick="mbDocument.ToggerSearch(this)" href="javascript://">MP3</a> 
+</li>
+  <li><a onclick="mbDocument.ToggerSearch(this)" href="javascript://">视频</a> </li>
+  <li><a onclick="mbDocument.ToggerSearch(this)" href="javascript://">图片</a> </li>
+  <li><a onclick="mbDocument.ToggerSearch(this)" href="javascript://">贴吧</a> </li>
+  <li><a onclick="mbDocument.ToggerSearch(this)" href="javascript://">知道</a> </li>
+  <li><a onclick="mbDocument.ToggerSearch(this)" href="javascript://">新闻</a> </li>
+  <li style="BACKGROUND: url(/images/bg.png) no-repeat 0px -242px"><a class="Search-more" id="showdtc" onclick="mbDocument.ToggerSearch(this)" onmouseout="document.getElementById(&#39;searchmore&#39;).style.display=&#39;none&#39;" href="javascript://">更多 </a>
+  <div id="searchmore" onmouseover="mbDocument.SearchmoreStat=0;mbDocument.ToggerSearch(document.getElementById(&#39;showdtc&#39;))" style="BORDER-RIGHT: #aaccee 1px solid; BORDER-TOP: #aaccee 1px solid; DISPLAY: none; Z-INDEX: 10; RIGHT: 390px; BACKGROUND: #ffffff 0px 0px; LEFT: 1px; BORDER-LEFT: #aaccee 1px solid; WIDTH: 72px; BORDER-BOTTOM: #aaccee 1px solid; POSITION: absolute; TOP: 25px; TEXT-ALIGN: center" onmouseout="document.getElementById(&#39;searchmore&#39;).style.display=&#39;none&#39;"><span class="menuspan" onmouseover="this.style.background=&#39;#7198CC&#39;;this.style.color=&#39;#FFF&#39;;" onclick="mbDocument.ToggerSearch(null,9)" onmouseout="this.style.background=&#39;&#39;;this.style.color=&#39;&#39;;">WebQQ</span> <span class="menuspan" onmouseover="this.style.background=&#39;#7198CC&#39;;this.style.color=&#39;#FFF&#39;;" onclick="mbDocument.ToggerSearch(null,7)" onmouseout="this.style.background=&#39;&#39;;this.style.color=&#39;&#39;;">百科</span> <span class="menuspan" onmouseover="this.style.background=&#39;#7198CC&#39;;this.style.color=&#39;#FFF&#39;;" onclick="mbDocument.ToggerSearch(null,8)" onmouseout="this.style.background=&#39;&#39;;this.style.color=&#39;&#39;;">股票</span> 
+  </div></li></ul></div>
+<div id="search_div">
+<div class="fr" id="search_news">
+<li><a href="http://www.52wanle.com/" target="_blank">深圳吃喝玩乐 </a><a href="http://www.jxgaokao.com/" target="_blank">江西高考网 </a><a href="http://www.1122sw.cn/seo/seo.html" target="_blank">SEO发帖表 </a><a href="http://www.hqbshouji.com/" target="_blank">华强北手机 </a>
+</li><li><a href="http://bbs.hqbshouji.com/" target="_blank">华强北水货手机报价 </a><a href="http://pindao.huoban.taobao.com/channel/onSale.htm?pid=mm_14507733_0_0&unid=16" target="_blank">淘宝促销 </a><a href="http://cx.360doo.com/pacx/9/414.html" target="_blank">车险直销 </a><a href="http://search8.taobao.com/browse/16/n-86-----17----7------g,nvwv6mjuguydonztgnptaxzq----------------0-false--------all------------------------------40-grid-coefp-0-all-16.htm?f=null" target="_blank">淘宝韩版女装 </a></li></div>
+<div class="fl" id="search_show">
+<form action="http://www.baidu.com/s" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://www.baidu.com/index.php?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_logo.gif"></a></div><input id="tn" type="hidden" value="haokan123" name="tn"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="wd"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://mp3.baidu.com/m" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://mp3.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_mp3.gif"></a></div><input id="tn" type="hidden" value="haokan123" name="tn"> <input id="tn" type="hidden" value="haokan123" name="tn"> 
+<input id="f" type="hidden" value="ms" name="f"> <input id="ct" type="hidden" value="134217728" name="ct"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://video.baidu.com/v?ct=301989888&rn=20&pn=0&db=0&s=0&fbl=1024" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://video.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_video.gif"></a></div><input type="hidden" value="haokan123" name="tn"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://image.baidu.com/i" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://image.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_img.gif"></a></div><input id="tn" type="hidden" value="baiduimage" name="tn"> <input id="ct" type="hidden" value="201326592" name="ct"> 
+<input id="cl" type="hidden" value="2" name="cl"> <input id="pv" type="hidden" name="pv"> 
+<input id="lm" type="hidden" value="-1" name="lm"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://post.baidu.com/f" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://post.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_post.gif"></a></div><input id="tn" type="hidden" value="baiduPostSearch" name="tn"> <input id="lm" type="hidden" value="65536" name="lm"> 
+<input id="ct" type="hidden" value="352321536" name="ct"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://zhidao.baidu.com/q" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://zhidao.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_know.gif"></a></div><input id="tn" type="hidden" value="ikaslist" name="tn"> <input id="pt" type="hidden" value="ylmf_ik" name="pt"> <input id="ct" type="hidden" value="17" name="ct"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://news.baidu.com/ns" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://news.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_news.gif"></a></div><input type="hidden" value="news" name="tn"> <input type="hidden" value="haokan123" name="sc"> <input type="hidden" value="134217728" name="ct"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://bk.baidu.com/w" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://bk.baidu.com/?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_baike.gif"></a></div><input id="tn" type="hidden" value="baiduWikiSearch" name="tn"> <input id="ct" type="hidden" value="17" name="ct"> <input id="lm" type="hidden" value="0" name="lm"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form style="DISPLAY: none" action="http://www.baidu.com/baidu" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><a href="http://www.baidu.com/index.php?tn=haokan123" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/baidu_logo.gif"></a></div><input type="hidden" value="haokan123" name="tn"> 
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 12px; MARGIN: 0px; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: #afccec 1px solid; BORDER-TOP: #afccec 1px solid; BACKGROUND: #fff; MARGIN: 0px 2px; BORDER-LEFT: #afccec 1px solid; BORDER-BOTTOM: #afccec 1px solid; HEIGHT: 26px"><input class="keyword" name="word"> </div><input class="search_btn" type="submit" value="百度一下"> 
+</div></form>
+<form id="qqLogin" style="DISPLAY: none" name="qqLogin" action="http://ptlogin2.qq.com/login" method="post" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 2px; PADDING-BOTTOM: 1px; WIDTH: 54px; PADDING-TOP: 1px"><a href="http://web.qq.com/" target="_blank"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/webqq.jpg"></a></div>
+<div class="fl" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 1px">
+<div class="fl" style="BORDER-RIGHT: #c3e0f2 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #c3e0f2 1px solid; PADDING-LEFT: 0px; BACKGROUND: url(images/webqqbg.jpg); PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: 0px; WIDTH: 536px; PADDING-TOP: 0px; BORDER-BOTTOM: #c3e0f2 1px solid; HEIGHT: 53px">
+<div style="FLOAT: left; MARGIN: 13px 0px; LINE-HEIGHT: 23px; HEIGHT: 23px">帐号: 
+<input class="qqinput" maxlength="12" name="u" tagindex="100"> 密码: <input class="qqinput" tabindex="2" type="password" maxlength="16" name="p" tagindex="101/"> 验证码 
+<input class="qqinput2" maxlength="4" name="verifycode" tagindex="102"> </div>
+<div class="fl" style="WIDTH: 130px; HEIGHT: 53px"><img id="imgVerify" onclick="mbDocument.ToggerSearch(null,9)"></div>
+<div style="FLOAT: left; MARGIN: 13px 1px; WIDTH: 70px"><input class="login_btn" onclick="mbDocument.WebQQ()" type="button" value="登录" tagindex="103"> 
+</div></div></div><input type="hidden" value="1002101" name="aid"> <input type="hidden" value="http://web.qq.com/main.shtml" name="u1"> <input type="hidden" value="loginerroralert" name="fp"> <input type="hidden" value="1" name="h"> <input type="hidden" value="1" name="ptredirect"> <input type="hidden" value="0" name="ptlang"> 
+<input type="hidden" value="1" name="from_ui"> <input type="hidden" value="1" name="pttype"> 
+<input type="hidden" name="dumy"> </form>
+<div class="fl" style="MARGIN: 13px 2px"></div></div></div></div>
+
+<!-- /header -->
+<div class="w960 center clear mt1">
+	<div class="pleft">
+		<div class="place">
+			<strong>当前位置:</strong> <a href="http://www.1122sw.cn/">主页</a> &gt; <a href="http://www.1122sw.cn/wangyezhizuo/">网页制作</a> &gt; <a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/">网页制作代码</a> &gt; 
+		</div><!-- /place -->
+		<div class="viewbox">
+			<div class="title">
+				<h2>CSS+JS 实现的3D球面标签云！！！</h2>
+			</div><!-- /title -->
+			<div class="info">
+				<small>时间:</small>2011-07-28 11:29<small>来源:</small>未知 <small>作者:</small>亲亲De建站 <small>点击:</small><script src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/count.php" type="text/javascript" language="javascript"></script>59次</div><!-- /info -->
+
+            	<div class="intro">CSS+JS 实现的3D球面标签云</div>
+			<div class="content">
+			<table width="100%">
+				<tbody><tr><td>
+<div class="Artadleft" style="float: left" align="left"><script type="text/javascript">/*300*250，创建于2011-9-8*/ var cpro_id = 'u604595';</script><script src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/c.js" type="text/javascript"></script><script type="text/javascript" charset="utf-8" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ecom"></script><div style="display:none">-</div> <iframe id="cproIframe1" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/uijs(1).htm" width="300" height="250" align="center,center" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe></div>
+<p>之前曾经用过一个基于 Flash 实现的 <span class="wp_keywordlink_affiliate"><font color="#2250a2">3D球面标签云</font></span>，中文字体是其中一大问题，毕竟修改 Flash 囊括的中文字体比较麻烦，而涵盖全部中文 Flash 文件又会太大。于是便有了下面这个基于 <span class="wp_keywordlink_affiliate"><font color="#2250a2">CSS</font></span> + <span class="wp_keywordlink_affiliate"><font color="#2250a2">JavaScript</font></span> 实现的 <span class="wp_keywordlink_affiliate"><font color="#2250a2">3D球面标签云</font></span>。</p>
+<p><a href="http://1122sw.cn/images/bqyun.html">http://1122sw.cn/images/bqyun.html</a> 演示地址！！</p>
+<p><strong>效果演示：<font color="#2250a2"> Demo</font></strong></p>
+<p><span style="color: #ff0000"><strong><span class="wp_keywordlink_affiliate"><font color="#2250a2">CSS</font></span>部分代码如下，保存后更名为 style.css ：</strong></span></p>
+<p>&nbsp;</p>
+<pre><ol class="dp-xml"><li class="alt"><span><span>/*&nbsp;背景&nbsp;*/ &nbsp;</span></span></li><li><span>body&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;#f2f2f2; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>/*&nbsp;标签样式&nbsp;*/ &nbsp;</span></li><li class="alt"><span>#div1&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;position:relative; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;width:600px; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;height:500px; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;20px&nbsp;auto&nbsp;0; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>#div1&nbsp;a&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;position:absolute; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;top:0px; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;left:0px; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;font-family:&nbsp;Microsoft&nbsp;YaHei; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;color:#fff; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;font-weight:bold; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;text-decoration:none; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;3px&nbsp;6px; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>#div1&nbsp;a:hover&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;border:&nbsp;2px&nbsp;solid&nbsp;#666; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;background:none; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>/*&nbsp;标签字体样式&nbsp;*/ &nbsp;</span></li><li class="alt"><span>#div1&nbsp;.blue&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;blue; &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span>#div1&nbsp;.red&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;red; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>#div1&nbsp;.orange&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;color:#F90; &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span>#div1&nbsp;.pink&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#F6F; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>#div1&nbsp;.black&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#333; &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span>#div1&nbsp;.purple&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#90F; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>/*&nbsp;其他文字样式&nbsp;*/ &nbsp;</span></li><li><span>p&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;font:&nbsp;18px&nbsp;Microsoft&nbsp;YaHei; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;text-align:&nbsp;center; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;color:#999; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>p&nbsp;a&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;18px; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#999; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>p&nbsp;a:hover&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#333; &nbsp;</span></li><li class="alt"><span>}&nbsp;</span></li></ol></pre>
+<p><span style="color: #ff0000"><strong><span class="wp_keywordlink_affiliate"><a title="查看 JavaScript 中的全部文章" target="_blank" href="http://www.libertystudio.net/tag/javascript"><font color="#2250a2">JavaScript</font></a></span>部分代码如下，保存为 3D-Tags.js ：</strong></span></p>
+<p>&nbsp;</p>
+<pre><ol class="dp-xml"><li class="alt"><span><span>//&nbsp;JavaScript&nbsp;代码开始 &nbsp;</span></span></li><li><span>var&nbsp;</span><span class="attribute">radius</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">120</span><span>; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">dtr</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.PI/180; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">d</span><span>=</span><span class="attribute-value">300</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">mcList</span><span>&nbsp;=&nbsp;[]; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">active</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">false</span><span>; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">lasta</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">1</span><span>; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">lastb</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">1</span><span>; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">distr</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">true</span><span>; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">tspeed</span><span>=</span><span class="attribute-value">10</span><span>; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">size</span><span>=</span><span class="attribute-value">250</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">mouseX</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">mouseY</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">howElliptical</span><span>=</span><span class="attribute-value">1</span><span>; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>var&nbsp;</span><span class="attribute">aA</span><span>=</span><span class="attribute-value">null</span><span>; &nbsp;</span></li><li><span>var&nbsp;</span><span class="attribute">oDiv</span><span>=</span><span class="attribute-value">null</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span class="attribute">window.onload</span><span>=</span><span class="attribute-value">function</span><span>&nbsp;() &nbsp;</span></li><li class="alt"><span>{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">oTag</span><span>=</span><span class="attribute-value">null</span><span>; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oDiv</span><span>=</span><span class="attribute-value">document</span><span>.getElementById('div1'); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">aA</span><span>=</span><span class="attribute-value">oDiv</span><span>.getElementsByTagName('a'); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;for(</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>;i</span><span class="tag">&lt;</span><span class="tag-name">aA.length</span><span>;i++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oTag</span><span>={}; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oTag.offsetWidth</span><span>=</span><span class="attribute-value">aA</span><span>[i].offsetWidth; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oTag.offsetHeight</span><span>=</span><span class="attribute-value">aA</span><span>[i].offsetHeight; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList.push(oTag); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sineCosine(&nbsp;0,0,0&nbsp;); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;positionAll(); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oDiv.onmouseover</span><span>=</span><span class="attribute-value">function</span><span>&nbsp;() &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">active</span><span>=</span><span class="attribute-value">true</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oDiv.onmouseout</span><span>=</span><span class="attribute-value">function</span><span>&nbsp;() &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">active</span><span>=</span><span class="attribute-value">false</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">oDiv.onmousemove</span><span>=</span><span class="attribute-value">function</span><span>&nbsp;(ev) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">oEvent</span><span>=</span><span class="attribute-value">window</span><span>.event&nbsp;||&nbsp;ev; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">mouseX</span><span>=</span><span class="attribute-value">oEvent</span><span>.clientX-(oDiv.offsetLeft+oDiv.offsetWidth/2); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">mouseY</span><span>=</span><span class="attribute-value">oEvent</span><span>.clientY-(oDiv.offsetTop+oDiv.offsetHeight/2); &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mouseX/=5; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mouseY/=5; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;setInterval(update,&nbsp;30); &nbsp;</span></li><li class="alt"><span>}; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>function&nbsp;update() &nbsp;</span></li><li><span>{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;a; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;b; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;if(active) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">a</span><span>&nbsp;=&nbsp;(-Math.min(&nbsp;Math.max(&nbsp;-mouseY,&nbsp;-size&nbsp;),&nbsp;size&nbsp;)&nbsp;/&nbsp;radius&nbsp;)&nbsp;*&nbsp;tspeed; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">b</span><span>&nbsp;=&nbsp;(Math.min(&nbsp;Math.max(&nbsp;-mouseX,&nbsp;-size&nbsp;),&nbsp;size&nbsp;)&nbsp;/&nbsp;radius&nbsp;)&nbsp;*&nbsp;tspeed; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">a</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">lasta</span><span>&nbsp;*&nbsp;0.98; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">b</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">lastb</span><span>&nbsp;*&nbsp;0.98; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">lasta</span><span>=a; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">lastb</span><span>=b; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;if(Math.abs(a)</span><span class="tag">&lt;</span><span>=0.01&nbsp;&amp;&amp;&nbsp;Math.abs(b)</span><span class="tag">&lt;</span><span>=0.01) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">c</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;sineCosine(a,b,c); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;for(var&nbsp;</span><span class="attribute">j</span><span>=</span><span class="attribute-value">0</span><span>;j</span><span class="tag">&lt;</span><span class="tag-name">mcList.length</span><span>;j++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">rx1</span><span>=</span><span class="attribute-value">mcList</span><span>[j].cx; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">ry1</span><span>=</span><span class="attribute-value">mcList</span><span>[j].cy*ca+mcList[j].cz*(-sa); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">rz1</span><span>=</span><span class="attribute-value">mcList</span><span>[j].cy*sa+mcList[j].cz*ca; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">rx2</span><span>=</span><span class="attribute-value">rx1</span><span>*cb+rz1*sb; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">ry2</span><span>=</span><span class="attribute-value">ry1</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">rz2</span><span>=</span><span class="attribute-value">rx1</span><span>*(-sb)+rz1*cb; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">rx3</span><span>=</span><span class="attribute-value">rx2</span><span>*cc+ry2*(-sc); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">ry3</span><span>=</span><span class="attribute-value">rx2</span><span>*sc+ry2*cc; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">rz3</span><span>=</span><span class="attribute-value">rz2</span><span>; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.cx</span><span>=</span><span class="attribute-value">rx3</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.cy</span><span>=</span><span class="attribute-value">ry3</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.cz</span><span>=</span><span class="attribute-value">rz3</span><span>; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">per</span><span>=</span><span class="attribute-value">d</span><span>/(d+rz3); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.x</span><span>=(howElliptical*rx3*per)-(howElliptical*2); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.y</span><span>=</span><span class="attribute-value">ry3</span><span>*per; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.scale</span><span>=</span><span class="attribute-value">per</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.alpha</span><span>=</span><span class="attribute-value">per</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[j]</span><span class="attribute">.alpha</span><span>=(mcList[j].alpha-0.6)*(10/6); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;doPosition(); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;depthSort(); &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>function&nbsp;depthSort() &nbsp;</span></li><li><span>{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">aTmp</span><span>=[]; &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;for(</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>;i</span><span class="tag">&lt;</span><span class="tag-name">aA.length</span><span>;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aTmp.push(aA[i]); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;aTmp.sort &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;( &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;(vItem1,&nbsp;vItem2) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(vItem1.cz</span><span class="tag">&gt;</span><span>vItem2.cz) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;-1; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(vItem1.cz</span><span class="tag">&lt;</span><span class="tag-name">vItem2.cz</span><span>) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;1; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;); &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;for(</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>;i</span><span class="tag">&lt;</span><span class="tag-name">aTmp.length</span><span>;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aTmp[i]</span><span class="attribute">.style.zIndex</span><span>=</span><span class="attribute-value">i</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>function&nbsp;positionAll() &nbsp;</span></li><li class="alt"><span>{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">phi</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">theta</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">max</span><span>=</span><span class="attribute-value">mcList</span><span>.length; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">aTmp</span><span>=[]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">oFragment</span><span>=</span><span class="attribute-value">document</span><span>.createDocumentFragment(); &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;//随机排序 &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;for(</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>;i</span><span class="tag">&lt;</span><span class="tag-name">aA.length</span><span>;i++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aTmp.push(aA[i]); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;aTmp.sort &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;( &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;() &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Math.random()</span><span class="tag">&lt;</span><span class="tag-name">0.5</span><span>?1:-1; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;); &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;for(</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>;i</span><span class="tag">&lt;</span><span class="tag-name">aTmp.length</span><span>;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oFragment.appendChild(aTmp[i]); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;oDiv.appendChild(oFragment); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;for(&nbsp;var&nbsp;</span><span class="attribute">i</span><span>=</span><span class="attribute-value">1</span><span>;&nbsp;i</span><span class="tag">&lt;</span><span class="tag-name">max</span><span>+1;&nbsp;i++){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(&nbsp;distr&nbsp;) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">phi</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.acos(-1+(2*i-1)/max); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">theta</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.sqrt(max*Math.PI)*phi; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">phi</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.random()*(Math.PI); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">theta</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.random()*(2*Math.PI); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//坐标变换 &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[i-1]</span><span class="attribute">.cx</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">radius</span><span>&nbsp;*&nbsp;Math.cos(theta)*Math.sin(phi); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[i-1]</span><span class="attribute">.cy</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">radius</span><span>&nbsp;*&nbsp;Math.sin(theta)*Math.sin(phi); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mcList[i-1]</span><span class="attribute">.cz</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">radius</span><span>&nbsp;*&nbsp;Math.cos(phi); &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i-1]</span><span class="attribute">.style.left</span><span>=</span><span class="attribute-value">mcList</span><span>[i-1].cx+oDiv.offsetWidth/2-mcList[i-1].offsetWidth/2+'px'; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i-1]</span><span class="attribute">.style.top</span><span>=</span><span class="attribute-value">mcList</span><span>[i-1].cy+oDiv.offsetHeight/2-mcList[i-1].offsetHeight/2+'px'; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>function&nbsp;doPosition() &nbsp;</span></li><li class="alt"><span>{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">l</span><span>=</span><span class="attribute-value">oDiv</span><span>.offsetWidth/2; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span class="attribute">t</span><span>=</span><span class="attribute-value">oDiv</span><span>.offsetHeight/2; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;for(var&nbsp;</span><span class="attribute">i</span><span>=</span><span class="attribute-value">0</span><span>;i</span><span class="tag">&lt;</span><span class="tag-name">mcList.length</span><span>;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i]</span><span class="attribute">.style.left</span><span>=</span><span class="attribute-value">mcList</span><span>[i].cx+l-mcList[i].offsetWidth/2+'px'; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i]</span><span class="attribute">.style.top</span><span>=</span><span class="attribute-value">mcList</span><span>[i].cy+t-mcList[i].offsetHeight/2+'px'; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i]</span><span class="attribute">.style.fontSize</span><span>=</span><span class="attribute-value">Math</span><span>.ceil(12*mcList[i].scale/2)+8+'px'; &nbsp;</span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i]</span><span class="attribute">.style.filter</span><span>=</span><span class="attribute-value">"alpha(opacity="</span><span>+100*mcList[i].alpha+")"; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aA[i]</span><span class="attribute">.style.opacity</span><span>=</span><span class="attribute-value">mcList</span><span>[i].alpha; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp; &nbsp;</span></li><li><span>function&nbsp;sineCosine(&nbsp;a,&nbsp;b,&nbsp;c) &nbsp;</span></li><li class="alt"><span>{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">sa</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.sin(a&nbsp;*&nbsp;dtr); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">ca</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.cos(a&nbsp;*&nbsp;dtr); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">sb</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.sin(b&nbsp;*&nbsp;dtr); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">cb</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.cos(b&nbsp;*&nbsp;dtr); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">sc</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.sin(c&nbsp;*&nbsp;dtr); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">cc</span><span>&nbsp;=&nbsp;</span><span class="attribute-value">Math</span><span>.cos(c&nbsp;*&nbsp;dtr); &nbsp;</span></li><li><span>}&nbsp;</span></li></ol></pre>
+<p>网页代码：</p>
+<p>&nbsp;</p>
+<pre><ol class="dp-xml"><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">html</span><span>&nbsp;</span><span class="attribute">xmlns</span><span>=</span><span class="attribute-value">"http://www.w3.org/1999/xhtml"</span><span class="tag">&gt;</span><span>&nbsp;</span></span></li><li><span class="tag">&lt;</span><span class="tag-name">head</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span class="tag">&lt;</span><span class="tag-name">meta</span><span>&nbsp;</span><span class="attribute">http-equiv</span><span>=</span><span class="attribute-value">"Content-Type"</span><span>&nbsp;</span><span class="attribute">content</span><span>=</span><span class="attribute-value">"text/html;&nbsp;charset=utf-8"</span><span>&nbsp;</span><span class="tag">/&gt;</span><span>&nbsp;</span></li><li><span class="tag">&lt;</span><span class="tag-name">title</span><span class="tag">&gt;</span><span>3D标签云&nbsp;by&nbsp;CSS+JavaScript</span><span class="tag">&lt;/</span><span class="tag-name">title</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span class="tag">&lt;</span><span class="tag-name">link</span><span>&nbsp;</span><span class="attribute">rel</span><span>=</span><span class="attribute-value">"stylesheet"</span><span>&nbsp;</span><span class="attribute">type</span><span>=</span><span class="attribute-value">"text/css"</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"style.css"</span><span>&nbsp;</span><span class="tag">/&gt;</span><span>&nbsp;</span></li><li><span class="tag">&lt;</span><span class="tag-name">script</span><span>&nbsp;</span><span class="attribute">type</span><span>=</span><span class="attribute-value">"text/javascript"</span><span>&nbsp;</span><span class="attribute">src</span><span>=</span><span class="attribute-value">"3D-Tags.js"</span><span class="tag">&gt;</span><span class="tag">&lt;/</span><span class="tag-name">script</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span class="tag">&lt;/</span><span class="tag-name">head</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;</span></li><li class="alt"><span class="tag">&lt;</span><span class="tag-name">body</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span class="tag">&lt;</span><span class="tag-name">div</span><span>&nbsp;</span><span class="attribute">id</span><span>=</span><span class="attribute-value">"div1"</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>JavaScript</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"red"</span><span class="tag">&gt;</span><span>PHP教程</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>测试</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>代码如诗</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"blue"</span><span class="tag">&gt;</span><span>Liberty&nbsp;Studio</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>SEO</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"red"</span><span class="tag">&gt;</span><span>网页特效</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"orange"</span><span class="tag">&gt;</span><span>JavaScript</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>Code&nbsp;is&nbsp;Poetry</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"red"</span><span class="tag">&gt;</span><span>CSS</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>Div</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"blue"</span><span class="tag">&gt;</span><span>3D标签云</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>面向对象</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>Liberty&nbsp;Studio</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"blue"</span><span class="tag">&gt;</span><span>Oops!</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>Html5</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"blue"</span><span class="tag">&gt;</span><span>404&nbsp;Error</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>Cocoa</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>Objective-C</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"orange"</span><span class="tag">&gt;</span><span>Liberty&nbsp;Studio</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"black"</span><span class="tag">&gt;</span><span>blue</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"pink"</span><span class="tag">&gt;</span><span>粉红</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tag">&lt;</span><span class="tag-name">a</span><span>&nbsp;</span><span class="attribute">href</span><span>=</span><span class="attribute-value">"#"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"purple"</span><span class="tag">&gt;</span><span>紫色</span><span class="tag">&lt;/</span><span class="tag-name">a</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span class="tag">&lt;/</span><span class="tag-name">div</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li class="alt"><span class="tag">&lt;/</span><span class="tag-name">body</span><span class="tag">&gt;</span><span>&nbsp;</span></li><li><span class="tag">&lt;/</span><span class="tag-name">html</span><span class="tag">&gt;</span><span>&nbsp;</span></li></ol></pre>
+<p>&nbsp;</p>(责任编辑：亲亲站长网)</td></tr>
+<tr><td>更多<strong>CSS+JS 实现的3D球面标签云！！！</strong>到亲亲站长网(<a href="http://www.1122sw.cn/" target="_blank">http://www.1122sw.cn/</a>)查看,亲亲站长网提供的<a href="http://1122sw.cn/wangzhantuiguang/" title="网站推广技术" target="_blank">网站推广技术</a>、<a href="http://www.1122sw.cn/jz/" title="深圳网站制作" target="_blank">深圳网站制作</a>欢迎浏览亲亲站长网，多提宝贵意见！</td></tr>
+			</tbody></table>
+			</div><!-- /content -->
+			<div class="dede_pages">
+				<ul class="pagelist">
+          
+				</ul>
+			</div><!-- /pages -->
+			
+			<!-- //顶踩 -->
+			<div class="newdigg" id="newdigg">
+				<div class="diggbox digg_good" onmousemove="this.style.backgroundPosition=&#39;left bottom&#39;;" onmouseout="this.style.backgroundPosition=&#39;left top&#39;;" onclick="javascript:postDigg(&#39;good&#39;,1938)">
+					<div class="digg_act">顶一下</div>
+					<div class="digg_num">(0)</div>
+					<div class="digg_percent">
+						<div class="digg_percent_bar"><span style="width:0%"></span></div>
+						<div class="digg_percent_num">0%</div>
+					</div>
+				</div>
+				<div class="diggbox digg_bad" onmousemove="this.style.backgroundPosition=&#39;right bottom&#39;;" onmouseout="this.style.backgroundPosition=&#39;right top&#39;;" onclick="javascript:postDigg(&#39;bad&#39;,1938)">
+					<div class="digg_act">踩一下</div>
+					<div class="digg_num">(0)</div>
+					<div class="digg_percent">
+						<div class="digg_percent_bar"><span style="width:0%"></span></div>
+						<div class="digg_percent_num">0%</div>
+					</div>
+				</div>
+			</div>
+			<script language="javascript" type="text/javascript">getDigg(1938);</script>
+			<!-- //顶踩部份的源码结束 -->
+			
+			<div class="boxoff">
+				<strong>------分隔线----------------------------</strong>
+			</div>
+			<div class="handle">
+				<div class="context">
+					<ul>
+						<li>上一篇：<a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1937.html">纯div+css+js打造仿.3D flash动态标签云代码|兼容所有浏览器|</a> </li>
+						<li>下一篇：<a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1939.html">如何用纯div+css+js打造成方形的动态标签云?</a> </li>
+					</ul>
+				</div><!-- /context -->
+				<div class="actbox">
+					<ul>
+						<li id="act-fav"><a href="http://www.1122sw.cn/plus/stow.php?aid=1938" target="_blank">收藏</a></li>
+						<li id="act-err"><a href="http://www.1122sw.cn/plus/erraddsave.php?aid=1938&title=CSS+JS%20%CA%B5%CF%D6%B5%C43D%C7%F2%C3%E6%B1%EA%C7%A9%D4%C6%A3%A1%A3%A1%A3%A1" target="_blank">挑错</a></li>
+						<li id="act-pus"><a href="http://www.1122sw.cn/plus/recommend.php?aid=1938" target="_blank">推荐</a></li>
+						<li id="act-pnt"><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1938.html#" onclick="window.print();">打印</a></li>
+					</ul>
+				</div><!-- /actbox -->
+			</div><!-- /handle -->
+		</div><!-- /viewbox -->
+
+<!-- //AJAX评论区 -->
+<!-- //主模板必须要引入/include/dedeajax2.js -->
+<a name="postform"></a>
+<div class="mt1">
+		<dl class="tbox">
+			<dt>
+				<strong>发表评论</strong>
+				<span class="more"></span>
+			</dt>
+			<dd>
+				<div class="dede_comment_post">
+          <form action="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1938.html#" method="post" name="feedback">
+          <input type="hidden" name="dopost" value="send">
+          <input type="hidden" name="comtype" value="comments">
+          <input type="hidden" name="aid" value="1938">
+          <input type="hidden" name="fid" id="feedbackfid" value="0">
+          <div class="dcmp-title">
+						<small>请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。</small>
+					</div><!-- /dcmp-title -->
+					<div class="dcmp-stand">
+						<strong>评价:</strong>
+							<input type="radio" name="feedbacktype" checked="1" value="feedback" id="dcmp-stand-neu"><label for="dcmp-stand-neu"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/cmt-neu.gif">中立</label>
+							<input type="radio" name="feedbacktype" value="good" id="dcmp-stand-good"><label for="dcmp-stand-good"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/cmt-good.gif">好评</label>
+							<input type="radio" name="feedbacktype" value="bad" id="dcmp-stand-bad"><label for="dcmp-stand-bad"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/cmt-bad.gif">差评</label>
+					</div><!-- /dcmp-stand -->
+                    <div class="clr"></div>
+                    <div class="dcmp-mood">
+						<strong>表情:</strong>
+						<ul>                               
+                                <li><input type="radio" name="face" value="1" checked="1"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-1.gif"></li>
+                                <li><input type="radio" name="face" value="2"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-2.gif"></li>
+                                <li><input type="radio" name="face" value="3"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-3.gif"></li>
+                                <li><input type="radio" name="face" value="4"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-4.gif"></li>
+                                <li><input type="radio" name="face" value="5"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-5.gif"></li>
+                                <li><input type="radio" name="face" value="6"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-6.gif"></li>
+                                <li><input type="radio" name="face" value="7"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-7.gif"></li>
+                                <li><input type="radio" name="face" value="8"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-8.gif"></li> 
+                                <li><input type="radio" name="face" value="9"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-9.gif"></li>
+                                <li><input type="radio" name="face" value="10"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-10.gif"></li>
+                                <li><input type="radio" name="face" value="11"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-11.gif"></li> 
+                                <li><input type="radio" name="face" value="12"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ico-mood-12.gif"></li>
+						</ul>
+					</div><!-- /dcmp-mood -->
+					<div class="dcmp-content">
+						<textarea cols="60" name="msg" rows="5" class="ipt-txt"></textarea>
+					</div><!-- /dcmp-content -->
+					<div class="dcmp-post"><!--未登陆-->
+							<div class="dcmp-userinfo" id="_ajax_feedback">
+								用户名:<input type="text" name="username" size="16" class="ipt-txt">
+                                验证码:<input type="text" name="validate" size="4" class="ipt-txt" style="text-transform:uppercase;"><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/vdimgck.php" id="validateimg" style="cursor:pointer" onclick="this.src=this.src+&#39;?&#39;" width="60" height="24" title="点击我更换图片" alt="点击我更换图片">
+                <input type="checkbox" name="notuser" id="dcmp-submit-guest"><label for="dcmp-submit-guest">匿名? </label>
+							</div>
+              <script language="javascript" type="text/javascript">CheckLogin();</script>
+							<div class="dcmp-submit">
+								<button type="button" onclick="PostComment()">发表评论</button>
+							</div>
+						</div>
+        </form>
+				</div>
+			</dd>
+		</dl>
+	</div><!-- //评论表单区结束 -->
+
+<!-- //评论内容区 -->
+	<a name="commettop"></a>
+	<div class="mt1">
+			<dl class="tbox">
+				<dt>
+					<strong>最新评论</strong>
+					<span class="more"><a href="http://www.1122sw.cn/plus/feedback.php?aid=1938">进入详细评论页&gt;&gt;</a></span>
+				</dt>
+				<!-- //这两个ID的区块必须存在，否则JS会出错 -->
+				<dd id="commetcontentNew"></dd>
+				<dd id="commetcontent"></dd>
+			</dl>
+	</div>
+<!--
+//由于评论载入时使用异步传输，因此必须在最后一步加载（DIGG和评论框须放在评论内容前面）
+//如果一定需要提前的把myajax.SendGet改为myajax.SendGet2，但可能会引起页面阻滞
+-->
+<script language="javascript">
+function LoadCommets(page)
+{
+		var taget_obj = document.getElementById('commetcontent');
+		var waithtml = "<div style='line-height:50px'><img src='/images/loadinglit.gif' />评论加载中...</div>";
+		var myajax = new DedeAjax(taget_obj, true, true, '', 'x', waithtml);
+		myajax.SendGet2("/plus/feedback_ajax.php?dopost=getlist&aid=1938&page="+page);
+		DedeXHTTP = null;
+}
+function PostComment()
+{
+		var f = document.feedback;
+		var nface = '6';
+		var nfeedbacktype = 'feedback';
+		var nvalidate = '';
+		var nnotuser = '';
+		var nusername = '';
+		var npwd = '';
+		var taget_obj = $DE('commetcontentNew');
+		var waithtml = "<div style='line-height:30px'><img src='/images/loadinglit.gif' />正在发送中...</div>";
+		if(f.msg.value=='')
+		{
+			alert("评论内容不能为空！");
+			return;
+		}
+		if(f.validate)
+		{
+			if(f.validate.value=='') {
+				alert("请填写验证码！");
+				return;
+			}
+			else {
+				nvalidate = f.validate.value;
+			}
+		}
+		if(f.msg.value.length > 500)
+		{
+			alert("你的评论是不是太长了？请填写500字以内的评论。");
+			return;
+		}
+		if(f.feedbacktype) {
+			for(var i=0; i < f.feedbacktype.length; i++)
+				if(f.feedbacktype[i].checked) nfeedbacktype = f.feedbacktype[i].value;
+		}
+		if(f.face) {
+			for(var j=0; j < f.face.length; j++)
+				if(f.face[j].checked) nface = f.face[j].value;
+		}
+		if(f.notuser.checked) nnotuser = '1';
+		if(f.username) nusername = f.username.value;
+		if(f.pwd) npwd = f.pwd.value;
+		
+		var myajax = new DedeAjax(taget_obj, false, true, '', '', waithtml);
+		myajax.sendlang = 'gb2312';
+		myajax.AddKeyN('dopost', 'send');
+		myajax.AddKeyN('aid', '1938');
+		myajax.AddKeyN('fid', f.fid.value);
+		myajax.AddKeyN('face', nface);
+		myajax.AddKeyN('feedbacktype', nfeedbacktype);
+		myajax.AddKeyN('validate', nvalidate);
+		myajax.AddKeyN('notuser', nnotuser);
+		myajax.AddKeyN('username', nusername);
+		myajax.AddKeyN('pwd', npwd);
+		myajax.AddKeyN('msg', f.msg.value);
+		myajax.SendPost2('/plus/feedback_ajax.php');
+		f.msg.value = '';
+		f.fid.value = 0;
+		if(f.validate)
+		{
+			if($DE('validateimg')) $DE('validateimg').src = "/include/vdimgck.php?"+f.validate.value;
+			f.validate.value = '';
+		}
+}
+function quoteCommet(fid)
+{
+	document.feedback.fid.value = fid;
+}
+LoadCommets(1);
+</script><!-- //评论内容区结束 -->
+
+
+</div><!-- //左边内容结束 -->
+
+<!-- //右边内容开始 -->
+<div class="pright">
+ 		
+		
+		<div class="pright">
+        <div>
+          <dl class="tbox">
+				<dt><strong>栏目列表</strong></dt>
+				<dd>
+					<ul class="d6">
+                      
+		<li><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuojiaocheng/">网页制作教程</a></li><li><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/" class="thisclass">网页制作代码</a></li>
+		<li><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuomoban/">网页制作模板</a></li>
+					</ul>
+				</dd>
+			</dl>
+        </div>   
+		
+		<div class="commend mt1">
+			<dl class="tbox light">
+				<dt class="light"><strong>推荐内容</strong></dt>
+				<dd class="light">
+					<ul class="d4">
+           
+					</ul>
+				</dd>
+<script type="text/javascript">/*234*60，创建于2011-9-8*/ var cpro_id = 'u604602';</script><script src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/c.js" type="text/javascript"></script><script type="text/javascript" charset="utf-8" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ecom(1)"></script><div style="display:none">-</div> <iframe id="cproIframe2" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/uijs(2).htm" width="234" height="60" align="center,center" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+			</dl>
+		</div><!-- /commend -->
+
+		<div class="hot mt1">
+			<dl class="tbox light">
+				<dt class="light"><strong>热点内容</strong></dt>
+				<dd class="light">
+					<ul class="c1 ico2">
+             <li><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1937.html">纯div+css+js打造仿.3D flash动</a></li>
+<li><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1939.html">如何用纯div+css+js打造成方形的</a></li>
+<li><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/1936.html">亲亲：主流酷炫！3D标签云特效</a></li>
+<li><a href="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航.htm">CSS+JS 实现的3D球面标签云！！</a></li>
+
+					</ul>
+				</dd>
+<script type="text/javascript">/*234*60，创建于2011-9-8*/ var cpro_id = 'u604602';</script><script src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/c.js" type="text/javascript"></script><script type="text/javascript" charset="utf-8" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/ecom(1)"></script><div style="display:none">-</div> <iframe id="cproIframe3" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/uijs(3).htm" width="234" height="60" align="center,center" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+			</dl>
+		</div>
+	</div><!-- /pright -->
+</div>
+
+<!-- //底部模板 -->
+<div class="default_div1 clear" id="bottomdiv">
+<div id="bottomsearch">
+<form id="frmBtmSearch" name="frmBtmSearch" action="" method="get" target="_blank">
+<div class="fl" style="PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; WIDTH: 76px; PADDING-TOP: 15px"><strong>关键字:</strong></div>
+<div class="fl" style="PADDING-RIGHT: 0pt; PADDING-LEFT: 0pt; PADDING-BOTTOM: 12px; MARGIN: 0pt; PADDING-TOP: 12px">
+<div class="fl" style="BORDER-RIGHT: rgb(175,204,236) 1px solid; BORDER-TOP: rgb(175,204,236) 1px solid; BACKGROUND: rgb(255,255,255); MARGIN: 0pt 2px; BORDER-LEFT: rgb(175,204,236) 1px solid; BORDER-BOTTOM: rgb(175,204,236) 1px solid; HEIGHT: 26px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial"><input class="keyword" id="keyword"> </div><input class="search_btn" onclick="mbDocument.btmSearch()" type="button" value="搜索一下"> 
+</div>
+<div class="fl" id="descTo" style="LINE-HEIGHT: 54px; HEIGHT: 54px"><span><input type="radio" value="0" name="abc">
+<a style="FONT-SIZE: 12px" href="http://www.baidu.com/">百度</a></span> <span><input name="abc" type="radio" value="1" checked="">
+<a style="FONT-SIZE: 12px" href="http://www.google.cn/">Google</a></span> <span><input type="radio" value="2" name="abc"><a style="FONT-SIZE: 12px" href="http://one.cn.yahoo.com/">雅虎</a></span> <span><input type="radio" value="3" name="abc"><a style="FONT-SIZE: 12px" href="http://www.sogou.com/">搜狗</a></span> 
+<span><input type="radio" value="4" name="abc"><a style="FONT-SIZE: 12px" href="http://www.soso.com/">搜搜</a></span> <span><input type="radio" value="5" name="abc"><a style="FONT-SIZE: 12px" href="http://www.youdao.com/">有道</a></span> 
+<span><input type="radio" value="6" name="abc"><a style="FONT-SIZE: 12px" href="http://map.baidu.com/">地图</a></span> </div>
+<div id="btm_more" style="DISPLAY: none"></div></form></div></div>
+<div id="footer"><a href="http://www.1122sw.cn/wangyezhizuo/wangyezhizuodaima/2011/0728/abouts.htm" target="_blank">关于亲亲</a>
+--<a href="http://www.1122sw.cn/data/sitemap.html" target="_blank">网站地图</a>
+--<a href="http://www.1122sw.cn/link.html" target="_blank">友情链接</a>
+--<a href="http://bbs.hqbshouji.com/" target="_blank">华强北手机报价</a>
+--<a href="http://www.hqbshouji.com/" target="_blank">华强北手机</a>
+--<a href="http://www.1122sw.cn/jz/" target="_blank">深圳网站制作</a>
+--<a href="http://www.k-dian.net/" target="_blank">深圳快餐</a>
+--<a href="http://www.jxgaokao.com/" target="_blank">高考网</a>
+--<a href="http://www.52wanle.com/" target="_blank">吃喝玩乐</a>
+--<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1354909588&site=qq&menu=yes"><img border="0" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/pa(1)" alt="点击！！！" title="点击！！！"></a>--<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1354909588&site=qq&menu=yes"><img border="0" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/pa(1)" alt="点击！！！" title="点击！！！"></a> --<a href="http://www.miibeian.gov.cn/">赣ICP备09013714号</a><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/biaoshi.gif" alt="1122sw.cn,亲亲导航，亲亲导航网，绿色导航" width="15" height="17" border="0"> <script type="text/javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/tongji.js"></script><img src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/tongji.do" border="0" width="1" height="1"><noscript>&lt;a href="http://www.linezing.com"&gt;&lt;img src="http://img.tongji.linezing.com/1454967/tongji.gif"/&gt;&lt;/a&gt;</noscript></div>
+<div></div>
+<div id="wearhermore"></div>
+<script id="IP_FORIE" type="text/javascript"></script>
+
+<script id="difangsite" type="text/javascript"></script>
+
+<script language="javascript" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/weather.js"></script>
+
+<script language="javascript1.2" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/lunar.js"></script>
+
+<script language="javascript1.2" src="./CSS+JS 实现的3D球面标签云！！！_网页制作代码-亲亲导航-站长导航_files/1122sw.js"></script>
+<script type="text/javascript">
+document.body.oncopy = function () { 
+	setTimeout( function () { 
+		var text = clipboardData.getData("text");
+		if (text) { 
+			text = text + "\r\n本文来自:亲亲站长网(http://www.1122sw.cn) 详细出处参考："+location.href; clipboardData.setData("text", text);
+		} 
+				}, 100 ) 
+}
+</script> 
+<!-- /footer -->
+
+
+
+</div></div></body></html>

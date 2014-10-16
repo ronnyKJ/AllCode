@@ -1,0 +1,9 @@
+background: -webkit-gradient(linear, left top, left bottom, from(#2e98e2), color-stop(0.56, #2a81be), color-stop(0.56, #276ea0), color-stop(1, #2879b2));
+width: 100px;
+height: 30px;
+border: 0px;
+border-radius: 5px;
+box-shadow: 0px 2px 5px #333;
+color: #EEE;
+font-weight: bold;
+text-shadow: 0px -1px 0px #000;

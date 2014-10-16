@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://fex.baidu.com/fex/demo/weath/weath.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <title>天气阿拉丁</title>
+</head>
+<body>
+<style type="text/css">
+  .op_weather4_twoicon {
+    margin-top: 8px;
+    width: 538px;
+    height: 250px;
+    position: relative;
+  }
+  
+  /*----- 所有列 -----*/
+  .op_weather4_twoicon_day {
+    position: absolute;
+    width: 88px;
+    height: 250px;
+  }
+  
+  .op_weather4_twoicon p {
+    font-family: '微软雅黑';
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 1px 1px 1px #555;
+  }
+  
+  /* 日期 */
+  .op_weather4_twoicon_date {
+    margin: 43px 0 0 0;
+  }
+  
+  /* 天气图标 */
+  .op_weather4_twoicon_icon {
+    width: 50px;
+    height: 50px;
+    background: no-repeat;
+    margin: 25px 0 0 20px;
+  }
+  
+  .op_weather4_twoicon_temp {
+    margin: 25px 0 0 0;
+  }
+  
+  .op_weather4_twoicon_weath {
+    margin: 8px 0 0 0;
+  }
+  
+  .op_weather4_twoicon_wind {
+    margin: 5px 0 0 0;
+  }
+  
+  /* 列表分隔竖线 */
+  .op_weather4_twoicon_split {
+    position: absolute;
+    left: 0px;
+    top: 45px;
+    width: 1px;
+    height: 180px;
+    background: #fff;
+    opacity: 0.15;
+    filter: alpha(opacity=15);
+  }
+  
+  
+  
+  /*----- 第一列天气 -----*/
+  .op_weather4_twoicon_today {
+    position: absolute;
+    width: 186px;
+    height: 250px;
+  }
+  
+  .op_weather4_twoicon_today .op_weather4_twoicon_date {
+    text-align: left;
+    margin: 14px 0 0 14px;
+  }
+  
+  .op_weather4_twoicon_today .op_weather4_twoicon_icon {
+    width: 70px;
+    height: 70px;
+    margin: 23px 0 0 60px;
+  }
+  
+  .op_weather4_twoicon_today .op_weather4_twoicon_temp {
+    font-size: 32px;
+    line-height: 32px;
+    font-family: Arial;
+    margin: 15px 0 0 0;
+  }
+  
+  .op_weather4_twoicon_today .op_weather4_twoicon_temp sup {
+    font-size: 0.5em;
+  }
+  
+  .op_weather4_twoicon_today .op_weather4_twoicon_weath {
+    font-size: 14px;
+    margin: 7px 0 0 0;
+    *margin: 14px 0 0 0;
+  }
+ 
+  .op_weather4_twoicon_today .op_weather4_twoicon_wind {
+    margin: 7px 0 0 0;
+  }
+  
+  
+/*
+  .op_weather4_twoicon_pm25 {
+    font-size: 15px;
+  }
+  
+  .op_weather4_twoicon_pm25 b {
+    margin: 0 7px 0 0;
+  }
+  
+  .op_weather4_twoicon_pm25 em {
+    display: inline-block;
+    width: 54px;
+    line-height: 17px;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    background-color: #fa0;
+    color: #fff;
+  }
+  
+  .op_weather4_twoicon_lv0 { background-color: #37B737; }
+  .op_weather4_twoicon_lv1 { background-color: #37B737; }
+  .op_weather4_twoicon_lv2 { background-color: #FA0; }
+  .op_weather4_twoicon_lv3 { background-color: #FA0; }
+  .op_weather4_twoicon_lv4 { background-color: #CC2B59; }
+  .op_weather4_twoicon_lv5 { background-color: #CC2B59; }*/
+</style>
+
+<!-- 新版天气主体内容 by zhangjiachen -->
+<div class="op_weather4_twoicon" id="op_weather4_twoicon"><div class="sjs" id="sjs0" style="overflow: hidden; position: relative; width: 538px; height: 250px;"><div id="sjs0-default" style="z-index: 2; height: 250px; width: 538px; position: absolute; top: 0px; left: 0px;"></div><div id="sjs0-bg" style="z-index: 9; height: 250px; width: 538px; position: absolute; top: 0px; left: 0px;"><div style="position: absolute; top: 0px; width: 538px; height: 250px; background-image: -webkit-linear-gradient(top, rgb(13, 104, 188), rgb(114, 173, 224)); opacity: 1; z-index: -44;"></div><div style="position: absolute; top: -999px; width: 538px; height: 250px; background-image: -webkit-linear-gradient(top, rgb(72, 86, 99), rgb(161, 184, 202)); opacity: 0; z-index: 35;"></div><div style="position: absolute; top: -999px; width: 538px; height: 250px; background-image: -webkit-linear-gradient(top, rgb(120, 128, 146), rgb(53, 55, 59)); opacity: 0.03000000000000025; z-index: 43;"></div><div style="position: absolute; top: -999px; width: 538px; height: 250px; background-image: -webkit-linear-gradient(top, rgb(143, 131, 129), rgb(199, 182, 149)); opacity: 0.00999999999999937; z-index: 39;"></div></div><canvas id="sjs0-eff-halo" height="250" width="538" style="position: absolute; top: 0px; left: 0px; z-index: 10; display: block; opacity: 1;"></canvas><canvas id="sjs0-eff-rain" height="250" width="538" style="position: absolute; top: 0px; left: 0px; z-index: 10; display: none; opacity: 0.00999999999999937;"></canvas><canvas id="sjs0-eff-thunder" height="250" width="538" style="position: absolute; top: 0px; left: 0px; z-index: 10; display: none; opacity: 0.00999999999999937;"></canvas><canvas id="sjs0-eff-snow" height="250" width="538" style="position: absolute; top: 0px; left: 0px; z-index: 10; display: none; opacity: 0.00999999999999937;"></canvas><div id="sjs0-column" style="z-index: 20; height: 250px; width: 538px; position: absolute; top: 0px; left: 0px;"><div class="op_weather4_twoicon_today"><p class="op_weather4_twoicon_date">周五(今天, 实时：23℃)</p><div id="zzz" class="op_weather4_twoicon_icon" style="background-image:url(http://www.baidu.com/aladdin/img/new_weath/bigicon/5.png)"></div><p class="op_weather4_twoicon_temp">29~13<sup>℃</sup></p><p class="op_weather4_twoicon_weath">多云转晴</p><p class="op_weather4_twoicon_wind">西南风微风</p></div><div class="op_weather4_twoicon_day" style="left: 186px;"><p class="op_weather4_twoicon_date">周六</p><div id="zzz" class="op_weather4_twoicon_icon" style="background-image:url(http://www.baidu.com/aladdin/img/new_weath/icon/9.png)"></div><p class="op_weather4_twoicon_temp">29~16℃</p><p class="op_weather4_twoicon_weath">中雨</p><p class="op_weather4_twoicon_wind">东风</p><div class="op_weather4_twoicon_split"></div></div><div class="op_weather4_twoicon_day" style="left: 274px;"><p class="op_weather4_twoicon_date">周日</p><div id="zzz" class="op_weather4_twoicon_icon" style="background-image:url(http://www.baidu.com/aladdin/img/new_weath/icon/15.png)"></div><p class="op_weather4_twoicon_temp">21~14℃</p><p class="op_weather4_twoicon_weath">雷阵雨转多云</p><p class="op_weather4_twoicon_wind">南风微风</p><div class="op_weather4_twoicon_split"></div></div><div class="op_weather4_twoicon_day" style="left: 362px;"><p class="op_weather4_twoicon_date">周一</p><div id="zzz" class="op_weather4_twoicon_icon" style="background-image:url(http://www.baidu.com/aladdin/img/new_weath/icon/23.png)"></div><p class="op_weather4_twoicon_temp">26~15℃</p><p class="op_weather4_twoicon_weath">沙尘暴</p><p class="op_weather4_twoicon_wind">微风</p><div class="op_weather4_twoicon_split"></div></div><div class="op_weather4_twoicon_day" style="left: 450px;"><p class="op_weather4_twoicon_date">周二</p><div id="zzz" class="op_weather4_twoicon_icon" style="background-image:url(http://www.baidu.com/aladdin/img/new_weath/icon/20.png)"></div><p class="op_weather4_twoicon_temp">28~13℃</p><p class="op_weather4_twoicon_weath">暴雪</p><p class="op_weather4_twoicon_wind">东南风</p><div class="op_weather4_twoicon_split"></div></div><div style="position: absolute; width: 88px; height: 250px; background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.0156863), rgba(255, 255, 255, 0.25098)); top: -999px; left: 274px;"></div><div class=" OP_LOG_LINK" data-click="{&quot;url&quot;:&quot;http://www.weather.com.cn/html/weather/101100904.shtml&quot;}" title="" style="position: absolute; width: 538px; height: 250px; opacity: 0; background-color: rgb(255, 255, 255); cursor: pointer;"></div></div></div></div>
+ 
+
+<script>
+    var data = {"url":"http:\/\/www.weather.com.cn\/html\/weather\/101100904.shtml","title":"\u827e\u6cfd\u62c9\u65af\u5929\u6c14\u9884\u62a5_\u4e2d\u56fd\u5929\u6c14\u7f51","time0":"\u5468\u4e94(\u4eca\u5929, \u5b9e\u65f6\uff1a23\u2103)","pic01":"http:\/\/open.baidu.com\/stat\/weather\/newday\/00.gif","pic02":"http:\/\/open.baidu.com\/stat\/weather\/newnight\/00.gif","weather0":"\u591a\u4e91\u8f6c\u6674","wind0":"\u897f\u5357\u98ce\u5fae\u98ce","temp0":"29~13\u2103","time1":"\u5468\u516d","pic11":"http:\/\/open.baidu.com\/stat\/weather\/newday\/01.gif","weather1":"\u4e2d\u96e8","wind1":"\u4e1c\u98ce","temp1":"29~16\u2103","time2":"\u5468\u65e5","pic21":"http:\/\/open.baidu.com\/stat\/weather\/newday\/21.gif","weather2":"\u96f7\u9635\u96e8\u8f6c\u591a\u4e91","wind2":"\u5357\u98ce\u5fae\u98ce","temp2":"21~14\u2103","time3":"\u5468\u4e00","pic31":"http:\/\/open.baidu.com\/stat\/weather\/newday\/00.gif","weather3":"\u6c99\u5c18\u66b4","wind3":"\u5fae\u98ce","temp3":"26~15\u2103","time4":"\u5468\u4e8c","pic41":"http:\/\/open.baidu.com\/stat\/weather\/newday\/01.gif","weather4":"\u66b4\u96ea","wind4":"\u4e1c\u5357\u98ce","temp4":"28~13\u2103","support":"\u4e2d\u56fd\u6c14\u8c61\u5c402013\u5e7408\u670809\u65e508\u65f6\u53d1\u5e03","link1":[{"linkurl":"http:\/\/www.weather.com.cn\/html\/weather\/101100904.shtml#7d","linkcontent":"\u4e03\u5929\u9884\u62a5>>"}],"swf":[{"condition":"neimenggu","url":"http:\/\/www.baidu.com\/aladdin\/flash\/weather\/index.swf","on":"\u663e\u793a\u5185\u8499\u53e4\u5929\u6c14\u9884\u62a5","off":"\u5173\u95ed"}],"showurl":"www.weather.com.cn\/","key":"\u5361\u5229\u59c6\u591a\u5929\u6c14"};
+</script>
+
+
+<script src="sprite.js"></script>
+<script>
+    var WEATH_URL = data.link1[0].linkurl;
+        
+    //
+    // 资源路径配置
+    //
+    function URL(path) {
+        return 'http://www.baidu.com/aladdin/img/new_weath/' + path;
+        //return URL_MAP[path];
+    }
+      
+    //
+    // 天气背景渐变色
+    //
+    var BG_COLOR = {
+
+        daytime: [
+            {color: 0xff0d68bc},
+            {color: 0xff72ade0}
+        ],
+
+        evening: [
+            {color: 0xFF394984},
+            {color: 0xFFCC666E, step: .6},
+            {color: 0xFFEEB66D}
+        ],
+
+        night: [
+            {color: 0xff183259},
+            {color: 0xff3482ba}
+        ],
+
+        cloudy: [
+            {color: 0xff485663},
+            {color: 0xffa1b8ca}
+        ],
+
+        rain: [
+            {color: 0xff485663},
+            {color: 0xffA1B8CA}
+        ],
+
+        dark: [
+            {color: 0xff788092},
+            {color: 0xff35373b}
+        ],
+
+        sand: [
+            {color: 0xff8f8381},
+            {color: 0xffc7b695}
+        ]
+    };
+
+    //
+    // 鼠标高亮层渐变色
+    //
+    var HOVER_GRADIENT = [
+        {color: 0x04ffffff},
+        {color: 0x40ffffff}
+    ];
+
+
+    //
+    // 天气特效参数配置
+    //
+    var WEATH_EFF = {
+        '晴': {bg: 'daytime', eff: {halo: 1}, icon: 1},
+        '阴': {bg: 'cloudy', icon: 3},
+        '雾': {bg: 'cloudy', icon: 4},
+        '多云': {bg: 'daytime', eff: {halo: 1}, icon: 5},
+        '霾': {bg: 'cloudy', icon: 7},
+
+        '小雨': {eff: {rain: 60}, bg: 'rain', icon: 8},
+        '中雨': {eff: {rain: 80}, bg: 'rain', icon: 9},
+        '大雨': {eff: {rain: 100}, bg: 'rain', icon: 10},
+        '暴雨': {eff: {rain: 120}, bg: 'rain', icon: 11},
+        '大暴雨': {eff: {rain: 140}, bg: 'rain', icon: 12},
+        '特大暴雨': {eff: {rain: 160}, bg: 'dark', icon: 13},
+        '冻雨': {eff: {rain: 80}, bg: 'rain', icon: 14},
+        '雨夹雪': {eff: {rain: 60}, bg: 'rain', icon: 14},
+        '阵雨': {eff: {rain: 120}, bg: 'rain', icon: 8},
+        '雷阵雨': {eff: {rain: 120, thunder: 1}, bg: 'dark', icon: 15},
+        '雷阵雨伴有冰雹': {eff: {rain: 100, thunder: 1}, bg: 'dark', icon: 16},
+
+        '阵雪': {eff: {snow: 40}, bg: 'daytime', icon: 17},
+        '小雪': {eff: {snow: 70}, bg: 'daytime', icon: 17},
+        '中雪': {eff: {snow: 90}, bg: 'daytime', icon: 18},
+        '大雪': {eff: {snow: 120}, bg: 'daytime', icon: 19},
+        '暴雪': {eff: {snow: 140}, bg: 'daytime', icon: 20},
+
+        '浮尘': {bg: 'cloudy', icon: 21},
+        '扬沙': {bg: 'sand', icon: 22},
+        '强沙尘暴': {bg: 'sand', icon: 23},
+        '沙尘暴': {bg: 'sand', icon: 23},
+        '特大沙尘': {bg: 'sand', icon: 24}
+    };
+
+    //
+    // 今天天气参数（优先级高）
+    //
+    var WEATH_TODAY_HOURS = {
+        '晴': {
+            morning: {eff: {}},
+            evening: {bg: 'evening', eff: {}},
+            night: {bg: 'night', eff: {star: 1}, icon: 2}
+        },
+        '多云': {
+            morning: {eff: {}},
+            evening: {bg: 'evening', eff: {}},
+            night: {bg: 'night', eff: {}, icon: 6}
+        }
+    };
+
+    //
+    // 时段名
+    //
+    function getHoursName(dt) {
+        var h = dt.getHours() + dt.getMinutes() / 100;
+        if (6.00 <= h && h <= 11.00)    return 'morning';
+        if (11.00 <= h && h <= 16.30)   return 'noon';
+        if (16.30 <= h && h <= 19.30)   return 'evening';
+        return 'night';
+    }
+    var hourName = getHoursName(new Date());
+    
+      
+    function getDayAttr(dayId, attr) {
+        var weath = data['weather' + dayId];
+        
+        //
+        // 当天8:00~18:00 以及未来天 使用“转”前的天气
+        //
+        var sZhuan = weath.split('转');
+        var hour = new Date().getHours();
+        if (dayId > 0 || (8 <= hour && hour<= 18) ) {
+            weath = sZhuan[0];
+        }
+        else {
+            weath = sZhuan.pop();
+        }
+        
+        // 取“到”后面的天气
+        var sDao = weath.split('到');
+        weath = sDao.pop();
+        
+        // 当天天气，优先使用时段内定义的
+        if (dayId == 0) {
+            var first = WEATH_TODAY_HOURS[weath];
+            
+          
+            var val = first && first[hourName] && first[hourName][attr];
+            if (val) return val;
+        }
+        
+        var common = WEATH_EFF[weath] || WEATH_EFF['晴'];
+        return common[attr];
+    }
+
+
+    //
+    // PM2.5参数
+    //
+/*
+    var PM25_LV = [
+        {range: [0, 35],        name: '优'},
+        {range: [35, 75],       name: '良'},
+        {range: [75, 115],      name: '轻度污染'},
+        {range: [115, 150],     name: '中度污染'},
+        {range: [150, 250],     name: '重度污染'},
+        {range: [250, 999],     name: '严重污染'}
+    ];*/
+
+    
+    // --------------------------------------------------
+    var IE = navigator.userAgent.match(/MSIE (\d+)/);
+    IE = IE && IE[1];
+    IE = document.documentMode || IE;
+
+    var IE6 = (IE && IE <= 6);
+    var IE78 = (IE && IE == 7) || (IE && IE == 8);
+    var IE678 = IE6 || IE78;
+
+
+    //==================================================
+    // 线性渐变 -- CSS3/IE 兼容
+    //==================================================
+    var Gradient = function(){
+        var vendors = ['O','Moz','ms','webkit'];
+        var prefix;
+
+        for(var i = vendors.length - 1; i >= 0; i--) {
+            var name = vendors[i];
+            if (name + 'Transform' in document.body.style) {
+                prefix = '-' + name.toLowerCase() + '-linear-gradient';
+                break;
+            }
+        }
+
+        // ie9 not support...
+        if (IE && IE < 10) prefix = '';
+
+
+        function display_css3(element, steps) {
+            var list = [];
+
+            for(var i = 0; i < steps.length; i++) {
+                var color = steps[i].color;
+                var step = steps[i].step;
+                if (step) {
+                    step = step * 100 + '%';
+                }
+
+                var str = [
+                    'rgba(',
+                        color >> 16 & 255, ',',
+                        color >> 8 & 255, ',',
+                        color & 255, ',',
+                        (color >>> 24) / 255,
+                    ') ',
+                    step
+                ].join('');
+
+                list.push(str);
+            }
+
+            element.style.backgroundImage =
+                prefix + '(top,' + list.join(',') + ')';
+        }
+
+        function display_ie(element, steps) {
+            //
+            // IE滤镜：拼接多个div实现多色渐变
+            //
+            var layers = element.__layers;
+            if (!layers) {
+                layers = element.__layers = [];
+            }
+
+            var i, n = steps.length;
+
+            if (steps[0].step == null) steps[0].step = 0;
+            if (steps[n-1].step == null) steps[n-1].step = 1;
+
+            //element.style.position = 'relative';
+
+            // 补充div
+            for(i = layers.length; i < n; i++) {
+                var div = document.createElement('div');
+                element.insertBefore(div, element.firstChild);
+
+                var sty = div.style;
+                sty.filter = 'progid:DXImageTransform.Microsoft.gradient(GradientType=0)';
+                sty.position = 'absolute';
+                sty.display = 'block';
+
+                layers[i] = {
+                    sty: sty,
+                    flt: div.filters['DXImageTransform.Microsoft.gradient']
+                };
+            }
+
+            // 隐藏多余
+            for(i = n; i < layers.length; i++) {
+                layers[i].sty.display = 'none';
+            }
+
+            var W = element.offsetWidth;
+            var H = element.offsetHeight;
+
+            var y = 0;
+
+            // 拼接div
+            for(i = 0; i < n - 1; i++) {
+                var sty = layers[i].sty;
+                var h = H * (steps[i+1].step - steps[i].step);
+
+                sty.pixelTop = y;
+                sty.pixelHeight = h;
+                sty.pixelLeft = 0;
+                sty.pixelWidth = W;
+                y += h;
+
+                var flt = layers[i].flt;
+                flt.StartColor = steps[i].color;
+                flt.EndColor = steps[i+1].color;
+            }
+        }
+
+        return {
+            display: prefix? display_css3 : display_ie
+        };
+    }();
+
+
+    var CANVAS_W = 538;
+    var CANVAS_H = 250;
+
+    var COL_DAY_W = 186;
+    var COL_TODAY_W = 88;
+
+
+
+    //var scene = sjs.Scene({w: CANVAS_W, h: CANVAS_H, parent: _this.qq('op_weather4_twoicon')});
+    var scene = sjs.Scene({w: CANVAS_W, h: CANVAS_H, parent: document.getElementById('op_weather4_twoicon')});
+
+    
+    var listBg = {};
+    var sptHover;
+    var sptWhite;
+
+
+    function checkCanvas() {
+        return 'getContext' in document.createElement('canvas');
+    }
+
+
+    // ==================================================
+    // 创建日期列UI
+    //==================================================
+    function createColunm(box) {
+
+data.temp0 = data.temp0.replace('℃', '<sup>℃</sup>');
+
+        for(var i = 0, n = 5; i < n; i++) {
+            var column = document.createElement('div');
+            var html = [];
+
+            // ---------- 首行 ----------
+            if (i == 0) {
+                column.className = 'op_weather4_twoicon_today';
+                html.push('<p class="op_weather4_twoicon_date">' + data.time0 + '</p>');
+            }
+            else {
+                column.className = 'op_weather4_twoicon_day';
+                column.style.left = COL_DAY_W + (i - 1) * COL_TODAY_W + 'px';
+
+                html.push('<p class="op_weather4_twoicon_date">', data['time'+i], '</p>');
+            }
+
+            // ---------- 其他行 ----------
+            var icon = getDayAttr(i, 'icon');
+            var iconUrl = (i == 0? 'bigicon/' : 'icon/') + icon + '.png';
+            var css;
+          
+            if (IE6) {
+                css = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=' + URL(iconUrl) + ')';
+            }
+            else {
+                css = 'background-image:url(' + URL(iconUrl) + ')';
+            }
+
+            var weath = data['weather'+i];
+            if (i != 0 && weath.length > 6) {
+                weath = weath.substr(0, 5) + '...';
+            }
+
+            html.push(
+                '<div id=zzz class="op_weather4_twoicon_icon" style="' + css + '"></div>',
+                '<p class="op_weather4_twoicon_temp">', data['temp'+i], '</p>',
+                '<p class="op_weather4_twoicon_weath">', weath, '</p>',
+                '<p class="op_weather4_twoicon_wind">', data['wind'+i], '</p>'
+            );
+
+            // ---------- PM2.5 ----------
+/*
+            if (i == 0) {
+                var pm25 = data.pm25;
+                var k, lv;
+
+                for(k = 0; k < PM25_LV.length; k++) {
+                    lv = PM25_LV[k];
+                    if (lv.range[0] <= pm25 && pm25 <= lv.range[1]) {
+                        break;
+                    }
+                }
+                html.push('<p class="op_weather4_twoicon_pm25', '">空气质量: <b class="op_weather4_twoicon_pm25_num">', pm25, '</b><em class="op_weather4_twoicon_lv', k, '">', lv.name, '</em></p>');
+            }
+*/
+            if (i > 0) {
+                html.push('<div class="op_weather4_twoicon_split"></div>');
+            }
+
+            column.innerHTML = html.join('');
+            box.appendChild(column);
+        }
+    }
+
+
+    var efFact = {};    // effects factory
+    var efUsed = {};    // effects used
+
+
+    function init() {
+        var opt;
+        if (checkCanvas()) {
+            opt = {useCanvas:true, autoClear:true, disableAutoZIndex:true};
+        }
+
+        // 创建背景
+        var layerBg = scene.Layer('bg');
+        layerBg.setZIndex(9);
+
+        for(var i = 0; i < 5; i++) {
+            var bg = getDayAttr(i, 'bg');
+
+            if (!listBg[bg]) {
+                var sptBg = scene.Sprite(null, layerBg);
+
+                sptBg.setY(-999);
+                sptBg.size(CANVAS_W, CANVAS_H);
+                sptBg.update();
+                listBg[bg] = sptBg;
+
+                Gradient.display(sptBg.dom, BG_COLOR[bg]);
+            }
+
+            var eff = getDayAttr(i, 'eff');
+            for(var k in eff) {
+                if (!efUsed[k]) {
+                    var exports = {};
+                    efFact[k](exports);
+                    efUsed[k] = exports;
+                }
+            }
+        }
+
+        // 创建特效层
+        if (!IE6) {
+            for(var k in efUsed) {
+                var eff = efUsed[k];
+                eff.layer = scene.Layer('eff-' + k, opt);
+                eff.layer.setZIndex(10);
+                eff.layer.setVisible(false);
+            }
+        }
+
+        // 内容层
+        var layerFr = scene.Layer('column');
+        layerFr.setZIndex(20);
+
+        createColunm(layerFr.dom);
+
+        sptHover = scene.Sprite(null, layerFr);
+        sptHover
+            .size(COL_TODAY_W, CANVAS_H)
+            .update();
+        Gradient.display(sptHover.dom, HOVER_GRADIENT);
+
+        // 前景层
+        sptWhite = scene.Sprite(null, layerFr);
+        sptWhite
+            .size(CANVAS_W, CANVAS_H)
+            .setColor('#fff')
+            .setOpacity(0)
+            .update();
+        sptWhite.dom.style.cursor = 'pointer';
+      
+        sptWhite.dom.onmousemove = handleMouseMove;
+        sptWhite.dom.onmouseout = handleMouseOut;
+        sptWhite.dom.onclick = handleClick;
+      
+        // 点击监控
+        sptWhite.dom.className += ' OP_LOG_LINK';
+        sptWhite.dom.setAttribute('data-click', '{"url":"http://www.weather.com.cn/html/weather/101100904.shtml"}');
+
+        // 显示默认天气
+        handleHover(0);
+    }
+
+    // ==================== 鼠标高亮 ====================
+    var curID;
+   
+    function handleClick() {
+        window.open( curID > 0? WEATH_URL : WEATH_URL.split('#')[0] );
+    }
+      
+      
+    function handleMouseMove(e) {
+        e = e || event;
+        var x = e.offsetX || e.layerX;
+        var y = e.offsetY || e.layerY;
+
+        if (x < COL_DAY_W) {
+            handleHover(0);
+        }
+        else {
+            var id = (x - COL_DAY_W) / COL_TODAY_W;
+            handleHover(~~id + 1);
+        }
+    }
+
+    function handleMouseOut(e) {
+        handleHover(0);
+    }
+
+    function handleHover(id) {
+        if (id == curID) return;
+        curID = id;
+
+        if (id != 0) {
+            var name = data['weather' + id];
+            sptWhite.dom.title = name.length>6 ? name : '';
+        }
+      
+        if (id == 0) {
+            sptHover.setY(-999);
+            sptHover.update();
+        }
+        else {
+            sptHover.position(COL_DAY_W + COL_TODAY_W * (id-1), 0);
+            sptHover.update();
+        }
+
+        Weath.change(id);
+    }
+
+
+
+    // ==================================================
+    // 下雨特效
+    // ==================================================
+    efFact.rain = function(exports) {
+        var W = 2;
+        var H = 16;
+
+        var sprites = [];
+        var curNum = 0;
+
+
+        var LAYER_PERCENT = [
+            0,
+            1,1,1,
+            2,2,2,2,2,2,2,2
+        ];
+
+        var LAYER_ALPHA = [
+            [0.25, +0.30],
+            [0.20, +0.10],
+            [0.15, +0.15]
+        ];
+
+        var LAYER_SPEED = [9, 7, 5];
+
+        var GRAVITY = 0.1;
+
+
+        function setOpacity(spt, val) {
+            spt.setYOffset(H * ~~((1 - val) * 10));
+        }
+
+
+        function reset(spt) {
+            var rnd = Math.random() * LAYER_PERCENT.length;
+            var type = LAYER_PERCENT[rnd >> 0];
+
+            spt.setXOffset(W * type);
+            spt.setVelocity(0, LAYER_SPEED[type]);
+            spt.setX(Math.random() * CANVAS_W);
+
+            if (spt.fromtop_) {
+                spt.setY(-10);
+            }
+            else {
+                spt.fromtop_ = true;
+                spt.setY( Math.random() * CANVAS_H );   
+            }
+
+            // 越前面的透明度越高
+            var alpha_range = LAYER_ALPHA[type];
+            var opacity = alpha_range[0] + Math.random() * alpha_range[1];
+            setOpacity(spt, opacity);
+        }
+
+
+        exports.render = function() {
+            var num = exports.arg;
+
+            // 隐藏多余
+            for(var i = num; i < curNum; i++) {
+                sprites[i].setY(999);
+                sprites[i].fromtop_ = false;
+            }
+
+            // 补充不足
+            for(var i = sprites.length; i < num; i++) {
+                var spt = scene.Sprite(URL('rain.png'), exports.layer);
+
+                spt.size(2, 16);
+                reset(spt);
+                sprites[i] = spt;
+            }
+
+            // 渲染
+            for(var i = 0; i < curNum; i++) {
+                var spt = sprites[i];
+
+                spt.yv += GRAVITY;
+                spt.applyYVelocity();
+                spt.update();
+
+                if (spt.y > CANVAS_H) {
+                    reset(spt);
+                }
+            }
+
+            curNum = num;
+        };
+
+        exports.RES = ['rain.png'];
+    };
+
+
+    // ==================================================
+    // 下雪特效
+    // ==================================================
+    efFact.snow = function(exports) {
+        var W = 14;
+        var H = 12;
+
+        var ROTATE = 0.03;          // 每帧旋转角度
+        var TURN_TIMES = 1.5;       // 左右摇摆次数
+        var K = 2 * Math.PI / (CANVAS_H / TURN_TIMES);
+
+        var sprites = [];
+        var curNum = 0;
+
+
+        var LAYER_PERCENT = [
+            0,
+            1,1,1,1,1,
+            2,2,2,2,2,2,2,2,2,2
+        ];
+
+        var LAYER_ALPHA = [
+            [0.1, +0.60],
+            [0.2, +0.40],
+            [0.3, +0.15]
+        ];
+
+        // 下落速度（匀速）
+        var LAYER_SPEED = [1.2, 0.8, 0.6];
+
+
+        function setOpacity(spt, val) {
+            spt.setYOffset(H * ~~((1 - val) * 10));
+        }
+
+
+        function reset(spt) {
+            var rnd = Math.random() * LAYER_PERCENT.length;
+            var type = LAYER_PERCENT[~~rnd];
+
+            spt.setXOffset(W * type);
+            spt.type_ = type;
+            spt.x_ = Math.random() * CANVAS_W;
+            spt.setX(spt.x_);
+
+            if (spt.fromTop_) {
+                spt.setY(-10);
+            }
+            else {
+                spt.fromTop_ = true;
+                spt.setY(Math.random() * CANVAS_H);
+            }
+
+            // 越前面的速度越快，摇摆越大
+            spt.v_ = LAYER_SPEED[type];
+            spt.offset_ = 6 - 2 * type;
+
+            // 随机略微变化
+            spt.v_ *= (0.95 + Math.random() / 10);
+            spt.offset_ *= (0.875 + Math.random() / 4);
+
+            // 越前面的透明度越高
+            var alpha_range = LAYER_ALPHA[type];
+            var opacity = alpha_range[0] + Math.random() * alpha_range[1];
+
+            setOpacity(spt, opacity);
+            spt.op_ = opacity;
+        };
+
+
+        exports.render = function() {
+            var num = exports.arg;
+
+            // 隐藏多余
+            for(var i = num; i < curNum; i++) {
+                sprites[i].setY(999);
+                sprites[i].fromTop_ = false;
+            }
+
+            // 补充不足
+            for(var i = sprites.length; i < num; i++) {
+                var spt = scene.Sprite(URL('snow.png'), exports.layer);
+                spt.size(W, H);
+                reset(spt);
+                sprites[i] = spt;
+            }
+
+            // 渲染
+            for(var i = 0; i < curNum; i++) {
+                var spt = sprites[i];
+
+                var x = spt.x_ + spt.offset_ * Math.sin(spt.y * K);
+                var y = spt.y + spt.v_;
+
+                spt.position(x, y);
+
+                // 大雪花旋转
+                if (spt.type_ == 0) {
+                    spt.rotate(ROTATE);
+                }
+
+                if (y > 200) {
+                    setOpacity(spt, spt.op_ *= 0.95);
+                }
+
+                spt.update();
+
+                if (y > CANVAS_H) {
+                    reset(spt);
+                }
+            }
+
+            curNum = num;
+        };
+
+        exports.RES = ['snow.png'];
+    };
+
+
+    // ==================================================
+    // 打雷特效
+    // ==================================================
+    efFact.thunder = function(exports) {
+        var DELAY_MIN = 5000 / 60;
+        var DELAY_RND = 15000 / 60;
+        var NUM = 2;
+
+        var sprites;    // 所有闪电
+        var spt;        // 当前闪电
+
+        var tickWait;   // 下一次闪电倒计时
+        var tick = 0;   // 当前进度
+
+
+        function init() {
+            sprites = [];
+            for(var i = 0; i < NUM; i++) {
+                sprites[i] =
+                    scene.Sprite(URL('thunder/' + i + '.png'), exports.layer);;
+            }
+            reset();
+        }
+
+        function reset() {
+            var id = Math.random() * NUM;
+            spt = sprites[~~id];
+            spt.position(Math.random() * (CANVAS_W - spt.w), 0);
+
+            tickWait = ~~(DELAY_MIN + Math.random() * DELAY_RND);
+            tick = 0;
+        }
+
+        exports.render = function() {
+if(IE78)return;
+            if (!sprites) {
+                init();
+            }
+
+            if (--tickWait > 0) {
+                return;
+            }
+
+            var opaticy;
+            tick++;
+
+            if (tick < 11) {
+                spt.setH(25 * tick);
+                opaticy = tick * 0.04;
+            }
+            else if (tick < 13) {
+                opaticy = 0;
+            }
+            else if (tick < 28) {
+                opaticy = 1 - (tick - 13) * 0.0714;
+                sptWhite.setOpacity(opaticy / 8).update();
+            }
+            else {
+                sptWhite.setOpacity(0).update();
+                spt.setY(-999).update();
+                reset();
+                return;
+            }
+
+            spt.setOpacity(opaticy).update();
+        };
+
+        exports.RES = ['thunder/0.png', 'thunder/1.png'];
+    };
+
+
+    // ==================================================
+    // 光晕特效
+    // ==================================================
+    efFact.halo = function(exports) {
+        var SUN_X = 320;
+
+        var LIGHT_DEF = 1;
+        var LIGHT_MAX = 1;
+        var LIGHT_MIN = 0.85;
+
+        var RING_NUM = 7;
+        var RING_D = 216;
+        var MARGIN_TOP = 100;
+
+        var rings = [];
+        var light;
+        var inited;
+
+        var op = LIGHT_DEF;
+        var A = 0.0005;
+
+
+
+        function init() {
+            light = scene.Sprite(URL('halo/light.png'), exports.layer);
+            light.position(SUN_X - light.w / 2, 0);
+
+            for(var i = 0; i < RING_NUM; i++) {
+                var spt = scene.Sprite(URL('halo/ring.png'), exports.layer);
+                var y = Math.random() * 250;
+                var x = SUN_X - 150 - y * 0.3;
+
+                spt.position(x, y);
+                spt.size(RING_D, RING_D);
+                spt.setXOffset(RING_D * i);
+
+                rings[i] = spt;
+            }
+        }
+
+        exports.render = function() {
+            if (!inited) {
+                init();
+                inited = true;
+            }
+
+            //
+            // 更新光线亮度
+            //
+            op += A;
+            if (op >= LIGHT_MAX || op <= LIGHT_MIN) {
+                A = -A;
+            }
+          
+            if (!IE78) {
+                light.setOpacity(op);
+            }
+            light.update();
+
+            //
+            // 更新光晕
+            //
+            for(var i = 0; i < RING_NUM; i++) {
+                rings[i].update();
+            }
+        };
+
+        exports.RES = ['halo/light.png', 'halo/ring.png'];
+    };
+
+    // ==================================================
+    // 星星特效
+    // ==================================================
+    efFact.star = function(exports) {
+        var W = 5;
+        var H = 5;
+        var MAX_Y = 100;
+        var MAX_NUM = 110;
+
+
+        var LAYER_PERCENT = [
+            0,0,0,0,
+            1,1,1,1,1,
+            2
+        ];
+
+        var LAYER_ALPHA = [
+            [0.9, +0.1],
+            [0.9, +0.1],
+            [0.8, +0.2]
+        ];
+
+        var sprites = [];
+        var inited;
+
+
+        function setOpacity(spt, val) {
+            spt.setYOffset(H * ~~((1 - val) * 5));
+        }
+
+        function reset(spt) {
+            var x = ~~(Math.random() * CANVAS_W);
+            var y = 0;
+
+            if (spt.y < MAX_Y) {
+                y = ~~(Math.random() * MAX_Y);
+            }
+            spt.position(x, y);
+
+            // 大小随机
+            var rnd = Math.random() * LAYER_PERCENT.length;
+            var type = LAYER_PERCENT[~~rnd];
+            spt.setXOffset(W * type);
+
+            // 透明度
+            var alpha_range = LAYER_ALPHA[type];
+            var opacity = alpha_range[0] + Math.random() * alpha_range[1];
+
+            setOpacity(spt, opacity);
+            spt.op_ = opacity;
+            spt.opmax_ = opacity;           // 最大透明度
+            spt.opmin_ = opacity * 0.2;     // 最小透明度
+            spt.opA_ = -0.025;              // 透明变化速度
+
+            // 渐隐间隔帧数
+            spt.cd_ = spt.cdmax_ = 90 + ~~(120 * Math.random());
+        }
+
+        function init() {
+            for(var i = 0; i < MAX_NUM; i++) {
+                var spt = scene.Sprite(URL('star.png'), exports.layer);
+                spt.size(W, H);
+                reset(spt);
+                sprites[i] = spt;
+            }
+        }
+
+        exports.render = function() {
+            if (!inited) {
+                init();
+                inited = true;
+            }
+
+            for(var i = 0; i < MAX_NUM; i++) {
+                var spt = sprites[i];
+
+                //
+                // 亮-> 暗-> 亮-> ...
+                //
+                if (--spt.cd_ < 0) {
+                    spt.op_ += spt.opA_;
+
+                    if (spt.op_ < spt.opmin_) {         // 最暗，往下移1px
+                        spt.opA_ *= -1;
+                        spt.move(0, 1);
+                    }
+                    else if (spt.op_ >= spt.opmax_) {   // 最亮
+                        spt.opA_ *= -1;
+                        spt.cd_ = spt.cdmax_;
+                    }
+
+                    setOpacity(spt, spt.op_);
+                }
+
+                // 下落到边界，重置
+                if (spt.y > MAX_Y) {
+                    reset(spt);
+                }
+                spt.update();
+            }
+        };
+
+        exports.RES = ['star.png'];
+    };
+
+
+
+
+
+
+
+    var Weath = function() {
+        var ALPHA_DELTA = -0.03;
+        var opacity;
+
+        var curBg;
+        var curEffArgs;
+
+        var fading;
+        var opacity;
+        var sptOldBg;
+
+        
+        function render() {
+            //
+            // 背景层渐变
+            //
+            if (fading) {
+                opacity += ALPHA_DELTA;
+
+                if (opacity < 0) {
+                    sptOldBg.setY(-999);
+                    fading = false;
+                }
+                else {
+                    sptOldBg.setOpacity(opacity);
+                }
+                sptOldBg.update();
+            }
+
+            //
+            // 特效层渐变
+            //
+if(IE6) return;
+            for(var k in efUsed) {
+                var e = efUsed[k];
+                if (!e.loaded) {
+                    continue;
+                }
+
+                var last = e.alpha;
+                e.alpha += ALPHA_DELTA;
+
+                if (e.alpha > 0) {
+                    e.render();
+
+                    // 淡出中，此过程图层内容仍保持更新
+if (!IE78) {
+                    if (e.alpha < 1.0) {
+                        e.layer.setOpacity(e.alpha);
+                    }
+}
+                }
+                else {
+                    // 已消失，隐藏图层
+                    if (last > 0) {
+                        e.layer.setVisible(false);
+                    }
+                }
+            }
+        }
+
+        function setBg(bg) {
+            if (bg == curBg) {
+                return;
+            }
+          
+            var sptBg = listBg[bg];
+
+            // 首次背景
+            if (!curBg) {
+                curBg = bg;
+                sptBg.setY(0).update();
+                return;
+            }
+                    
+            if (opacity > 0) {
+                sptOldBg
+                    .setY(-999)
+                    .setOpacity(0)
+                    .update();
+                opacity = 1 - opacity;
+            }
+            else {
+                opacity = 1;
+            }
+
+            sptOldBg = listBg[curBg];
+            var sptBgNew = listBg[bg];
+
+            // 旧背景放前面，逐渐淡出
+            sptOldBg
+                .toFront()
+                .setOpacity(1.0)
+                .update();
+          
+            // 新背景放后面，逐渐深入
+            sptBgNew
+                .toBack()
+                .setY(0)
+                .setOpacity(1.0)
+                .update();
+
+            curBg = bg;
+            fading = true;
+        }
+
+        //
+        // 设置当前特效
+        //   effArgs: {rain: 100, thunder: 1}
+        //
+        function setEff(effArgs) {
+if (IE6) retuen;
+
+            // 消退的特效层
+            for(var k in curEffArgs) {
+if (IE78) {
+    efUsed[k].layer.setVisible(false);
+}
+                efUsed[k].alpha = 1.0;
+            }
+
+            // 显示的特效层
+            for(var k in effArgs) {
+                var e = efUsed[k];
+
+                if (!e.loaded && !e.loading) {
+                    e.loading = true;
+                    loadEff(e);
+                }
+
+                e.arg = effArgs[k];
+                e.alpha = 9e9;
+if (!IE78) {
+    e.layer.setOpacity(1.0);
+}
+                e.layer.setVisible(true);
+            }
+
+            curEffArgs = effArgs;
+        }
+
+        function loadEff(e) {
+            var res = e.RES;
+            for(var i = res.length - 1; i >= 0; i--) {
+                res[i] = URL(res[i]);
+            }
+
+            scene.loadImages(res, function() {
+                e.loaded = true;
+            });
+        }
+
+
+
+        function change(id) {
+            var bg = getDayAttr(id, 'bg');
+            setBg(bg);
+
+            if (IE6) return;
+
+            var eff = getDayAttr(id, 'eff');
+            setEff(eff);
+        }
+
+        var ticker = scene.Ticker(1000 / 60, render);
+        ticker.run();
+
+        //
+        // 天气切换
+        //
+        return {
+            change: change
+        }
+    }();
+
+    init();
+</script>
+
+</body></html>

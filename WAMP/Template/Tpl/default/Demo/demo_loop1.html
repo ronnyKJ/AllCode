@@ -1,0 +1,61 @@
+<div class="box">
+    <h3>使用iterate标签对数据循环输出</h3>
+    <table summary="模拟数据循环输出">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>other</th>
+        </tr>
+        <iterate name="data" id="vo">
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>{$vo.email}</td>
+            <td>{$vo.other}</td>
+        </tr>
+        </iterate>
+    </table>
+</div>
+
+<div class="box">
+    <h3>只输出第5～10条记录</h3>
+    <table summary="模拟数据循环输出">
+         <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>other</th>
+        </tr>
+        <iterate name="data" id="vo" offset="5" length="5">
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>{$vo.email}</td>
+            <td>{$vo.other}</td>
+        </tr>
+        </iterate>
+    </table>
+</div>
+
+<div class="box">
+    <h3>使用别名volist输出偶数记录</h3>
+    <table summary="模拟数据循环输出">
+         <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>other</th>
+        </tr>
+        <volist name="data" id="vo" mod="2">
+        <neq name="mod" value="1">
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>{$vo.email}</td>
+            <td>{$vo.other}</td>
+        </tr>
+        </neq>
+        </volist>
+    </table>
+</div>

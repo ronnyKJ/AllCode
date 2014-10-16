@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>SyntaxHighlighter Build Test Page</title>
+    
+    <link href="css/sh_the.css" rel="stylesheet" type="text/css" />
+    <script src="sh_main.js" type="text/javascript"></script>
+    <script src="lang/sh_javascript.js" type="text/javascript"></script>
+    
+    <script src="formater.js" type="text/javascript"></script>
+    <script src="editor.js" type="text/javascript"></script>
+    
+    <style type="text/css">
+    *
+    {
+        font-size:12px;
+        font-family:Courier New;
+    }
+    html
+    {
+    }
+    pre
+    {
+        overflow:hidden;
+        margin:0px;
+        padding:0px;
+        line-height:18px;
+    }
+    body
+    {
+        overflow:auto;
+        margin:0px;
+        padding:0px;
+    }
+    textarea
+    {
+        border:solid 1px #D0D0D0;
+        margin:0px;
+        padding:0px;
+        outline:none;
+        overflow:auto;
+    }
+    .snippetEditor
+    {
+        border:solid 1px #224488;
+    }
+    .snippetEditor .toolbar
+    {
+        color:White;
+        background-color:#3366CC;
+    }
+    .toolbar .fsbtn
+    {
+        float:right;
+        font-family:宋体;
+        font-size:12px;
+        cursor:pointer;
+        padding-top:5px;
+        padding-right:5px;
+    }
+    .toolbar .title
+    {
+        float:left;
+        font-family:宋体;
+        padding-top:5px;
+        padding-left:5px;
+        font-size:12px;
+    }
+    .toolbar .fsbtn:hover
+    {
+        text-decoration:underline;
+    }
+    </style>
+    <script type="text/javascript">
+        function Delegate()
+        {
+	        var all=[];
+        	
+	        var This=this;
+        	
+	        This.Call=function()
+	        {
+		        var ret=null;
+		        for(var index in all)
+		        {
+			        ret=all[index].apply(This,arguments);
+		        }
+		        return ret;
+	        }
+        	
+	        This.Attach=function(func)
+	        {
+		        all.push(func);
+	        }
+        	
+	        This.Detach=function(func)
+	        {
+		        var index=0;
+		        for(index in all) 
+		        {
+			        if(all[index]==func) break;
+		        }
+		        if(index<all.length)
+		        {
+			        delete all[index];
+			        all.splice(index,1);
+		        }
+	        }
+        }
+
+        var OnResize = new Delegate();
+        var FSE = null;
+        var FSEID = "";
+        
+        window.onresize = function()
+        {
+            if(frame!=null) OnResize.Call(frame.GetWidth(), frame.GetHeight());
+        }
+
+        var frame = null;
+
+        window.Init = function(config)
+        {
+            frame = config.Frame;
+            document.body.innerHTML = '<div style="padding:8px; overflow: hidden;"></div><div style="display:none;"></div>';
+            FSE = new FullScreenEditor();
+        }
+        
+        window.onload=function()
+        {
+        }
+    </script>
+</head>
+
+<body>
+</body>
+</html>

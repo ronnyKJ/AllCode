@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Array.each</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>Array.each(<em>function</em>)</h1>
+<p class="info">数组的每一个元素都被传入指定的 funtion 执行。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>function</em></dt>
+		<dd>必选项。指定的方法。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">原数组。</p>	
+    <h2>描述</h2>
+	<p class="p">除了数组的每一个元素都被传入指定的 funtion 执行外，传入 function 的还有一个计数器 <em>i</em>，该计数器是 each 方法内部用于循环数组的计数器。</p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var arr = [0,2,4,6,8,10];<br />
+var newArr = [];<br />
+arr.each(function(n,i){newArr[i]=++n;})&nbsp; <span class="comment">//数组的每一项都加1，并赋给新数组。</span> <br />
+alert( newArr ); <span class="comment">// 1,3,5,7,9,11 </span><br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+﻿<html>
+<head><title>ball-v4</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des">地球赤道平面</span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+canvasW = getOdd(canvasW);
+canvasH = getOdd(canvasH);
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+t.translate(canvasW/2,canvasH/2);
+
+//球体及坐标轴
+var R = 300;
+function basement(){
+	//球体outline
+	c.width = canvasW;
+	t.translate(canvasW/2,canvasH/2);
+	circle(0,0,1,true,"#FF0");
+	circle(0,0,R,false,"rgba(255, 0, 0, 0.5)");
+	//xy坐标轴
+	/*
+	path(0-R-50,0,R+50,0, "rgba(0, 0, 255, 0.5)");
+	path(0,0-R-50,0,R+50, "rgba(0, 0, 255, 0.5)");
+	*/
+	
+}
+basement();
+
+//坐标
+var xy = d.getElementById("xy");
+var x=y=z=0;
+var object = 50;
+var ifFront = true;
+d.onmousemove= function()
+{
+	basement();//清空
+	//坐标计算
+	x = event.clientX-cl-canvasW/2;
+	(x<(-R))&&(x=(0-R));
+	(x>R)&&(x=R);
+	y = event.clientY-ct-canvasH/2;
+	(y<(-R))&&(y=(0-R));
+	(y>R)&&(y=R);
+	z = Math.pow(R*R-x*x-y*y, 0.5)||0;
+	
+	//赤道面
+	t.save();
+	t.scale(1, Math.abs(y/R));
+	var tan = Math.atan(x/y)-Math.PI/2;
+	if(y<=0)
+	{
+		tan = Math.atan(x/y)+Math.PI/2;
+	}
+	t.rotate(-tan);
+	circle(0,0,R,false,"rgba(255, 255, 0, 0.5)");
+	//跟踪线	
+	path(0,0,R,0, "rgba(0, 255, 0, 0.7)");
+	path(0,R,0,-R, "rgba(0, 255, 0, 0.7)");
+	t.restore();
+		
+	//地轴
+	var yo = Math.abs(y);
+	path(0, R-yo, 0, yo-R, "rgba(33, 179, 255, 0.8)");
+	
+	//纬线
+	var num = 7;
+	for(var i=1; i<=num; i++)
+	{
+		latitude(Math.PI/(num+1)*i-Math.PI/2, R-yo);
+	}
+	
+	//参数显示
+	//xy.innerHTML = "x:" + x + " y:" + y + " z:" + z + "<br>alpha:" + alpha;
+}
+
+
+//函数定义
+function getOdd(a)
+{
+	(a%2==1)&&(a--);
+	return a;
+}
+
+function getSideValue(obj)
+{
+	var pMax = 1, pMin = 0.2;
+	var pMid = (pMax+pMin)/2;
+	var v={};
+	v.front = obj*(pMid+(pMax-pMid)*z/R);
+	v.back = obj*(pMid-((pMid-pMin)*z/R))
+	return v;
+}
+
+function circle(x, y, r, isFill, style)
+{
+	if(!isFill)
+	{
+		t.beginPath();
+		t.strokeStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.stroke();
+		t.closePath();
+	}
+	else
+	{
+		t.fillStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.fill();
+	}
+}
+
+function path(x1, y1, x2, y2, style)
+{
+	t.beginPath();
+	t.strokeStyle = style;
+	t.moveTo(x1,y1);
+	t.lineTo(x2,y2);
+	t.stroke();
+	t.closePath();
+}
+
+function latitude(a, axis)//参数a正数为北纬，负数为南纬
+{
+	t.save();
+	var h = R*Math.sin(-a);
+	var r = R*Math.cos(-a);
+	var p = r/R;
+	t.translate(0,h/R*axis);
+	t.scale(1,Math.abs(y/R));
+	circle(0,0,r,false,"rgba(255, 255, 0, 0.4)");
+	t.restore();
+}
+</script>
+</html>

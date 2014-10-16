@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ajax.Request</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>Ajax.Request(<em><br />
+  url</em>,<br />
+{<br />
+<strong>method</strong>:<em>method</em>,<br />
+<strong>parameters</strong>:<em>para</em>,<br />
+<strong>postBody</strong>:<em>xmlString</em>,<br />
+<strong>asynchronous</strong>:<em>true</em>,<br />
+<strong>setRequestHeader</strong>:<em>Object</em>,<br />
+<strong>onComplete</strong>:<em>completeFun</em>,<br />
+<strong>onError</strong>:<em>errorFun</em><br />
+}<br />
+)</h1>
+<p class="info">
+发送异步请求。（此方法是为兼容 <a href="http://www.prototypejs.org" target="_blank">prototype.js</a> 而写，调用风格与 prototype 一致）</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>url</em></dt>
+		<dd>必选项。数据发送的目标地址。</dd>
+		<dt><em>method</em></dt>
+		<dd>可选项。数据提交的方式，默认值为get。常用的还有post。</dd>
+		<dt><em>parameters</em></dt>
+		<dd>当 method 为 get 时是可选项，为 post 时是必选项。发送的数据，其形式为： name1=valeu1&amp; name2=value2&amp;name3=value3...... </dd>
+		<dt><em>postBody</em></dt>
+		<dd>可选项。客户端发送的 xml 格式字符串。如果启用 postBody，那么 parameters 将被忽略。</dd>
+		<dt><em>asynchronous</em></dt>
+		<dd>可选项。指定请求是否异步，默认为true（异步）。</dd>
+		<dt><em>setRequestHeader</em></dt>
+		<dd>指定请求的头部字串。其值类型为“名称值对”形式的对象，比如：{&quot;If-Modified-Since&quot;:&quot;0&quot;, &quot;SOAPAction&quot;:&quot;http://tempuri.org/SBS_WebService&quot;, ... ... }</dd>
+		<dt><em>onComplete</em></dt>
+		<dd>可选项。请求成功时执行的回调函数，该函数默认把当前使用 xmlhttp 对象作为第一个参数。</dd>
+		<dt><em>onError</em></dt>
+		<dd>可选项。请求异常时执行的回调函数，该函数默认把当前使用 xmlhttp 对象作为第一个参数。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">当前使用的 xmlhttp 对象。</p>	
+    <h2>描述</h2>
+<p class="p">发送异步请求，并返回 xmlhttp 对象，该对象内置有 abort() 方法，用于提前终止请求。异步请求成功则执行<em> onComplete</em>，失败则执行 <em>onError</em> 。并返回 xmlhttp 对象。<br />
+    <strong>Ajax.Request 是个接口完整的 Ajax 方法，是 myJSFrame 中所有其他 Ajax 方法的核心方法。</strong></p>
+    <h2>示例</h2>
+<p class="code">示例一：<br />
+  &lt;script type=&quot;text/javascript&quot; &gt;<br />
+&nbsp;&nbsp;	var
+	myAjax = new Ajax.Request(<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&quot;http://www.happyshow.org/form.asp&quot;,<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>{</strong><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; method:&quot;post&quot;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comment">//表单提交方式</span>   <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; parameters:&quot;name=acai&amp;age=26&amp;sex=male&quot;,&nbsp;&nbsp; <span class="comment">//提交的表单数据</span><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setRequestHeader:{&quot;If-Modified-Since&quot;:&quot;0&quot;},&nbsp; <span class="comment">&nbsp;&nbsp; //禁止读取缓存数据</span><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onComplete:function(x){&nbsp;&nbsp;&nbsp; <span class="comment">//提交成功回调</span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(x.responseText);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	},<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onError:function(x){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comment">//提交失败回调</span><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(x.statusText);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+} <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<strong>}</strong> <br />
+&nbsp;&nbsp;	); <br />
+  &lt;/script&gt; <br />
+  <br />
+  示例二：<br />
+	&lt;script type=&quot;text/javascript&quot; &gt;<br />
+	&nbsp;&nbsp; var xmlString = &quot;&lt;root&gt;&quot;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +&quot;&lt;people&gt;&lt;name&gt;caizhongqi&lt;/name&gt;&lt;sex&gt;male&lt;/sex&gt;&lt;/people&gt;&quot;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +&quot;&lt;people&gt;&lt;name&gt;ahuang&lt;/name&gt;&lt;sex&gt;female&lt;/sex&gt;&lt;/people&gt;&quot;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +&quot; &lt;/root&gt;&quot;;<br />
+&nbsp;&nbsp;	var
+	myAjax = new Ajax.Request(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&quot;http://www.happyshow.org/xmlform.asp&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>{</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; method:&quot;post&quot;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comment">//表单提交方式</span> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postBody:xmlString,&nbsp;&nbsp; <span class="comment">//提交的xml</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setRequestHeader:{&quot;content-Type&quot;:&quot;text/xml&quot;},&nbsp; <span class="comment">&nbsp;&nbsp; //指定发送的数据为 xml 文档（非字符串）</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onComplete:function(x){&nbsp;&nbsp;&nbsp; <span class="comment">//提交成功回调</span> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(x.responseXML.xml);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	},<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onError:function(x){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comment">//提交失败回调</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(x.statusText);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+} <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>}</strong> <br />
+&nbsp;&nbsp;	); <br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+</body>
+</html>

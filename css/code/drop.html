@@ -1,0 +1,117 @@
+﻿<html>
+<head><title>Drop</title>
+<style>
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+#container
+{
+	position: relative;
+	width: 1000px;
+	height: 300px;
+	background: #72c749 url('http://ronny-i.com/pics/browsers.jpg');
+	margin: 100px auto 20px;
+}
+
+#drop
+{
+	position: absolute;
+	top: 100px;
+	left: 240px;
+	width: 200px;
+	height: 200px;	
+	-webkit-animation: drop 4s infinite ease-in-out;
+	-webkit-animation-direction: alternate;
+}
+
+@-webkit-keyframes drop
+{
+	100%{left: 940px;}
+}
+
+.round
+{
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	border-radius: 100px;
+	/*background: -webkit-gradient(radial, 40 80, 20, 60 60, 60, color-stop(0, rgba(0,0,0,0)),  color-stop(1, rgba(0,0,0,0.9)));*/
+}
+
+.r0
+{
+	background: #FFF;
+	width: 16px;
+	height: 16px;
+	top: 25px;
+	left: 80px;
+	box-shadow: 0px 0px 4px rgba(255,255,255,1);
+}
+
+.r1
+{
+	box-shadow: -20px 20px 40px rgba(0,0,0,0.5) inset;
+}
+
+.r2
+{
+	box-shadow: 2px -2px 30px 4px rgba(0,0,0,0.7) inset;
+}
+
+.r3
+{
+	box-shadow: 0px 20px 40px rgba(0,0,0,0.5) inset;
+}
+
+.r4
+{
+	box-shadow: -20px 0px 40px rgba(0,0,0,0.5) inset;
+}
+
+.r5
+{
+	box-shadow: -25px 25px 50px rgba(0,0,0,0.5) inset;
+}
+
+.s1
+{
+	box-shadow: -12px 12px 15px rgba(0,0,0,0.6);
+}
+
+.s2
+{
+	width: 80px;
+	height: 80px;
+	top: 28px;
+	left: 12px;
+	box-shadow: -7px 7px 10px rgba(255,255,255,0.5);
+}
+
+#right
+{
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: gray;
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="drop">
+		<p class="round s1"></p>
+		<!--<p class="round s2"></p>-->
+		<p class="round r1"></p>
+		<p class="round r2"></p>
+		<p class="round r3"></p>
+		<p class="round r4"></p>
+		<p class="round r5"></p>
+		<p class="round r0"></p>
+	</div>
+</div>
+<div id="right">-- By Ronny 2011 --</div>
+</body>
+</html>

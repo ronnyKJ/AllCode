@@ -1,0 +1,47 @@
+<html>
+<head><title>math</title></head>
+<body>
+
+</body>
+<script>
+var easeInOutQuart = function(pos){
+	if((pos/=0.5) < 1)
+	{
+		return 0.5*Math.pow(pos,4);
+	}
+	return -0.5 * ((pos-=2)*Math.pow(pos,3) - 2);
+}
+
+function a(x, y)
+{
+	this.add = function()
+	{
+		return x+y;
+	}
+}
+
+function b(x, y)
+{
+	this.minus = function()
+	{
+		return x-y;
+	}
+}
+
+var a1 = new a(3, 1);
+var b1 = new b(3, 1);
+
+//alert(a1.add.call(b1.minus));
+//alert(a1.add.apply(b1.minus));
+
+function test()
+{
+	//alert(Array.prototype.join.apply(arguments, ["--","2","r"]));
+	alert(this == window);
+}
+
+test("g","k", "h","n");
+var t = new test();
+
+</script>
+</html>

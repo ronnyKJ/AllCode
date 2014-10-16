@@ -1,0 +1,495 @@
+<html>
+<head><title></title>
+<style>
+body
+{
+	background: #F1F1F1 url('bg.gif');
+	font-family: "Century Gothic";
+	font-size: 26px;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+#map
+{
+	position: relative;
+	width: 400px;
+	border: 10px #000 solid;
+	cursor: pointer;
+	margin: 0px auto;
+	background: #ffc51b url('dot5.png');
+}
+
+.grid
+{
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	display: inline-block;
+	border: 1px #333 solid;
+	border-top: 1px #DDD solid;
+	border-left: 1px #DDD solid;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.grid:hover
+{
+	position: relative;
+	outline: 4px #00ff2a dashed;
+}
+
+#title
+{
+	position: relative;
+	left: -40px;
+	top: 20px;
+	width: 500px;
+	margin: 20px auto;
+	font-size: 56px;
+	-webkit-transform: rotate(-5deg);
+	text-align: left;
+}
+
+.mask
+{
+	position: absolute;
+	top: 0;
+	left:0;
+	background: url('dot.gif');
+	width: 100%;
+	height: 100%;
+}
+
+#time, #notes
+{
+	font-weight: bold;
+	font-size: 40px;
+	background: url('time.png') no-repeat 0 8px;
+	text-indent: 50px;
+	margin: 20px 50px;
+	width: 140px;
+	display: inline-block;
+	text-align: left;
+}
+
+#notes
+{
+	background-position: 0 -38px;
+}
+
+#cover
+{
+	position: relative;
+	background: url('dot.gif');
+	height: 120px;
+	margin-top: -97px;
+	opacity: 0.8;
+}
+
+#rect
+{
+	position: absolute;
+	background: #000 url('dot5.png');
+	height: 150px;
+	width: 100%;
+	top: 300px;
+}
+
+#copyright
+{
+	font-size: 14px;
+}
+
+#end
+{
+	position: relative;
+	width: 500px;
+	margin: -400px auto 0;
+	font-family: "Impact";
+	color: #c80c0c;
+	font-size: 60px;
+	-webkit-transform: rotate(10deg);
+	border: #c80c0c 5px solid;
+	border-radius: 20px;
+	display: none;
+}
+
+#end .mask
+{
+	opacity: 0.5;
+}
+</style>
+<script>
+function MineMap(m ,n ,count)
+{
+	this.mines = {};
+	this.m = m;
+	this.n = n;
+	this.count = count;
+	this.unfoldCount = 0;
+	this.firstClick = true;
+	this.numBg = "rgba(0,0,255,0.5)";
+	this.mineBg = "rgba(255,0,0,0.8) url('time.png') no-repeat -1px -83px";
+	this.flagBg = "url('time.png') no-repeat -1px -115px";
+	this.quesBg = "url('time.png') no-repeat -1px -150px";
+	this.unfoldBorder = "1px #333 solid";
+	this.grids = document.getElementsByClassName("grid");
+	var self = this;
+
+	this.resetMap = function()
+	{
+		document.body.innerHTML = '<div id="rect"></div><h1 id="title">Mine Sweeping<div class="mask"></div></h1>'+
+			'<div id="map"></div>'+
+			'<div id="time">0s</div><div id="notes"></div><div id="cover"></div>'+
+			'<div id="copyright">-- By Ronny 2011 --</div><div id="end"></div></div>';
+	}
+
+	this.setMapArray = function()
+	{
+		var num = 0;
+		for(var i=0; i<this.m; i++)
+		{
+			for(var j=0; j<this.n; j++)
+			{
+				this.mines[i+""+j] = 0;
+			}
+		}
+		var k=0;
+		while(k<this.count)
+		{
+			var number = Math.floor(Math.random()*this.m*this.n);
+			var n = getIndex(number);
+			
+			if(this.mines[n] != "*")
+			{
+				k++;
+				this.mines[n] = "*";
+				setNumber(n);
+			}
+		}
+		addGrid();
+	}
+	
+	this.gridClick = function()
+	{
+		for(var i=0; i<this.grids.length; i++)
+		{
+			this.grids[i].onclick = (function(i){
+				return function(){
+					if(self.firstClick)
+					{
+						self.firstClick = false;
+						Timer.begin();
+					}
+					//**********************************************************
+					var n = self.unfoldGrid(i);
+					self.clearNabors(n, i);
+				}
+			})(i);
+		}
+	}
+	
+	this.unfoldGrid = function(i)
+	{
+		if(this.grids[i].getAttribute("state") == "1")
+			return;
+			
+		var s = self.mines[getIndex(i)];
+		this.grids[i].innerText = s;
+		this.grids[i].style.background = self.numBg;
+		this.grids[i].setAttribute("state", "4");
+		this.grids[i].className = "grid unfold";
+		this.grids[i].style.border = this.unfoldBorder;
+		if(s==0)
+		{
+			this.grids[i].innerText = "";
+		}
+		else if(s==2)
+		{
+			this.grids[i].style.color = "#06ea00";
+		}
+		else if(s>2)
+		{
+			this.grids[i].style.color = "#ff0012";
+		}
+		setNodeCount(self.count);
+		
+		if(s == "*")
+		{
+			this.grids[i].innerText = "";
+			this.grids[i].style.background = this.mineBg;
+			self.unfoldAll(false);
+			_("end").innerHTML = '<span id="words">Oh, no! Try again.</span><div class="mask">';
+			_("words").style.color = "#333";
+			_("end").style.borderColor = "#333";
+			_("end").style.display = "block";
+			if(confirm("Boom!!! You are dead... Try again?"))
+			{
+				begin();
+			}
+			Timer.stop();
+			_("time").innerText = "0s";
+			self.firstClick = true;
+			return null;
+		}
+		
+		if(document.getElementsByClassName("unfold").length == self.m*self.n-self.count)
+		{
+			self.unfoldAll(true);
+			_("end").innerHTML = '<span id="words">Congratulations!!!</span><div class="mask">';
+			_("words").style.color = "#c80c0c";
+			_("words").style.borderColor = "#c80c0c";
+			_("end").style.display = "block";
+			if(confirm("Great!!! Congratulations! Try again?"))
+			{
+				begin();
+			}
+			Timer.stop();
+			_("time").innerText = "0s";
+			self.firstClick = true;
+			return null;
+		}
+		return s;
+	}
+	
+	this.unfoldAll = function(bool)
+	{
+		for(var i=0; i<this.grids.length; i++)
+		{
+			var s = this.mines[getIndex(i)];
+			this.grids[i].innerText = s;
+			this.grids[i].style.background = this.numBg;
+			if(s==0)
+			{
+				this.grids[i].innerText = "";
+			}
+			else if(s==2)
+			{
+				this.grids[i].style.color = "#06ea00";
+			}
+			else if(s>2)
+			{
+				this.grids[i].style.color = "#ff0012";
+			}
+			if(s == "*")
+			{
+				this.grids[i].innerText = "";
+				this.grids[i].style.background = this.mineBg;
+				if(bool)
+					this.grids[i].style.background = this.flagBg;			
+			}
+		}
+	}
+	
+	
+	//*******************************************************************
+	this.clearNabors = function(num, index)
+	{
+		var t = getIndex(index).split("");
+		
+		if(num == 0)
+		{
+			var arr = getNabors(parseInt(t[0]), parseInt(t[1]), this.m, this.n);
+			for(var i=0; i<arr.length; i++)
+			{
+				var n = this.unfoldGrid(parseInt(arr[i].X+""+arr[i].Y, 10));
+				if(n==null) return;
+				if(n == 0)
+				{
+					var arr1 = getNabors(arr[i].X, arr[i].Y, this.m, this.n);
+					for(var j=0; j<arr1.length; j++)
+					{
+						var m = this.unfoldGrid(parseInt(arr1[j].X+""+arr1[j].Y, 10));
+						if(m==null) return;
+						if(m == 0)
+						{
+							var arr2 = getNabors(arr1[j].X, arr1[j].Y, this.m, this.n);
+							for(var k=0; k<arr2.length; k++)
+							{
+								var x = this.unfoldGrid(parseInt(arr2[k].X+""+arr2[k].Y, 10));
+								if(x==null) return;
+								if(x == 0)
+								{
+									var arr3 = getNabors(arr2[k].X, arr2[k].Y, this.m, this.n);
+								}								
+								
+							}
+						}
+						
+					}
+				}
+				
+				//alert("dd");
+			}
+		}
+		
+	}
+	
+	this.note = function()
+	{
+		var grids = document.getElementsByClassName("grid");
+		for(var i=0; i<grids.length; i++)
+		{
+			grids[i].oncontextmenu = function(){
+				window.event.returnValue = false;
+				if(this.getAttribute("state") == 0)
+				{
+					this.style.background = self.flagBg;
+					this.setAttribute("state", "1");
+					this.className = "grid note";
+					setNodeCount(self.count);
+				}
+				else if(this.getAttribute("state") == "1")
+				{
+					this.style.background = self.quesBg;
+					this.className = "grid";
+					this.setAttribute("state", "2");
+					setNodeCount(self.count);					
+				}
+				else if(this.getAttribute("state") == "2")
+				{
+					this.style.background = "";
+					this.innerText = "";
+					this.className = "grid";
+					this.setAttribute("state", "0");
+					setNodeCount(self.count);
+				}
+			}
+		}
+	}
+
+	function setNumber(index)
+	{
+		var num = 0;
+		var tmp = index.split("");
+		var x = parseInt(tmp[0], 10);
+		var y = parseInt(tmp[1], 10);
+
+		var nabors = getNabors(x, y, self.m, self.n);
+		for(var i=0; i<nabors.length; i++)
+		{
+			var tmp = self.mines[nabors[i].X + "" + nabors[i].Y];
+			if(tmp != "*")
+				self.mines[nabors[i].X + "" + nabors[i].Y]++;
+		}
+	}
+		
+	function addGrid()
+	{
+		var map = _("map");
+		for(var i=0; i<self.m; i++)
+		{
+			for(var j=0; j<self.n; j++)
+			{
+				var span = document.createElement("span");
+				span.className = "grid";
+				span.setAttribute("state", "0");
+				//span.innerText = self.mines[i+""+j];
+				map.appendChild(span);
+			}
+		}
+	}
+}
+
+var Timer =
+{
+	s: 0,
+	flag : 0,
+	begin: function()
+	{
+		this.flag = 0;
+		(function(){
+			var a = arguments.callee;
+			if(Timer.flag == 0)
+			{
+				_("time").innerText = (++Timer.s) + "s";
+				setTimeout(function(){a()}, 1000);
+			}
+		})();
+	},
+	stop: function()
+	{
+		this.flag = 1;
+		this.s = 0;
+	}
+}
+
+var setNodeCount = function(total)
+{
+	_("notes").innerText = total - document.getElementsByClassName("note").length;
+}
+
+function getIndex(number)
+{
+	if(number<10)
+	{
+		return "0" + number.toString();
+	}
+	else
+	{
+		var tmp = number.toString().split("");
+		return tmp[0]+""+tmp[1];
+	}
+}
+
+function getNabors(x, y, _m, _n)
+{
+	var m = _m-1, n = _n-1;
+	var nabors = [];
+	if(x-1>=0 && y-1 >=0)
+	{
+		nabors.push({X:x-1, Y:y-1});
+	}
+	if(y-1 >=0)
+	{
+		nabors.push({X:x, Y:y-1});
+	}
+	if(x+1<=n && y-1 >=0)
+	{
+		nabors.push({X:x+1, Y:y-1});
+	}
+	if(x+1<=n)
+	{
+		nabors.push({X:x+1, Y:y});
+	}
+	if(x+1<=n && y+1 <=m)
+	{
+		nabors.push({X:x+1, Y:y+1});
+	}
+	if(y+1 <=m)
+	{
+		nabors.push({X:x, Y:y+1});
+	}
+	if(x-1>=0 && y+1 <=m)
+	{
+		nabors.push({X:x-1, Y:y+1});
+	}
+	if(x-1>=0)
+	{
+		nabors.push({X:x-1, Y:y});
+	}
+	return nabors;
+}
+
+function _(id)
+{
+	return document.getElementById(id);
+}
+
+function begin()
+{
+	var map = new MineMap(10, 10, 1);
+	map.resetMap();
+	map.setMapArray()
+	map.gridClick();
+	map.note();
+	_("notes").innerText = 10;
+	//map.unfoldAll(false);
+}
+</script>
+</head>
+<body onload="begin()">
+</body>
+</html>

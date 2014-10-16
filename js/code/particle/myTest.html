@@ -1,0 +1,174 @@
+﻿<html>
+<head><title>partical</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+/*
+ * 鼠标按下与否的监控，如果时间间隔设置较长，而鼠标按下时间较短，可能不能被监控到，
+*/
+lightArray=[];
+count = 400;
+
+with(document.body)
+{
+	C = document.getElementById('c');
+	C.height = clientHeight;
+	C.width = clientWidth;
+	X = C.getContext("2d")
+}
+
+with(Math)
+{
+	r=random;
+	Sin=sin;
+	Cos=cos;
+	Abs=abs;
+	tmpCount = count;
+	while(tmpCount-- > 0)
+	{
+		lightArray[tmpCount]=
+		{
+			color: "rgb(40,40,"+min(255,floor(r()*255))+")",
+			x: C.width/2,
+			y: C.height/2,
+			xDir: Cos(tmpCount)*50*r(),//X轴方向运动的方向速度
+			yDir: Sin(tmpCount)*15*r(),//Y轴方向运动的方向速度
+			radius: 4+3*r(),
+			angle: r()*2*PI,
+			l: 8*r()+2
+		};
+	}
+}
+flag = false;
+setInterval(function()
+{
+	//刷新画布
+	X.globalCompositeOperation = 'source-over';
+	X.fillStyle = '#000';
+	X.fillRect(0,0,C.width,C.height);
+	
+	//颜色变亮
+	X.globalCompositeOperation = 'lighter';
+	
+	if(flag)
+	{
+		for(index=count; (index--)>0;)//遍历每点光
+		{
+			light = lightArray[index];
+			
+			//方向速度随时间减少
+			light.xDir *= 0.95;
+			light.yDir *= 0.95;
+			xDirAbs = Abs(light.xDir);
+			yDirAbs = Abs(light.yDir);
+			
+			if(xDirAbs < 0.1)//当方向速度小于一定值
+			{
+				light.xDir *= 3*r(); //使光点不要停下，保持一个很小的速度按原方向前进
+			}
+			else
+			{
+				light.xDir *= 1;
+			}
+			
+			if(yDirAbs<0.1)
+			{
+				light.yDir *= 3*r();
+			}
+			else
+			{
+				light.yDir *= 1;
+			}
+
+			//移动光点，位置加上方向速度
+			light.x += light.xDir;
+			light.y += light.yDir;
+			
+			//边缘碰撞
+			if(light.x > C.width)
+			{
+				light.x = C.width;
+				light.xDir *= -1;//碰撞，反向
+			}
+			else if(light.x<0)
+			{
+				light.x=0;
+				light.xDir *= -1;//碰撞，反向
+			}
+			
+			//边缘碰撞
+			if(light.y > C.height)
+			{
+				light.y = C.height;
+				light.yDir *= -1;//碰撞，反向
+			}
+			else if(light.y<0)
+			{
+				light.y = 0;
+				light.yDir *= -1;//碰撞，反向
+			}
+			
+			X.fillStyle = light.color;
+			X.beginPath();
+			X.arc(light.x, light.y, light.radius, 0, 360, true);
+			X.fill();
+		}
+	}
+	else
+	{
+		for(index=count; (index--)>0;)//遍历每点光
+		{
+			light = lightArray[index];
+			
+			xDir = light.l*Cos(light.angle);
+			yDir = light.l*Sin(light.angle);
+			
+			light.l *= 0.995;
+			
+			xDirAbs = Abs(xDir);
+			yDirAbs = Abs(yDir);
+			
+			//移动光点，位置加上方向速度
+			light.x += xDir;
+			light.y += yDir;
+			
+			//边缘碰撞
+			if(light.x > C.width)
+			{
+				light.x = C.width;
+				light.angle = Math.PI - light.angle;//折射
+			}
+			else if(light.x<0)
+			{
+				light.x=0;
+				light.angle = Math.PI - light.angle;//折射
+			}
+			
+			//边缘碰撞
+			if(light.y > C.height)
+			{
+				light.y = C.height;
+				light.angle = 2*Math.PI - light.angle;//折射
+			}
+			else if(light.y<0)
+			{
+				light.y = 0;
+				light.angle = 2*Math.PI - light.angle;
+			}
+			
+			X.fillStyle = light.color;
+			X.beginPath();
+			X.arc(light.x, light.y, light.radius, 0, 360, true);
+			X.fill();
+		}		
+	}
+},30);
+</script>
+</html>

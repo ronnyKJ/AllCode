@@ -1,0 +1,22 @@
+function domReady(fn){
+                        /*一个timer..中文称计时器..*/
+            var _timer_ = null;
+                        /*一个自执行函数..就是不调用就会跑.. void function(){}(),  or  (function(){})()  or + function(){}()  or ~function(){}().. or . 手酸了.*/
+            void function(){
+                                /*ie..*/
+                if(document.all){
+                    try{
+                                                /*调用document.body.doScroll()  这个函数在domReady之前调用。会报错。所以这里try catch*/
+                        document.body.doScroll("left");
+                                                /*如果通过。说明domReady了。好，清除计时器，跑你的回调函数, 否则，进入catch*/
+                        clearTimeout(_timer_,_timer_ = null, fn());
+                    }catch(e){
+                                                /*继续跑哪个自执行函数, 每隔100毫秒就跑一次*/
+                        _timer_ = setTimeout(arguments.callee,100);
+                    }
+                }else{
+                                        /*FF...*/
+                    document.addEventListener("DOMContentLoaded", fn, false);
+                }
+            }()
+        }

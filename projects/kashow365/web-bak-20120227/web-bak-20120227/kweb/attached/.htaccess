@@ -1,0 +1,4 @@
+RewriteEngine On
+Order Allow,Deny
+Deny from all
+Allow from all

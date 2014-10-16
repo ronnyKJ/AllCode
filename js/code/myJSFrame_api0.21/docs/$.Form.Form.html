@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Form</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$.Form(<em>name</em>)</h1>
+<p class="info">
+获取页面中指定名称的表单。
+</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>name</em></dt>
+		<dd>必选项。指定 Form 的名称。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">表单对象。</p>	
+    <h2>描述</h2>
+<p class="p">该方法返回的是 document.forms[name]，但在返回前，表单对象已经被赋予新的方法。</p>
+    <h2>示例</h2>
+	<p class="code">&lt;form method=&quot;post&quot; name=&quot;login&quot; action=&quot;http://localhost&quot;&gt;<br />
+	  &nbsp; &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;<br />
+      &nbsp; &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;<br />
+      &nbsp; &lt;input type=&quot;submit&quot; /&gt;<br />
+      &nbsp; &lt;input type=&quot;button&quot; value=&quot;用JavaScript提交表单&quot; onclick=&quot;test()&quot; /&gt;<br />
+	  &lt;/form&gt;<br />
+	  &lt;script type=&quot;text/javascript&quot; &gt;<br />
+	  function test(){ <br />
+&nbsp;&nbsp;&nbsp;&nbsp;	<span class="core">$.Form(&quot;login&quot;).submit()</span>;&nbsp; <span class="comment">//submit() 是表单对象内置的方法。</span> <br />
+}<br />
+&lt;/script&gt; </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

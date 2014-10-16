@@ -1,0 +1,125 @@
+<include file="Public:header" />
+<div id="content">
+	<div id="chart">
+		<h1>图表查询</h1>
+		<div id="histogramContainer"></div>
+	</div>
+	<h1>事项列表</h1>
+	<!--<table>
+		<tr>
+			<th>序号</th>
+			<th>属性内容id</th>
+			<th>事件id</th>
+			<th>属性内容</th>
+			<th>属性id</th>
+			<th>事件id</th>
+			<th>日期</th>
+			<th>标题</th>
+			<th>开始时间</th>
+			<th>结束时间</th>
+			<th>分类id</th>
+			<th>用户id</th>
+			<th>分类id</th>
+			<th>用户id</th>
+			<th>分类名</th>
+			<th>分类事件数</th>
+			<th>控件类型</th>
+			<th>标签</th>
+			<th></th>
+			<th></th>
+		</tr>-->
+		<!--<td>{$i}.</td>-->
+		<!--<td>{$vo.id}</td>-->
+		<!--<td>{$vo.uid}</td>-->
+	<if condition="(count($list) neq 0)">
+	<ul id="eventList">	
+		<volist name="list" id="vo" key="i">
+		<if condition="($list[$i]['eventid'] neq $list[$i-1]['eventid']) OR ($i eq 1)">
+		<li>
+			<span class="_attrCtId hidden">{$vo.aid}</span>
+			<span class="_evtId hidden">{$vo.eventid}</span>
+			<span class="_attrId hidden">{$vo.attributeid}</span>
+			<span class="_uid hidden">{$vo.userid}</span>
+			<span class="_ctgrId hidden">{$vo.cid}</span>
+			<span class="_ctgr hidden">{$vo.categoryid}</span>
+			<span class="_cnt hidden">{$vo.count}</span>
+			<span class="_ctrl hidden">{$vo.ctrl_type}</span>
+			<span class="_lbl hidden">{$vo.label}</span>
+			<span class="_date hidden">{$vo.date}</span>
+			<span class="_stTime hidden">{$vo.starttime}</span>
+			<span class="_edTime hidden">{$vo.endtime}</span>
+			<span class="_ctgrNm hidden">{$vo.categoryname}</span>
+			<span class="_attrNm hidden">{$vo.name}</span>
+			<span class="_attrCt hidden">{$vo.content}</span>
+			
+			<div class="datePad">
+				<div class="dateD"><?php echo substr($list[$i-1]['date'],8); ?></div>
+				<div class="dateYM"><?php echo substr($list[$i-1]['date'],0,7); ?></div>
+			</div>
+			<span class="right operation"><a title="删除" class="delete" href="__URL__/deleteEvt/id/{$vo.id}"><i>删除</i></a></span>
+			<span class="right operation"><a title="编辑" class="edit" href="javascript:;" onclick="edit(this,{$vo.eventid})"><i>编辑</i></a></span>
+			<h3 class="_title setMrgnLft evtTitle">{$vo.title}</h3>
+			<p class="setMrgnLft evtTime">起始时间: {$vo.starttime}-{$vo.endtime}<span>{$vo.categoryname}({$vo.count})</span></p>
+			<p class="setMrgnLft"><span class="attrName">{$vo.name}: </span><span class="attrContent">{$vo.content}</span></p>
+		<else/><p class="setMrgnLft"><span class="attrName">{$vo.name}: </span><span class="attrContent">{$vo.content}</span></p>
+		</if>
+		</volist>
+	</ul>
+	<else/>还没添加事件......
+	</if>
+</div>
+<div id="rightsidebar">
+	<div id="categoryDiv">
+		<if condition="(count($cate) neq 0)">
+		<h1>分类</h1>
+		<table>
+			<volist name="cate" id="cate_count">
+				<tr><td><span class="hidden">{$cate_count.cid}</span>{$cate_count.categoryname}</td><td class="categoryCount">({$cate_count.count})</td></tr>
+			</volist>
+		</table>
+		<else/>暂无分类...
+		</if>
+	</div>
+	<div id="addEvent">
+		<h1>新增事项</h1>
+		<if condition="(count($cate) neq 0)">
+		<form method='post' action="__URL__/insert">
+			<table cellpadding=2 cellspacing=2>
+				<tr>
+					<td>日期: </td>
+					<td><input id="date" type="text" name="date" /></td>
+				</tr>
+				<tr>
+					<td>标题: </td>
+					<td><input id="title" type="text" name="title" /></td>
+				</tr>
+				<tr>
+					<td>时间: </td>
+					<td><input id="starttime" type="text" name="starttime" /> - <input id="endtime" type="text" name="endtime" /></td>
+				</tr>
+				<tr id="cRow">
+					<td>分类: </td>
+					<td>
+						<select id="category" name="category">
+							<volist name="cate" id="item">
+								<option value="{$item.cid}">{$item.categoryname}</option>
+							</volist>
+						</select>
+						<a href="__URL__/addCategory">添加分类</a>
+					</td>
+				</tr>
+				<tr><td></td><td id="attributes"></td></tr>
+				<tr>
+					<td>
+						<input type="hidden" name="uid" id="uid" value="{$userid}" />
+						<input type="hidden" name="eventid" id="eventid" />
+					</td>
+					<td><input type="submit" value="确 定"> <input type="reset" value="清 空"> <a class="addEvt" href="javascript:addEvent();">新增事项</a></td>
+				</tr>
+			</table>
+		</form>
+		<else/><a href="__URL__/addCategory">添加分类</a>
+		</if>
+	</div>
+</div>
+<include file="Public:footer" />

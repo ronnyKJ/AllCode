@@ -1,0 +1,67 @@
+<html>
+<head><title></title>
+<script type="text/javascript">
+var value = "auto";
+(value == "auto")&&(value = "0px" );
+document.write(false||"1--");
+document.write("<br>");
+document.write(true||"2--");
+document.write("<br>");
+document.write("3--"||false);
+document.write("<br>");
+document.write("4--"||true);
+document.write("<br>");
+document.write(false&&"5--");
+document.write("<br>");
+document.write(true&&"6--");
+document.write("<br>");
+document.write("7--"&&false);
+document.write("<br>");
+document.write("8--"&&true);
+
+	Array.prototype.map = function(fn, thisObj) {
+		var scope = thisObj || window;
+		var a = [];
+		for ( var i=0, j=this.length; i < j; ++i ) {
+			a.push(fn.call(scope, this[i], i, this));
+		}
+		return a;
+	};
+	
+	Array.prototype.max = function(){
+		return Math.max.apply({},this)
+	}
+	
+	Array.prototype.min = function(){
+		return Math.min.apply({},this)
+	}
+	
+	var a = [1, 4, 3];
+	//alert(a.map(function(a, b, c){return a+"-"+b+"-"+c.join(":");}));
+</script>
+</head>
+<body><br><br><div id="r">DIV</div></body>
+<script type="text/javascript">
+Object.prototype.insertAfter = function()
+{
+	if(arguments.length == 1)
+	{
+		this.parentNode.appendChild(arguments[0]);
+	}
+	else
+	{
+		this.parentNode.insertBefore(arguments[0], arguments[1].nextSibling);
+	}
+}
+var panel = document.createElement("div");
+panel.id = "panel"
+panel.innerHTML = "<span>11</span>";
+
+var r = document.getElementById("r");
+r.insertAfter(panel);
+
+var s = document.createElement("span");
+s.innerHTML = "22";
+r.insertAfter(s, r);
+</script>
+</html>

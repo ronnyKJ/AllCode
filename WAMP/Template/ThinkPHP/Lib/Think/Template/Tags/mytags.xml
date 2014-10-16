@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+<shortname>mytags</shortname>
+
+<tag>
+<name>var</name>
+<bodycontent>empty</bodycontent>
+<attribute>
+<name>name</name>
+<required>true</required>
+</attribute>
+</tag>
+
+<tag>
+<name>需要两个方法以上才不会有错误提示</name>
+<bodycontent>empty</bodycontent>
+<attribute>
+<name>name</name>
+<required>true</required>
+</attribute>
+</tag>
+
+</taglib>

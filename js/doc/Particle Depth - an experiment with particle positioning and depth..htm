@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://hakim.se/experiments/html5/particledepth/02/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		
+		<meta name="description" content="An experiment with particle positioning using depth.">
+		<meta name="keywords" content="hakim, elhattab, hakim el hattab, hakim elhattab, interactive, developer, flash, html5, canvas, web, experiments">
+		<meta name="author" content="Hakim El Hattab">
+		
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	    		
+        <title>Particle Depth - an experiment with particle positioning and depth.</title>
+        
+		<style type="text/css"> html{color:#000;background:#222222;}a{cursor:pointer;}html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;outline-style:none;outline-width:0pt;}legend{color:#000;}a:focus,object,h1,h2,h3,h4,h5,h6{-moz-outline-style: none; border:0px;}strong {font-weight: bold;}@font-face { font-family: Delicious; font-weight: bold; src: url('../../../assets/fonts/Delicious-Bold.otf'); }body {overflow: hidden;font-family: Georgia, Helvetica, Arial, sans-serif;color: #333333;font-size: 11px;}a, a:hover {transition: all .08s linear;-o-transition: all .08s linear;-moz-transition: all .08s linear;-webkit-transition: all .08s linear;padding: 1px;}p.noCanvas {color: #999999;font-size: 24px;text-align: center;margin-top: 150px;}#panel {position: absolute; margin: 5px;padding: 5px;z-index: 99;background-color: #FFFECF;border: 1px solid #e1e0af;}#panel a {color: #333333;background-color: #FFFECF;text-decoration: underline;}#panel a:hover {color: #FFFECF;background-color: #333333;}#panel a.versionLink {padding: 1px;text-decoration: underline;}#panel a.versionLink.selected {color: #888888;text-decoration: none;}#panel p {padding: 0px 5px 5px 5px;line-height: 1.6em;}#panel h2 {font-size: 20px;font-weight: bold;font-family: Delicious, Helvetica, sans-serif;padding: 5px 5px 5px 5px;}#chromeBadge {position: absolute; bottom: 0; right: 0;padding: 4px;}#sharing {background-color: #FFFECF;position: absolute; top: 0;right: 0;margin: 5px;padding: 7px 0 4px 10px;z-index: 98;border: 1px solid #e1e0af;}#facebook_button {float: left;}#retweet_button {float: left;}#flattr_button {float: right;margin: 1px 10px 0 4px;}a[href="http://www.w3counter.com"] {display: none!important;}			
+		</style>
+		
+		<link rel="shortcut icon" type="image/x-icon" href="http://hakim.se/experiments/html5/particledepth/02/favicon.ico">
+		
+		<link href="http://hakim.se/experiments/html5/particledepth/02/styles.css" rel="stylesheet" media="screen">
+		
+		<!-- Google Analytics Tracking Code -->
+		<script async="" src="./Particle Depth - an experiment with particle positioning and depth._files/ga.js"></script><script>
+		var _gaq = [['_setAccount', 'UA-15240703-1'], ['_trackPageview']];
+		(function(d, t) {
+		var g = d.createElement(t),
+		    s = d.getElementsByTagName(t)[0];
+		g.async = true;
+		g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g, s);
+		})(document, 'script');
+		</script>
+		
+    <script type="text/javascript" async="" src="./Particle Depth - an experiment with particle positioning and depth._files/pulse.js"></script></head>
+    <body>
+		<div id="panel">
+			<h2><a href="http://hakim.se/experiments/">Experiments</a> / Particle Depth  / 02</h2>
+			<p>An experiment with particle positioning using depth.</p>
+			<div style="padding: 5px;"><a href="http://hakim.se/experiments/html5/particledepth/02/#" id="organizePipe" class="selected">Pipe</a> - <a href="http://hakim.se/experiments/html5/particledepth/02/#" id="organizeCone">Cone</a> - <a href="http://hakim.se/experiments/html5/particledepth/02/#" id="organizeCircle">Circle</a> - <a href="http://hakim.se/experiments/html5/particledepth/02/#" id="organizeSpiral">Spiral</a> - <a href="http://hakim.se/experiments/html5/particledepth/02/#" id="organizeSwirl">Swirl</a></div>					</div>
+		
+<canvas id="world" width="1366" height="621"><p class="noCanvas">You need a <a href="http://www.google.com/chrome">modern browser</a> to view this.</p></canvas>
+<div id="sharing">
+	<iframe id="facebook_button" src="./Particle Depth - an experiment with particle positioning and depth._files/saved_resource.htm" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowtransparency="true"></iframe>
+	<div id="retweet_button">
+		<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hakim.se/experiments/html5/particledepth/02/" data-text="Particle Depth - an experiment with particle positioning patterns in HTML5 by @hakimel." data-count="horizontal" data-related="hakimel">Tweet</a>
+		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	</div>
+</div>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><script src="./Particle Depth - an experiment with particle positioning and depth._files/jquery.min.js"></script>
+<script src="./Particle Depth - an experiment with particle positioning and depth._files/hakim.particledepth.js"></script>
+		
+		<script src="./Particle Depth - an experiment with particle positioning and depth._files/tracker.js"></script>
+		<script>
+			w3counter(49720);
+			var ps = document.createElement('script');
+				ps.type = 'text/javascript';
+				ps.async = true;
+				ps.src = '//pulse.w3counter.com/pulse.js?id=49720';
+			(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ps);
+		</script><a href="http://www.w3counter.com/"><img src="./Particle Depth - an experiment with particle positioning and depth._files/tracker.php" style="border: 0" alt="W3Counter Web Stats"></a>
+		
+    
+</body></html>

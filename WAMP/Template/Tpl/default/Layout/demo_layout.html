@@ -1,0 +1,10 @@
+{//DemoOne 使用布局模板 }
+
+{//使用layout标签导入公用的页首模板文件 cache缓存时间这里设为0是为了方便演示}
+<layout name="Public:header" cache="0" />
+
+{//动态控制布局模板的内容输出}
+<layout name="$content" cache="0" />
+
+{//使用layout标签导入公用的页脚模板文件}
+<layout name="Public:footer" cache="0" />

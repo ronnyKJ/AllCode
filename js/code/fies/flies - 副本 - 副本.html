@@ -1,0 +1,99 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+var a=[],
+b=Math,
+G='length',
+S=150,
+d=c=O=K=E=y=0,
+e=1,
+$=300,
+f,g,h,i,j,k,l,m,c={};
+l=[];
+n=b.random,
+o=b.round,
+p=b.PI,
+q=b.floor;
+with(document.body.children.c)
+{
+	width=height=$;
+	x=getContext("2d")
+}
+x.font="200px Times";
+setInterval(function(){
+	g=o(n()*48)+1;
+	
+	if(y<1&!(g in c))
+	{
+		x.fillStyle="rgb(2,0,0)";
+		x.fillText(g,S-x.measureText(g).width/2,257);
+		h=x.getImageData(0,0,$,$).data;
+		j=[];
+		for(f=0;f<h[G];f+=4)
+			h[f]==2&n()>.9&&j.push([f/4%$,q(f/1600)]);
+		l.push([g,j]);
+		c[""+g]=1;
+		y++;
+	}
+	x.fillStyle="rgb(200,200,200)";
+	//x.fillRect(0,0,$,$);
+	x.fillStyle="rgb(1,0,0)";
+	j=l[K][1];
+	for(g=0;g<2;g++)
+	{
+		E||a.push([{x:S,y:S,a:q(n()*16)},{x:150,y:150}]);
+		k=a[g][0];
+		m=a[g][1];
+		i=j[g%j[G]];
+		k.d=i[0];
+		k.c=i[1];
+		x.beginPath();
+		x.moveTo(k.x,k.y);
+		x.lineTo(m.x,m.y);
+		x.stroke();
+		m.x=k.x;
+		m.y=k.y;
+		i=k.a*p/8;
+		k.x+=b.sin(i)*2;k.y-=b.cos(i)*2;
+		if(e)
+		{
+			i=o(8*b.atan((k.x-k.d)/(k.c-k.y))/p);
+			i+=k.y<k.c?24:16;
+			i%=16;
+			if(i==k.a)
+				k.b=1;
+			else if(n()>.8)
+			{
+				if(i<k.a)
+					i+=16;
+				k.b=i-k.a<8?2:0
+			}
+		}
+		else
+		{
+			i=n();
+			k.b=i<.3?0:i<.6?2:1
+		}
+		k.a+=!k.b?15:k.b==2?17:16;k.a%=16
+	}
+	
+	if(++E>100)
+	{
+		if(d%3)
+		{
+			e=!e;
+			if(d%2)
+			{
+				K++;K%=6
+			}
+		}
+		d++;
+		E=0;
+	}
+},100)
+</script>
+</html>

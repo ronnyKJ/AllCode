@@ -1,0 +1,168 @@
+﻿<html>
+<head><title>partical</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+/*
+ * 鼠标按下与否的监控，如果时间间隔设置较长，而鼠标按下时间较短，可能不能被监控到，
+*/
+lightArray=[];
+length = 800;
+count = 800;
+mX=mY=tmpX=tmpY=flag=0;
+with(document.body)
+{
+	B = children[0];
+	B.height = length;
+	B.width = length;
+	B.onmousemove=function(p)
+	{
+		mX = p.clientX;
+		mY = p.clientY
+	};
+	B.onmousedown=function()
+	{
+		flag=1
+	};
+	B.onmouseup=function()
+	{
+		flag=0
+	};
+	X=B.getContext("2d")
+}
+with(Math)
+{
+	r=random;
+	Sin=sin;
+	Cos=cos;
+	Abs=abs;
+	tmpCount = count;
+	while(tmpCount-- > 0)
+	{
+		lightArray[tmpCount]=
+		{
+			color: "rgb(40,40,"+min(255,floor(r()*255))+")",
+			x: length/2,
+			y: length/2,
+			xDir: Cos(tmpCount)*25*r(),//X轴方向运动的方向速度
+			yDir: Sin(tmpCount)*2*r()//Y轴方向运动的方向速度
+		};
+	}
+}
+//鼠标行为对光点有影响的范围
+moveScope=length/8;
+clickScope=length/2;
+
+setInterval(function()
+{
+	//刷新画布
+	X.globalCompositeOperation = 'source-over';
+	X.fillStyle='#000';
+	X.fillRect(0,0,length,length);
+	
+	//颜色变亮
+	X.globalCompositeOperation = 'lighter';
+	
+	mousemoveXDistance = mX - tmpX;
+	mousemoveYDistance = mY - tmpY;
+	tmpX = mX;
+	tmpY = mY;
+	
+	for(index=count; (index--)>0;)//遍历每点光
+	{
+		light = lightArray[index];
+		deltaX = light.x - mX;
+		deltaY = light.y - mY;
+		distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);//光跟鼠标距离
+		angle = Math.atan2(deltaY,deltaX);//光跟鼠标角度
+		cosAngle = Cos(angle);//0~1
+		sinAngle = Sin(angle);//0~1
+		
+		if(flag)//鼠标按下
+		{
+			if(distance < clickScope)// 1/2画布长度的距离内有效
+			{
+				clickE=(1-distance/clickScope)*15;//点击弹力系数
+				light.xDir += cosAngle*clickE+0.5;//-r(); //得到弹力系数在X方向上的分量
+				light.yDir += sinAngle*clickE+0.5;//-r(); //得到弹力系数在Y方向上的分量
+			}
+		}
+		
+		//鼠标移动
+		if(distance < moveScope)// 1/8画布长度的距离内有效
+		{
+			moveE = (1-distance/moveScope)*0.096;//鼠标移动弹力系数
+			light.xDir += mousemoveXDistance * moveE; //得到鼠标移动弹力系数 在X方向上的分量
+			light.yDir += mousemoveYDistance * moveE; //得到鼠标移动弹力系数 在Y方向上的分量
+		}
+		
+		//方向速度随时间减少
+		light.xDir *= 0.95;
+		light.yDir *= 0.95;
+		xDirAbs = Abs(light.xDir);
+		yDirAbs = Abs(light.yDir);
+		
+		if(xDirAbs < 0.1)//当方向速度小于一定值
+		{
+			light.xDir *= 3*r(); //使光点不要停下，保持一个很小的速度按原方向前进
+		}
+		else
+		{
+			light.xDir *= 1;
+		}
+		
+		if(yDirAbs<0.1)
+		{
+			light.yDir *= 3*r();
+		}
+		else
+		{
+			light.yDir *= 1;
+		}
+		
+		tmpR = (xDirAbs + yDirAbs)*0.75;//由方向速度求出半径，速度越小，半径越小
+		radius = Math.max(Math.min(tmpR,3.5),0.4);//限定半径范围
+		//移动光点，位置加上方向速度
+		light.x += light.xDir;
+		light.y += light.yDir;
+		
+		//边缘碰撞
+		if(light.x > length)
+		{
+			light.x = length;
+			light.xDir *= -1;//碰撞，反向
+		}
+		else
+		{
+			if(light.x<0)
+			{
+				light.x=0;
+				light.xDir *= -1;//碰撞，反向
+			}
+		}
+		
+		//边缘碰撞
+		if(light.y > length)
+		{
+			light.y = length;
+			light.yDir *= -1;//碰撞，反向
+		}
+		else
+		{
+			if(light.y<0)
+			{
+				light.y = 0;
+				light.yDir *= -1;//碰撞，反向
+			}
+		}
+		
+		X.fillStyle = light.color;
+		X.beginPath();
+		X.arc(light.x, light.y, radius, 0, 360, true);
+		X.fill();
+	}
+},30);
+</script>
+</html>

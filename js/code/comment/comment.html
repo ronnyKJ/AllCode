@@ -1,0 +1,103 @@
+﻿<html>
+<head><title>Comment</title>
+<style>
+.comment
+{
+	width: 400px;
+	border: 1px #888 dotted;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.floor
+{
+	color: #F00;
+	font-weight: bold;
+}
+
+.quote
+{
+	background: #EEE;
+	border: 1px #888 dotted;
+}
+
+.re
+{
+	
+}
+
+p
+{
+	border: 1px #00F dotted;
+	margin: 2px;
+}
+</style>
+</head>
+<body></body>
+<script type="text/javascript">
+d=document;
+var comments = [
+{id: 2, comment: "2-- I feel good.", cid: 0, layer: 1},
+{id: 12, comment: "12-- Not bad.", cid: 2, layer: 2},
+{id: 33, comment: "33-- I like it.", cid: 12, layer: 3},
+{id: 56, comment: "56-- Owesome.", cid: 33, layer: 4},
+{id: 145, comment: "145-- Hahaha.", cid: 56, layer: 5},
+{id: 230, comment: "230-- I want it.", cid: 2, layer: 1},
+];
+
+function getComment(val, attr, arrayCollection)
+{
+	var l = arrayCollection.length;
+	for(var i=0; i<l; i++)
+	{
+		if(arrayCollection[i][attr] == val)
+		{
+			break;
+		}
+	}
+	return arrayCollection[i];
+}
+
+var re = "";
+var org = 0;
+function reply(id)
+{
+	var c = getComment(id, "id", comments);
+	var s = "";
+	if(org)
+	{
+		s = "<span class='re' style='margin-left: "+ org +"em'>RE:</span>";
+	}
+	var q="";
+	if(org!=0)
+	{
+		q = " class='quote'";
+	}
+	org++;
+	var line = s + "<span" + q + ">" + c.comment + "</span><br>";
+	if(c.cid)
+	{
+		
+		re += line;
+		reply(c.cid);
+	}
+	else
+	{
+		re += line;
+	}
+}
+
+var ele;
+for(var i=0; i<comments.length; i++)
+{
+	ele = d.createElement("div");
+	var tmp = "<span class='floor'>#"+(i+1)+":</span>";
+	re = "";
+	org = 0;
+	reply(comments[i].id)
+	ele.innerHTML = tmp + re;
+	ele.className = "comment";
+	d.body.appendChild(ele);
+}
+</script>
+</html>

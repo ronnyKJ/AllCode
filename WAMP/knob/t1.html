@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>applying perspective</title>
+
+<script type="text/javascript">
+function setView(value) {
+    document.getElementById("showVal").innerHTML=value+"px";
+    document.getElementById("view3d").style.webkitPerspective=value+"px";
+}
+</script>
+</head>
+<body>
+<div id="view3d"
+     style="-webkit-perspective: 150px;">
+ 
+      <div class="tilted"
+      style= "-webkit-transform: rotateX(45deg); -webkit-transform-origin: 50% 80%;">
+      <p>
+      Once upon a time, in a third dimension far, far, away, a paragraph of text went
+      on and on and on and on and on and on and on and on and on and on and on
+      on and on and on and on and on and on and on and on and on and on and on...
+      </p>
+      </div>
+</div>
+<p>Perspective:</p>
+<input type="range" min="150" max="800" value="400" step="5" onchange="setView(value);">
+<p id="showVal"> 400px </p>
+</body>

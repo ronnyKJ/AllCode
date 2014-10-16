@@ -1,0 +1,46 @@
+body{margin:0; padding: 0;}
+#container{position: relative;}
+#experiment{position: absolute; width: 536px;height: 369px;background: url(img/instructment.png);left: 100px; top:70px;}
+#alcohol_burner{position: absolute; width: 93px;height: 76px;background: url(img/alcohol_burner.png);left: 22px; top:212px;}
+#fire{position: absolute; width: 66px;height: 55px;background: url(img/fire.png);left: 14px; top:-54px;}
+#tube{position: absolute; width: 255px;height: 78px;background: url(img/tube.png);left: 30px; top:113px;}
+#hint{position: absolute; z-index: 100; left: 70px; top:110px; font-weight:bold;font-size: 22px; opacity: 0}
+.hint-right{color:green;-webkit-animation: playright 0.8s 1 ease;}
+.hint-wrong{color:red;-webkit-animation: playwrong 0.8s 1 ease;}
+@-webkit-keyframes playwrong {
+	0%{opacity: 0}
+	20%{opacity: 1}
+	70%{opacity: 1}
+	100%{opacity: 0}
+}
+
+@-webkit-keyframes playright {
+	0%{opacity: 0}
+	20%{opacity: 1}
+	100%{opacity: 1}
+}
+
+.hide{display: none;}
+.rotate{-webkit-transform-origin:255px 40px;-webkit-transform: rotate(0deg);}
+#mask{background: #000; position: fixed;top:0;left:0;bottom:0;right:0;opacity: 0;z-index: 2;display: none;}
+
+#bubble{position: absolute; width: 10px; height:70px; left: 421px; top:251px;display: none;}
+#bubble .bubble{position: absolute;background: url(img/bubble.png); width: 10px; height:10px;top:60px;opacity: 0;-webkit-animation: bubble 0.5s infinite ease-in;}
+#bubble .b1{-webkit-animation-delay: 0s;}
+#bubble .b2{-webkit-animation-delay: 0.2s;}
+#bubble .b3{-webkit-animation-delay: 0.4s;}
+@-webkit-keyframes bubble {
+	0%{top:60px;opacity: 0}
+	20%{opacity: 1}
+	70%{opacity: 1}
+	100%{top:0px;opacity: 0}
+}
+
+.blink{-webkit-animation: blink 0.2s 1 linear;-webkit-animation-iteration-count: 3;}
+@-webkit-keyframes blink {
+	0%{opacity: 0}
+	50%{opacity: 1}
+	100%{opacity: 0}
+}
+
+#copyright{position: absolute;top:480px;font-size:10px;left:260px;}

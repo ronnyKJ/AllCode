@@ -1,0 +1,86 @@
+﻿<html>
+<head><title>FireTest</title>
+<style>
+body
+{
+	background: #333;
+	margin: 0;
+	padding: 0;
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des"></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var t = c.getContext("2d");
+var canvasW = b.clientWidth;
+var canvasH = b.clientHeight;
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+var des = d.getElementById("des");
+t.translate(canvasW/2,canvasH/2);
+
+
+var x=y=0;
+var ballArray = [];
+var count = 50;
+r = Math.random;
+for(var i=0; i<count; i++)
+{
+	var ball = 
+	{
+		x: 0,
+		y: 0,
+		xs: 15*r()-7.5,
+		ys: 15*r()-7.5,
+		r: 50*r()+30
+	};
+	ballArray.push(ball);
+}
+
+var a = function()
+{
+	t.globalCompositeOperation = 'source-over';
+	t.fillStyle = "#000";
+	t.fillRect(-canvasW/2, -canvasH/2, canvasW, canvasH);
+	
+	t.globalCompositeOperation = 'lighter';
+	for(var i=0; i<count; i++)
+	{
+		var ball = ballArray[i];
+		ball.x += (ball.xs*=0.94);
+		ball.y += (ball.ys*=0.94);
+		var tmp = Math.max(Math.abs(ball.x), Math.abs(ball.y));
+		ball.r = Math.max((1-tmp*4/canvasW)*ball.r, 0);
+		if(ball.r>0.08)
+		{
+				var n = t.createRadialGradient(ball.x, ball.y, ball.r/2, ball.x, ball.y, ball.r);
+				n.addColorStop(0,"rgba(255,40,0,1)");
+				n.addColorStop(0.6,"rgba(0,0,0,0.2)");
+				n.addColorStop(1,"rgba(0,0,0,0)");
+				t.fillStyle = n;
+				t.fillRect(-canvasW/2, -canvasH/2, canvasW, canvasH);
+		}
+	}
+}
+
+setInterval(a, 33);
+</script>
+</html>

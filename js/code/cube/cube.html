@@ -1,0 +1,140 @@
+﻿<html>
+<head><title></title>
+<style>
+body
+{
+	-webkit-perspective: 600;
+	margin: 0;
+	padding: 0;
+}
+
+#container
+{
+	/*background: rgba(0, 0, 0, 0.4);*/
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 200px auto;
+	padding: 0;
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: cube 6s infinite linear;
+	-webkit-transform:rotateX(80deg) rotateY(360deg);
+}
+
+#container p
+{
+	position: absolute;
+	top: 0px;
+	width: 200px;
+	height: 200px;
+	line-height: 200px;
+	text-align: center;
+	font-size: 30px;
+	margin: 0;
+}
+
+#container p.front
+{
+	background: rgba(255, 0, 0, 0.4);
+	-webkit-transform: translateZ(100px);
+	
+}
+#container p.back
+{
+	background: rgba(0, 255, 0, 0.4);
+	-webkit-transform: rotateY(180deg) translateZ(100px);
+}
+#container p.left
+{
+	background: rgba(0, 0, 255, 0.4);
+	-webkit-transform: rotateY(-90deg) translateZ(100px);
+}
+#container p.right
+{
+	background: rgba(255, 255, 0, 0.4);
+	-webkit-transform: rotateY(90deg) translateZ(100px);
+}
+#container p.top
+{
+	background: rgba(255, 0, 255, 0.4);
+	-webkit-transform: rotateX(-90deg) translateZ(100px);
+}
+#container p.bottom
+{
+	background: rgba(0, 255, 255, 0.4);
+	-webkit-transform: rotateX(90deg) translateZ(100px);
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<p class="front" onclick="zoom(0, 0, 300, 'Z', c)">前</p>
+	<p class="back" onclick="zoom(0, 180, -300, 'Z', c)">后</p>
+	<p class="left" onclick="zoom(0, 90, -300, 'X', c)">左</p>
+	<p class="right" onclick="zoom(0, -90, 300, 'X', c)">右</p>
+	<p class="top" onclick="zoom(90, 0, 300, 'Y', c)">上</p>
+	<p class="bottom" onclick="zoom(-90, 0, -300, 'Y', c)">下</p>
+</div>
+</body>
+<script type="text/javascript">
+var d = document;
+var c = d.getElementById("container");
+var des = d.getElementById("des");
+var flag = false;
+var tx=0, ty=0;
+var tx1=0, ty1=0;
+var tmpx = 0, tmpy = 0;
+var first = true;
+c.style.webkitTransform = "rotateX("+tx+"deg) rotateY("+ty+"deg)";
+d.onmousemove = function(e)
+{
+	if(flag)
+	{
+		tx1 = e.clientX - tx;
+		ty1 = e.clientY - ty;
+		tmpx += tx1;
+		tmpy += ty1;
+		c.style.webkitTransform = "rotateX("+(-tmpy)+"deg) rotateY("+tmpx+"deg)";
+		tx = e.clientX;
+		ty = e.clientY;
+	}
+}
+d.onmouseup = function(e)
+{
+	flag = false;
+}
+d.onmousedown = function(e)
+{
+	flag = true;
+	tx = e.clientX;
+	ty = e.clientY;
+}
+
+function zoom(x, y, z, axix, obj)
+{
+	setWebkitAnimation(obj, "zoom", "100%{-webkit-transform:rotateX("+x+"deg) rotateY("+y+"deg) translate"+axix+"("+z+"px);}", "1s", "1", "ease");
+	setTimeout(function(){c.style.webkitTransform = "rotateX("+x+"deg) rotateY("+y+"deg) translate"+axix+"("+z+"px)";}, 1000);
+}
+
+function setWebkitAnimation(obj, name, animation, time, loop, ease)
+{
+	if(!window._ANIMATION_INDEX)
+	{
+		window._ANIMATION_INDEX = {};
+	}
+	if(window._ANIMATION_INDEX[name] == undefined)
+		window._ANIMATION_INDEX[name] = 0;
+	
+	var anim = document.createTextNode("@-webkit-keyframes " + name + "" + window._ANIMATION_INDEX[name] + "{" + animation + "}");
+	var style = document.getElementsByTagName("style")[0];
+	style.appendChild(anim);
+	obj.style.webkitAnimation = name + "" + window._ANIMATION_INDEX[name] +" " + time + " " + loop + " " + ease;
+	if(window._ANIMATION_INDEX[name] > 0)
+	{
+		var l = style.childNodes.length;
+		style.removeChild(style.childNodes[l-2]);
+	}
+	window._ANIMATION_INDEX[name]++;
+}
+</script>
+</html>

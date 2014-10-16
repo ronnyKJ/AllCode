@@ -1,0 +1,78 @@
+﻿<html>
+<head><title>ball-v4</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des"></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+canvasW = getOdd(canvasW);
+canvasH = getOdd(canvasH);
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+t.translate(canvasW/2,canvasH/2);
+
+//-----code-------
+
+
+//函数定义
+function getOdd(a)
+{
+	(a%2==1)&&(a--);
+	return a;
+}
+
+function circle(x, y, r, isFill, style)
+{
+	if(!isFill)
+	{
+		t.beginPath();
+		t.strokeStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.stroke();
+		t.closePath();
+	}
+	else
+	{
+		t.fillStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.fill();
+	}
+}
+
+function path(x1, y1, x2, y2, style)
+{
+	t.beginPath();
+	t.strokeStyle = style;
+	t.moveTo(x1,y1);
+	t.lineTo(x2,y2);
+	t.stroke();
+	t.closePath();
+}
+</script>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">  
+<html>  
+<head>  
+<title></title>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+</head>
+<body>  
+<script type="text/javascript">  
+var where = document.getElementById('here');  
+for(a=1;a<16;a++){ 
+	for(b=1;b<16;b++){  
+		for(i=1;i<16;i++){  
+			var e = code(i);  
+			var x = code(b);  
+			var y = code(a);  
+			document.write('<font color=#'+y+x+e+'>x</font>');  
+		}  
+		document.write('<br/>');  
+	}  
+	document.write('<br/>');  
+}  
+function code(z){  
+	switch(z){  
+		case 10:z='a';break;  
+		case 11:z='b';break;  
+		case 12:z='c';break;  
+		case 13:z='d';break;  
+		case 14:z='e';break;  
+		case 15:z='f';break;
+	}  
+	return z;  
+}  
+</script>  
+<div id="here">you will like it!</div>  
+</body>  
+</html>

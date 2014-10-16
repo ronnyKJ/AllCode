@@ -1,0 +1,31 @@
+﻿<html>
+<head><title></title>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+<div id='a' style="width: 100px; height: 100px;" onmouseover='cancel=0;colorful()' onmouseout='cancel=1;'>主页</div>
+</body>
+<script type="text/javascript">
+function gCL(i){
+	var f=parseInt((i%15)/5); 
+	i=i%15%5; 
+	switch(f){ 
+		case 0:return "#"+cS2(255-i*51)+cS2(i*51)+"00"; 
+		case 1:return "#00"+cS2(255-i*51)+cS2(i*51); 
+		case 2:return "#"+cS2(i*51)+"00"+cS2(255-i*51); 
+	}
+} 
+function cS2(i) { 
+	var s=i.toString(16); 
+	return ("00"+s).substr(s.length); 
+} 
+var a=document.getElementById('a') 
+var sd=0; 
+var cancel=0; 
+function colorful(){
+	a.style.backgroundColor=gCL(sd++); 
+	if(!cancel)setTimeout('colorful()',50); 
+}
+</script> 
+</html>

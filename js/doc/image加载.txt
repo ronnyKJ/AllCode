@@ -1,0 +1,9 @@
+<script>
+var image = new Image();
+image.src = 'http://www.baidu.com/img/logo.gif';
+image.onreadystatechange=function(){
+ if (image.readyState=="complete") {
+  alert(["Õº∆¨¥Û–° «:",image.width,image.height]);
+ }
+}
+</script>

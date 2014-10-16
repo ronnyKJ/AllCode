@@ -1,0 +1,36 @@
+<div class="box">
+    <h3>IF标签使用示例</h3>
+
+    <form action="__URL__/other" method="get">
+        <p>您喜欢ThinkPHP内置的模板引擎吗？</p>
+
+        <iterate name="data" id="vo" key="key">
+        <p>
+            <input type="radio" name="test" id="test{$key}" value="{$key}" />
+            <label for="test" class="labe{$key}">{$vo.sayyou}</label>
+        </p>
+        </iterate>
+
+
+        <p>&nbsp;&nbsp;&nbsp;<input type="submit" value="&nbsp;&nbsp;确认&nbsp;&nbsp;" /></p>
+    </form>
+
+    <p>
+    <if condition="isset($_GET['test'])">您选择了第 {.test} 项。<else />您没有作出选择</if>
+    </p>
+
+    <h3>switch标签使用示例</h3>
+    <present name="_GET['test']">
+    <p>
+        <switch name="_GET['test']">
+            <case value="1">{$data[0]['sayme']}</case>
+            <case value="2">{$data[1]['sayme']}</case>
+            <default />{$data[2]['sayme']}
+        </switch>
+    </p>
+    <else />
+        <p>使用switch标签，对上面提交的选择项作出相应文字显示</p>
+    </present>
+
+
+</div>

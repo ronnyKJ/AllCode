@@ -1,0 +1,28 @@
+<html>
+<head><title>animate</title><head>
+<body>
+<div id="cube" style="background: #0F0; width: 100px; height: 50px;"></div>
+</body>
+<script type="text/javascript">
+bouncePast = function(pos) {
+	if (pos < (1/2.75)) {
+	return (7.5625*pos*pos);
+	} else if (pos < (2/2.75)) {
+	return 2 - (7.5625*(pos-=(1.5/2.75))*pos + .75);
+	} else if (pos < (2.5/2.75)) {
+	return 2 - (7.5625*(pos-=(2.25/2.75))*pos + .9375);
+	} else {
+	return 2 - (7.5625*(pos-=(2.625/2.75))*pos + .984375);
+	}
+};
+var c = document.getElementById("cube");
+c.style.position = "absolute";
+var i=1300;
+	document.onmousemove = function(){
+		c.style.left=event.clientX;
+		c.style.top=event.clientY;
+		c.style.width = 80;
+		c.style.height = 80;
+	}
+</script>
+</html>

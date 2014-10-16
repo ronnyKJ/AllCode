@@ -1,0 +1,1341 @@
+﻿<html>
+<head><title>Super Mario</title>
+<link type="text/css" rel="stylesheet" href="mario.css" />
+<style>
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	background: #000;
+}
+
+#container
+{
+	position: relative;
+	margin: 250px auto 0;
+	width: 256px;
+	overflow: hidden;
+}
+
+#game
+{
+	position: relative;
+	height: 240px;
+	width: 1800px;
+	background: #5080ff;
+	overflow: hidden;
+	-webkit-animation-name: game-move;
+	-webkit-animation-duration: 300s;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes game-move {
+	0%{left: 0;}
+	3%{left: -600px;}
+	4.5%{left: -920px;}
+	6.8%{left: -920px;}
+	7.5%{left: -1220px;}
+	9%{left: -1554px;}
+	100%{left: -1554px;}
+}
+
+#ground
+{
+	position: absolute;
+	bottom: 0;
+	height: 32px;
+	width: 100%;
+	background: url('mario/gound.gif');
+}
+
+#count
+{
+	position: absolute;
+	background: #FFA000 url('mario/count.gif') no-repeat;
+	height: 16px;
+	width: 208px;
+	top: 16px;
+	left: 24px;
+	z-index: 1;
+	-webkit-animation-name: coin-count;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-direction: alternate;
+}
+
+@-webkit-keyframes coin-count {
+	0%{background: #FFA000;}
+	79.9999%{background: #FFA000;}
+	80%{background: #C07000;}
+	84.9999%{background: #C07000;}
+	85%{background: #784000;}
+	100%{background: #784000;}
+}
+
+#count .num
+{
+	display: inline-block;
+	height: 7px;
+	width: 7px;
+	background: url('mario/number.gif') no-repeat;
+	margin: 8px 1px 0 0;
+}
+
+#count .t1
+{
+	-webkit-animation-name: time;
+	-webkit-animation-duration: 60s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;	
+}
+
+#count .t2
+{
+	-webkit-animation-name: time;
+	-webkit-animation-duration: 6s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;	
+}
+
+#count .t3
+{
+	-webkit-animation-name: time;
+	-webkit-animation-duration: 600ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;	
+}
+
+@-webkit-keyframes time {
+	0% { background-position: 0 0; } 
+	9.99% { background-position: 0 0; }
+	10% { background-position: 0 -7px; }
+	19.99% { background-position: 0 -7px; }
+	20% { background-position: 0 -14px; }
+	29.99% { background-position: 0 -14px; }
+	30% { background-position: 0 -21px; }
+	39.99% { background-position: 0 -21px; }
+	40% { background-position: 0 -28px; }
+	49.99% { background-position: 0 -28px; }
+	50% { background-position: 0 -35px; }
+	59.99% { background-position: 0 -35px; }
+	60% { background-position: 0 -42px; }
+	69.99% { background-position: 0 -42px; }
+	70% { background-position: 0 -49px; }
+	79.99% { background-position: 0 -49px; }
+	80% { background-position: 0 -56px; }
+	89.99% { background-position: 0 -56px; }
+	90% { background-position: 0 -63px; }
+	99.99% { background-position: 0 -63px; }
+	100% { background-position: 0 -70px; } 
+}
+
+#count .coin_count
+{
+	margin-left: 24px;
+}
+
+#count .world-1
+{
+	margin-left: 24px;
+}
+
+#count .world-2
+{
+	margin-left: 9px;
+}
+
+#count .time
+{
+	margin-left: 23px;
+}
+
+/***************MOUNT***************/
+.mount
+{
+	position: absolute;
+	border: 1px #000 solid;
+	border-radius: 16px;
+	background: #48a810;
+	width: 300px;
+	height:300px;
+	top: 220px;
+	-webkit-transform: rotate(45deg)
+}
+
+.mount .mountdot
+{
+	position: absolute;
+	background: url('mario/mountdot.gif') no-repeat;
+	width: 6px;
+	height:8px;
+	top: 35px;
+	left: 6px;
+	-webkit-transform: rotate(-45deg);
+}
+
+.mount .dot-1
+{
+	top: 7px;
+	left: 12px;
+}
+
+.mount .dot-2
+{
+	top: 7px;
+	left: 35px;
+}
+
+.mount-1
+{
+	left: -100px;
+}
+
+.mount-2
+{
+	left: 140px;
+	top: 240px;
+}
+
+.mount-3
+{
+	left: 684px;
+	top: 225px;
+}
+/***************CLOUD***************/
+.cloud
+{
+	position: absolute;
+	background: url('mario/cloud.gif') no-repeat;
+	height: 24px;
+	width: 64px;
+	top: 48px;
+}
+
+.cloud-1
+{
+	left: 140px;
+}
+
+.cloud-2
+{
+	top: 32px;
+	left: 300px;
+	background-position: 0 -24px;
+}
+
+.cloud-3
+{
+	top: 48px;
+	left: 500px;
+	background-position: 0 -48px;
+}
+
+.cloud-4
+{
+	top: 32px;
+	left: 660px;
+	background-position: 0 -24px;
+}
+
+.cloud-5
+{
+	top: 60px;
+	left: 900px;
+	background-position: 0 -48px;
+}
+
+.cloud-6
+{
+	top: 32px;
+	left: 1080px;
+}
+
+.cloud-7
+{
+	top: 50px;
+	left: 1130px;
+	background-position: 0 -24px;
+}
+
+.cloud-8
+{
+	top: 32px;
+	left: 1300px;
+	background-position: 0 -24px;
+}
+
+/***************GRASS***************/
+.grass
+{
+	position: absolute;
+	background: url('mario/grass.gif') no-repeat;
+	height: 16px;
+	width: 64px;
+	bottom: 32px;
+}
+
+.grass-1
+{
+	background-position: 0 -32px;
+	left: 184px;
+}
+
+.grass-2
+{
+	left: 380px;
+}
+
+.grass-3
+{
+	background-position: 0 -16px;
+	left: 680px;
+}
+
+.grass-4
+{
+	left: 930px;
+}
+
+.grass-5
+{
+	background-position: 0 -32px;
+	left: 1100px;
+}
+/***************POPE***************/
+.pope
+{
+	position: absolute;
+	background: url('mario/pope.gif') no-repeat;
+	width: 32px;
+	height: 90px;
+}
+
+.pope-1
+{
+	top: 176px;
+	left: 450px;
+}
+
+.pope-2
+{
+	top: 160px;
+	left: 628px;
+}
+
+.pope-3
+{
+	top: 144px;
+	left: 756px;
+}
+/***************broke&coin***************/
+#area-1
+{
+	position: absolute;
+	width: 144px;
+	height: 80px;
+	top: 80px;
+	left: 260px;
+}
+
+.broke, .coin
+{
+	position: absolute;
+	display: inline-block;
+	background: url('mario/broke.gif') no-repeat;
+	width: 16px;
+	height: 16px;
+	bottom: 0;
+}
+
+#area-1 .b-1
+{
+	left: 64px;
+}
+
+#area-1 .b-2
+{
+	left: 96px;
+}
+
+#area-1 .b-3
+{
+	left: 128px;
+}
+
+.coin
+{
+	background: url('mario/coin.gif') no-repeat;
+	-webkit-animation-name: coin;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes coin {
+	0%{background-position: 0 0;}
+	32.9999%{background-position: 0 0;}
+	33%{background-position: 0 -16px;}
+	66.9999%{background-position: 0 -16px;}
+	67%{background-position: 0 -32px;}
+	100%{background-position: 0 -32px;}
+}
+
+#area-1 .c-2
+{
+	left: 80px;
+}
+
+#area-1 .c-3
+{
+	left: 112px;
+}
+
+#area-1 .c-4
+{
+	left: 96px;
+	bottom: 64px;
+}
+
+/***************castle-area***************/
+#castle-area
+{
+	position: absolute;
+	bottom: 32px;
+	left: 1300px;
+	width: 440px;
+	height: 168px;
+}
+
+#castle-area .pope
+{
+	left: 0;
+	top: 144px;
+}
+
+.stage
+{
+	position: absolute;
+	background: url('mario/stage.gif') no-repeat;
+}
+
+#castle-area .stage
+{
+	bottom: 0;
+	left: 34px;
+	width: 144px;
+	height: 128px;
+}
+
+#flag
+{
+	position: absolute;
+	background: url('mario/flag.gif') no-repeat 0 -16px;
+	left: 306px;
+	width: 16px;
+	height: 168px;
+}
+
+#flag p
+{
+	position: absolute;
+	background: url('mario/flag.gif') no-repeat;
+	left: -8px;
+	top: 9px;
+	width: 16px;
+	height: 16px;
+	-webkit-animation-name: flag-down;
+	-webkit-animation-duration: 300s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 25.7s;
+}
+
+@-webkit-keyframes flag-down {
+	0%{top: 9px;}
+	0.4%{top: 137px;}
+	100%{top: 137px;}
+}
+
+#castle
+{
+	position: absolute;
+	background: url('mario/castle.gif') no-repeat;
+	bottom: 0;
+	left: 354px;
+	width: 80px;
+	height: 80px;	
+}
+
+#castle-area .mount-1
+{
+	top: 185px;
+	left: 93px;	
+}
+
+#castle-area .mount-2
+{
+	top: 185px;
+	left: 346px;	
+}
+
+#castle-area .grass
+{
+	bottom: 0;
+	left: 416px;	
+}
+
+#castle-area .cloud
+{
+	top: 0;
+	left: 320px;	
+}
+
+#castle-area .boom
+{
+	position: absolute;
+	background: url('mario/boom.gif') no-repeat 0 -48px;
+	width: 16px;
+	height: 16px;
+	-webkit-animation-name: boom;
+	-webkit-animation-duration: 600ms;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes boom {
+	0%{background-position: 0 0;}
+	33.9999%{background-position: 0 0;}
+	34%{background-position: 0 -16px;}
+	66.9999%{background-position: 0 -16px;}
+	67%{background-position: 0 -32px;}
+	99.9999%{background-position: 0 -32px;}
+	100%{background-position: 0 -48px;}
+}
+
+#castle-area .boom-1
+{
+	top: 30px;
+	left: 400px;
+	-webkit-animation-delay: 30.82s;
+}
+
+#castle-area .boom-2
+{
+	top: 50px;
+	left: 450px;
+	-webkit-animation-delay: 31.48s;
+}
+
+#castle-area .boom-3
+{
+	top: 50px;
+	left: 370px;
+	-webkit-animation-delay: 32.2s;
+}
+
+#castle-area .boom-4
+{
+	top: 30px;
+	left: 340px;
+	-webkit-animation-delay: 32.8s;
+}
+
+#castle-area .boom-5
+{
+	top: 60px;
+	left: 420px;
+	-webkit-animation-delay: 33.4s;
+}
+
+#castle-area .boom-6
+{
+	top: 70px;
+	left: 330px;
+	-webkit-animation-delay: 34s;
+}
+
+/***************mashroom***************/
+.mashroom
+{
+	position: absolute;
+	bottom: 32px;
+	left: -40px;
+	width: 16px;
+	height: 16px;
+	-webkit-animation-name: mr-go;
+	-webkit-animation-duration: 2.5s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-direction: alternate;
+}
+
+@-webkit-keyframes mr-go {
+	0%{left: 660px;}
+	100%{left: 740px;}
+}
+
+.mr-1
+{
+	-webkit-animation-delay: 700ms;
+}
+
+.mashroom p
+{
+	background: url('mario/mashroom_turtle.gif') no-repeat;
+	width: 16px;
+	height: 16px;
+	-webkit-animation-name: mr-shake;
+	-webkit-animation-duration: 600ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes mr-shake {
+	0%{background-position: 0 0;}
+	49.9999%{background-position: 0 0;}
+	50%{background-position: 0 -16px;}
+	100%{background-position: 0 -16px;}
+}
+
+/***************turtle***************/
+.turtle
+{
+	position: absolute;
+	bottom: 32px;
+	left: -40px;
+	width: 16px;
+	height: 24px;
+	-webkit-animation-name: tl-go;
+	-webkit-animation-duration: 14s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes tl-go {
+	0%{left: 1200px;}
+	100%{left: 800px;}
+}
+
+.turtle p
+{
+	background: url('mario/mashroom_turtle.gif') no-repeat;
+	width: 16px;
+	height: 24px;
+	-webkit-animation-name: tl-shake;
+	-webkit-animation-duration: 600ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes tl-shake {
+	0%{background-position: 0 -32px;}
+	49.9999%{background-position: 0 -32px;}
+	50%{background-position: 0 -56px;}
+	100%{background-position: 0 -56px;}
+}
+
+/***************mario***************/
+.kofu
+{
+	position: absolute;
+	bottom: 32px;
+	left: -40px;
+	width: 32px;
+	height: 33px;
+}
+
+.kofu p
+{
+	background: url('mario/kofu.gif') no-repeat;
+	width: 32px;
+	height: 33px;
+	-webkit-animation-name: kofu-shake;
+	-webkit-animation-duration: 600ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes kofu-shake {
+	0%{background-position: 0 0;}
+	24.9999%{background-position: 0 0;}
+	25%{background-position: 0 -33px;}
+	49.9999%{background-position: 0 -33px;}
+	50%{background-position: 0 -66px;}
+	74.9999%{background-position: 0 -66px;}
+	75%{background-position: 0 -99px;}
+	100%{background-position: 0 -99px;}
+}
+
+.k-stop p
+{
+	-webkit-animation-name: kofu-stop;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes kofu-stop {
+	0%{ background-position: 0 0;}
+	100%{background-position: 0 0;}
+}
+
+.k-1
+{
+	-webkit-animation-name: k-go-1;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-delay: 12s;
+}
+
+@-webkit-keyframes k-go-1 {
+	0%{left: 1300px;}
+	100%{left: 1100px;}
+}
+
+.k-2
+{
+	-webkit-animation-name: k-stop-2;
+	-webkit-animation-duration: 3.8s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-delay: 15s;
+}
+
+@-webkit-keyframes k-stop-2 {
+	0%{left: 1100px;}
+	100%{left: 1100px;}
+}
+
+.k-3
+{
+	-webkit-animation-name: k-go-3;
+	-webkit-animation-duration: 4.8s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-delay: 18.8s;
+}
+
+@-webkit-keyframes k-go-3 {
+	0%{left: 1100px;}
+	100%{left: 700px;}
+}
+/***************mario***************/
+.mario
+{
+	position: absolute;
+	bottom: 32px;
+	left: -120px;
+	width: 16px;
+	height: 16px;
+}
+
+.mario p
+{
+	background: url('mario/mario.gif') no-repeat;
+	width: 16px;
+	height: 16px;
+	-webkit-animation-name: mario-shake;
+	-webkit-animation-duration: 240ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes mario-shake {
+	0%{background-position: 0 -16px;}
+	32.9999%{background-position: 0 -16px;}
+	33%{background-position: 0 -32px;}
+	66.9999%{background-position: 0 -32px;}
+	67%{background-position: 0 -48px;}
+	100%{background-position: 0 -48px;}
+}
+
+.m-jump p
+{
+	-webkit-animation-name: mario-jump;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes mario-jump {
+	0%{ background-position: 0 -64px;}
+	100%{background-position: 0 -64px;}
+}
+
+.m-stop p
+{
+	-webkit-animation-name: mario-stop;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes mario-stop {
+	0%{ background-position: 0 0;}
+	100%{background-position: 0 0;}
+}
+
+.m-drag-l p
+{
+	background-position: 0 -160px;
+	-webkit-animation-name: mario-drag;/*动画不存在，只是为了显示新的背景, 算是hack，上面的stop也许可以改成这样的*/
+}
+
+.m-drag-r p
+{
+	background-position: 0 -176px;
+	-webkit-animation-name: mario-drag;
+}
+
+.m-1
+{
+	-webkit-animation-name: speedup-1;
+	-webkit-animation-duration: 0.6s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+}
+
+@-webkit-keyframes speedup-1 {
+	0%{left: 60px;}
+	100%{left: 100px;}
+}
+
+.m-2
+{
+	-webkit-animation-name: run-2;
+	-webkit-animation-duration: 4s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 0.6s;	
+}
+
+@-webkit-keyframes run-2 {
+	0%{left: 100px;}
+	100%{left: 410px;}
+}
+
+.m-3
+{
+	-webkit-animation-name: jumpup-3;
+	-webkit-animation-duration: 0.45s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 4.6s;		
+}
+
+@-webkit-keyframes jumpup-3 {
+	0%{left: 410px; bottom: 32px;}
+	100%{left: 450px; bottom: 98px;}
+}
+
+.m-4
+{
+	-webkit-animation-name: jumpdown-4;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 5.05s;		
+}
+
+@-webkit-keyframes jumpdown-4 {
+	0%{left: 452px; bottom: 96px;}
+	100%{left: 510px; bottom: 32px;}
+}
+
+.m-5
+{
+	-webkit-animation-name: run-5;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 5.55s;	
+}
+
+@-webkit-keyframes run-5 {
+	0%{left: 510px;}
+	100%{left: 580px;}
+}
+
+.m-6
+{
+	-webkit-animation-name: jumpup-6;
+	-webkit-animation-duration: 0.45s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 7.55s;		
+}
+
+@-webkit-keyframes jumpup-6 {
+	0%{left: 580px; bottom: 32px;}
+	100%{left: 620px; bottom: 98px;}
+}
+
+.m-7
+{
+	-webkit-animation-name: jumpdown-7;
+	-webkit-animation-duration: 0.1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 8s;		
+}
+
+@-webkit-keyframes jumpdown-7 {
+	0%{left: 622px; bottom: 96px;}
+	100%{left: 630px; bottom: 80px;}
+}
+
+.m-8
+{
+	-webkit-animation-name: jumpup-8;
+	-webkit-animation-duration: 0.45s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 8.1s;		
+}
+
+@-webkit-keyframes jumpup-8 {
+	0%{left:630px; bottom: 80px;}
+	100%{left: 680px; bottom: 168px;}
+}
+
+.m-9
+{
+	-webkit-animation-name: jumpdown-9;
+	-webkit-animation-duration: 0.55s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 8.55s;		
+}
+
+@-webkit-keyframes jumpdown-9 {
+	0%{left: 680px; bottom: 168px;}
+	100%{left: 765px; bottom: 96px;}
+}
+
+.m-10
+{
+	-webkit-animation-name: run-10;
+	-webkit-animation-duration: 0.8s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 9.1s;	
+}
+
+@-webkit-keyframes run-10 {
+	0%{left: 765px; bottom: 96px;}
+	100%{left: 785px; bottom: 96px;}
+}
+
+.m-11
+{
+	-webkit-animation-name: jumpdown-11;
+	-webkit-animation-duration: 0.55s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 9.9s;		
+}
+
+@-webkit-keyframes jumpdown-11 {
+	0%{left: 785px; bottom: 96px;}
+	100%{left: 800px; bottom: 32px;}
+}
+
+.m-12
+{
+	-webkit-animation-name: run-12;
+	-webkit-animation-duration: 0.8s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 10.45s;	
+}
+
+@-webkit-keyframes run-12 {
+	0%{left: 800px; bottom: 32px;}
+	100%{left: 830px; bottom: 32px;}
+}
+
+.m-13
+{
+	-webkit-animation-name: jumpup-13;
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 11.25s;		
+}
+
+@-webkit-keyframes jumpup-13 {
+	0%{left: 830px; bottom: 32px;}
+	100%{left: 850px; bottom: 80px;}
+}
+
+.m-14
+{
+	-webkit-animation-name: jumpdown-14;
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 11.65s;		
+}
+
+@-webkit-keyframes jumpdown-14 {
+	0%{left: 850px; bottom: 80px;}
+	100%{left: 880px; bottom: 32px;}
+}
+
+.m-15
+{
+	-webkit-animation-name: run-15;
+	-webkit-animation-duration: 1.5s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 12.05s;	
+}
+
+@-webkit-keyframes run-15 {
+	0%{left: 880px; bottom: 32px;}
+	100%{left: 1000px; bottom: 32px;}
+}
+
+.m-16
+{
+	-webkit-animation-name: stop-16;
+	-webkit-animation-duration: 6s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 13.55s;	
+}
+
+@-webkit-keyframes stop-16 {
+	0%{left: 1000px; bottom: 32px;}
+	100%{left: 1000px; bottom: 32px;}
+}
+
+.m-17
+{
+	-webkit-animation-name: jumpup-17;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 19.55s;		
+}
+
+@-webkit-keyframes jumpup-17 {
+	0%{left: 1000px; bottom: 32px;}
+	100%{left: 1020px; bottom: 80px;}
+}
+
+.m-18
+{
+	-webkit-animation-name: jumpdown-18;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 19.85s;		
+}
+
+@-webkit-keyframes jumpdown-18 {
+	0%{left: 1020px; bottom: 80px;}
+	100%{left: 1040px; bottom: 32px;}
+}
+
+.m-19
+{
+	-webkit-animation-name: run-19;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 20.15s;
+}
+
+@-webkit-keyframes run-19 {
+	0%{left: 1040px;}
+	100%{left: 1250px;}
+}
+
+.m-20
+{
+	-webkit-animation-name: jumpup-20;
+	-webkit-animation-duration: 0.45s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 22.15s;
+}
+
+@-webkit-keyframes jumpup-20 {
+	0%{left: 1250px; bottom: 32px;}
+	100%{left: 1340px; bottom: 120px;}
+}
+
+.m-21
+{
+	-webkit-animation-name: jumpdown-21;
+	-webkit-animation-duration: 0.15s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 22.6s;	
+}
+
+@-webkit-keyframes jumpdown-21 {
+	0%{left: 1340px; bottom: 120px;}
+	100%{left: 1376px; bottom: 96px;}
+}
+
+.m-22
+{
+	-webkit-animation-name: jumpup-22;
+	-webkit-animation-duration: 0.45s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 22.75s;
+}
+
+@-webkit-keyframes jumpup-22 {
+	0%{left: 1376px; bottom: 96px;}
+	100%{left: 1440px; bottom: 180px;}
+}
+
+.m-23
+{
+	-webkit-animation-name: jumpdown-23;
+	-webkit-animation-duration: 0.15s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 23.2s;	
+}
+
+@-webkit-keyframes jumpdown-23 {
+	0%{left: 1440px; bottom: 180px}
+	100%{left: 1450px; bottom: 160px;}
+}
+
+.m-24
+{
+	-webkit-animation-name: stop-24;
+	-webkit-animation-duration: 0.7s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 23.35s;	
+}
+
+@-webkit-keyframes stop-24 {
+	0%{left: 1450px; bottom: 160px;}
+	100%{left: 1450px; bottom: 160px;}
+}
+
+.m-25
+{
+	-webkit-animation-name: run-25;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 24.05s;
+}
+
+@-webkit-keyframes run-25 {
+	0%{left: 1450px; bottom: 160px;}
+	100%{left: 1475px; bottom: 160px;}
+}
+
+.m-26
+{
+	-webkit-animation-name: jumpup-26;
+	-webkit-animation-duration: 0.35s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;	
+	-webkit-animation-delay: 25.05s;
+}
+
+@-webkit-keyframes jumpup-26 {
+	0%{left: 1475px; bottom: 160px;}
+	100%{left: 1525px; bottom: 200px;}
+}
+
+.m-27
+{
+	-webkit-animation-name: jumpdown-27;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 25.4s;
+}
+
+@-webkit-keyframes jumpdown-27 {
+	0%{left: 1525px; bottom: 200px;}
+	100%{left: 1600px; bottom: 176px;}
+}
+
+.m-28
+{
+	-webkit-animation-name: drag-28;
+	-webkit-animation-duration: 1.2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 25.7s;
+}
+
+@-webkit-keyframes drag-28 {
+	0%{left: 1600px; bottom: 176px;}
+	100%{left: 1600px; bottom: 48px;}
+}
+
+.m-29
+{
+	-webkit-animation-name: drag-29;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-iteration-count:1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 26.9s;
+}
+
+@-webkit-keyframes drag-29 {
+	0%{left: 1613px; bottom: 48px;}
+	100%{left: 1613px; bottom: 48px;}
+}
+
+.m-30
+{
+	-webkit-animation-name: stop-30;
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;	
+	-webkit-animation-delay: 27.2s;	
+}
+
+@-webkit-keyframes stop-30 {
+	0%{left: 1613px; bottom: 48px;}
+	100%{left: 1613px; bottom: 48px;}
+}
+
+.m-31
+{
+	-webkit-animation-name: run-31;
+	-webkit-animation-duration: 0.7s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 27.6s;
+}
+
+@-webkit-keyframes run-31 {
+	0%{left: 1613px; bottom: 48px;}
+	100%{left: 1620px; bottom: 48px;}
+}
+
+.m-32
+{
+	-webkit-animation-name: jumpdown-32;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 28.3s;
+}
+
+@-webkit-keyframes jumpdown-32 {
+	0%{left: 1620px; bottom: 48px;}
+	100%{left: 1626px; bottom: 32px;}
+}
+
+.m-33
+{
+	-webkit-animation-name: run-33;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;	
+	-webkit-animation-delay: 28.6s;
+}
+
+@-webkit-keyframes run-33 {
+	0%{left: 1626px; bottom: 32px;}
+	100%{left: 1686px; bottom: 32px;}
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="count">
+		<span class="num"></span><span class="num"></span><span class="num"></span><span class="num"></span><span class="num"></span><span class="num"></span>
+		<span class="num coin_count"></span><span class="num"></span>
+		<span class="num world-1"></span><span class="num world-2"></span>
+		<span class="num time t1"></span><span class="num t2"></span><span class="num t3"></span>
+	</div>
+	<!--meet-->
+	<div id="meet">
+		<div id="tvM">
+			<div id="marioM"></div>
+			<div id="kofuM"></div>
+			<div id="blackM"></div>
+			<div id="mtM"></div>
+			<div id="ktM"></div>
+		</div>
+	</div>
+	<div id="game">
+		<!--mount-->
+		<div class="mount mount-1"><span class="mountdot"></span><span class="mountdot dot-1"></span><span class="mountdot dot-2"></span></div>
+		<div class="mount mount-2"><span class="mountdot dot-1"></span></div>
+		<div class="mount mount-3"><span class="mountdot"></span><span class="mountdot dot-1"></span><span class="mountdot dot-2"></span></div>
+		<!--cloud-->
+		<div class="cloud cloud-1"></div><div class="cloud cloud-2"></div><div class="cloud cloud-3"></div><div class="cloud cloud-4"></div>
+		<div class="cloud cloud-5"></div><div class="cloud cloud-6"></div><div class="cloud cloud-7"></div><div class="cloud cloud-8"></div>
+		<!--grass-->
+		<div class="grass grass-1"></div><div class="grass grass-2"></div><div class="grass grass-3"></div>
+		<div class="grass grass-4"></div><div class="grass grass-5"></div>
+		<!--pope-->
+		<div class="pope pope-1"></div><div class="pope pope-2"></div><div class="pope pope-3"></div>
+		<!--broke&coin-->
+		<div id="area-1">
+			<span class="broke b-1"></span><span class="broke b-2"></span><span class="broke b-3"></span>
+			<span class="coin c-1"></span><span class="coin c-2"></span><span class="coin c-3"></span><span class="coin c-4"></span>
+		</div>
+				
+		<!--castle_area-->
+		<div id="castle-area">
+			<div class="grass"></div><div class="cloud"></div>
+			<div class="pope pope-1"></div><div class="stage"></div><div id="flag"><p></p></div><div id="castle"></div>
+			<div class="mount mount-1"><span class="mountdot"></span><span class="mountdot dot-1"></span><span class="mountdot dot-2"></span></div>
+			<div class="mount mount-2"><span class="mountdot dot-1"></span></div>
+			<div class="boom boom-1"></div><div class="boom boom-2"></div><div class="boom boom-3"></div>
+			<div class="boom boom-4"></div><div class="boom boom-5"></div><div class="boom boom-6"></div>
+		</div>
+		
+		<!--ground-->
+		<div id="ground"></div>
+		
+		<!--mashroom-->
+		<div class="mashroom mr-1"><p></p></div><div class="mashroom mr-2"><p></p></div>
+		<!--turtle-->
+		<div class="turtle tl-1"><p></p></div>
+		
+		<!--mario-->
+		<div class="mario m-1"><p></p></div><!--speedup-->
+		<div class="mario m-2"><p></p></div><!--run-->
+		<div class="mario m-3 m-jump"><p></p></div><div class="mario m-4 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-5"><p></p></div><!--run-->
+		<div class="mario m-6 m-jump"><p></p></div><div class="mario m-7 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-8 m-jump"><p></p></div><div class="mario m-9 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-10"><p></p></div><!--run-->
+		<div class="mario m-11 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-12"><p></p></div><!--run-->
+		<div class="mario m-13 m-jump"><p></p></div><div class="mario m-14 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-15"><p></p></div><!--run-->
+		<div class="mario m-16 m-stop"><p></p></div><!--stop-->
+		<div class="mario m-17 m-jump"><p></p></div><div class="mario m-18 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-19"><p></p></div><!--run-->
+		<div class="mario m-20 m-jump"><p></p></div><div class="mario m-21 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-22 m-jump"><p></p></div><div class="mario m-23 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-24 m-stop"><p></p></div><!--stop-->
+		<div class="mario m-25"><p></p></div><!--run-->
+		<div class="mario m-26 m-jump"><p></p></div><div class="mario m-27 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-28 m-drag-l"><p></p></div><div class="mario m-29 m-drag-r"><p></p></div><!--drag-->
+		<div class="mario m-30 m-stop"><p></p></div><!--stop-->
+		<div class="mario m-31"><p></p></div><!--run-->
+		<div class="mario m-32 m-jump"><p></p></div><!--jump-->
+		<div class="mario m-33"><p></p></div><!--run-->
+		
+		<!--kofu-->
+		<div class="kofu k-1"><p></p></div><!--run-->
+		<div class="kofu k-2 k-stop"><p></p></div><!--stop-->
+		<div class="kofu k-3"><p></p></div><!--run-->
+	</div>
+	<audio src="mario/music.mp3" autoplay></audio>
+</div>
+</body>
+</html>

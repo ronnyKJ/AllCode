@@ -1,0 +1,1 @@
+<?php//map tiles configurationTile_config = array(	'url'=>'http://www.openstreetmap.org/api/0.6/map?bbox=',	'width'=>0.005,	'height'=>0.005,	'timeout'=>120 //second);?>

@@ -1,0 +1,1519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0033)http://www.iteye.com/topic/783260 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛</title>
+    <meta name="description" content="基于jquery-1.4.3rc1版本的. 正式版据说过几天就发布, 应该差别不大. 这个系列应该有十章, 本来准备写完了一起发的. 但有几章还不知道会拖到什么时候. 现在完成大概五章的内容了. 会陆续放上来. 这个源码分析系列我不想它成为单纯的翻译注释.除了那种一眼就明白的代码, 其它基本都加了注解.  有时候一句代码的分析可能会关联到一个重要的知识点, 我也尽量在能力范围内把它讲清. 看源码前尽 ...">
+    <meta name="keywords" content=" JQuery web">
+    <link rel="shortcut icon" href="http://www.iteye.com/images/favicon.ico" type="image/x-icon">
+    <link href="http://www.iteye.com/rss/board/web" rel="alternate" title="ITeye论坛" type="application/rss+xml">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://www.iteye.com/open_search.xml" title="ITeye">
+    <link href="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/forum.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/ga.js"></script><script src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/application.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', '.iteye.com']);
+  _gaq.push(['_setAllowHash', 'false']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+      <link href="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/SyntaxHighlighter.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/shCoreCommon.js" type="text/javascript"></script>
+<script src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/hotkey.js" type="text/javascript"></script>
+  <script src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/code_favorites.js" type="text/javascript"></script>
+          <script src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/dragdrop.js" type="text/javascript"></script>
+          <style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style></head>
+  <body>
+    <div id="page">
+      <div id="header">
+        <div class="clearfix"><div id="user_nav">
+      <a href="http://www.iteye.com/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="http://www.iteye.com/all" style="color:red">我的应用</a>
+    <a href="http://www.iteye.com/login">登录</a>
+    <a href="http://www.iteye.com/signup" class="nobg">注册</a>
+  </div></div>
+        <div class="clearfix">
+          <div id="branding">
+            <a href="http://www.iteye.com/"><img alt="ITeye-最棒的软件开发交流社区" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/logo.gif" title="ITeye-最棒的软件开发交流社区"></a>
+          </div>
+          <div id="gg"><a href="http://www.iteye.com/clicks/642" target="_blank"><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/760-90_ruby.jpg"></a></div>
+        </div>
+      </div>
+
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+          
+
+<div class="clearfix">
+  <div class="crumbs">
+    <a href="http://www.iteye.com/forums">论坛首页</a> <span class="arrow">→</span>
+    <a href="http://www.iteye.com/forums/board/web">Web前端技术版</a> <span class="arrow">→</span>
+    <a href="http://www.iteye.com/forums/tag/JQuery">JQuery</a> <span class="arrow">→</span>
+    <h1>jquery1.43源码分析之核心部分</h1>
+  </div>
+</div>
+
+<div id="forum_tag_list">
+  <a href="http://www.iteye.com/forums/board/web">全部</a>
+      <a href="http://www.iteye.com/forums/tag/JavaScript">JavaScript</a>
+      <a href="http://www.iteye.com/forums/tag/EXT">EXT</a>
+      <a href="http://www.iteye.com/forums/tag/ajax">AJAX</a>
+      <a href="http://www.iteye.com/forums/tag/UI">UI</a>
+      <a href="http://www.iteye.com/forums/tag/CSS">CSS</a>
+      <a href="http://www.iteye.com/forums/tag/prototype">prototype</a>
+      <a href="http://www.iteye.com/forums/tag/dojo">dojo</a>
+      <a href="http://www.iteye.com/forums/tag/YUI">YUI</a>
+      <a href="http://www.iteye.com/forums/tag/DWR">DWR</a>
+      <a href="http://www.iteye.com/forums/tag/GWT">GWT</a>
+      <a href="http://www.iteye.com/forums/tag/JQuery">JQuery</a>
+      <a href="http://www.iteye.com/forums/tag/JavaFX">JavaFX</a>
+      <a href="http://www.iteye.com/forums/tag/Web">Web综合</a>
+  </div>
+
+<div class="actions">
+  <div class="buttons"><a href="http://www.iteye.com/forums/41/topics/783260/posts/new" class="new_post" title="发表回复">&nbsp;</a></div>
+  <div class="wrapper">
+    <div id="forum_recommended_f4"><a href="http://www.iteye.com/clicks/593" target="_blank"><span style="color: blue; font-weight: bold;">最成熟稳定甘特图控件,支持Java和.Net</span></a></div>
+    <div class="pagination"><span class="disabled prev_page">« 上一页</span> <span class="current">1</span> <a href="http://www.iteye.com/topic/783260?page=2" rel="next">2</a> <a href="http://www.iteye.com/topic/783260?page=3">3</a> <a href="http://www.iteye.com/topic/783260?page=4">4</a> <a href="http://www.iteye.com/topic/783260?page=5">5</a> <a href="http://www.iteye.com/topic/783260?page=2" class="next_page" rel="next">下一页 »</a></div>
+    <div class="info">浏览 12104 次</div>
+  </div>
+</div>
+
+
+
+<table id="forum_main" cellspacing="1">
+  <thead>
+    <tr>
+      <th colspan="2" class="topic_title">
+        <div class="wrapper"> <a href="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛.htm">主题：jquery1.43源码分析之核心部分</a></div>
+        <div id="topic_rate_box">精华帖 (12) :: 良好帖 (5) :: 新手帖 (18) :: 隐藏帖 (0)</div>
+      </th>
+    </tr>
+    <tr>
+      <td class="first_col">作者</td>
+      <td class="last_col">正文
+      
+      </td>
+    </tr>
+  </thead>
+  <tbody id="posts">
+    <tr id="1707130">
+  <td class="postauthor">
+    <ul>
+      <li class="name">__游乐场</li>
+      <li>等级: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/star2.gif" alt="二星会员" title="二星会员"></li>
+      <li><a href="http://gengzhelun619-163-com.iteye.com/" target="_blank"><img alt="__游乐场的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/94fddce1-4fbb-376e-af27-870f7a4d860e.jpeg" title="__游乐场的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 62</li>
+      <li>积分: 280</li>
+      <li>来自: 深圳</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        最后修改：2010-10-13
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+        
+              <script type="text/javascript">
+      var hunters = ["\u003Ca href='/jobs/714' target='_blank' style='color:#000;'\u003E\u003Cspan style='font-weight:bold;'\u003E\u5317\u4eac: \u003C/span\u003E ITeye\u7f51\u7ad9\u8bda\u8058Ruby\u5de5\u7a0b\u5e08\u003C/a\u003E","\u003Ca href='/jobs/1848' target='_blank' style='color:#000;'\u003E\u003Cspan style='font-weight:bold;'\u003E\u5317\u4eac: \u003C/span\u003E ITeye\u7f51\u7ad9\u8bda\u8058\u7f51\u7ad9\u7f16\u8f91\u003C/a\u003E","\u003Ca href='/jobs/1846' target='_blank' style='color:#000;'\u003E\u003Cspan style='font-weight:bold;'\u003E\u5317\u4eac: \u003C/span\u003E ITeye\u7f51\u7ad9\u8bda\u8058\u7f51\u7ad9\u4ea7\u54c1UED\u4e3b\u7ba1\u003C/a\u003E","\u003Ca href='/jobs/712' target='_blank' style='color:#000;'\u003E\u003Cspan style='font-weight:bold;'\u003E\u5317\u4eac: \u003C/span\u003E ITeye\u7f51\u7ad9\u8bda\u8058Java\u9ad8\u7ea7\u641c\u7d22\u5de5\u7a0b\u5e08\u003C/a\u003E","\u003Ca href='/jobs/1847' target='_blank' style='color:#000;'\u003E\u003Cspan style='font-weight:bold;'\u003E\u5317\u4eac: \u003C/span\u003E ITeye\u7f51\u7ad9\u8bda\u8058\u4ea7\u54c1\u4ea4\u4e92\u8bbe\u8ba1\u003C/a\u003E"]
+      var hunter_id = Math.ceil(Math.random() * hunters.length) - 1;
+      if(hunter_id == -1) hunter_id = 0;
+    </script>
+    <div id="hunter_recommended" style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-bottom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; margin-bottom: 10px; float: left; width: 557px; background-position: initial initial; background-repeat: initial initial; ">
+      <span id="hunters_nav" style="margin-right:5px;">
+        <a href="http://www.iteye.com/topic/783260#" onclick="hunter_id &lt;= 0 ? hunter_id = hunters.length - 1 : hunter_id--; $(&#39;hunters&#39;).update(hunters[hunter_id]);return false;" style="border:1px solid #ccc;padding: 0 3px;size: 13px;text-decoration: none;">&lt;</a>
+        <a href="http://www.iteye.com/topic/783260#" onclick="hunter_id &gt;= hunters.length - 1 ? hunter_id = 0 : hunter_id++; $(&#39;hunters&#39;).update(hunters[hunter_id]);return false;" style="border:1px solid #ccc;padding: 0 3px;size :13px;text-decoration: none;">&gt;</a>
+      </span>
+      猎头职位: <span id="hunters"><script type="text/javascript">document.write(hunters[hunter_id]);</script><a href="http://www.iteye.com/jobs/1846" target="_blank" style="color:#000;"><span style="font-weight:bold;">北京: </span> ITeye网站诚聘网站产品UED主管</a></span>
+    </div>
+
+        
+      
+                                            <div id="related_topics" style="position: relative; ">相关文章: <span class="close"><a href="http://www.iteye.com/topic/783260#" onclick="$(&#39;related_topics&#39;).hide();if($(&#39;hunter_recommended&#39;)){$(&#39;hunter_recommended&#39;).style.width=&#39;780px&#39;;} return false;" title="关闭">&nbsp;</a></span>
+              <ul>
+                                    <li><a href="http://www.iteye.com/topic/576084" title="jQuery源码解析2(Core)" target="_blank">jQuery源码解析2(Core)</a></li>
+                                      <li><a href="http://www.iteye.com/topic/780238" title="jquery1.42 缓存系统分析" target="_blank">jquery1.42 缓存系统分析</a></li>
+                                      <li><a href="http://www.iteye.com/topic/786984" title="jquery1.43源码分析之动画部分" target="_blank">jquery1.43源码分析之动画部分</a></li>
+                                  </ul>
+                <br><span>推荐群组: <a href="http://hzjavaeyer.group.iteye.com/" target="_blank">javascript研究小组</a></span>
+                <br><a href="http://www.iteye.com/wiki/topic/783260" target="_blank">更多相关推荐</a>
+              </div>
+              <script type="text/javascript">
+                if($('hunter_recommended')) {
+                  $('hunter_recommended').setStyle({cssFloat: 'left', width: '557px'})
+                }
+                new Draggable("related_topics");
+              </script>
+                              
+        基于jquery-1.4.3rc1版本的. 正式版据说过几天就发布, 应该差别不大.
+<br>
+<br>这个系列应该有十章, 本来准备写完了一起发的. 但有几章还不知道会拖到什么时候. 现在完成大概五章的内容了.
+<br>
+<br>会陆续放上来.
+<br>
+<br>这个源码分析系列我不想它成为单纯的翻译注释.除了那种一眼就明白的代码, 其它基本都加了注解. 
+<br>有时候一句代码的分析可能会关联到一个重要的知识点, 我也尽量在能力范围内把它讲清. 看源码前尽可能的多思考一下,假如是我们实现这个方法,会怎么去做. 再对比jquery的实现就更能加深理解. 另外你也可以对jquery的某些代码保持怀疑, 每次版本更新,都会修复很多bug, 可能你现在怀疑的就是其中一个.
+<br>
+<br>这些源码分析里面的错误和缺陷肯定是有的. 写成文档的目的一是为了梳理自己的知识,再就是希望在和大家的讨论中, 能认识和改正自己的错误.
+<br>
+<br>最后面提供了pdf下载.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>------------------------------- 分割线----------------------------------------------- 
+<br>
+<br>
+<br>
+<br>
+<br>jquery核心
+<br>
+<br>
+<br>一&nbsp; 构造jquery.
+<br>
+<br>相对于其它库里传统的构造对象方法. jquery提供了一种截然不同的方法. 它选择创造一个全新的奇异世界.
+<br>
+<br>首先所有的jquery代码被一个自动执行的闭包包裹起来, 只在后面暴露$和jQuery这2个变量给外界 尽量避开变量冲突.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=(function(window%2C%20%20undefined)%7B%0A%E2%80%A6..%0A%7D)(window)" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>(function(window,&nbsp;&nbsp;undefined){&nbsp;&nbsp;</span></span></li><li><span>…..&nbsp;&nbsp;</span></li><li><span>})(window)&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="0" title="jquery1.43源码分析之核心部分">(function(window,  undefined){
+…..
+})(window)</pre>
+<br>window和undefined都是为了减少变量查找所经过的scope. 当window通过传递给闭包内部之后, 在闭包内部使用它的时候,
+<br>可以把它当成一个局部变量, 显然比原先在window scope下查找的时候要快一些.
+<br>undefined也是同样的道理, 其实这个undefined并不是javascript数据类型六君子之一的undefined, 而是一个普普通通的变量名.
+<br>只是因为没给它传递值. 它的值就是undefined.&nbsp; undefined并不是javascript的保留字.
+<br>
+<br>然后是一个套子套住jquery的构造方法
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=var%20jQuery%20%3D%20(function()%7B%20%20%20--------------------jq1%0A%09var%20jQuery%20%3D%20function(%20selector%2C%20context%20)%7B%20%20%20%20---------------jq2%0A%09%09%E2%80%A6%E2%80%A6..%0A%7D%3B%0A%09return%20(window.jQuery%20%3D%20window.%24%20%3D%20jQuery)%3B%0A%7D)()" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>var&nbsp;jQuery&nbsp;=&nbsp;(function(){&nbsp;&nbsp;&nbsp;--------------------jq1&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;jQuery&nbsp;=&nbsp;function(&nbsp;selector,&nbsp;context&nbsp;){&nbsp;&nbsp;&nbsp;&nbsp;---------------jq2&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;……..&nbsp;&nbsp;</span></li><li><span>};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;(window.jQuery&nbsp;=&nbsp;window.$&nbsp;=&nbsp;jQuery);&nbsp;&nbsp;</span></span></li><li><span>})()&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="1" title="jquery1.43源码分析之核心部分">var jQuery = (function(){   --------------------jq1
+	var jQuery = function( selector, context ){    ---------------jq2
+		……..
+};
+	return (window.jQuery = window.$ = jQuery);
+})()</pre>
+<br>
+<br>首先定义jq1, 这个jQuery最终在return&nbsp; (window.jQuery = window.$ = jQuery)的时候会变成
+<br>window下面的变量供外界使用.
+<br>而jq2供jquery内部执行的时候调用. 最终作为jq1的引用返回.
+<br>return (window.jQuery = window.$ = jQuery);这句话等价于
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=window.jQuery%20%3D%20window.%24%20%3D%20jQuery%3B%0Areturn%20window.%20jQuery." quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>window.jQuery&nbsp;=&nbsp;window.$&nbsp;=&nbsp;jQuery;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">return</span><span>&nbsp;window.&nbsp;jQuery.&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="2" title="jquery1.43源码分析之核心部分">window.jQuery = window.$ = jQuery;
+return window. jQuery.</pre>
+<br>
+<br>
+<br>现在来看看jquery对象是怎么被创建出来的. jquery作为一个独立特行的库,&nbsp; 它产生jquery对象时并不需要用new 操作符..
+<br>它宁愿选择这种方式, 比如要产生一个构造函数Man的对象.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=function%20Man(name)%7B%0A%09this.name%20%3D%20name%3B%09%0A%7D%0A%0Afunction%20People(name)%7B%0A%09return%20new%20Man(name)%3B%0A%7D%0A%0Avar%20pe%20%3D%20People(%22zengtan%22)%3B%0Aalert%20(pe.name)%3B%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>function&nbsp;Man(name){&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.name&nbsp;=&nbsp;name;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>function&nbsp;People(name){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">new</span><span>&nbsp;Man(name);&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>var&nbsp;pe&nbsp;=&nbsp;People(<span class="string">"zengtan"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>alert&nbsp;(pe.name);&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="3" title="jquery1.43源码分析之核心部分">function Man(name){
+	this.name = name;	
+}
+
+function People(name){
+	return new Man(name);
+}
+
+var pe = People("zengtan");
+alert (pe.name);
+</pre>
+<br>同样真正作为jQuery对象的构造方法的并不是
+<br>function (selector, context){
+<br>}
+<br>而是jQuery.fn.init.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=var%20jQuery%20%20%3D%20%20function(%20selector%2C%20context%20)%20%7B%09%09%09%0A%09%09return%20new%20jQuery.fn.init(%20selector%2C%20context%20)%3B%0A%09%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>var&nbsp;jQuery&nbsp;&nbsp;=&nbsp;&nbsp;function(&nbsp;selector,&nbsp;context&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">new</span><span>&nbsp;jQuery.fn.init(&nbsp;selector,&nbsp;context&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="4" title="jquery1.43源码分析之核心部分">var jQuery  =  function( selector, context ) {			
+		return new jQuery.fn.init( selector, context );
+	}
+</pre>
+<br>jQuery.fn就是jQuery.prototype. 见源码102行.
+<br>jQuery.fn = jQuery.prototype = {}
+<br>
+<br>init是挂在jQuery.prototype上的属性.
+<br>当jQuery(‘div’)的时候, 实际上转交给了jQuery.fn.init构造函数来生成对象.
+<br>当然我们想用new jQuery来生成jquery对象也可以. 跟直接用jQuery()没区别.
+<br>因为构造函数一定会返回一个对象.如果显示指定了返回某个对象.就会返回那个对象,
+<br>否则才会返回this对象. 
+<br>好比说, 有只母鸡被你强迫下一个蛋, 它会先看窝里有没有别人的蛋, 如果没有,才会自己努力下一个.
+<br>这里显然返回的是jQuery.fn.init的对象.
+<br>
+<br>也许现在你开始回忆制作jquery插件时, 明明是给jQuery.prototype添加方法. 
+<br>这里返回的又是jQuery.prototype.init的对象.
+<br>原来在源码333行,&nbsp; jQuery.prototype.init.prototype = jQuery. prototype;
+<br>现在很容易看明白. 给jQuery.prototype添加方法就等于给jQuery. prototype.init.prototype添加方法了.
+<br>JQuery api里的方法大部分都是通过jQuery.prototype扩展上去的, 除此之外. 我们还要给jquery对象加上索引. 给集合添加length属性,让他们更像一个数组里的元素.
+<br>
+<br>搞明白这些, 再来看jQuery. prototype.init这个方法里究竟是怎样生产jquery对象的.
+<br>我们可以把jQuery. prototype.init想象成一个火腿肠加工器. 只要你放了正确的原料进去, 
+<br>它就可以把原料变成火腿肠生产出来.如果你不小心放错了原料.它也会帮你变成火腿肠. 不过只有塑料包装, 里面没有火腿.
+<br>当然这个加工器里面的构造是很复杂的, 它需要判断材料种类, 数量等等. 
+<br>一般这个材料主要为这4种情况
+<br>1 dom节点
+<br>2 字符串
+<br>3 函数
+<br>4 数组
+<br>5 其他元素
+<br>
+<br>一 jQuery构造方法
+<br>jQuery的构造方法会生成一组jquery对象的集合.具体关于init方法的分析, 还是留在选择器部分说吧.
+<br>
+<br>二 jQuery对象访问
+<br>
+<br>jquery构造完对象之后, 会提供一些方法访问这些对象.
+<br>
+<br>1&nbsp; jQuery.prototype.size&nbsp; 
+<br>集合内元素的数量
+<br>就是通过this.length得到.
+<br>
+<br>2&nbsp; jQuery.prototype.get&nbsp; 
+<br>按照索引取得集合内某个元素, 返回包装前的原始对象
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=get%3A%20function(%20num%20)%20%7B%0A%09%09return%20num%20%3D%3D%20null%20%3F%20%0A%20%2F%2F%E5%A6%82%E6%9E%9C%E5%8F%82%E6%95%B0%E4%B8%BAnull%E6%88%96%E8%80%85undefiend.%20%E6%B3%A8%E6%84%8F%E6%98%AF%3D%3D.%0A%09%09%09this.toArray()%20%3A%20%20%2F%2F%E5%A6%82%E6%9E%9C%E4%B8%8D%E4%BC%A0%E5%8F%82%E6%95%B0%2C%20%E9%9B%86%E5%90%88%E5%86%85%E7%9A%84%E5%85%83%E7%B4%A0%E5%85%A8%E9%83%A8%E8%BD%AC%E5%8C%96%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84(1)%0A%09%09%09(%20num%20%3C%200%20%3F%20this.slice(num)%5B%200%20%5D%20%3A%20this%5B%20num%20%5D%20)%3B%20%0A%2F%2F%E8%B0%83%E7%94%A8silce%E6%96%B9%E6%B3%95%E6%88%AA%E5%8F%96%E6%9F%90%E4%B8%80%E4%B8%AA.%E5%8F%AF%E4%BB%A5%E4%BC%A0%E5%85%A5%E8%B4%9F%E6%95%B0%E5%B9%B6%E4%B8%94%E8%BF%94%E5%9B%9E%E7%9A%84%E6%98%AF%E5%8C%85%E8%A3%85%E5%89%8D%E7%9A%84%E5%AF%B9%E8%B1%A1.%0A%09%7D%0A%0A(1)%09%E7%9C%8B%E7%9C%8B%E8%BF%99%E9%87%8C%E7%9A%84this.toArray%E5%87%BD%E6%95%B0.%0AtoArray%3A%20function()%20%7B%0A%09%09return%20slice.call(%20this%2C%200%20)%3B%0A%09%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>get:&nbsp;function(&nbsp;num&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;num&nbsp;==&nbsp;</span><span class="keyword">null</span><span>&nbsp;?&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;<span class="comment">//如果参数为null或者undefiend.&nbsp;注意是==.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.toArray()&nbsp;:&nbsp;&nbsp;</span><span class="comment">//如果不传参数,&nbsp;集合内的元素全部转化为一个数组(1)</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;num&nbsp;&lt;&nbsp;<span class="number">0</span><span>&nbsp;?&nbsp;</span><span class="keyword">this</span><span>.slice(num)[&nbsp;</span><span class="number">0</span><span>&nbsp;]&nbsp;:&nbsp;</span><span class="keyword">this</span><span>[&nbsp;num&nbsp;]&nbsp;);&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//调用silce方法截取某一个.可以传入负数并且返回的是包装前的对象.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>(<span class="number">1</span><span>)&nbsp;看看这里的</span><span class="keyword">this</span><span>.toArray函数.&nbsp;&nbsp;</span></span></li><li><span>toArray:&nbsp;function()&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;slice.call(&nbsp;</span><span class="keyword">this</span><span>,&nbsp;</span><span class="number">0</span><span>&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="5" title="jquery1.43源码分析之核心部分">get: function( num ) {
+		return num == null ? 
+ //如果参数为null或者undefiend. 注意是==.
+			this.toArray() :  //如果不传参数, 集合内的元素全部转化为一个数组(1)
+			( num &lt; 0 ? this.slice(num)[ 0 ] : this[ num ] ); 
+//调用silce方法截取某一个.可以传入负数并且返回的是包装前的对象.
+	}
+
+(1)	看看这里的this.toArray函数.
+toArray: function() {
+		return slice.call( this, 0 );
+	}
+</pre>
+<br>很简单, 就是让当前jquery对象冒充Array的对象, 调用Array.prototype.slice进行截断. 返回的是一个数组.
+<br>至于为什么可以像这样使用对象冒充. 我们抽个地方来好好讨论一下.
+<br>其实如果查看v8之类开源引擎的源码就知道(当然也可以在ecma里挣扎一番). 要调用Array原型链上的方法. 通常这个对象满足2个条件就可以了.
+<br>1, 本身可以存取属性.
+<br>2, length属性不能是只读(可以没有length属性).
+<br>由于Array.prototype.slice方法太长了. 我拿Array.prototype.push方法举例. 在V8的src目录下的array.js可以找到这些方法.
+<br>比如push
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=function%20ArrayPush()%20%7B%0A%20%20var%20n%20%3D%20ToUint32(this.length)%3B%0A%20%2F*%0A%20%20%20%20%E5%AF%B9%E8%B1%A1%2F%E6%95%B0%E7%BB%84%E6%9C%AC%E8%BA%AB%E7%9A%84length.%20%E5%A6%82%E6%9E%9C%E4%B8%BAnull%E6%88%96%E8%80%85undefined%2C%20%E4%BC%9A%E5%9C%A8ToUint32%E4%B8%AD%E8%BD%AC%E5%8C%96%E4%B8%BA0.%20%E6%89%80%E4%BB%A5%0A%20%20%20%20%E5%8D%B3%E4%BD%BF%E6%B2%A1%E6%9C%89length%E5%B1%9E%E6%80%A7%2C%E4%B9%9F%E4%BC%9A%E7%BB%99%E4%B8%80%E4%B8%AA%E9%BB%98%E8%AE%A4%E7%9A%840%E5%80%BC.%0A%20*%2F%0A%20%20var%20m%20%3D%20%25_ArgumentsLength()%3B%20%20%20%20%2F%2F%E5%8F%82%E6%95%B0%E7%9A%84length.%0A%20%20for%20(var%20i%20%3D%200%3B%20i%20%3C%20m%3B%20i%2B%2B)%20%7B%0A%20%20%20%20this%5Bi%2Bn%5D%20%3D%20%25_Arguments(i)%3B%20%20%20%2F%2F%E5%A4%8D%E5%88%B6%E5%B1%9E%E6%80%A7%0A%20%20%7D%0A%20%20this.length%20%3D%20n%20%2B%20m%3B%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%E9%87%8D%E8%AE%BElength.%0A%20%20return%20this.length%3B%0A%7D" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>function&nbsp;ArrayPush()&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;var&nbsp;n&nbsp;=&nbsp;ToUint32(<span class="keyword">this</span><span>.length);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;<span class="comment">/*</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;对象/数组本身的length.&nbsp;如果为null或者undefined,&nbsp;会在ToUint32中转化为0.&nbsp;所以</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;即使没有length属性,也会给一个默认的0值.</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;var&nbsp;m&nbsp;=&nbsp;%_ArgumentsLength();&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//参数的length.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(var&nbsp;i&nbsp;=&nbsp;</span><span class="number">0</span><span>;&nbsp;i&nbsp;&lt;&nbsp;m;&nbsp;i++)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>[i+n]&nbsp;=&nbsp;%_Arguments(i);&nbsp;&nbsp;&nbsp;</span><span class="comment">//复制属性</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="keyword">this</span><span>.length&nbsp;=&nbsp;n&nbsp;+&nbsp;m;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//重设length.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>.length;&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="6" title="jquery1.43源码分析之核心部分">function ArrayPush() {
+  var n = ToUint32(this.length);
+ /*
+    对象/数组本身的length. 如果为null或者undefined, 会在ToUint32中转化为0. 所以
+    即使没有length属性,也会给一个默认的0值.
+ */
+  var m = %_ArgumentsLength();    //参数的length.
+  for (var i = 0; i &lt; m; i++) {
+    this[i+n] = %_Arguments(i);   //复制属性
+  }
+  this.length = n + m;            //重设length.
+  return this.length;
+}</pre>
+<br>可以看到push操作的核心就是复制属性和重设长度.
+<br>jquery对象完全可以满足这2个条件. 同样的道理 一个对象字面量{}也可以. 
+<br>而string类型的不可以, 因为不能在string上存取属性. function对象虽然可以存取属性, 也有length属性.
+<br>不过它的length属性比较特殊, 表示形参的个数, 是一个只读属性, 源码中的this.length = n + m这一句不起作用, 所以function对象也不行. 同理window对象也不行.
+<br>上面的slice.call也是这个原理, 虽然slice方法的实现更复杂一点.
+<br>
+<br>明白了这个,我们可以解释很多奇怪的问题.比如:
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=var%20a%20%3D%20%7B%7D%3B%0Aa%5B0%5D%20%3D%201%3B%0Aa%5B1%5D%20%3D%202%3B%0AArray.prototype.push(a%2C%203)%3B%0Aalert%20(a.length)%20%20%20%2F%2F%20a%E6%B2%A1%E6%9C%89length%E5%B1%9E%E6%80%A7%2C%20%E9%BB%98%E8%AE%A4%E7%9A%84%E7%BB%990%E5%80%BC%2C%20%E6%89%80%E4%BB%A5%E7%BB%93%E6%9E%9C%E4%B8%BA1%20.%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>var&nbsp;a&nbsp;=&nbsp;{};&nbsp;&nbsp;</span></span></li><li><span>a[<span class="number">0</span><span>]&nbsp;=&nbsp;</span><span class="number">1</span><span>;&nbsp;&nbsp;</span></span></li><li><span>a[<span class="number">1</span><span>]&nbsp;=&nbsp;</span><span class="number">2</span><span>;&nbsp;&nbsp;</span></span></li><li><span>Array.prototype.push(a,&nbsp;<span class="number">3</span><span>);&nbsp;&nbsp;</span></span></li><li><span>alert&nbsp;(a.length)&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;a没有length属性,&nbsp;默认的给0值,&nbsp;所以结果为1&nbsp;.</span><span>&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="7" title="jquery1.43源码分析之核心部分">var a = {};
+a[0] = 1;
+a[1] = 2;
+Array.prototype.push(a, 3);
+alert (a.length)   // a没有length属性, 默认的给0值, 所以结果为1 .
+</pre>
+<br>如果在push操作之前添加一句 a.length = 2;
+<br>再进行push操作后, a.length就为3了.
+<br>
+<br>
+<br>
+<br>3 jQuery.prototype.index&nbsp; 
+<br>搜索匹配的元素，并返回相应元素的索引值，从0开始计数。
+<br>如果不给 .index() 方法传递参数，那么返回值就是这个jQuery对象集合中第一个元素相对于其同辈元素的位置。 
+<br>如果参数是一组DOM元素或者jQuery对象，那么返回值就是传递的元素相对于原先集合的位置。
+<br>如果参数是一个选择器，那么返回值就是原先元素相对于选择器匹配元素中的位置。如果找不到匹配的元素，则返回-1。
+<br>没有什么特别需要解释的, 直接看代码.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=index%3A%20function(%20elem%20)%20%7B%0A%09%09if%20(%20!elem%20%7C%7C%20typeof%20elem%20%3D%3D%3D%20%22string%22%20)%20%7B%20%20%20%0A%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%8F%82%E6%95%B0%2C%20%E6%88%96%E8%80%85%E5%8F%82%E6%95%B0%E6%98%AF%E9%80%89%E6%8B%A9%E5%99%A8.%0A%09%09%09return%20jQuery.inArray(%20this%5B0%5D%2C%0A%09%09%09%09elem%20%3F%20jQuery(%20elem%20)%20%3A%20this.parent().children()%20)%3B%0A%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%9C%89%E5%8F%82%E6%95%B0(%E9%80%89%E6%8B%A9%E5%99%A8)%2C%20%E5%88%99%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E6%9C%AC%E8%BA%AB%E5%9C%A8%E8%BF%99%E4%BA%9B%E9%80%89%E6%8B%A9%E5%99%A8%E7%BB%84%E6%88%90%E7%9A%84jq%E5%AF%B9%E8%B1%A1%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE%0A%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%8F%82%E6%95%B0%2C%20%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E6%9C%AC%E8%BA%AB%E5%9C%A8%E5%AE%83%E7%9A%84%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BD%8D%E7%BD%AE.%20this.parent().children()%E5%8F%AF%E4%BB%A5%E5%8F%96%E5%BE%97%E8%87%AA%E5%B7%B1%E5%92%8C%E5%85%A8%E9%83%A8%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9.%0A%7D%0A%09%09return%20jQuery.inArray(%0A%09%09%09%2F%2F%E5%8F%82%E6%95%B0%E6%98%AF%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%0A%09%09%09elem.jquery%20%3F%20elem%5B0%5D%20%3A%20elem%2C%20this%20)%3B%0A%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AFjquery%E5%AF%B9%E8%B1%A1%2C%20%E5%8F%96%E5%BE%97%E5%AE%83%E7%9A%84%E5%8E%9F%E5%A7%8B%E8%8A%82%E7%82%B9.%20%E5%86%8D%E6%9F%A5%E6%89%BE%E5%9C%A8%E5%BD%93%E5%89%8D%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE%09%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>index:&nbsp;function(&nbsp;elem&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!elem&nbsp;||&nbsp;typeof&nbsp;elem&nbsp;===&nbsp;</span><span class="string">"string"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果没有参数,&nbsp;或者参数是选择器.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;jQuery.inArray(&nbsp;</span><span class="keyword">this</span><span>[</span><span class="number">0</span><span>],&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem&nbsp;?&nbsp;jQuery(&nbsp;elem&nbsp;)&nbsp;:&nbsp;<span class="keyword">this</span><span>.parent().children()&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果有参数(选择器),&nbsp;则查找元素本身在这些选择器组成的jq对象集合中的位置</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果没有参数,&nbsp;查找元素本身在它的兄弟节点之间的位置.&nbsp;this.parent().children()可以取得自己和全部兄弟节点.</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;jQuery.inArray(&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//参数是一个对象</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem.jquery&nbsp;?&nbsp;elem[<span class="number">0</span><span>]&nbsp;:&nbsp;elem,&nbsp;</span><span class="keyword">this</span><span>&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果是jquery对象,&nbsp;取得它的原始节点.&nbsp;再查找在当前集合中的位置&nbsp;&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="8" title="jquery1.43源码分析之核心部分">index: function( elem ) {
+		if ( !elem || typeof elem === "string" ) {   
+		//如果没有参数, 或者参数是选择器.
+			return jQuery.inArray( this[0],
+				elem ? jQuery( elem ) : this.parent().children() );
+		//如果有参数(选择器), 则查找元素本身在这些选择器组成的jq对象集合中的位置
+		//如果没有参数, 查找元素本身在它的兄弟节点之间的位置. this.parent().children()可以取得自己和全部兄弟节点.
+}
+		return jQuery.inArray(
+			//参数是一个对象
+			elem.jquery ? elem[0] : elem, this );
+			//如果是jquery对象, 取得它的原始节点. 再查找在当前集合中的位置	
+}
+</pre>
+<br>顾名思义jQuery.inArray就是判断数组里有没有某个元素.当然这里的数组也包括伪数组.
+<br>这个方法虽然实现起来很简单, 关于inArray这个名字在jquery的官方论坛却有颇多争议.
+<br>很多人认为它应该返回true或者false, 而不是索引的位置.
+<br>john resig只是说暂时还不准备修改这个方法.
+<br>
+<br>有些浏览器还不支持Array.prototype.indexOf方法. 所以首先在源码的851行, 有这样一段代码.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=if%20(%20Array.prototype.indexOf%20)%20%7B%0A%09jQuery.inArray%20%3D%20function(%20elem%2C%20array%20)%20%7B%0A%09%09return%20indexOf.call(%20array%2C%20elem%20)%3B%0A%09%7D%3B%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="keyword">if</span><span>&nbsp;(&nbsp;Array.prototype.indexOf&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.inArray&nbsp;=&nbsp;function(&nbsp;elem,&nbsp;array&nbsp;)&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;indexOf.call(&nbsp;array,&nbsp;elem&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;};&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="9" title="jquery1.43源码分析之核心部分">if ( Array.prototype.indexOf ) {
+	jQuery.inArray = function( elem, array ) {
+		return indexOf.call( array, elem );
+	};
+}
+</pre>
+<br>如果支持Array.prototype.indexOf. 则重写jQuery.inArray, 直接用Array.prototype.indexOf.call(array, elem );
+<br>在页面加载的时候就重写这个方法. 也避免了在函数里反复判断造成的浪费.
+<br>然后
+<br>	<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=inArray%3A%20function(%20elem%2C%20array%20)%20%7B%0A%09%09if%20(%20array.indexOf%20)%20%7B%0A%2F%2F%E7%A1%AE%E8%AE%A4indexOf%E6%96%B9%E6%B3%95%E5%AD%98%E5%9C%A8.%E6%88%96%E9%98%B2%E6%AD%A2indexOf%E6%96%B9%E6%B3%95%E8%A2%AB%E6%94%B9%E5%86%99.%0A%09%09%09return%20array.indexOf(%20elem%20)%3B%0A%09%09%7D%0A%09%09for%20(%20var%20i%20%3D%200%2C%20length%20%3D%20array.length%3B%20i%20%3C%20length%3B%20i%2B%2B%20)%20%7B%0A%09%09%09%2F%2F%E5%90%A6%E5%88%99%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%2C%20%E8%BF%94%E5%9B%9E%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%B4%A2%E5%BC%95.%0Aif%20(%20array%5B%20i%20%5D%20%3D%3D%3D%20elem%20)%20%7B%0A%09%09%09%09return%20i%3B%0A%09%09%09%7D%0A%09%09%7D%0A%09%09return%20-1%3B%20%20%2F%2F%E5%A6%82%E6%9E%9C%E6%95%B0%E7%BB%84%E9%87%8C%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E5%85%83%E7%B4%A0%2C%20%E8%BF%94%E5%9B%9E-1.%0A%09%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>inArray:&nbsp;function(&nbsp;elem,&nbsp;array&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;array.indexOf&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//确认indexOf方法存在.或防止indexOf方法被改写.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;array.indexOf(&nbsp;elem&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(&nbsp;var&nbsp;i&nbsp;=&nbsp;</span><span class="number">0</span><span>,&nbsp;length&nbsp;=&nbsp;array.length;&nbsp;i&nbsp;&lt;&nbsp;length;&nbsp;i++&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//否则遍历数组,&nbsp;返回正确的索引.</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">if</span><span>&nbsp;(&nbsp;array[&nbsp;i&nbsp;]&nbsp;===&nbsp;elem&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;i;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;-</span><span class="number">1</span><span>;&nbsp;&nbsp;</span><span class="comment">//如果数组里没有这个元素,&nbsp;返回-1.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="10" title="jquery1.43源码分析之核心部分">inArray: function( elem, array ) {
+		if ( array.indexOf ) {
+//确认indexOf方法存在.或防止indexOf方法被改写.
+			return array.indexOf( elem );
+		}
+		for ( var i = 0, length = array.length; i &lt; length; i++ ) {
+			//否则遍历数组, 返回正确的索引.
+if ( array[ i ] === elem ) {
+				return i;
+			}
+		}
+		return -1;  //如果数组里没有这个元素, 返回-1.
+	}
+</pre>
+<br>三 数据缓存
+<br>
+<br>jQuery.data
+<br>
+<br>在实际应用中, 我们经常需要往节点中缓存一些数据. 这些数据往往和dom元素紧密相关. dom节点也是对象, 所以我们可以直接扩展dom节点的属性.
+<br> 不过肆意污染dom节点是不良少年的行为. 我们需要一种低耦合的方式让dom和缓存数据能够联系起来.
+<br>
+<br>jquery提供了一套非常巧妙的缓存办法.
+<br>
+<br>我们先在jquery内部创建一个cache对象{}, 来保存缓存数据.
+<br>
+<br>然后往需要进行缓存的dom节点上扩展一个值为jQuery.expando的属性, 这里是”jquery” + (new Date).getTime().
+<br> 
+<br>接着把每个节点的dom[jQuery.expando]的值都设为一个自增的变量id,保持全局唯一性. 
+<br>这个id的值就作为cache的key用来关联dom节点和数据. 
+<br>也就是说cache[id]就取到了这个节点上的所有缓存.
+<br>
+<br>而每个元素的所有缓存都被放到了一个map里面,这样可以同时缓存多个数据.
+<br>
+<br>比如有2个节点dom1和dom2, 它们的缓存数据在cache中的格式应该是这样
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=cache%20%3D%20%7B%0A%09dom1%5B%20%20jQuery.expando%20%5D%3A%20%7B%0A%09%09key1%3A%20value1%2C%0A%09%09key2%3A%20value2%0A%7D%2C%0Adom2%5B%20jQuery.expando%20%5D%20%7B%0A%09key3%3A%20value3%2C%0A%09key4%3A%20value4%0A%7D%0A%7D" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>cache&nbsp;=&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;dom1[&nbsp;&nbsp;jQuery.expando&nbsp;]:&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key1:&nbsp;value1,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key2:&nbsp;value2&nbsp;&nbsp;</span></li><li><span>},&nbsp;&nbsp;</span></li><li><span>dom2[&nbsp;jQuery.expando&nbsp;]&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;key3:&nbsp;value3,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;key4:&nbsp;value4&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="11" title="jquery1.43源码分析之核心部分">cache = {
+	dom1[  jQuery.expando ]: {
+		key1: value1,
+		key2: value2
+},
+dom2[ jQuery.expando ] {
+	key3: value3,
+	key4: value4
+}
+}</pre>
+<br>
+<br>jQuery.expando的值等于”jquery”+当前时间, 元素本身具有这种属性而起冲突的情况是微乎其微的.
+<br>
+<br>我们在看源码之前, 先根据上面的原理来自己实现一个简单的缓存系统.以便增强理解.
+<br>
+<br>先把跟data相关的所有代码都封装到一个闭包里,通过返回的接口暴露给外界.
+<br>同时为了简便,我们拆分成setData和getData两个方法.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3Cdiv%20id%3D%22ddd%22%3Edddddddd%3C%2Fdiv%3E%0A%0A%3Cscript%3E%0A%0Avar%20Data%20%3D%20function()%7B%0A%09var%20cache%20%3D%20%7B%7D%3B%0A%09var%20expando%20%3D%20%22zengtan%22%20%2B%20%2Bnew%20Date%3B%0A%09var%20uuid%20%3D%201%3B%0A%09%0A%09var%20setData%20%3D%20function(elem%2C%20key%2C%20value)%7B%0A%09%09%09var%20id%20%3D%20elem%5Bexpando%5D%3B%0A%09%09%09if%20(!id)%7B%20%20%20%2F%2F%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%BB%99%E5%85%83%E7%B4%A0%E8%AE%BE%E7%BD%AE%E7%BC%93%E5%AD%98%0A%09%09%09%09id%20%3D%20%2B%2Buuid%3B%0A%09%09%09%09elem%5Bexpando%5D%20%3D%20id%3B%0A%09%09%09%7D%0A%09%09%09if%20(!cache%5Bid%5D)%7B%20%20%20%2F%2F%E8%BF%99%E4%B8%AA%E5%85%83%E7%B4%A0%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%BF%9B%E8%A1%8C%E7%BC%93%E5%AD%98%E6%88%96%E8%80%85%E7%BC%93%E5%AD%98%E5%B7%B2%E8%A2%AB%E6%B8%85%E7%A9%BA%0A%09%09%09%09cache%5Bid%5D%20%3D%20%7B%7D%3B%0A%09%09%09%7D%0A%09%09%09cache%5Bid%5D%5Bkey%5D%20%3D%20value%3B%0A%09%7D%3B%0A%0A%09var%20getData%20%3D%20function(elem%2C%20key)%7B%0A%09%09var%20id%20%3D%20elem%5Bexpando%5D%3B%20%20%2F%2F%E5%8F%96%E5%BE%97cache%E9%87%8C%E8%B7%9Fdom%E8%8A%82%E7%82%B9%E5%85%B3%E8%81%94%E7%9A%84key%0A%09%09return%20cache%5Bid%5D%20%26%26%20cache%5Bid%5D%5Bkey%5D%20%7C%7C%20null%3B%20%20%2F%2F%E5%A6%82%E6%9E%9C%E7%BC%93%E5%AD%98%E9%87%8C%E6%B2%A1%E6%9C%89%2C%20%E8%BF%94%E5%9B%9Enull%0A%09%7D%0A%0A%09return%20%7B%0A%09%09setData%3A%20setData%2C%0A%09%09getData%3A%20getData%09%0A%09%7D%0A%7D()%0A%0A%3C%2Fscript%3E%0A%0Avar%20div%20%3D%20document.getElementById(%22ddd%22)%3B%0AData.setData(div%2C%20%22name%22%2C%20%22zengtan%22)%3B%0Avar%20value%20%3D%20Data.getData(div%2C%20%22name%22)%3B%0Aalert%20(value)%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;div&nbsp;id=</span><span class="string">"ddd"</span><span>&gt;dddddddd&lt;/div&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&lt;script&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>var&nbsp;Data&nbsp;=&nbsp;function(){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;cache&nbsp;=&nbsp;{};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;expando&nbsp;=&nbsp;<span class="string">"zengtan"</span><span>&nbsp;+&nbsp;+</span><span class="keyword">new</span><span>&nbsp;Date;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;uuid&nbsp;=&nbsp;<span class="number">1</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;setData&nbsp;=&nbsp;function(elem,&nbsp;key,&nbsp;value){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;id&nbsp;=&nbsp;elem[expando];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(!id){&nbsp;&nbsp;&nbsp;</span><span class="comment">//第一次给元素设置缓存</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;=&nbsp;++uuid;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem[expando]&nbsp;=&nbsp;id;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(!cache[id]){&nbsp;&nbsp;&nbsp;</span><span class="comment">//这个元素第一次进行缓存或者缓存已被清空</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache[id]&nbsp;=&nbsp;{};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache[id][key]&nbsp;=&nbsp;value;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;getData&nbsp;=&nbsp;function(elem,&nbsp;key){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;id&nbsp;=&nbsp;elem[expando];&nbsp;&nbsp;<span class="comment">//取得cache里跟dom节点关联的key</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;cache[id]&nbsp;&amp;&amp;&nbsp;cache[id][key]&nbsp;||&nbsp;</span><span class="keyword">null</span><span>;&nbsp;&nbsp;</span><span class="comment">//如果缓存里没有,&nbsp;返回null</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setData:&nbsp;setData,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getData:&nbsp;getData&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>}()&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&lt;/script&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>var&nbsp;div&nbsp;=&nbsp;document.getElementById(<span class="string">"ddd"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>Data.setData(div,&nbsp;<span class="string">"name"</span><span>,&nbsp;</span><span class="string">"zengtan"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>var&nbsp;value&nbsp;=&nbsp;Data.getData(div,&nbsp;<span class="string">"name"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>alert&nbsp;(value)&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="12" title="jquery1.43源码分析之核心部分">&lt;div id="ddd"&gt;dddddddd&lt;/div&gt;
+
+&lt;script&gt;
+
+var Data = function(){
+	var cache = {};
+	var expando = "zengtan" + +new Date;
+	var uuid = 1;
+	
+	var setData = function(elem, key, value){
+			var id = elem[expando];
+			if (!id){   //第一次给元素设置缓存
+				id = ++uuid;
+				elem[expando] = id;
+			}
+			if (!cache[id]){   //这个元素第一次进行缓存或者缓存已被清空
+				cache[id] = {};
+			}
+			cache[id][key] = value;
+	};
+
+	var getData = function(elem, key){
+		var id = elem[expando];  //取得cache里跟dom节点关联的key
+		return cache[id] &amp;&amp; cache[id][key] || null;  //如果缓存里没有, 返回null
+	}
+
+	return {
+		setData: setData,
+		getData: getData	
+	}
+}()
+
+&lt;/script&gt;
+
+var div = document.getElementById("ddd");
+Data.setData(div, "name", "zengtan");
+var value = Data.getData(div, "name");
+alert (value)
+</pre>
+<br>看看源码实现.
+<br>
+<br>首先声明一些特殊的节点, 在它们身上存属性的时候可能会抛出异常.
+<br>	<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=noData%3A%20%7B%0A%09%09%22embed%22%3A%20true%2C%0A%09%09%2F%2F%20Ban%20all%20objects%20except%20for%20Flash%20(which%20handle%20expandos)%0A%09%09%22object%22%3A%20%22clsid%3AD27CDB6E-AE6D-11cf-96B8-444553540000%22%2C%0A%09%09%22applet%22%3A%20true%0A%09%7D" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>noData:&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"embed"</span><span>:&nbsp;</span><span class="keyword">true</span><span>,&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Ban&nbsp;all&nbsp;objects&nbsp;except&nbsp;for&nbsp;Flash&nbsp;(which&nbsp;handle&nbsp;expandos)</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"object"</span><span>:&nbsp;</span><span class="string">"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"</span><span>,&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"applet"</span><span>:&nbsp;</span><span class="keyword">true</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="13" title="jquery1.43源码分析之核心部分">noData: {
+		"embed": true,
+		// Ban all objects except for Flash (which handle expandos)
+		"object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
+		"applet": true
+	}</pre>
+<br>
+<br>这个对象里的数据用在acceptData方法中, 跟1.42版本相比, 这里多了对什么flash的object的特殊处理.
+<br>总之acceptData方法就是判断节点能否添加缓存.
+<br>
+<br>看具体的jQuery.data
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%09data%3A%20function(%20elem%2C%20name%2C%20data%20)%20%7B%0A%09%09if%20(%20!jQuery.acceptData(%20elem%20)%20)%20%7B%0A%09%09%09return%3B%0A%09%09%7D%0A%09%09%2F%2FnoData%E7%B1%BB%E5%9E%8B%0A%09%09elem%20%3D%20elem%20%3D%3D%20window%20%3F%0A%09%09%09windowData%20%3A%0A%09%09%09elem%3B%0A%09%09%2F%2F%E5%A4%84%E7%90%86elem%E6%98%AFwindow%E7%9A%84%E6%83%85%E5%86%B5%2C%20%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%8D%95%E7%8B%AC%E5%A4%84%E7%90%86%E7%9A%84%E8%AF%9D%2C%20%E7%AD%89%E4%BA%8E%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%2C%20windowData%E4%B9%9F%E6%98%AF%E4%B8%80%E4%B8%AA%7B%7D%0A%09%09var%20isNode%20%3D%20elem.nodeType%2C%0A%09%09%2F%2F%E5%88%A4%E6%96%AD%E6%98%AF%E4%B8%8D%E6%98%AFdom%E8%8A%82%E7%82%B9%2C%E7%94%B1%E4%BA%8E%E9%9D%9Edom%E8%8A%82%E7%82%B9%E7%9A%84%E7%BC%93%E5%AD%98%E5%9C%A8%E7%BB%A7%E6%89%BF%E5%92%8C%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%B8%8A%E9%83%BD%E4%BC%9A%E9%80%A0%E6%88%90%E9%BA%BB%E7%83%A6%2C1.43%E7%89%88%E6%9C%AC%E5%B7%B2%E7%BB%8F%E6%8A%8Adom%E8%8A%82%E7%82%B9%E5%92%8C%E5%85%B6%E4%BB%96%E5%AF%B9%E8%B1%A1%E5%88%86%E5%BC%80%E5%A4%84%E7%90%86%E4%BA%86.%0A%09%09%09id%20%3D%20isNode%20%3F%20elem%5B%20jQuery.expando%20%5D%20%3A%20null%2C%0A%09%09%09cache%20%3D%20jQuery.cache%2C%20thisCache%3B%0A%09%09%2F%2F%E5%9B%A0%E4%B8%BA%E5%AD%98%E6%95%B0%E6%8D%AE%E7%9A%84%E6%97%B6%E5%80%99%2C%20%E4%BC%9A%E7%BB%99elem%5B%20jQuery.expando%20%5D%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80%E6%A0%87%E5%BF%97%E9%87%8F.%20%E5%88%A4%E6%96%ADid%E6%98%AF%E5%90%A6%E4%B8%BAundefined%2C%20%E5%B0%B1%E7%9F%A5%E9%81%93%E5%B7%B2%E7%BB%8F%E6%9C%89%E6%B2%A1%E6%9C%89%E5%BE%80%E8%BF%99%E4%B8%AA%E5%85%83%E7%B4%A0%E4%B8%8A%E7%BC%93%E5%AD%98%E8%BF%87%E6%95%B0%E6%8D%AE.%20%0A%0A%09%09if%20(%20isNode%20%26%26%20!id%20%26%26%20typeof%20name%20%3D%3D%3D%20%22string%22%20%26%26%20data%20%3D%3D%3D%20undefined%20)%20%7B%0A%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AFdom%E8%8A%82%E7%82%B9%E5%AF%B9%E8%B1%A1%2C%20%E5%B9%B6%E4%B8%94%E7%8E%B0%E5%9C%A8%E6%98%AFget%E6%96%B9%E5%BC%8F(typeof%20name%20%3D%3D%3D%20%22string%22%20%26%26%20data%20%3D%3D%3D%20undefined%E8%A1%A8%E7%A4%BAget%E6%96%B9%E5%BC%8F)%2C%20%E5%8F%88%E6%B2%A1%E6%9C%89%E7%BC%93%E5%AD%98(!id%E8%A1%A8%E7%A4%BA%E6%B2%A1%E6%9C%89%E7%BC%93%E5%AD%98).%0A%09%09%09return%3B%0A%09%09%7D%0A%0A%09%09if%20(%20!isNode%20)%20%7B%0A%09%09%09cache%20%3D%20elem%3B%0A%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AF%E9%9D%9Edom%E8%8A%82%E7%82%B9%E5%AF%B9%E8%B1%A1%2C%20%E5%8F%96%E7%BC%93%E5%AD%98%E9%87%8C%E7%9A%84%E5%B1%9E%E6%80%A7%E5%B0%B1%E7%9B%B4%E6%8E%A5%E5%8F%96%E5%85%83%E7%B4%A0%E6%9C%AC%E8%BA%AB%E5%B1%9E%E6%80%A7.%0A%09%09%7D%20else%20if%20(%20!id%20)%20%7B%0A%09%09%09elem%5B%20jQuery.expando%20%5D%20%3D%20id%20%3D%20%2B%2BjQuery.uuid%3B%0A%09%09%2F%2F%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%BF%9B%E8%A1%8C%E7%BC%93%E5%AD%98%2C%20%E5%88%86%E9%85%8D%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80%E6%A0%87%E5%BF%97id.%0A%09%09%7D%0A%0A%09%09if%20(%20typeof%20name%20%3D%3D%3D%20%22object%22%20)%20%7B%0A%09%09%2F%2F%E5%A6%82%E6%9E%9Ckey%E6%98%AF%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%0A%09%09%09if%20(%20isNode%20)%20%7B%0A%09%09%09%09cache%5B%20id%20%5D%20%3D%20jQuery.extend(cache%5B%20id%20%5D%2C%20name)%3B%0A%09%09%2F*%0A%09%09%E6%8A%8A%E6%95%B4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E9%83%BD%E5%A4%8D%E5%88%B6%E5%88%B0%E5%8E%9F%E6%9D%A5%E7%9A%84%E7%BC%93%E5%AD%98%E4%B8%8A%2C%20%E6%AF%94%E5%A6%82%0A%09%09%09%20%24(&#39;%23ddd&#39;).data(%7B%0A%20%09%09%09%09%22v2%22%3A%20%22bbb%22%2C%0A%20%09%09%09%09%22v3%22%3A%20%22ccc%22%0A%20%09%09%09%7D)%3B%0A%20%09%09%09%E7%9B%B8%E5%BD%93%E4%BA%8E%24(&#39;%23ddd&#39;).data(%22v2%22%2C%20%22bbb%22).data(%22v3%22%3A%22ccc%22)%3B%0A%20%09%09%091.42%E7%89%88%E6%9C%AC%E7%94%A8%E7%9A%84cache%5B%20id%20%5D%20%3D%20jQuery.extend(true%2C%20%7B%7D%2C%20name).%20%E8%BF%99%E6%A0%B7%E4%BC%9A%E6%B8%85%E7%A9%BA%E4%BB%A5%E5%89%8D%E7%9A%84%E7%BC%93%E5%AD%98.%0A%09%09%09*%2F%0A%09%09%09%7D%20else%20%7B%0A%09%09%09%09jQuery.extend(%20cache%2C%20name%20)%3B%0A%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E4%B8%8D%E6%98%AFdom%E8%8A%82%E7%82%B9.%20%E6%8A%8A%E5%B1%9E%E6%80%A7%E5%A4%8D%E5%88%B6%E5%88%B0%E5%85%83%E7%B4%A0%E6%9C%AC%E8%BA%AB.%0A%09%09%09%7D%0A%0A%09%09%7D%20else%20if%20(%20isNode%20%26%26%20!cache%5B%20id%20%5D%20)%20%7B%0A%09%09%09%2F%2F%E5%A6%82%E6%9E%9Ccache%5B%20id%20%5D%E4%B8%AD%E6%B2%A1%E6%9C%89%E4%B8%9C%E8%A5%BF%2C%20%E8%A1%A8%E7%A4%BA%E8%BF%99%E4%B8%AA%E5%85%83%E7%B4%A0%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%BF%9B%E8%A1%8C%E7%BC%93%E5%AD%98%E6%88%96%E8%80%85%E7%BC%93%E5%AD%98%E5%B7%B2%E8%A2%AB%E6%B8%85%E7%A9%BA%2C%20%E8%AE%BE%E7%BD%AEcache%5B%20id%20%5D%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84map.%0A%09%09%09cache%5B%20id%20%5D%20%3D%20%7B%7D%3B%0A%09%09%7D%0A%0A%09%09thisCache%20%3D%20isNode%20%3F%20cache%5B%20id%20%5D%20%3A%20cache%3B%0A%0A%09%09if%20(%20data%20!%3D%3D%20undefined%20)%20%7B%0A%09%09%09%2F*%0A%09%09%09%09set%E6%93%8D%E4%BD%9C%2C%20%E4%B9%9F%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E4%B8%80%E4%BA%9B%E6%84%8F%E5%A4%96%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E7%BC%93%E5%AD%98%E8%A2%AB%E6%B8%85%E7%A9%BA.%20%E6%AF%94%E5%A6%82data%E6%9C%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%2C%20%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C%E6%98%AF%E6%97%A0%E6%95%88%E7%9A%84.%0A%09%09%09%09var%20a%20%3D%20%7B%7D%3B%0A%09%09%09%09var%20b%3B%0A%09%09%09%09%24(a).data(%22c%22%2C%203)%3B%0A%09%09%09%09%24(a).data(%22c%22%2C%20b)%3B%20b%E4%B8%BAundefined.%20%E8%BF%99%E5%8F%A5%E6%98%AF%E6%97%A0%E6%95%88%E7%9A%84.%20%E8%A6%81%E7%A7%BB%E9%99%A4%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E7%94%A8removeData%E6%96%B9%E6%B3%95.%0A%09%09%09*%2F%0A%09%09%09thisCache%5B%20name%20%5D%20%3D%20data%3B%0A%09%09%09%2F%2F%E5%8D%B3cache%5B%20id%20%5D%5B%20name%20%5D%20%3D%20data%2C%20%E6%8A%8Adata%E8%AE%BE%E7%BD%AE%E8%BF%9Bcache%E7%BC%93%E5%AD%98%E5%AF%B9%E8%B1%A1%E4%B8%AD%2C%20%E5%89%8D%E9%9D%A2%E5%88%86%E9%85%8D%E7%9A%84%E8%87%AA%E5%A2%9Eid%E5%BD%93%E5%81%9Akey%E6%9D%A5%E5%85%B3%E8%81%94%0A%09%09%7D%0A%0A%09%09return%20typeof%20name%20%3D%3D%3D%20%22string%22%20%3F%20thisCache%5B%20name%20%5D%20%3A%20thisCache%3B%0A%09%09%2F%2F%E5%A6%82%E6%9E%9Ckey%E6%98%AFstring%E7%B1%BB%E5%9E%8B%2C%20%E8%BF%94%E5%9B%9Ekey%E5%AF%B9%E5%BA%94%E7%9A%84%E7%BC%93%E5%AD%98%2C%20%E5%90%A6%E5%88%99%E8%BF%94%E5%9B%9E%E6%95%B4%E4%B8%AA%E5%85%83%E7%B4%A0%E4%B8%8A%E7%9A%84%E7%BC%93%E5%AD%98%0A%09%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>data:&nbsp;function(&nbsp;elem,&nbsp;name,&nbsp;data&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!jQuery.acceptData(&nbsp;elem&nbsp;)&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//noData类型</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;elem&nbsp;=&nbsp;elem&nbsp;==&nbsp;window&nbsp;?&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;windowData&nbsp;:&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//处理elem是window的情况,&nbsp;如果不单独处理的话,&nbsp;等于增加了一个全局变量,&nbsp;windowData也是一个{}</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;isNode&nbsp;=&nbsp;elem.nodeType,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//判断是不是dom节点,由于非dom节点的缓存在继承和内存泄露上都会造成麻烦,1.43版本已经把dom节点和其他对象分开处理了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;=&nbsp;isNode&nbsp;?&nbsp;elem[&nbsp;jQuery.expando&nbsp;]&nbsp;:&nbsp;<span class="keyword">null</span><span>,&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;=&nbsp;jQuery.cache,&nbsp;thisCache;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//因为存数据的时候,&nbsp;会给elem[&nbsp;jQuery.expando&nbsp;]设置一个全局唯一标志量.&nbsp;判断id是否为undefined,&nbsp;就知道已经有没有往这个元素上缓存过数据.&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;isNode&nbsp;&amp;&amp;&nbsp;!id&nbsp;&amp;&amp;&nbsp;typeof&nbsp;name&nbsp;===&nbsp;</span><span class="string">"string"</span><span>&nbsp;&amp;&amp;&nbsp;data&nbsp;===&nbsp;undefined&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果是dom节点对象,&nbsp;并且现在是get方式(typeof&nbsp;name&nbsp;===&nbsp;"string"&nbsp;&amp;&amp;&nbsp;data&nbsp;===&nbsp;undefined表示get方式),&nbsp;又没有缓存(!id表示没有缓存).</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!isNode&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;=&nbsp;elem;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果是非dom节点对象,&nbsp;取缓存里的属性就直接取元素本身属性.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(&nbsp;!id&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem[&nbsp;jQuery.expando&nbsp;]&nbsp;=&nbsp;id&nbsp;=&nbsp;++jQuery.uuid;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//第一次进行缓存,&nbsp;分配一个全局唯一标志id.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;typeof&nbsp;name&nbsp;===&nbsp;</span><span class="string">"object"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果key是对象类型</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;isNode&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache[&nbsp;id&nbsp;]&nbsp;=&nbsp;jQuery.extend(cache[&nbsp;id&nbsp;],&nbsp;name);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;把整个对象都复制到原来的缓存上,&nbsp;比如</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ddd').data({</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"v2":&nbsp;"bbb",</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"v3":&nbsp;"ccc"</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相当于$('#ddd').data("v2",&nbsp;"bbb").data("v3":"ccc");</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.42版本用的cache[&nbsp;id&nbsp;]&nbsp;=&nbsp;jQuery.extend(true,&nbsp;{},&nbsp;name).&nbsp;这样会清空以前的缓存.</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.extend(&nbsp;cache,&nbsp;name&nbsp;);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果不是dom节点.&nbsp;把属性复制到元素本身.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(&nbsp;isNode&nbsp;&amp;&amp;&nbsp;!cache[&nbsp;id&nbsp;]&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果cache[&nbsp;id&nbsp;]中没有东西,&nbsp;表示这个元素第一次进行缓存或者缓存已被清空,&nbsp;设置cache[&nbsp;id&nbsp;]为一个新的map.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache[&nbsp;id&nbsp;]&nbsp;=&nbsp;{};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;thisCache&nbsp;=&nbsp;isNode&nbsp;?&nbsp;cache[&nbsp;id&nbsp;]&nbsp;:&nbsp;cache;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;data&nbsp;!==&nbsp;undefined&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set操作,&nbsp;也可以防止一些意外的情况下缓存被清空.&nbsp;比如data未定义的情况下,&nbsp;缓存操作是无效的.</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;a&nbsp;=&nbsp;{};</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;b;</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(a).data("c",&nbsp;3);</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(a).data("c",&nbsp;b);&nbsp;b为undefined.&nbsp;这句是无效的.&nbsp;要移除缓存可以用removeData方法.</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thisCache[&nbsp;name&nbsp;]&nbsp;=&nbsp;data;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//即cache[&nbsp;id&nbsp;][&nbsp;name&nbsp;]&nbsp;=&nbsp;data,&nbsp;把data设置进cache缓存对象中,&nbsp;前面分配的自增id当做key来关联</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;typeof&nbsp;name&nbsp;===&nbsp;</span><span class="string">"string"</span><span>&nbsp;?&nbsp;thisCache[&nbsp;name&nbsp;]&nbsp;:&nbsp;thisCache;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果key是string类型,&nbsp;返回key对应的缓存,&nbsp;否则返回整个元素上的缓存</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="14" title="jquery1.43源码分析之核心部分">	data: function( elem, name, data ) {
+		if ( !jQuery.acceptData( elem ) ) {
+			return;
+		}
+		//noData类型
+		elem = elem == window ?
+			windowData :
+			elem;
+		//处理elem是window的情况, 如果不单独处理的话, 等于增加了一个全局变量, windowData也是一个{}
+		var isNode = elem.nodeType,
+		//判断是不是dom节点,由于非dom节点的缓存在继承和内存泄露上都会造成麻烦,1.43版本已经把dom节点和其他对象分开处理了.
+			id = isNode ? elem[ jQuery.expando ] : null,
+			cache = jQuery.cache, thisCache;
+		//因为存数据的时候, 会给elem[ jQuery.expando ]设置一个全局唯一标志量. 判断id是否为undefined, 就知道已经有没有往这个元素上缓存过数据. 
+
+		if ( isNode &amp;&amp; !id &amp;&amp; typeof name === "string" &amp;&amp; data === undefined ) {
+		//如果是dom节点对象, 并且现在是get方式(typeof name === "string" &amp;&amp; data === undefined表示get方式), 又没有缓存(!id表示没有缓存).
+			return;
+		}
+
+		if ( !isNode ) {
+			cache = elem;
+		//如果是非dom节点对象, 取缓存里的属性就直接取元素本身属性.
+		} else if ( !id ) {
+			elem[ jQuery.expando ] = id = ++jQuery.uuid;
+		//第一次进行缓存, 分配一个全局唯一标志id.
+		}
+
+		if ( typeof name === "object" ) {
+		//如果key是对象类型
+			if ( isNode ) {
+				cache[ id ] = jQuery.extend(cache[ id ], name);
+		/*
+		把整个对象都复制到原来的缓存上, 比如
+			 $('#ddd').data({
+ 				"v2": "bbb",
+ 				"v3": "ccc"
+ 			});
+ 			相当于$('#ddd').data("v2", "bbb").data("v3":"ccc");
+ 			1.42版本用的cache[ id ] = jQuery.extend(true, {}, name). 这样会清空以前的缓存.
+			*/
+			} else {
+				jQuery.extend( cache, name );
+			//如果不是dom节点. 把属性复制到元素本身.
+			}
+
+		} else if ( isNode &amp;&amp; !cache[ id ] ) {
+			//如果cache[ id ]中没有东西, 表示这个元素第一次进行缓存或者缓存已被清空, 设置cache[ id ]为一个新的map.
+			cache[ id ] = {};
+		}
+
+		thisCache = isNode ? cache[ id ] : cache;
+
+		if ( data !== undefined ) {
+			/*
+				set操作, 也可以防止一些意外的情况下缓存被清空. 比如data未定义的情况下, 缓存操作是无效的.
+				var a = {};
+				var b;
+				$(a).data("c", 3);
+				$(a).data("c", b); b为undefined. 这句是无效的. 要移除缓存可以用removeData方法.
+			*/
+			thisCache[ name ] = data;
+			//即cache[ id ][ name ] = data, 把data设置进cache缓存对象中, 前面分配的自增id当做key来关联
+		}
+
+		return typeof name === "string" ? thisCache[ name ] : thisCache;
+		//如果key是string类型, 返回key对应的缓存, 否则返回整个元素上的缓存
+	}
+</pre>
+<br>从新版本的源码里可以看到,&nbsp; 1.42版本中data方法的几个缺点已经被解决了. 
+<br>
+<br>当然我们用jquery缓存系统的时候, 一般调用的是prototype方法, prototype方法除了调用上面的静态方法之外. 还加入了对节点上自定义事件的处理, 留在event部分再讲.
+<br>
+<br>当然, 我们还需要删除缓存的方法. 现在看看removeData的代码
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=Jquery.removeData%0A%0A%09removeData%3A%20function(%20elem%2C%20name%20)%20%7B%0A%09%09if%20(%20!jQuery.acceptData(%20elem%20)%20)%20%7B%0A%09%09%09return%3B%0A%09%09%7D%0A%0A%09%09elem%20%3D%20elem%20%3D%3D%20window%20%3F%0A%09%09%09windowData%20%3A%0A%09%09%09elem%3B%0A%0A%09%09var%20isNode%20%3D%20elem.nodeType%2C%0A%09%09%09id%20%3D%20isNode%20%3F%20elem%5B%20jQuery.expando%20%5D%20%3A%20elem%2C%0A%09%09%09%2F%2Fid%E6%98%AF%E8%AF%A5%E5%85%83%E7%B4%A0%E5%9C%A8cache%E4%B8%8A%E9%9D%A2%E7%9A%84key%2C%20%E5%A6%82%E6%9E%9C%E4%B8%8D%E6%98%AF%E8%8A%82%E7%82%B9%E5%B0%B1%E8%BF%94%E5%9B%9E%E5%85%83%E7%B4%A0%E6%9C%AC%E8%BA%AB.%0A%09%09%09cache%20%3D%20jQuery.cache%2C%0A%09%09%09thisCache%20%3D%20isNode%20%3F%20cache%5B%20id%20%5D%20%3A%20id%3B%0A%0A%09%09if%20(%20name%20)%20%7B%0A%09%09%09if%20(%20thisCache%20)%20%7B%0A%09%09%09%09delete%20thisCache%5B%20name%20%5D%3B%0A%09%09%09%09%2F%2F%E5%88%A0%E9%99%A4key%E5%AF%B9%E5%BA%94%E7%9A%84%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%0A%09%09%09%09if%20(%20isNode%20%26%26%20jQuery.isEmptyObject(thisCache)%20)%7B%0A%09%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E5%85%83%E7%B4%A0%E6%98%AFdom%E8%8A%82%E7%82%B9%E5%B9%B6%E4%B8%94%E7%BC%93%E5%AD%98%E4%B8%BA%E4%B8%80%E4%B8%AA%E7%A9%BA%E5%AF%B9%E8%B1%A1.%E8%AF%B4%E6%98%8E%E6%89%80%E6%9C%89%E7%BC%93%E5%AD%98%E7%9A%84%E6%95%B0%E6%8D%AE%E9%83%BD%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%A0%E6%8E%89%E4%BA%86.%0A%09%09%09%09%09%2F%2F%E9%82%A3%E4%B9%88%E9%87%8D%E6%96%B0%E8%B0%83%E7%94%A8%E4%B8%80%E6%AC%A1removeData%E6%96%B9%E6%B3%95%2C%20%E5%88%A0%E6%8E%89%E7%BC%93%E5%AD%98%E7%B3%BB%E7%BB%9F%E9%87%8C%E5%B7%B2%E7%BB%8F%E6%97%A0%E7%94%A8%E7%9A%84%E4%B8%9C%E8%A5%BF%2C%20%E9%98%B2%E6%AD%A2%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%2C%20%E6%B3%A8%E6%84%8F%E7%8E%B0%E5%9C%A8%E8%B5%B0%E7%9A%84%E6%98%AF%E4%B8%8B%E9%9D%A2else%E5%88%86%E6%94%AF.%20%0A%09%09%09%09%09jQuery.removeData(%20elem%20)%3B%20%0A%09%09%09%09%7D%0A%09%09%09%7D%0A%09%09%7D%20else%20%7B%0A%09%09%09if%20(%20isNode%20%26%26%20jQuery.support.deleteExpando%20)%20%7B%0A%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%94%AF%E6%8C%81delete%2C%20%E8%A7%81%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B%E9%83%A8%E5%88%86.%0A%09%09%09%09delete%20elem%5B%20jQuery.expando%20%5D%3B%0A%09%09%09%09%2F%2F%E5%88%A0%E6%8E%89%E5%85%83%E7%B4%A0%E7%9A%84jQuery.expando%E5%B1%9E%E6%80%A7%0A%0A%09%09%09%7D%20else%20if%20(%20elem.removeAttribute%20)%20%7B%0A%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%94%AF%E6%8C%81removeAttribute%0A%09%09%09%09elem.removeAttribute(%20jQuery.expando%20)%3B%0A%0A%09%09%09%7D%20else%20if%20(%20isNode%20)%20%7B%0A%09%09%09%09delete%20cache%5B%20id%20%5D%3B%0A%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AFdom%E8%8A%82%E7%82%B9%2C%20%E5%85%A8%E5%B1%80%E7%BC%93%E5%AD%98%E9%87%8C%E5%88%A0%E9%99%A4%E4%BB%A5%E8%BF%99%E4%B8%AAid%E4%B8%BAkey%E7%9A%84%E5%AF%B9%E8%B1%A1.%0A%09%09%09%7D%20else%20%7B%0A%09%09%09%09for%20(%20var%20n%20in%20elem%20)%20%7B%0A%09%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AF%E5%85%B6%E5%AE%83%E5%AF%B9%E8%B1%A1%2C%20%E5%88%A0%E9%99%A4%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7.%20%E9%98%B2%E6%AD%A2%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2.%0A%09%09%09%09%09delete%20elem%5B%20n%20%5D%3B%0A%09%09%09%09%7D%0A%09%09%09%7D%0A%09%09%7D%0A%09%7D%0A%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>Jquery.removeData&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;removeData:&nbsp;function(&nbsp;elem,&nbsp;name&nbsp;)&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!jQuery.acceptData(&nbsp;elem&nbsp;)&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem&nbsp;=&nbsp;elem&nbsp;==&nbsp;window&nbsp;?&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;windowData&nbsp;:&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;isNode&nbsp;=&nbsp;elem.nodeType,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;=&nbsp;isNode&nbsp;?&nbsp;elem[&nbsp;jQuery.expando&nbsp;]&nbsp;:&nbsp;elem,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//id是该元素在cache上面的key,&nbsp;如果不是节点就返回元素本身.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;=&nbsp;jQuery.cache,&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thisCache&nbsp;=&nbsp;isNode&nbsp;?&nbsp;cache[&nbsp;id&nbsp;]&nbsp;:&nbsp;id;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;name&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;thisCache&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;thisCache[&nbsp;name&nbsp;];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//删除key对应的缓存数据</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;isNode&nbsp;&amp;&amp;&nbsp;jQuery.isEmptyObject(thisCache)&nbsp;){&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果元素是dom节点并且缓存为一个空对象.说明所有缓存的数据都已经被删掉了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//那么重新调用一次removeData方法,&nbsp;删掉缓存系统里已经无用的东西,&nbsp;防止内存泄露,&nbsp;注意现在走的是下面else分支.&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.removeData(&nbsp;elem&nbsp;);&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;isNode&nbsp;&amp;&amp;&nbsp;jQuery.support.deleteExpando&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果支持delete,&nbsp;见特性检测部分.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;elem[&nbsp;jQuery.expando&nbsp;];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//删掉元素的jQuery.expando属性</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(&nbsp;elem.removeAttribute&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果支持removeAttribute</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elem.removeAttribute(&nbsp;jQuery.expando&nbsp;);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(&nbsp;isNode&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;cache[&nbsp;id&nbsp;];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果是dom节点,&nbsp;全局缓存里删除以这个id为key的对象.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(&nbsp;var&nbsp;n&nbsp;in&nbsp;elem&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果是其它对象,&nbsp;删除对象的所有属性.&nbsp;防止内存泄露.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;elem[&nbsp;n&nbsp;];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="15" title="jquery1.43源码分析之核心部分">Jquery.removeData
+
+	removeData: function( elem, name ) {
+		if ( !jQuery.acceptData( elem ) ) {
+			return;
+		}
+
+		elem = elem == window ?
+			windowData :
+			elem;
+
+		var isNode = elem.nodeType,
+			id = isNode ? elem[ jQuery.expando ] : elem,
+			//id是该元素在cache上面的key, 如果不是节点就返回元素本身.
+			cache = jQuery.cache,
+			thisCache = isNode ? cache[ id ] : id;
+
+		if ( name ) {
+			if ( thisCache ) {
+				delete thisCache[ name ];
+				//删除key对应的缓存数据
+				if ( isNode &amp;&amp; jQuery.isEmptyObject(thisCache) ){
+					//如果元素是dom节点并且缓存为一个空对象.说明所有缓存的数据都已经被删掉了.
+					//那么重新调用一次removeData方法, 删掉缓存系统里已经无用的东西, 防止内存泄露, 注意现在走的是下面else分支. 
+					jQuery.removeData( elem ); 
+				}
+			}
+		} else {
+			if ( isNode &amp;&amp; jQuery.support.deleteExpando ) {
+				//如果支持delete, 见特性检测部分.
+				delete elem[ jQuery.expando ];
+				//删掉元素的jQuery.expando属性
+
+			} else if ( elem.removeAttribute ) {
+				//如果支持removeAttribute
+				elem.removeAttribute( jQuery.expando );
+
+			} else if ( isNode ) {
+				delete cache[ id ];
+				//如果是dom节点, 全局缓存里删除以这个id为key的对象.
+			} else {
+				for ( var n in elem ) {
+					//如果是其它对象, 删除对象的所有属性. 防止内存泄露.
+					delete elem[ n ];
+				}
+			}
+		}
+	}
+
+</pre>
+<br>四 队列控制
+<br>队列控制也是jquery中很有特点的一个功能. 可以用来管理动画或者事件等的执行顺序. queue和dequeue主要为动画服务.
+<br>比如在jquery的动画里, 因为javascript的单线程异步机制, 如果要管理一批动画的执行顺序, 而不是让它们一起在屏幕上飞舞. 
+<br>一般我们是一个一个的把下个动画写在上个动画的回调函数中, 意味着如果要让十个动画按次序执行. 至少要写9个回调函数. 
+<br>好吧我承认我做过这样的事, 直接导致我的视力从5.2变为5.1.
+<br>
+<br>现在有了队列机制, 可以把动画都放到队列中依次执行.究竟怎样把动画填充进队列.用的是queue方法.
+<br>不过queue非常先进的是.把动画push进队列之后,还会自动去执行队列里的第一个函数.
+<br>队列机制里面的另外一个重要方法是dequeue, 意为取出队列的第一个函数并执行.此时队列里面的函数个数变为N-1.
+<br>
+<br>看个例子.比如我要让2个div以动画效果交替隐藏和显示.同时只能有一个div在进行动画.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3Cstyle%20type%3D%22text%2Fcss%22%3E%20%0A%23div1%20%7Bbackground%3A%23aaa%3Bwidth%3A188px%3Bheight%3A188px%3Bposition%3Aabsolute%3Btop%3A10px%3Bleft%3A%20110px%3B%7D%0A%23div2%20%7Bbackground%3A%23aaa%3Bwidth%3A188px%3Bheight%3A188px%3Bposition%3Aabsolute%3Btop%3A310px%3Bleft%3A%20110px%3B%7D%0A%3C%2Fstyle%3E%0A%0A%3Cbody%3E%20%0A%3Cdiv%20id%3D%22div1%22%3E%E6%88%91%E6%98%AF%E4%B8%80%E4%B8%AAdiv%3C%2Fdiv%3E%0A%3Cdiv%20id%3D%22div2%22%3E%E6%88%91%E6%98%AF%E5%8F%A6%E4%B8%80%E4%B8%AAdiv%3C%2Fdiv%3E%0A%3C%2Fbody%3E%0A%0A%E7%94%A8queue%E5%8F%AF%E4%BB%A5%E8%BF%99%E6%A0%B7%E5%81%9A.%0A%3Cscript%20type%3D%22text%2Fjavascript%22%3E%0A%24(document).queue(%5B%0A%09function(fn)%7B%0A%09%09%24(%22%23div1%22).hide(1000%2C%20fn)%3B%20%0A%20%20%20%20%20%20%2F%2Ffn%20%3D%3D%3D%20%24(document).dequeue%3B%0A%09%7D%2C%0A%09function(fn)%7B%0A%09%09%24(%22%23div2%22).hide(1000%2C%20fn)%3B%0A%09%7D%2C%0A%09function(fn)%7B%0A%09%09%24(%22%23div1%22).show(1000%2C%20fn)%3B%0A%09%7D%2C%0A%09function(fn)%7B%0A%09%09%24(%22%23div2%22).show(1000%2C%20fn)%3B%0A%09%7D%0A%5D)%0A%3C%2Fscript%3E%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;style&nbsp;type=</span><span class="string">"text/css"</span><span>&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>#div1&nbsp;{background:#aaa;width:188px;height:188px;position:absolute;top:10px;left:&nbsp;110px;}&nbsp;&nbsp;</span></li><li><span>#div2&nbsp;{background:#aaa;width:188px;height:188px;position:absolute;top:310px;left:&nbsp;110px;}&nbsp;&nbsp;</span></li><li><span>&lt;/style&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&lt;body&gt;&nbsp;&nbsp;&nbsp;</span></li><li><span>&lt;div&nbsp;id=<span class="string">"div1"</span><span>&gt;我是一个div&lt;/div&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;div&nbsp;id=<span class="string">"div2"</span><span>&gt;我是另一个div&lt;/div&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;/body&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>用queue可以这样做.&nbsp;&nbsp;</span></li><li><span>&lt;script&nbsp;type=<span class="string">"text/javascript"</span><span>&gt;&nbsp;&nbsp;</span></span></li><li><span>$(document).queue([&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;function(fn){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">"#div1"</span><span>).hide(</span><span class="number">1000</span><span>,&nbsp;fn);&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//fn&nbsp;===&nbsp;$(document).dequeue;</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;function(fn){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">"#div2"</span><span>).hide(</span><span class="number">1000</span><span>,&nbsp;fn);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;function(fn){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">"#div1"</span><span>).show(</span><span class="number">1000</span><span>,&nbsp;fn);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;function(fn){&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">"#div2"</span><span>).show(</span><span class="number">1000</span><span>,&nbsp;fn);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>])&nbsp;&nbsp;</span></li><li><span>&lt;/script&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="16" title="jquery1.43源码分析之核心部分">&lt;style type="text/css"&gt; 
+#div1 {background:#aaa;width:188px;height:188px;position:absolute;top:10px;left: 110px;}
+#div2 {background:#aaa;width:188px;height:188px;position:absolute;top:310px;left: 110px;}
+&lt;/style&gt;
+
+&lt;body&gt; 
+&lt;div id="div1"&gt;我是一个div&lt;/div&gt;
+&lt;div id="div2"&gt;我是另一个div&lt;/div&gt;
+&lt;/body&gt;
+
+用queue可以这样做.
+&lt;script type="text/javascript"&gt;
+$(document).queue([
+	function(fn){
+		$("#div1").hide(1000, fn); 
+      //fn === $(document).dequeue;
+	},
+	function(fn){
+		$("#div2").hide(1000, fn);
+	},
+	function(fn){
+		$("#div1").show(1000, fn);
+	},
+	function(fn){
+		$("#div2").show(1000, fn);
+	}
+])
+&lt;/script&gt;
+</pre>
+<br>首先我们需要一个载体, 来保存这个队列, 这里选择了document. 其实选什么节点都一样, 保存队列其实也是一个jQuery.data操作.
+<br>然后queue的参数是一个数组. 里面的函数就是队列依次执行的函数. 前面讲到, queue方法会自动把队列里的第一个函数取出来执行.
+<br>意味着这些代码写完后, div1已经开始渐渐隐藏了. 隐藏完毕后, 如果要让后面的动画继续执行, 还要用$(document).dequeue()继续取出并执行现在队列里的第一个函数.
+<br>当然这个操作是放在第一个动画的回调函数里, 以此类推, 第二个.dequeue()要放在第二个动画的回调函数里.
+<br>我们看到这里没有用$(document).dequeue(). 因为这句代码太长. 注意队列函数里有一个参数fn, fn是dequeue方法内部传给此函数的, 就是$(document).dequeue().
+<br>
+<br>在看源码之前, 先自己来想想这个功能应该怎么实现.
+<br>首先我们需要一个数组, 里面存放那些动画. 然后需要2个方法, set和get.可以存取动画. 
+<br>可能我们还需要一个变量来模拟线程锁, 保证队列里的函数不会同时被执行.
+<br>最后我们要把这个数组存入dom的缓存中, 方便随时存取和删除.
+<br>
+<br>看源码, 先是prototype方法.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=jQuery.prototype.queue%20%3D%20function(%20type%2C%20data%20)%20%7B%0A%09%09if%20(%20typeof%20type%20!%3D%3D%20%22string%22%20)%20%7B%0A%09%09%09data%20%3D%20type%3B%0A%09%09%09type%20%3D%20%22fx%22%3B%20%20%0A%2F%2F%E4%BF%AE%E6%AD%A3type%2C%20%E9%BB%98%E8%AE%A4%E4%B8%BA%E8%A1%A8%E7%A4%BAjquery%E5%8A%A8%E7%94%BB%E7%9A%84fx%2C%20%E5%A6%82%E6%9E%9C%E4%B8%8D%E4%B8%BA%22fx%22%2C%20%E5%8D%B3%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8A%A8%E7%94%BB%2C%20%E4%B8%80%E8%88%AC%E6%88%91%E4%BB%AC%E7%94%A8%22fx%22%E5%B0%B1%E8%B6%B3%E5%A4%9F%E4%BA%86.%0A%09%09%7D%0A%09%09if%20(%20data%20%3D%3D%3D%20undefined%20)%20%7B%20%0A%09%09%09return%20jQuery.queue(%20this%5B0%5D%2C%20type%20)%3B%20%20%0A%2F%2Fget%E9%98%9F%E5%88%97.%20%E4%B8%8D%E8%AE%BA%E9%9B%86%E5%90%88%E4%B8%AD%E6%98%AF%E5%8D%95%E4%B8%AA%E6%88%96%E8%80%85%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0%2C%20%E6%80%BB%E6%98%AF%E8%BF%94%E5%9B%9E%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%9F%E5%88%97%0A%09%09%7D%0A%09%09return%20this.each(function(%20i%2C%20elem%20)%20%7B%20%20%0A%2F%2Fset%E9%98%9F%E5%88%97%2C%20%E9%81%8D%E5%8E%86%E9%9B%86%E5%90%88%E5%86%85%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%0A%09%09%09var%20queue%20%3D%20jQuery.queue(%20this%2C%20type%2C%20data%20)%3B%20%20%0A%2F%2Fset%E5%B9%B6%E8%BF%94%E5%9B%9E%E9%98%9F%E5%88%97%0A%09%09%09if%20(%20type%20%3D%3D%3D%20%22fx%22%20%26%26%20queue%5B0%5D%20!%3D%3D%20%22inprogress%22%20)%20%7B%0A%09%09%20%2F%2F%E9%98%B2%E6%AD%A2%E5%9C%A8%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%2C%20%E8%BF%99%E9%87%8C%E5%8F%88%E8%BF%9B%E8%A1%8Cdequeue%E6%93%8D%E4%BD%9C%2C%20%E8%BF%99%E6%A0%B7%E4%BC%9A%E5%90%8C%E6%97%B6%E6%89%A7%E8%A1%8C2%E4%B8%AA%E5%87%BD%E6%95%B0%2C%20%E9%98%9F%E5%88%97%E5%B0%B1%E4%B8%8D%E5%8F%97%E6%8E%A7%E5%88%B6%E4%BA%86.%0A%09%09%09%09jQuery.dequeue(%20this%2C%20type%20)%3B%20%20%20%20%0A%2F%2F%E5%A6%82%E6%9E%9C%E9%98%9F%E5%88%97%E6%B2%A1%E6%9C%89%E8%A2%AB%E9%94%81%E4%BD%8F%2C%20%E5%8D%B3%E6%AD%A4%E6%97%B6%E6%B2%A1%E6%9C%89%E5%9C%A8%E6%89%A7%E8%A1%8Cdequeue.%20%E7%A7%BB%E5%87%BA%E9%98%9F%E5%88%97%E9%87%8C%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B9%B6%E6%89%A7%E8%A1%8C%E5%AE%83.%0A%2F%2F%E6%AF%95%E7%AB%9Fqueue%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BB%BB%E5%8A%A1%E6%98%AF%E6%B7%BB%E5%8A%A0%E9%98%9F%E5%88%97%2C%20%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E7%9A%84%E6%93%8D%E4%BD%9C%E4%B8%8A%2C%20%E5%8F%AA%E8%83%BD%E5%BD%93%E4%BA%8C%E7%AD%89%E5%85%AC%E6%B0%91.%0A%09%09%09%7D%0A%09%09%7D)%3B%0A%09%7D%0A%E7%9C%8B%E7%9C%8BjQuery.queue%E8%BF%99%E4%B8%AA%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95.%0A%09jQuery.queue%20%3D%20function(%20elem%2C%20type%2C%20data%20)%20%7B%0A%09%09if%20(%20!elem%20)%20%7B%0A%09%09%09return%3B%0A%09%09%7D%0A%09%09type%20%3D%20(type%20%7C%7C%20%22fx%22)%20%2B%20%22queue%22%3B%0A%09%09var%20q%20%3D%20jQuery.data(%20elem%2C%20type%20)%3B%0A%09%09%2F%2F%E5%8F%96%E5%BE%97%E5%85%83%E7%B4%A0%E7%BC%93%E5%AD%98%E4%B8%8A%E9%9D%A2%E7%9A%84%E9%98%9F%E5%88%97%0A%09%09if%20(%20!data%20)%20%7B%20%20%0A%09%09%2F%2F%E5%A6%82%E6%9E%9C%E5%BD%93data%E4%B8%BA%E7%A9%BA%2C%20%E5%8F%AA%E6%98%AF%E6%9F%A5%E8%AF%A2queue.%20%E9%82%A3%E4%B9%88%E8%BF%94%E5%9B%9E%E9%98%9F%E5%88%97%E6%88%96%E8%80%85%5B%5D%0Areturn%20q%20%7C%7C%20%5B%5D%3B%0A%09%09%7D%0A%09%09if%20(%20!q%20%7C%7C%20jQuery.isArray(data)%20)%20%7B%0A%09%09%09q%20%3D%20jQuery.data(%20elem%2C%20type%2C%20jQuery.makeArray(data)%20)%3B%20%0A%09%09%2F%2F%E5%90%A6%E5%88%99%E6%98%AFset%E6%93%8D%E4%BD%9C%EF%BC%8C%E6%B3%A8%E6%84%8F!q%20%7C%7C%20jQuery.isArray(data)%E8%BF%99%E5%8F%A5%E4%BB%A3%E7%A0%81%E7%9A%84%E5%90%AB%E4%B9%89%2C%20%0A%2F%2F%E5%A6%82%E6%9E%9Cq%E4%B8%BAnull%2C%20%E8%AF%B4%E6%98%8E%E7%BC%93%E5%AD%98%E4%B8%8A%E6%B2%A1%E6%9C%89%E9%98%9F%E5%88%97.%20%E6%AD%A4%E6%97%B6%E5%93%AA%E6%80%95%E9%98%9F%E5%88%97%E9%87%8C%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%2C%20%E4%B9%9F%E6%8A%8A%E5%AE%83%E8%BD%AC%E6%88%90%E6%95%B0%E7%BB%84%2C%20%E4%BF%9D%E8%AF%81%E9%98%9F%E5%88%97%E6%98%AF%E6%95%B0%E7%BB%84%E5%BD%A2%E5%BC%8F%0A%09%09%2F%2F%E5%A6%82%E6%9E%9Cq%E4%B8%8D%E4%B8%BAnull%2C%20%E8%AF%B4%E6%98%8E%E7%BC%93%E5%AD%98%E4%B8%8A%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E9%98%9F%E5%88%97%2C%20%E4%BD%86%E6%98%AF%E5%A6%82%E6%9E%9C%E7%8E%B0%E5%9C%A8%E8%A2%AB%E6%B7%BB%E5%8A%A0%E7%9A%84%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E8%AF%9D%2C%20%E4%BB%A5%E7%8E%B0%E5%9C%A8%E7%9A%84%E6%95%B0%E7%BB%84%E6%9D%A5%E4%BB%A3%E6%9B%BF%E5%8E%9F%E6%9D%A5%E7%9A%84%E9%98%9F%E5%88%97%2C%20%E5%8D%B3%E6%8A%8A%E5%8E%9F%E6%9D%A5%E7%9A%84%E9%98%9F%E5%88%97%E6%B8%85%E7%A9%BA%E4%BA%86.%0A%09%09%2F%2F%20clearQueue%E5%87%BD%E6%95%B0%E5%B0%B1%E6%98%AF%E7%94%A8%E7%9A%84%E8%BF%99%E4%B8%80%E5%8F%A5%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%B8%85%E7%A9%BA%E9%98%9F%E5%88%97%E6%93%8D%E4%BD%9C.%09%0A%7D%20else%20%7B%0A%09%09%09q.push(%20data%20)%3B%0A%09%09%2F%2F%E7%BC%93%E5%AD%98%E4%B8%8A%E6%9C%89%E9%98%9F%E5%88%97%E5%B9%B6%E4%B8%94%E5%8F%AA%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%0A%09%09%7D%0A%09%09return%20q%3B%0A%09%7D%0A%0A%E5%86%8D%E7%9C%8Bdequeue%2C%20dequeue%E7%9A%84%E5%8E%9F%E5%9E%8B%E6%96%B9%E6%B3%95%E4%BB%80%E4%B9%88%E4%B9%9F%E6%B2%A1%E5%81%9A%2C%20%E7%9B%B4%E6%8E%A5%E6%8A%8A%E5%8F%82%E6%95%B0%E4%BA%A4%E7%BB%99jQuery.dequeue%E6%9D%A5%E5%A4%84%E7%90%86.%0A%0A%09dequeue%3A%20function(%20elem%2C%20type%20)%20%7B%0A%09%09type%20%3D%20type%20%7C%7C%20%22fx%22%3B%0A%09%09var%20queue%20%3D%20jQuery.queue(%20elem%2C%20type%20)%2C%20fn%20%3D%20queue.shift()%3B%0A%09%09%2F%2F%E5%8F%96%E5%BE%97%E9%98%9F%E5%88%97%2C%20%E5%92%8C%E9%98%9F%E5%88%97%E9%87%8C%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%2C%20%E8%BF%99%E9%87%8C%E7%9B%B4%E6%8E%A5%E7%BB%99shift%E6%8E%89%E4%BA%86%2C%20%E5%85%88%E6%96%A9%E5%90%8E%E5%A5%8F.%0A%09%09if%20(%20fn%20%3D%3D%3D%20%22inprogress%22%20)%20%7B%0A%09%09%2F%2F%E5%A6%82%E6%9E%9Cfn%3D%3D%3D%E2%80%9D%20inprogress%E2%80%9D%2C%20%E8%AF%B4%E6%98%8E%E6%9D%80%E9%94%99%E4%BA%86%E4%BA%BA%2C%20%E6%88%91%E8%A6%81%E6%89%BE%E7%9A%84%E6%98%AF%E5%87%BD%E6%95%B0%0A%09%09fn%20%3D%20queue.shift()%3B%0A%09%09%2F%2F%E7%BB%A7%E7%BB%AD%E6%89%BE%E4%B8%8B%E4%B8%80%E4%B8%AA%2C%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E8%82%AF%E5%AE%9A%E6%98%AF%E5%87%BD%E6%95%B0%E4%BA%86.%0A%09%09%7D%0A%09%09if%20(%20fn%20)%20%7B%0A%09%09%09if%20(%20type%20%3D%3D%3D%20%22fx%22%20)%20%7B%0A%09%09%09%09queue.unshift(%22inprogress%22)%3B%0A%09%09%2F%2F%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%89%8D%2C%20%E5%9C%A8queue%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%89%8D%E9%9D%A2%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B%E9%94%81%2C%20%E5%A4%8D%E6%B4%BB%E5%88%9A%E6%89%8D%E6%9D%80%E9%94%99%E7%9A%84%E4%BA%BA.%09%0A%7D%0A%0A%09%09%09fn.call(elem%2C%20function()%20%7B%0A%09%09%2F%2F%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%2C%20%E5%8F%82%E6%95%B0%E5%B0%B1%E6%98%AF%E5%89%8D%E9%9D%A2%E7%9A%84fn%0A%09%09%09%09jQuery.dequeue(elem%2C%20type)%3B%0A%09%09%09%7D)%3B%0A%09%09%7D%0A%09%7D%0A%7D)%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>jQuery.prototype.queue&nbsp;=&nbsp;function(&nbsp;type,&nbsp;data&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;typeof&nbsp;type&nbsp;!==&nbsp;</span><span class="string">"string"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;type;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;<span class="string">"fx"</span><span>;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//修正type,&nbsp;默认为表示jquery动画的fx,&nbsp;如果不为"fx",&nbsp;即为自己的自定义动画,&nbsp;一般我们用"fx"就足够了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;data&nbsp;===&nbsp;undefined&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;jQuery.queue(&nbsp;</span><span class="keyword">this</span><span>[</span><span class="number">0</span><span>],&nbsp;type&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//get队列.&nbsp;不论集合中是单个或者多个元素,&nbsp;总是返回第一个元素的队列</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>.each(function(&nbsp;i,&nbsp;elem&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//set队列,&nbsp;遍历集合内所有元素</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;queue&nbsp;=&nbsp;jQuery.queue(&nbsp;<span class="keyword">this</span><span>,&nbsp;type,&nbsp;data&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//set并返回队列</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;type&nbsp;===&nbsp;</span><span class="string">"fx"</span><span>&nbsp;&amp;&amp;&nbsp;queue[</span><span class="number">0</span><span>]&nbsp;!==&nbsp;</span><span class="string">"inprogress"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//防止在执行函数的时候,&nbsp;这里又进行dequeue操作,&nbsp;这样会同时执行2个函数,&nbsp;队列就不受控制了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.dequeue(&nbsp;<span class="keyword">this</span><span>,&nbsp;type&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//如果队列没有被锁住,&nbsp;即此时没有在执行dequeue.&nbsp;移出队列里第一个函数并执行它.</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//毕竟queue的主要任务是添加队列,&nbsp;执行函数的操作上,&nbsp;只能当二等公民.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>看看jQuery.queue这个静态方法.&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;jQuery.queue&nbsp;=&nbsp;function(&nbsp;elem,&nbsp;type,&nbsp;data&nbsp;)&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!elem&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;(type&nbsp;||&nbsp;<span class="string">"fx"</span><span>)&nbsp;+&nbsp;</span><span class="string">"queue"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;q&nbsp;=&nbsp;jQuery.data(&nbsp;elem,&nbsp;type&nbsp;);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//取得元素缓存上面的队列</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!data&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果当data为空,&nbsp;只是查询queue.&nbsp;那么返回队列或者[]</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">return</span><span>&nbsp;q&nbsp;||&nbsp;[];&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;!q&nbsp;||&nbsp;jQuery.isArray(data)&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q&nbsp;=&nbsp;jQuery.data(&nbsp;elem,&nbsp;type,&nbsp;jQuery.makeArray(data)&nbsp;);&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//否则是set操作，注意!q&nbsp;||&nbsp;jQuery.isArray(data)这句代码的含义,&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//如果q为null,&nbsp;说明缓存上没有队列.&nbsp;此时哪怕队列里只有一个函数,&nbsp;也把它转成数组,&nbsp;保证队列是数组形式</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果q不为null,&nbsp;说明缓存上已经存在队列,&nbsp;但是如果现在被添加的函数是一个数组的话,&nbsp;以现在的数组来代替原来的队列,&nbsp;即把原来的队列清空了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;clearQueue函数就是用的这一句代码执行清空队列操作.&nbsp;&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.push(&nbsp;data&nbsp;);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//缓存上有队列并且只添加一个函数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;q;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>再看dequeue,&nbsp;dequeue的原型方法什么也没做,&nbsp;直接把参数交给jQuery.dequeue来处理.&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;dequeue:&nbsp;function(&nbsp;elem,&nbsp;type&nbsp;)&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;=&nbsp;type&nbsp;||&nbsp;<span class="string">"fx"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;queue&nbsp;=&nbsp;jQuery.queue(&nbsp;elem,&nbsp;type&nbsp;),&nbsp;fn&nbsp;=&nbsp;queue.shift();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//取得队列,&nbsp;和队列里的第一个元素,&nbsp;这里直接给shift掉了,&nbsp;先斩后奏.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;fn&nbsp;===&nbsp;</span><span class="string">"inprogress"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果fn===”&nbsp;inprogress”,&nbsp;说明杀错了人,&nbsp;我要找的是函数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fn&nbsp;=&nbsp;queue.shift();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//继续找下一个,&nbsp;下一个肯定是函数了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;fn&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;type&nbsp;===&nbsp;</span><span class="string">"fx"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue.unshift(<span class="string">"inprogress"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//函数执行前,&nbsp;在queue数组的最前面添加一个进程锁,&nbsp;复活刚才杀错的人.&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fn.call(elem,&nbsp;function()&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//执行函数,&nbsp;参数就是前面的fn</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.dequeue(elem,&nbsp;type);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>})&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="17" title="jquery1.43源码分析之核心部分">jQuery.prototype.queue = function( type, data ) {
+		if ( typeof type !== "string" ) {
+			data = type;
+			type = "fx";  
+//修正type, 默认为表示jquery动画的fx, 如果不为"fx", 即为自己的自定义动画, 一般我们用"fx"就足够了.
+		}
+		if ( data === undefined ) { 
+			return jQuery.queue( this[0], type );  
+//get队列. 不论集合中是单个或者多个元素, 总是返回第一个元素的队列
+		}
+		return this.each(function( i, elem ) {  
+//set队列, 遍历集合内所有元素
+			var queue = jQuery.queue( this, type, data );  
+//set并返回队列
+			if ( type === "fx" &amp;&amp; queue[0] !== "inprogress" ) {
+		 //防止在执行函数的时候, 这里又进行dequeue操作, 这样会同时执行2个函数, 队列就不受控制了.
+				jQuery.dequeue( this, type );    
+//如果队列没有被锁住, 即此时没有在执行dequeue. 移出队列里第一个函数并执行它.
+//毕竟queue的主要任务是添加队列, 执行函数的操作上, 只能当二等公民.
+			}
+		});
+	}
+看看jQuery.queue这个静态方法.
+	jQuery.queue = function( elem, type, data ) {
+		if ( !elem ) {
+			return;
+		}
+		type = (type || "fx") + "queue";
+		var q = jQuery.data( elem, type );
+		//取得元素缓存上面的队列
+		if ( !data ) {  
+		//如果当data为空, 只是查询queue. 那么返回队列或者[]
+return q || [];
+		}
+		if ( !q || jQuery.isArray(data) ) {
+			q = jQuery.data( elem, type, jQuery.makeArray(data) ); 
+		//否则是set操作，注意!q || jQuery.isArray(data)这句代码的含义, 
+//如果q为null, 说明缓存上没有队列. 此时哪怕队列里只有一个函数, 也把它转成数组, 保证队列是数组形式
+		//如果q不为null, 说明缓存上已经存在队列, 但是如果现在被添加的函数是一个数组的话, 以现在的数组来代替原来的队列, 即把原来的队列清空了.
+		// clearQueue函数就是用的这一句代码执行清空队列操作.	
+} else {
+			q.push( data );
+		//缓存上有队列并且只添加一个函数
+		}
+		return q;
+	}
+
+再看dequeue, dequeue的原型方法什么也没做, 直接把参数交给jQuery.dequeue来处理.
+
+	dequeue: function( elem, type ) {
+		type = type || "fx";
+		var queue = jQuery.queue( elem, type ), fn = queue.shift();
+		//取得队列, 和队列里的第一个元素, 这里直接给shift掉了, 先斩后奏.
+		if ( fn === "inprogress" ) {
+		//如果fn===” inprogress”, 说明杀错了人, 我要找的是函数
+		fn = queue.shift();
+		//继续找下一个, 下一个肯定是函数了.
+		}
+		if ( fn ) {
+			if ( type === "fx" ) {
+				queue.unshift("inprogress");
+		//函数执行前, 在queue数组的最前面添加一个进程锁, 复活刚才杀错的人.	
+}
+
+			fn.call(elem, function() {
+		//执行函数, 参数就是前面的fn
+				jQuery.dequeue(elem, type);
+			});
+		}
+	}
+})
+</pre>
+<br>“inprogress”进程锁是这样工作的：
+<br>如果是dequeue操作, 去掉锁, 执行队列里的函数, 同时给队列加上锁. 如果是queue操作, 要看锁的状态, 如果被锁上了, 就只执行队列的添加操作. 不再调用dequeue. 
+<br>其实dequeue和queue都可以执行队列里的第一个函数.queue操作添加完队列之后, 会调用dequeue方法去执行函数.
+<br>但是用dequeue执行函数的时候, 这时候如果又用queue触发dequeue的话, 很可能同时有2个函数在执行. 队列就失去一大半意义了(还是可以保证顺序, 但是2个动画会同时执行).
+<br>不过这个锁只能保证在dequeue的时候, 不被queue操作意外的破坏队列.
+<br>如果人为的同时用2个dequeue, 还是会破坏动画效果的. 所以要把fn写在回调函数里.
+<br>
+<br>清空队列
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=clearQueue%3A%20function(%20type%20)%20%7B%0A%09%09return%20this.queue(%20type%20%7C%7C%20%22fx%22%2C%20%5B%5D%20)%3B%0A%09%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>clearQueue:&nbsp;function(&nbsp;type&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>.queue(&nbsp;type&nbsp;||&nbsp;</span><span class="string">"fx"</span><span>,&nbsp;[]&nbsp;);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="18" title="jquery1.43源码分析之核心部分">clearQueue: function( type ) {
+		return this.queue( type || "fx", [] );
+	}
+</pre>
+<br>原理上面已经提到过了, 就是这一句
+<br>
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=if%20(%20!q%20%7C%7C%20jQuery.isArray(data)%20)%20%7B%0A%09%09%09q%20%3D%20jQuery.data(%20elem%2C%20type%2C%20jQuery.makeArray(data)%20)%3B%20%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="keyword">if</span><span>&nbsp;(&nbsp;!q&nbsp;||&nbsp;jQuery.isArray(data)&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q&nbsp;=&nbsp;jQuery.data(&nbsp;elem,&nbsp;type,&nbsp;jQuery.makeArray(data)&nbsp;);&nbsp;&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="19" title="jquery1.43源码分析之核心部分">if ( !q || jQuery.isArray(data) ) {
+			q = jQuery.data( elem, type, jQuery.makeArray(data) ); 
+}
+</pre>
+<br>用一个空数组代替了原来的队列.
+<br>
+<br>五&nbsp; 多库共存
+<br>jQuery.noConflict
+<br>将变量$的控制权让渡给上一个实现它的那个库.
+<br>可能很多人都被多库共存时的$变量问题困扰过. 比如你先引入了prototype库,然后又引入了jquery.因为jquery的$会覆盖prototype的$.
+<br>现在想调用prototype的$怎么办呢, noConflict方法就派上用场了.
+<br>Jquery代码里最开始就有一句_$ = window.$ , 在加载的时候就用_$来引用原来的$ (比如现在就是prototype库里的$).
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=jQuery.extend(%7B%20%20%20%0A%09noConflict%3A%20function(%20deep%20)%20%7B%0A%09%09window.%24%20%3D%20_%24%3B%20%20%20%0A%2F%2Fwindow.%24%E5%BD%92%E8%BF%98%E7%BB%99%E5%8E%9F%E6%9D%A5%E7%9A%84%E5%BA%93.%20%E8%A6%81%E5%9B%9E%E5%BD%92jquery%E5%86%8D%E7%94%A8window.%24%20%3D%20jQuery%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86.%0A%09%09if%20(%20deep%20)%20%7B%20%20%20%20%0A%09%09%09window.jQuery%20%3D%20_jQuery%3B%20%20%20%0A%2F%2F%E5%A6%82%E6%9E%9Cdeep%E4%B8%BAtrue%2C%20jQuery%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%BD%92%E8%BF%98%2C%20%E4%B8%8D%E8%BF%87%E4%B8%80%E8%88%AC%E4%B8%8D%E9%9C%80%E8%A6%81%E4%B9%9F%E4%B8%8D%E6%8E%A8%E8%8D%90%E8%BF%99%E4%B9%88%E5%81%9A.%0A%09%09%7D%0A%09%09return%20jQuery%3B%0A%09%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>jQuery.extend({&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;noConflict:&nbsp;function(&nbsp;deep&nbsp;)&nbsp;{&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.$&nbsp;=&nbsp;_$;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span><span class="comment">//window.$归还给原来的库.&nbsp;要回归jquery再用window.$&nbsp;=&nbsp;jQuery就可以了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;deep&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.jQuery&nbsp;=&nbsp;_jQuery;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span><span class="comment">//如果deep为true,&nbsp;jQuery这个变量也可以归还,&nbsp;不过一般不需要也不推荐这么做.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;jQuery;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="20" title="jquery1.43源码分析之核心部分">jQuery.extend({   
+	noConflict: function( deep ) {
+		window.$ = _$;   
+//window.$归还给原来的库. 要回归jquery再用window.$ = jQuery就可以了.
+		if ( deep ) {    
+			window.jQuery = _jQuery;   
+//如果deep为true, jQuery这个变量也可以归还, 不过一般不需要也不推荐这么做.
+		}
+		return jQuery;
+	}
+</pre>
+<br>继承和拷贝
+<br>jQuery.prototype.extend和jQuery.extend
+<br>扩展 jQuery 元素集来提供新的方法, 或者把一个对象的属性拷贝到另外一个对象上.
+<br>通常javascript的继承实现有4种方式. 
+<br>1	构造继承
+<br>2	prototype继承
+<br>3	属性拷贝
+<br>4	实例继承(这个有点特殊, 主要用于继承内置对象)
+<br>
+<br>这4种继承都有各自的优点和缺陷.
+<br>构造继承查找属性快.但无法继承原型链上的方法,而且每次都要为属性复制一份新的副本进行储存
+<br>原型继承在性能方面好一些,可以共享原型链.但查找属性慢,因为可能要遍历N条原型链才能找到某个属性.而且原型链太多,会使得结构越加混乱.并且会丢失对象的constructor属性
+<br>(对象的constructor总是指向原型链最上层的构造器)
+<br>属性拷贝非常灵活,但明显效率偏低. 而且仅仅只是模拟继承.
+<br>实例继承主要用来继承Array, Date等内置对象, 用的较少.
+<br>
+<br>jquery里采用的是属性拷贝.其实用哪种继承是个见仁见智的问题. 也有其它一些库就是用的原型继承.
+<br>
+<br>前面也可以注意到, jquery只在构造方法或者原型链上定义了少量的核心方法. 其它功能块都是通过extend函数拷贝上去.按需定制.
+<br>好比开发商交给我们房子的时候, 只安装了水电暖气等基本设施.电视机洗衣机显然是自己去买比较好.
+<br>
+<br>属性拷贝原理就是遍历第二个对象, 然后分别把键和值填入第一个对象中.类似于
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=for%20(var%20i%20in%20obj2)%7B%0A%09Obj1%5Bi%5D%20%3D%20obj2%5Bi%5D%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="keyword">for</span><span>&nbsp;(var&nbsp;i&nbsp;in&nbsp;obj2){&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;Obj1[i]&nbsp;=&nbsp;obj2[i]&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="21" title="jquery1.43源码分析之核心部分">for (var i in obj2){
+	Obj1[i] = obj2[i]
+}
+</pre>
+<br>不幸的是jquery里面的做法复杂的多,不仅可以把多个参数的属性都复制到一个对象中,还能实现深度继承.
+<br>深度继承是指如果被继承对象和继承对象都有同名属性a, 而且这个属性的值分别是一个对象b和c.会把b和c的属性都合并到一个新的对象里, 作为值返回给合并后的对象.
+<br>说的有点复杂, 看个例子.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%09%0AjQuery.extend(%20true%2C%20%20%20%20%20%20%20%20%0A%09%20%20%20%20%20%7B%20name%3A%20%E2%80%9CJohn%E2%80%9D%2C%20location%3A%20%7B%20city%3A%20%E2%80%9CBoston%E2%80%9D%20%7D%20%7D%2C%20%20%20%20%20%20%20%0A%09%20%20%20%20%20%7B%20last%3A%20%E2%80%9CResig%E2%80%9D%2C%20location%3A%20%7B%20state%3A%20%E2%80%9CMA%E2%80%9D%20%7D%20%7D%20%20%20%20%20%20%20%0A%09%20)%3B%20%20%20%20%20%20%20%20%0A%09%20%20%E7%BB%93%E6%9E%9C%E4%B8%BA%20%20%20%20%20%20%20%0A%09%20%20%20%7B%20%0Aname%3A%20%E2%80%9CJohn%E2%80%9D%2C%20last%3A%20%E2%80%9CResig%E2%80%9D%2C%20%20%20%20%20%20%20%20%0A%09%20%20%20%20location%3A%20%7B%20city%3A%20%E2%80%9CBoston%E2%80%9D%2C%20state%3A%20%E2%80%9CMA%E2%80%9D%20%7D%20%0A%09%20%20%20%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>jQuery.extend(&nbsp;<span class="keyword">true</span><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;name:&nbsp;“John”,&nbsp;location:&nbsp;{&nbsp;city:&nbsp;“Boston”&nbsp;}&nbsp;},&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;last:&nbsp;“Resig”,&nbsp;location:&nbsp;{&nbsp;state:&nbsp;“MA”&nbsp;}&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结果为&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;</span></li><li><span>name:&nbsp;“John”,&nbsp;last:&nbsp;“Resig”,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location:&nbsp;{&nbsp;city:&nbsp;“Boston”,&nbsp;state:&nbsp;“MA”&nbsp;}&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="22" title="jquery1.43源码分析之核心部分">	
+jQuery.extend( true,        
+	     { name: “John”, location: { city: “Boston” } },       
+	     { last: “Resig”, location: { state: “MA” } }       
+	 );        
+	  结果为       
+	   { 
+name: “John”, last: “Resig”,        
+	    location: { city: “Boston”, state: “MA” } 
+	   }
+</pre>
+<br>jQuery的做法主要是这样, 先修正参数,根据第一个参数是boolean还是object确定target是哪个对象.
+<br>如果有且只有一个object类型的参数, 则把这个参数里的属性copy到jQuery或者jQuery.prototype上, 扩展jQuery对象.用这个办法可以很方便的编写插件.
+<br>否则依次遍历第一个object参数之后的所有object类型对象的属性. 根据是否深度继承用不同的方式进行copy操作. 
+<br>extend会改变第一个参数的引用. 如果不想改变它,可以稍微变通一下,把所有的参数属性都拷贝到一个空对象上.如$.extend({}, obj1, obj2);
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=jQuery.extend%20%3D%20jQuery.fn.extend%20%3D%20function()%20%7B%0A%09var%20target%20%3D%20arguments%5B0%5D%20%7C%7C%20%7B%7D%2C%20i%20%3D%201%2C%20length%20%3D%20arguments.length%2C%20deep%20%3D%20false%2C%20options%2C%20name%2C%20src%2C%20copy%2C%20copyIsArray%3B%0A%09%2F%2Ftarget%E5%BA%94%E8%AF%A5%E6%8C%87%E5%90%91%E8%A2%AB%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%AF%B9%E8%B1%A1%2C%20deep%E8%A1%A8%E7%A4%BA%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D%E6%88%96%E8%80%85%E6%B5%85%E5%BA%A6%E6%8B%B7%E8%B4%9D%2C%20%E5%A6%82%E6%9E%9C%E4%B8%BAtrue%2C%E5%8D%B3%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D.%E5%8F%8D%E4%B9%8B%E4%B8%BA%E6%B5%85%E5%BA%A6%E6%8B%B7%E8%B4%9D.%0A%0A%09if%20(%20typeof%20target%20%3D%3D%3D%20%22boolean%22%20)%20%7B%0A%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%BE%E7%A4%BA%E5%A3%B0%E6%98%8E%E4%BA%86%E6%98%AF%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E5%BA%A6%E6%8B%B7%E8%B4%9D%0A%09%09deep%20%3D%20target%3B%0A%09%2F%2F%E9%87%8D%E6%96%B0%E8%AE%BE%E7%BD%AEdeep%0A%09%09target%20%3D%20arguments%5B1%5D%20%7C%7C%20%7B%7D%3B%0A%09%2F%2F%E4%BF%AE%E6%AD%A3target%2C%20%E8%AE%A9%E5%AE%83%E6%8C%87%E5%90%91%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0%0A%09%09i%20%3D%202%3B%0A%09%2F%2F%E4%BF%AE%E6%AD%A3%E5%BE%AA%E7%8E%AF%E5%BC%80%E5%A7%8B%E7%9A%84%E4%BD%8D%E7%BD%AE%2C%20copy%E7%9A%84%E6%97%B6%E5%80%99%E8%B7%B3%E8%BF%87deep%E5%92%8Ctarget%2C%20%E6%8C%87%E5%90%91%E7%AC%AC%E4%B8%80%E4%B8%AAcopy%E5%AF%B9%E8%B1%A1.%0A%09%7D%0A%0A%09if%20(%20typeof%20target%20!%3D%3D%20%22object%22%20%26%26%20!jQuery.isFunction(target)%20)%20%7B%0A%09%09%2F%2F%E4%BF%AE%E6%AD%A3target.%20%E7%A1%AE%E4%BF%9Dtarget%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BB%A5%E8%BF%AD%E4%BB%A3%E5%B1%9E%E6%80%A7%E7%9A%84%E5%AF%B9%E8%B1%A1%2C%20%E4%BB%8E%E8%BF%99%E5%8F%A5%E4%BB%A3%E7%A0%81%E7%9C%8B%E5%87%BAtarget%E5%8F%AF%E4%BB%A5%E4%B8%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%0A%09%09target%20%3D%20%7B%7D%3B%0A%09%7D%0A%09if%20(%20length%20%3D%3D%3D%20i%20)%20%7B%0A%09%09target%20%3D%20this%3B%0A%09%09--i%3B%0A%09%09%2F*%0A%09%09%09%E5%BD%93%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E6%98%AF%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%83%85%E5%86%B5(%E5%8F%AF%E8%83%BD%E5%89%8D%E9%9D%A2%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AAtrue%E6%88%96false).%20%0A%09%09%09%E6%8A%8A%E5%B1%9E%E6%80%A7%E8%B5%8B%E5%80%BC%E7%BB%99jquery%E6%88%96%E8%80%85jquery.fn.%20%E5%B8%AEjquery%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF.%0A%09%09%09%E5%B9%B6%E4%B8%94%E9%87%8D%E6%96%B0%E4%BF%AE%E6%AD%A3%E5%BE%AA%E7%8E%AF%E8%B5%B7%E5%A7%8B%E4%BD%8D%E7%BD%AE.%0A%09%09*%2F%0A%09%7D%0A%0A%09for%20(%20%3B%20i%20%3C%20length%3B%20i%2B%2B%20)%20%7B%0A%09%09if%20(%20(options%20%3D%20arguments%5B%20i%20%5D)%20!%3D%20null%20)%20%7B%0A%09%09%09%2F%2F%E5%8F%AA%E9%81%8D%E5%8E%86%E4%B8%8D%E4%B8%BAnull%E7%9A%84%E5%8F%82%E6%95%B0%0A%09%09%09for%20(%20name%20in%20options%20)%20%7B%20%20%2F%2F%E9%81%8D%E5%8E%86copy%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%0A%09%09%09%09src%20%3D%20target%5B%20name%20%5D%3B%20%20%20%20%2F%2F%E8%AE%B0%E5%BD%95target%E7%9A%84%E5%B1%9E%E6%80%A7%E5%80%BC%0A%09%09%09%09copy%20%3D%20options%5B%20name%20%5D%3B%20%20%2F%2F%E8%AE%B0%E5%BD%95%E5%B0%86%E8%A6%81%E8%A2%ABcopy%E8%BF%9B%E5%8E%BB%E7%9A%84%E5%80%BC%0A%09%09%09%09if%20(%20target%20%3D%3D%3D%20copy%20)%20%7B%20%2F%2F%E9%98%B2%E6%AD%A2%E6%AD%BB%E5%BE%AA%E7%8E%AF%3F%3F%3F%0A%09%09%09%09%09continue%3B%0A%09%09%09%09%7D%0A%0A%09%09%09%09if%20(%20deep%20%26%26%20copy%20%26%26%20(%20jQuery.isPlainObject(copy)%20%7C%7C%20(copyIsArray%20%3D%20jQuery.isArray(copy))%20)%20)%20%7B%0A%09%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AF%E6%B7%B1%E5%BA%A6%E7%BB%A7%E6%89%BF%E5%B9%B6%E4%B8%94copy%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F%E6%88%96%E8%80%85%E6%95%B0%E7%BB%84%2C%20%E4%BD%86%E5%BF%85%E9%A1%BB%E4%BF%9D%E8%AF%81%E8%87%B3%E5%B0%91%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84%E4%B9%8B%E4%B8%80%E6%89%8D%E4%BC%9A%E7%BB%A7%E7%BB%AD%E4%B8%8B%E9%9D%A2.%0A%09%09%09%09%09%2F%2FcopyIsArray%20%3D%20jQuery.isArray(copy)%E8%BF%94%E5%9B%9E%E7%9A%84%E6%98%AFboolean.%0A%09%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9CjQuery.isPlainObject(copy)%E5%92%8CjQuery.isArray(copy)%E9%83%BD%E6%98%AFfalse%2C%E9%82%A3%E6%95%B4%E4%B8%AAif%E8%AF%AD%E5%8F%A5%E9%87%8C%E7%9A%84%E5%88%A4%E6%96%AD%E6%9D%A1%E4%BB%B6%E9%83%BD%E8%BF%94%E5%9B%9Efalse%2C%0A%09%09%09%09%09%2F%2F%E4%B9%9F%E5%B0%B1%E4%B8%8D%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%B8%8B%E9%9D%A2%E4%BA%86%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BB%A7%E6%89%BF%E4%BA%86.%E6%AF%94%E8%B5%B71.42%E7%89%88%E6%9C%AC%2C%20%E5%BE%88%E5%A4%9A%E5%9C%B0%E6%96%B9%E5%8A%9F%E8%83%BD%E6%B2%A1%E5%8F%98%2C%20%E4%BB%A3%E7%A0%81%E8%BF%98%E6%98%AF%E6%98%8E%E6%98%BE%E6%B8%85%E6%99%B0%E4%BA%86%E5%BE%88%E5%A4%9A.%0A%09%09%09%09%09if%20(%20copyIsArray%20)%20%7B%20%20%20%2F%2F%E5%A6%82%E6%9E%9C%E6%98%AF%E6%95%B0%E7%BB%84%0A%09%09%09%09%09%09copyIsArray%20%3D%20false%3B%20%2F%2F%E9%87%8D%E8%AE%BEcopyIsArray%0A%09%09%09%09%09%09clone%20%3D%20src%20%26%26%20jQuery.isArray(src)%20%3F%20src%20%3A%20%5B%5D%3B%0A%09%09%09%09%09%2F%2F%E9%98%B2%E6%AD%A2%E6%B7%B1%E5%BA%A6copy%E7%9A%84%E6%97%B6%E5%80%99%2C%20target%E4%B8%BAundefined.%20%E6%AD%A4%E6%97%B6target%E5%BA%94%E8%AF%A5%E4%B8%BA%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B.%20%0A%09%09%09%09%09%2F%2F%E5%A6%82%E6%9E%9Ctarget%E6%9C%AC%E6%9D%A5%E4%B8%BAundefined%2C%20%E8%A6%81%E8%AE%BE%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%90%AB%E5%B1%9E%E6%80%A7%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC%2C%20%E4%B8%94%E7%B1%BB%E5%9E%8B%E8%A6%81%E8%B7%9Fcopy%E5%AF%B9%E8%B1%A1%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4.%0A%09%09%09%09%09%7D%20else%20%7B%0A%09%09%09%09%09%09clone%20%3D%20src%20%26%26%20jQuery.isPlainObject(src)%20%3F%20src%20%3A%20%7B%7D%3B%0A%09%09%09%09%09%2F%2F%E5%90%8C%E4%B8%8A%0A%09%09%09%09%09%7D%0A%09%09%09%09%09target%5B%20name%20%5D%20%3D%20jQuery.extend(%20deep%2C%20clone%2C%20copy%20)%3B%0A%09%09%09%09%09%2F%2F%E6%B7%B1%E5%BA%A6%E7%BB%A7%E6%89%BF%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8extend%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E5%90%88%E5%B9%B6%0A%09%09%09%09%7D%20else%20if%20(%20copy%20!%3D%3D%20undefined%20)%20%7B%0A%09%09%09%09%09target%5B%20name%20%5D%20%3D%20copy%3B%0A%09%09%09%09%09%2F%2F%E6%B5%85%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9B%B4%E6%8E%A5%E5%A4%8D%E5%88%B6%E5%B1%9E%E6%80%A7%2C%20%E4%BD%86%E6%98%AF%E4%B8%8D%E8%A6%81%E5%B8%A6%E5%85%A5undefined%E5%80%BC.%0A%09%09%09%09%7D%0A%09%09%09%7D%0A%09%09%7D%0A%09%7D%0A%0A%09return%20target%3B%0A%09%2F%2F%E8%BF%94%E5%9B%9E%E5%90%88%E5%B9%B6%E5%90%8E%E7%9A%84%E5%AF%B9%E8%B1%A1.%20%E7%AC%AC%E4%B8%80%E4%B8%AAobj%E5%8F%82%E6%95%B0%E7%9A%84%E5%BC%95%E7%94%A8%E5%B7%B2%E7%BB%8F%E8%A2%AB%E6%94%B9%E5%8F%98%E4%BA%86.%0A%7D%0A%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>jQuery.extend&nbsp;=&nbsp;jQuery.fn.extend&nbsp;=&nbsp;function()&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;target&nbsp;=&nbsp;arguments[<span class="number">0</span><span>]&nbsp;||&nbsp;{},&nbsp;i&nbsp;=&nbsp;</span><span class="number">1</span><span>,&nbsp;length&nbsp;=&nbsp;arguments.length,&nbsp;deep&nbsp;=&nbsp;</span><span class="keyword">false</span><span>,&nbsp;options,&nbsp;name,&nbsp;src,&nbsp;copy,&nbsp;copyIsArray;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//target应该指向被拷贝的对象,&nbsp;deep表示深度拷贝或者浅度拷贝,&nbsp;如果为true,即深度拷贝.反之为浅度拷贝.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;typeof&nbsp;target&nbsp;===&nbsp;</span><span class="string">"boolean"</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果显示声明了是深度拷贝还是浅度拷贝</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deep&nbsp;=&nbsp;target;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//重新设置deep</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;=&nbsp;arguments[<span class="number">1</span><span>]&nbsp;||&nbsp;{};&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//修正target,&nbsp;让它指向第二个参数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;<span class="number">2</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//修正循环开始的位置,&nbsp;copy的时候跳过deep和target,&nbsp;指向第一个copy对象.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;typeof&nbsp;target&nbsp;!==&nbsp;</span><span class="string">"object"</span><span>&nbsp;&amp;&amp;&nbsp;!jQuery.isFunction(target)&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//修正target.&nbsp;确保target是一个可以迭代属性的对象,&nbsp;从这句代码看出target可以为函数对象</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;=&nbsp;{};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;length&nbsp;===&nbsp;i&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;=&nbsp;<span class="keyword">this</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--i;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当只有一个参数是对象的情况(可能前面还有一个true或false).&nbsp;</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;把属性赋值给jquery或者jquery.fn.&nbsp;帮jquery实现继承.</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;并且重新修正循环起始位置.</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;length;&nbsp;i++&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;(options&nbsp;=&nbsp;arguments[&nbsp;i&nbsp;])&nbsp;!=&nbsp;</span><span class="keyword">null</span><span>&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//只遍历不为null的参数</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;(&nbsp;name&nbsp;in&nbsp;options&nbsp;)&nbsp;{&nbsp;&nbsp;</span><span class="comment">//遍历copy对象的属性</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src&nbsp;=&nbsp;target[&nbsp;name&nbsp;];&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//记录target的属性值</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;copy&nbsp;=&nbsp;options[&nbsp;name&nbsp;];&nbsp;&nbsp;<span class="comment">//记录将要被copy进去的值</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;target&nbsp;===&nbsp;copy&nbsp;)&nbsp;{&nbsp;</span><span class="comment">//防止死循环???</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">continue</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;deep&nbsp;&amp;&amp;&nbsp;copy&nbsp;&amp;&amp;&nbsp;(&nbsp;jQuery.isPlainObject(copy)&nbsp;||&nbsp;(copyIsArray&nbsp;=&nbsp;jQuery.isArray(copy))&nbsp;)&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果是深度继承并且copy是对象字面量或者数组,&nbsp;但必须保证至少为对象字面量和数组之一才会继续下面.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//copyIsArray&nbsp;=&nbsp;jQuery.isArray(copy)返回的是boolean.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果jQuery.isPlainObject(copy)和jQuery.isArray(copy)都是false,那整个if语句里的判断条件都返回false,</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//也就不会执行下面了的深度继承了.比起1.42版本,&nbsp;很多地方功能没变,&nbsp;代码还是明显清晰了很多.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(&nbsp;copyIsArray&nbsp;)&nbsp;{&nbsp;&nbsp;&nbsp;</span><span class="comment">//如果是数组</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;copyIsArray&nbsp;=&nbsp;<span class="keyword">false</span><span>;&nbsp;</span><span class="comment">//重设copyIsArray</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clone&nbsp;=&nbsp;src&nbsp;&amp;&amp;&nbsp;jQuery.isArray(src)&nbsp;?&nbsp;src&nbsp;:&nbsp;[];&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//防止深度copy的时候,&nbsp;target为undefined.&nbsp;此时target应该为对象类型.&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//如果target本来为undefined,&nbsp;要设一个不含属性的默认值,&nbsp;且类型要跟copy对象保持一致.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clone&nbsp;=&nbsp;src&nbsp;&amp;&amp;&nbsp;jQuery.isPlainObject(src)&nbsp;?&nbsp;src&nbsp;:&nbsp;{};&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//同上</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target[&nbsp;name&nbsp;]&nbsp;=&nbsp;jQuery.extend(&nbsp;deep,&nbsp;clone,&nbsp;copy&nbsp;);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//深度继承递归调用extend方法进行合并</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(&nbsp;copy&nbsp;!==&nbsp;undefined&nbsp;)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target[&nbsp;name&nbsp;]&nbsp;=&nbsp;copy;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//浅度继承直接复制属性,&nbsp;但是不要带入undefined值.</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;target;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//返回合并后的对象.&nbsp;第一个obj参数的引用已经被改变了.</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1707130" source_url="http://www.iteye.com/topic/783260#1707130" pre_index="23" title="jquery1.43源码分析之核心部分">jQuery.extend = jQuery.fn.extend = function() {
+	var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy, copyIsArray;
+	//target应该指向被拷贝的对象, deep表示深度拷贝或者浅度拷贝, 如果为true,即深度拷贝.反之为浅度拷贝.
+
+	if ( typeof target === "boolean" ) {
+	//如果显示声明了是深度拷贝还是浅度拷贝
+		deep = target;
+	//重新设置deep
+		target = arguments[1] || {};
+	//修正target, 让它指向第二个参数
+		i = 2;
+	//修正循环开始的位置, copy的时候跳过deep和target, 指向第一个copy对象.
+	}
+
+	if ( typeof target !== "object" &amp;&amp; !jQuery.isFunction(target) ) {
+		//修正target. 确保target是一个可以迭代属性的对象, 从这句代码看出target可以为函数对象
+		target = {};
+	}
+	if ( length === i ) {
+		target = this;
+		--i;
+		/*
+			当只有一个参数是对象的情况(可能前面还有一个true或false). 
+			把属性赋值给jquery或者jquery.fn. 帮jquery实现继承.
+			并且重新修正循环起始位置.
+		*/
+	}
+
+	for ( ; i &lt; length; i++ ) {
+		if ( (options = arguments[ i ]) != null ) {
+			//只遍历不为null的参数
+			for ( name in options ) {  //遍历copy对象的属性
+				src = target[ name ];    //记录target的属性值
+				copy = options[ name ];  //记录将要被copy进去的值
+				if ( target === copy ) { //防止死循环???
+					continue;
+				}
+
+				if ( deep &amp;&amp; copy &amp;&amp; ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
+					//如果是深度继承并且copy是对象字面量或者数组, 但必须保证至少为对象字面量和数组之一才会继续下面.
+					//copyIsArray = jQuery.isArray(copy)返回的是boolean.
+					//如果jQuery.isPlainObject(copy)和jQuery.isArray(copy)都是false,那整个if语句里的判断条件都返回false,
+					//也就不会执行下面了的深度继承了.比起1.42版本, 很多地方功能没变, 代码还是明显清晰了很多.
+					if ( copyIsArray ) {   //如果是数组
+						copyIsArray = false; //重设copyIsArray
+						clone = src &amp;&amp; jQuery.isArray(src) ? src : [];
+					//防止深度copy的时候, target为undefined. 此时target应该为对象类型. 
+					//如果target本来为undefined, 要设一个不含属性的默认值, 且类型要跟copy对象保持一致.
+					} else {
+						clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : {};
+					//同上
+					}
+					target[ name ] = jQuery.extend( deep, clone, copy );
+					//深度继承递归调用extend方法进行合并
+				} else if ( copy !== undefined ) {
+					target[ name ] = copy;
+					//浅度继承直接复制属性, 但是不要带入undefined值.
+				}
+			}
+		}
+	}
+
+	return target;
+	//返回合并后的对象. 第一个obj参数的引用已经被改变了.
+}
+
+</pre>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br> 
+<br><span style="font-size: large">[/size]</span>[/size]
+      </div>
+      
+  <div class="attachments">
+    
+      
+        <ul>
+          <li><a href="http://dl.iteye.com/topics/download/8bae6532-4e49-3be6-a62d-367613fe5259">jquery-1.4.3rc1.zip</a> (50.3 KB)</li>
+          
+          <li>下载次数: 583</li>
+        </ul>
+      
+    
+      
+        <ul>
+          <li><a href="http://dl.iteye.com/topics/download/f3b593c5-cbfb-3190-9cd6-80f8bf3c6909">jquery1.43源码分析_核心部分_.zip</a> (280.3 KB)</li>
+          
+          <li>下载次数: 1415</li>
+        </ul>
+      
+    
+    
+  </div>
+
+
+              <div id="topic_copyright">声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。 </div>
+        <div id="forum_recommended_f5"><span>推荐链接</span><ul><li><a href="http://www.iteye.com/clicks/527" target="_blank"><span style="font-weight:bold;color:red">见证又一个准百万富翁的诞生！</span></a></li><li><script type="text/javascript"><!--
+google_ad_client = "pub-1076724771190722";
+/* JE问答468x60 */
+google_ad_slot = "5958594507";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><iframe allowtransparency="true" frameborder="0" height="60" hspace="0" marginwidth="0" marginheight="0" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){i+=&#39;.call&#39;;setTimeout(h,0)}else if(h.match){i+=&#39;.nav&#39;;w.location.replace(h)}s.log&amp;&amp;s.log.push(i)}" scrolling="no" vspace="0" width="468" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins></li><li><a href="http://www.iteye.com/clicks/617" target="_blank"><span style="font-weight:bold;color:red">20-30万急聘多名天才Java/MTA软件工程师</span></a></li><li><a href="http://www.iteye.com/clicks/508" target="_blank"><span style="font-weight:bold;color:red">3G培训就业月薪平均7K+，不3K就业不花一分钱！</span></a></li></ul></div>
+                    <div id="forum_recommended_f0"><script type="text/javascript"><!--
+google_ad_client = "pub-1076724771190722";
+/* JE论坛文章728x90 */
+google_ad_slot = "4097489287";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><iframe allowtransparency="true" frameborder="0" height="90" hspace="0" marginwidth="0" marginheight="0" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){i+=&#39;.call&#39;;setTimeout(h,0)}else if(h.match){i+=&#39;.nav&#39;;w.location.replace(h)}s.log&amp;&amp;s.log.push(i)}" scrolling="no" vspace="0" width="728" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;"></iframe></ins></ins></div>
+          </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://gengzhelun619-163-com.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+              </div>
+                        </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1707386">
+  <td class="postauthor">
+    <ul>
+      <li class="name">xyztony1985</li>
+      <li>等级: 初级会员</li>
+      <li><a href="http://xyztony1985.iteye.com/" target="_blank"><img alt="xyztony1985的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/user-logo.gif" title="xyztony1985的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 19</li>
+      <li>积分: 30</li>
+      <li>来自: 广州</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        支持，一直用原生js，开始准备用jQuery，省点事
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://xyztony1985.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://xyztony1985.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=xyztony1985" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://xyztony1985.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=xyztony1985" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1707386" title="xyztony1985回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1707386" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1707544">
+  <td class="postauthor">
+    <ul>
+      <li class="name">liangws</li>
+      <li>等级: 初级会员</li>
+      <li><a href="http://liangws.iteye.com/" target="_blank"><img alt="liangws的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/user-logo.gif" title="liangws的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 4</li>
+      <li>积分: 30</li>
+      <li>来自: 珠海</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        我也一直在用jquery不过学得没楼主深刻,下载下来多多向楼主学习
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://liangws.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://liangws.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=liangws" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://liangws.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=liangws" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1707544" title="liangws回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1707544" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1707634">
+  <td class="postauthor">
+    <ul>
+      <li class="name">hu437</li>
+      <li>等级: 初级会员</li>
+      <li><a href="http://hu437.iteye.com/" target="_blank"><img alt="hu437的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/2463ddc6-3ada-35ac-8933-fa8c62e3ee32.jpg" title="hu437的博客: 冷月V天一"></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 65</li>
+      <li>积分: 10</li>
+      <li>来自: 昆明</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        word转PDF，可以使用word 2007 SP2里面的功能既可，但是这个有点小问题<br><br>word2010的转换效果非常好<br><br>或者使用WPS转，效果也非常好
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://hu437.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://hu437.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=hu437" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://hu437.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=hu437" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1707634" title="hu437回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1707634" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1707638">
+  <td class="postauthor">
+    <ul>
+      <li class="name">__游乐场</li>
+      <li>等级: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/star2.gif" alt="二星会员" title="二星会员"></li>
+      <li><a href="http://gengzhelun619-163-com.iteye.com/" target="_blank"><img alt="__游乐场的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/94fddce1-4fbb-376e-af27-870f7a4d860e.jpeg" title="__游乐场的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 62</li>
+      <li>积分: 280</li>
+      <li>来自: 深圳</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        谢谢楼上, 我试试wps.
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://gengzhelun619-163-com.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1707638" title="__游乐场回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1707638" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1707990">
+  <td class="postauthor">
+    <ul>
+      <li class="name">__游乐场</li>
+      <li>等级: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/star2.gif" alt="二星会员" title="二星会员"></li>
+      <li><a href="http://gengzhelun619-163-com.iteye.com/" target="_blank"><img alt="__游乐场的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/94fddce1-4fbb-376e-af27-870f7a4d860e.jpeg" title="__游乐场的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 62</li>
+      <li>积分: 280</li>
+      <li>来自: 深圳</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        wps的效果非常好,再次感谢!
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://gengzhelun619-163-com.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1707990" title="__游乐场回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1707990" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1708346">
+  <td class="postauthor">
+    <ul>
+      <li class="name">fangbz</li>
+      <li>等级: 初级会员</li>
+      <li><a href="http://fangbz.iteye.com/" target="_blank"><img alt="fangbz的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/user-logo.gif" title="fangbz的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 17</li>
+      <li>积分: 40</li>
+      <li>来自: 河南</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        楼主好强! 向楼主学习
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://fangbz.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://fangbz.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=fangbz" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://fangbz.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=fangbz" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1708346" title="fangbz回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1708346" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1708389">
+  <td class="postauthor">
+    <ul>
+      <li class="name">javaDevil</li>
+      <li>等级: 初级会员</li>
+      <li><a href="http://javadevil.iteye.com/" target="_blank"><img alt="javaDevil的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/user-logo.gif" title="javaDevil的博客: javaDevil"></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 42</li>
+      <li>积分: 0</li>
+      <li>来自: 深圳</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        目前还处在学习和使用阶段，离楼主还差一截。仔细研读
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://javadevil.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://javadevil.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=javaDevil" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://javadevil.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=javaDevil" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1708389" title="javaDevil回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1708389" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1708618">
+  <td class="postauthor">
+    <ul>
+      <li class="name">西门吹牛</li>
+      <li>等级: 初级会员</li>
+      <li><a href="http://relive123-yahoo-com-cn.iteye.com/" target="_blank"><img alt="西门吹牛的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/60db2bc9-f5e5-3b64-9b83-70782b0b5927.png" title="西门吹牛的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 50</li>
+      <li>积分: 30</li>
+      <li>来自: 天津</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        <div class="quote_title">__游乐场 写道</div><div class="quote_div">基于jquery-1.4.3rc1版本的. 正式版据说过几天就发布, 应该差别不大.
+<br>
+<br>
+<br>首先所有的jquery代码被一个自动执行的闭包包裹起来, 只在后面暴露$和jQuery这2个变量给外界 尽量避开变量冲突.
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=(function(window%2C%20%20undefined)%7B%0A%E2%80%A6..%0A%7D)(window)" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>(function(window,&nbsp;&nbsp;undefined){&nbsp;&nbsp;</span></span></li><li><span>…..&nbsp;&nbsp;</span></li><li><span>})(window)&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_type="Post" codeable_id="1708618" source_url="http://www.iteye.com/topic/783260#1708618" pre_index="0" title="jquery1.43源码分析之核心部分">(function(window,  undefined){
+…..
+})(window)</pre>
+<br>window和undefined都是为了减少变量查找所经过的scope. 当window通过传递给闭包内部之后, 在闭包内部使用它的时候,
+<br>可以把它当成一个局部变量, 显然比原先在window scope下查找的时候要快一些.
+<br>undefined也是同样的道理, 其实这个undefined并不是javascript数据类型六君子之一的undefined, 而是一个普普通通的变量名.
+<br>只是因为没给它传递值. 它的值就是undefined.&nbsp; undefined并不是javascript的保留字.
+<br>
+<br>
+<br><span style="font-size: large">[/size]</span>[/size]</div>
+<br>我晕，开头就看不懂
+<br>scope？看不懂！不明白window和undefined通过匿名函数传进去和在匿名函数里直接用有啥区别？提高效率？我不懂js的运行原理，但看你的解释我是不是可以这么理解：window对象属于全局变量，匿名函数取变量是先在局部变量里找（该函数作用域里），若找不到再在全局变量里找，
+<br>如果是这样的话我真是服了jquery作者了，这能提高多少效率，真是吹毛求疵,服了
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://relive123-yahoo-com-cn.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://relive123-yahoo-com-cn.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=%E8%A5%BF%E9%97%A8%E5%90%B9%E7%89%9B" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://relive123-yahoo-com-cn.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=%E8%A5%BF%E9%97%A8%E5%90%B9%E7%89%9B" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1708618" title="西门吹牛回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1708618" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+<tr id="1708633">
+  <td class="postauthor">
+    <ul>
+      <li class="name">__游乐场</li>
+      <li>等级: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/star2.gif" alt="二星会员" title="二星会员"></li>
+      <li><a href="http://gengzhelun619-163-com.iteye.com/" target="_blank"><img alt="__游乐场的博客" class="logo" src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/94fddce1-4fbb-376e-af27-870f7a4d860e.jpeg" title="__游乐场的博客: "></a></li>
+      <li>性别: <img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/icon_minigender_1.gif" title="男"></li>      <li>文章: 62</li>
+      <li>积分: 280</li>
+      <li>来自: 深圳</li>
+      <li><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/offline.gif"></li>
+    </ul>
+  </td>
+  <td class="postcontent">
+    <div class="postactions">
+      <div class="description">
+        &nbsp;&nbsp;
+        发表时间：2010-10-13&nbsp;&nbsp;
+        
+      </div>
+      <div class="links">
+        
+      </div>
+    </div>
+    <div class="postbody clearfix">
+      
+      
+        恩, 你理解对了.
+<br>
+<br>看来我的解释还是不大到位. 呵呵
+      </div>
+      
+
+                </td>
+  </tr>
+  <tr>
+    <td class="postauthor"><a href="http://www.iteye.com/topic/783260#">返回顶楼</a></td>
+    <td class="postcontent">
+      <div class="icons">
+        <a href="http://gengzhelun619-163-com.iteye.com/" class="icon_www" title="浏览作者的博客">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/profile" class="icon_profile" title="浏览作者资料">&nbsp;</a>
+        <a href="http://app.iteye.com/messages/new?message%5Breceiver_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_pm" title="发送站内短信">&nbsp;</a>
+        <a href="http://gengzhelun619-163-com.iteye.com/blog/guest_book" class="icon_guestbook" title="给作者留言">&nbsp;</a>
+        <a href="http://app.iteye.com/feed?subscription%5Bsubscribed_user_name%5D=__%E6%B8%B8%E4%B9%90%E5%9C%BA" class="icon_rss" onclick="var f = document.createElement(&#39;form&#39;); f.style.display = &#39;none&#39;; this.parentNode.appendChild(f); f.method = &#39;POST&#39;; f.action = this.href;f.submit();return false;" title="关注作者">&nbsp;</a>
+                  <a href="http://www.iteye.com/topic/783260#1708633" title="__游乐场回帖:jquery1.43源码分析之核心部分">回帖地址</a>
+              </div>
+                        <div id="post_rate_box_1708633" class="post_rate_box"><a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="good" title="好">0</a> <a href="http://www.iteye.com/topic/783260#" onclick="return false;" class="hidden" title="差">0</a> 请登录后投票</div>                  </td>
+  </tr>
+  <tr class="sep2"><td colspan="2"></td></tr>
+
+  </tbody>
+</table>
+
+
+<div class="actions">
+  <div class="buttons"><a href="http://www.iteye.com/forums/41/topics/783260/posts/new" class="new_post" title="发表回复">&nbsp;</a></div>
+  <div class="wrapper"><div class="pagination"><span class="disabled prev_page">« 上一页</span> <span class="current">1</span> <a href="http://www.iteye.com/topic/783260?page=2" rel="next">2</a> <a href="http://www.iteye.com/topic/783260?page=3">3</a> <a href="http://www.iteye.com/topic/783260?page=4">4</a> <a href="http://www.iteye.com/topic/783260?page=5">5</a> <a href="http://www.iteye.com/topic/783260?page=2" class="next_page" rel="next">下一页 »</a></div></div>
+</div>
+
+<div>
+  <div class="crumbs">
+    <a href="http://www.iteye.com/forums">论坛首页</a> <span class="arrow">→</span>
+    <a href="http://www.iteye.com/forums/board/web">Web前端技术版</a>
+     <span class="arrow">→</span> <a href="http://www.iteye.com/forums/tag/JQuery">JQuery</a>
+    <br><br>跳转论坛:<select id="forum_urlname" name="forum[urlname]" onchange="window.location=&#39;/forums/board/&#39;+this.value"><option value="Java">Java编程和Java企业应用</option>
+<option value="web" selected="selected">Web前端技术</option>
+<option value="mobile">移动编程和手机应用开发</option>
+<option value="cpp">C/C++编程</option>
+<option value="Ruby">Ruby编程</option>
+<option value="Python">Python编程</option>
+<option value="PHP">PHP编程</option>
+<option value="Flash">Flash编程和RIA</option>
+<option value="dotnet">Microsoft .Net</option>
+<option value="Tech">综合技术</option>
+<option value="develop">软件开发和项目管理</option>
+<option value="Industry">行业应用</option>
+<option value="New">入门讨论</option>
+<option value="Job">招聘求职</option>
+<option value="Life">海阔天空</option></select>
+     
+      <ul id="recommended_jobs" style="list-style-type:none;border:1px solid #f8aa4f;width:400px;height:110px;margin-top:5px;padding:7px 0;overflow:hidden;" onmousemove="marqueeing = false;" onmouseout="marqueeing = true;"><li style="padding-left:20px;margin-left:15px;background:transparent url(/images/board-tab-list.png) no-repeat scroll left center;"><a href="http://www.iteye.com/jobs/1278" target="_blank" title="浙江:广通信达杭州研发中心诚聘UI工程师">浙江: 广通信达杭州研发中心诚聘UI工程师</a></li>
+        
+          <li style="padding-left:20px;margin-left:15px;background:transparent url(/images/board-tab-list.png) no-repeat scroll left center;"><a href="http://www.iteye.com/jobs/1560" target="_blank" title="北京:美团诚聘资深前端工程师">北京: 美团诚聘资深前端工程师</a></li>
+        
+      
+        
+          <li style="padding-left:20px;margin-left:15px;background:transparent url(/images/board-tab-list.png) no-repeat scroll left center;"><a href="http://www.iteye.com/jobs/916" target="_blank" title="北京:北京格致璞诚聘wap开发工程师">北京: 北京格致璞诚聘wap开发工程师</a></li>
+        
+          <li style="padding-left:20px;margin-left:15px;background:transparent url(/images/board-tab-list.png) no-repeat scroll left center;"><a href="http://www.iteye.com/jobs/1444" target="_blank" title="上海:上海广播电视台网络新闻台诚聘高级网站前端开发工程师">上海: 上海广播电视台网络新闻台诚聘高级网站前端开</a></li>
+        
+          <li style="padding-left:20px;margin-left:15px;background:transparent url(/images/board-tab-list.png) no-repeat scroll left center;"><a href="http://www.iteye.com/jobs/914" target="_blank" title="北京:北京格致璞诚聘前端开发工程师">北京: 北京格致璞诚聘前端开发工程师</a></li>
+        
+          </ul>
+      <script type="text/javascript">
+        var marqueeing = true;
+        function marquee(){
+          if(marqueeing) {
+            var container=document.getElementById("recommended_jobs");
+            container.appendChild(container.firstChild);
+          }
+        }
+        setInterval("marquee()", 4000);
+      </script>
+    
+  </div>
+
+  
+</div>
+
+<div style="display:none">
+  <form action="http://www.iteye.com/posts/rate" id="post_rate_form" method="post" onsubmit="new Ajax.Request(&#39;/posts/rate&#39;, {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;">
+    <input type="hidden" id="post_rate_id" name="id">
+    <input type="hidden" id="post_rate_type" name="type">
+  </form></div>
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  fix_image_size($$('div.postbody img'), 760);
+  
+  $$('#forum_main > #posts > tr[id]').each(function(tr){
+    var post_id = tr.id;
+    $$("#"+post_id+" pre[name=code]").each(function(pre, index){
+      var location = window.location;
+      source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+      source_url += "#" + post_id;
+      pre.writeAttribute('codeable_type', 'Post');
+      pre.writeAttribute('codeable_id', post_id);
+      pre.writeAttribute('source_url', source_url);
+      pre.writeAttribute('pre_index', index);
+      pre.writeAttribute('title', 'jquery1.43源码分析之核心部分');
+    });
+  });
+  code_favorites_init();
+
+  function rate_post(id, type) {
+    Element.update('post_rate_box_' + id, '提交中...');
+    new Ajax.Request('/posts/rate', {asynchronous:true, evalScripts:true, parameters:{"id":id, "type":type}});
+  }
+
+  function rate_topic(type) {
+    Element.update('topic_rate_box', '提交中...');
+    new Ajax.Request('/topics/rate', {asynchronous:true, evalScripts:true, parameters:{"id":783260, "type":type}});
+  }
+</script>
+
+
+
+        </div>
+        <div id="nav">
+  <div class="wrapper">
+    <ul>
+            <li><a href="http://www.iteye.com/">首页</a></li>
+      <li><a href="http://www.iteye.com/news">资讯</a></li>
+      <li><a href="http://www.iteye.com/magazines">精华</a></li>
+      <li><a href="http://www.iteye.com/forums" class="selected">论坛</a></li>
+      <li><a href="http://www.iteye.com/ask">问答</a></li>
+      <li><a href="http://www.iteye.com/blogs">博客</a></li>
+      <li><a href="http://www.iteye.com/groups">群组</a></li>
+      <li><a href="http://www.iteye.com/job">招聘</a></li>
+      <li><a href="http://www.iteye.com/search">搜索</a></li>
+      <li class="last"><a href="http://www.iteye.com/index/recruit" target="_blank">招贤纳士</a></li>
+    </ul>
+  </div>
+</div>
+
+      </div>
+      <div id="footer">
+  <div id="site_nav">
+    <ul>
+      <li><a href="http://www.iteye.com/index/service">广告服务</a></li>
+      <li><a href="http://webmaster.iteye.com/">ITeye黑板报</a></li>
+      <li><a href="http://www.iteye.com/index/contactus">联系我们</a></li>
+      <li class="last"><a href="http://www.iteye.com/index/friend_links">友情链接</a></li>
+    </ul>
+  </div>
+  <div id="copyright">
+    © 2003-2011 ITeye.com.    [ <a href="http://www.miibeian.gov.cn/">京ICP证110151号</a> ]
+  </div>
+</div>
+
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script><img src="./jquery1.43源码分析之核心部分 - JQuery - web - ITeye论坛_files/saved_resource" width="0" height="0">
+
+  
+
+</body></html>

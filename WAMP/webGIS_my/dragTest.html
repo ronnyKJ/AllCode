@@ -1,0 +1,81 @@
+﻿<html>
+<head><title>scale</title>
+<style>
+#div
+{
+	background: #0AD;
+	width: 400px;
+	height: 150px;
+	border: 1px #000 solid;
+}
+</style>
+</head>
+<body>
+<div id='div'>drag me around</div>
+<canvas id='map' width='1000' height='600' style='background: #DDD; display: none; margin-top: 300px;'></canvas>
+</body>
+<script>
+var dm = document;
+var div = dm.getElementById('div');
+var m = dm.getElementById('map');
+var t = m.getContext('2d');
+t.strokeStyle = '#000';
+
+dm.oncontextmenu = function(){
+	t.lineWidth = 3; //this is the evil 
+	return false;
+}
+
+var enableDrag = function(func){
+	var pX, pY, movedX=0, movedY=0, isMouseDown=false;
+	dm.onmouseup = function(){
+		isMouseDown = false;
+	}
+	dm.onmousedown = function(){
+		isMouseDown = true;
+		pX = event.clientX, pY = event.clientY;
+	}
+	dm.onmousemove = function(){
+		if(isMouseDown)
+		{
+			var mx=event.clientX, my=event.clientY;
+			var deltaX = mx-pX, deltaY = my-pY;
+			movedX+=deltaX, movedY+=deltaY;
+			pX=mx, pY=my;
+			//do
+			func(deltaX, deltaY, movedX, movedY);
+		}
+	}
+}
+
+//t.strokeStyle = '#000';
+//t.lineWidth = 3;
+/*
+var transfer = function(x, y, movedX, movedY)
+{
+	t.clearRect(0,0,1000,600);
+	t.save();
+	t.translate(movedX, movedY);
+	//--------------
+	t.beginPath();
+	t.moveTo(30, 30);
+	t.lineTo(80, 30);
+	t.lineTo(80, 80);
+	t.lineTo(30, 80);
+	t.lineTo(30, 30);
+	t.lineTo(80, 30);
+	//t.closePath();
+	t.stroke();
+	//--------------
+	t.restore();
+}
+*/
+var dragDiv = function(x, y, movedX, movedY)
+{
+	div.style.webkitTransform = 'translate('+movedX+'px, '+movedY+'px)';
+}
+
+//enableDrag(transfer);
+enableDrag(dragDiv);
+</script>
+</html>

@@ -1,0 +1,5 @@
+实现控制拖拽和缩放，优化如下：
+1. osm2geo加入了feature id
+2. 通过id，如果feature已经渲染，则不重复渲染
+3. 用的是tile完整的数据
+4. 初始化时通过geoLocation获取当前位置的经纬度

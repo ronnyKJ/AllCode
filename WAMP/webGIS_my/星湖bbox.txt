@@ -1,0 +1,7 @@
+http://localhost/webGIS/file/getOsm.php?bbox=114.35324,30.52911,114.35499,30.53002
+http://www.openstreetmap.org/api/0.6/map?bbox=114.35324,30.52911,114.35499,30.53002
+ÐÇºþ
+
+http://www.openstreetmap.org/api/0.6/map?bbox=114.3413,30.5196,114.3725,30.5499
+http://localhost/webGIS_1/server/server.php?x1=114.3413&y1=30.5196&x2=114.3725&y2=30.5499
+Îä´ó

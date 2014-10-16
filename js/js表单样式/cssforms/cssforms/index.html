@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>站长素材-专注于网页素材下载-www.web265.com</title>
+<style type="text/css">
+<!--
+	@import url(cssforms.css);
+-->
+</style>
+<script type="text/javascript" src="cssforms.mini.js"></script>
+</head>
+<body>
+<form id="form" name="form" method="post" action="output.php">
+<p>
+	<label for="language" style="color:#6D93AB;font-size:14px;">Language</label><br />
+	<select name="language" id="language">
+		<option value="English"  selected="selected">English</option>
+		<option value="简体中文" >简体中文</option>
+		<option value="日本語" >日本語</option>
+		<option value="Deutsch" >Deutsch</option>
+		<option value="Español" >Español</option>
+		<option value="Français" >Français</option>
+		<option value="Italiano" >Italiano</option>
+		<option value="Polski" >Polski</option>
+		<option value="Português" >Português</option>
+		<option value="Svenska" >Svenska</option>
+		<option value="Türkçe" >Türkçe</option>
+		<option value="Руccкий" >Руccкий</option>
+	</select>
+</p>
+
+<p>
+	<span style="color:#6D93AB;font-size:14px;">Gender:</span>
+	<br />
+	<input name="sex" type="radio" id="sexm" value="Male" checked="checked" onclick="alert('Hello boy.')" />
+	<label for="sexm">Male</label>
+	<br />
+	<input type="radio" name="sex" value="Female" id="sexf" onclick="alert('Hello girl.')" />
+	<label for="sexf">Female</label>
+	<br />
+	<input type="radio" name="sex" value="Unknown" id="sexu" />
+	<label for="sexu">Unknown</label>
+    <br /><br />
+    <input type="button" onclick="$('sexu').checked=true" value="Select Unknow" rel="no_init_style" />
+</p>
+<p>
+	<span style="color:#6D93AB;font-size:14px;">Hobbies</span>
+	<br /><br />
+	<input name="hobbies[]" type="checkbox" id="si" value="Singing" checked="checked" />
+	<label for="si">Singing</label>
+	<input name="hobbies[]" type="checkbox" id="re" value="Reading" />
+	<label for="re">Reading</label>
+	<input name="hobbies[]" type="checkbox" id="in" value="Internet" checked="checked" />
+	<label for="in">Internet</label>
+	<input name="hobbies[]" type="checkbox" id="sh" value="Shopping" />
+	<label for="sh">Shopping</label>
+	<input name="hobbies[]" type="checkbox" id="fo" value="Football" />
+	<label for="fo">Football</label>
+	<input name="hobbies[]" type="checkbox" id="ba" value="Basketball" />
+	<label for="ba">Basketball</label>
+	<input name="hobbies[]" type="checkbox" id="co" value="Coding" checked="checked" />
+	<label for="co">Coding</label>
+	<input name="hobbies[]" type="checkbox" id="da" value="Dancing" />
+	<label for="da">Dancing</label> &nbsp; &nbsp; <input name="chkall" type="checkbox" id="ca" value="chkall" onclick="checkAllCheckboxs(this.form, 'hobbies', this.checked);" />
+	<label for="ca">Check All</label>
+</p>
+<p>
+	<label for="username" style="color:#6D93AB;font-size:14px;">Username:</label>
+	<br />
+	<input type="text" name="username" id="username" value="" />
+</p>
+<p>
+	<label for="password" style="color:#6D93AB;font-size:14px;">Password:</label>
+	<br />
+	<input type="password" name="password" id="password" value="" />
+</p>
+<p>
+	<label for="comments" style="color:#6D93AB;font-size:14px;">Comments:</label><br />
+	<textarea id="comments" name="comments" ></textarea>
+</p>
+<p>
+	<input type="submit" id="submit" value="Submit" />
+</p>
+</form>
+</body>
+</html>

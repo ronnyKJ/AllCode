@@ -1,0 +1,41 @@
+<html>
+<head><title>knock knock</title>
+<style>
+#door{background: yellow;position:relative;overflow:hidden;-webkit-transform: rotateY(30deg) translate3d(0, 100, 0);-webkit-transform-style: preserve-3d;}
+#knob{background: blue; width: 40%; height: 5%;position:absolute;right:0%;}
+</style>
+</head>
+<body>
+<div id='door'>
+	<div id='knob'></div>
+</div>
+<!--<span id='txt' style='position:absolute;top:0;font-size: 5em;'></span>-->
+</body>
+<script>
+(function(){
+	var d=document, w=window;
+	//w.scroll(0, 1)
+	function _(i){return d.getElementById(i)}
+	var door=_('door'), knob=_('knob'), txt=_('txt');
+	door.style.width = d.width, door.style.height = d.height;
+	knob.style.top = (d.height*0.4)+'px';
+	
+	var rect = knob.getClientRects()[0];
+	var pivot = {x: rect.right-rect.width/2, y:rect.bottom-rect.height/2};//-webkit-transition: 300ms
+	
+	w.ontouchmove = function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		var t = e.touches[0];
+		var delX = pivot.x - t.pageX;
+		var delY = pivot.y - t.pageY;
+		var angle = Math.atan(delY/delX);
+		angle = angle/Math.PI*180;
+		
+		knob.style.webkitTransform = 'rotate('+(angle>0? 0:(angle<-60?-60:angle))+'deg)';
+	};
+	
+	
+})();
+</script>
+</html>

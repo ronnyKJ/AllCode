@@ -1,0 +1,1 @@
+﻿<?phpinclude("util.php");$xml = simpleXML_load_file('geo_0_0.osm');$ways = $xml->xpath('way');$id = $ways[0]->xpath('@id');dump((int)$id[0]);?>

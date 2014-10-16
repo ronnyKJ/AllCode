@@ -1,0 +1,30 @@
+<!DOCTYPE html> <html>
+<head>
+  <script type="text/javascript">
+function draw(direction)
+{
+  var canvas = document.getElementById("MyCanvas");
+  if (canvas.getContext) 
+     {
+      var ctx = canvas.getContext("2d");                // Get the context.
+      ctx.clearRect(0,0,canvas.width,canvas.height);    // Clear the last image if it exists.
+      var image = document.getElementById("pix");       // Get the address of the picture.
+      var pattern = ctx.createPattern(image, direction);// Get the direction from the button.    
+      ctx.fillStyle = pattern;                          // Assign pattern as a fill style.
+      ctx.fillRect(0,0,canvas.width,canvas.height);     // Fill the canvas.   
+    }  
+}
+  </script>
+</head>
+<body>
+    <p>This picture will appear below.</p>
+    <div>
+    <img id="pix" src="http://go.microsoft.com/fwlink/?LinkID=199028" />   
+    </div>
+    <button onclick="draw('repeat')">Repeat all</button> 
+    <button onclick="draw('repeat-x')">Repeat across</button> 
+    <button onclick="draw('repeat-y')">Repeat down</button> 
+    <button onclick="draw('no-repeat')">No Repeat</button>     
+  <canvas id="MyCanvas" width="600" height="500"> </canvas>
+</body>
+</html> 

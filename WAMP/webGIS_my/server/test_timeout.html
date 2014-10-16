@@ -1,0 +1,1141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>mirze_新浪博客</title>
+<meta name="keywords" content="mirze_新浪博客,mirze,mysql,load,data,导入,大文件,it,php,fseek,读取,大文件,it,svn,checkout,commit,update,命令,it,linux,ssh,it,sql,server,oracle,数据库,数据类型,it,mysql,myisam,innodb,备份,导入,导出,it,archlinux,应用,命令,it,jquery,jqgrid,jsonread,it,centos,linux,ftp,vsftpd,杂谈,linux,shell,主机,监控,脚本,it" />
+<meta name="description" content="mirze_新浪博客,mirze,mysql&nbsp;LOAD&nbsp;DATA&nbsp;导入大数据txt文件,PHP读取大文件,SVN&nbsp;常用命令,SSH&nbsp;常用命令,SQL&nbsp;Server&nbsp;和&nbsp;Oracle&nbsp;数据库数据类型的差别,mysql表类型&nbsp;MyISAM&nbsp;和&nbsp;Innodb&nbsp;备份,archlinux&nbsp;应用,jqgrid&nbsp;使用案例,快速搭建linux环境下FTP服务,常用的主机监控shell脚本[转]" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!–[if lte IE 6]>
+<script type="text/javascript">
+try{
+document.execCommand("BackgroundImageCache", false, true);
+}catch(e){}
+</script>
+<![endif]–>
+<script type="text/javascript">
+window.staticTime=new Date().getTime();
+
+var locInterval = setInterval(function(){
+var tc = document.getElementById('trayContainer');
+if(tc) {
+var isLogin = false;var sup = document.cookie.match(/sup=([^;]+);/gi);if(sup != null){ sup = decodeURIComponent(sup[0]);var uid = sup.match(/uid=([^&]+)/gi); isLogin = (uid != null); } if (isLogin){ tc.innerHTML = '<div class="topbar_loading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div>'; } else { tc.innerHTML = '<div class="topbar_menu"><span class="link"><a href="http://blog.sina.com.cn" target="_blank">博客首页</a></span><span class="line_s"></span></div><div class="topbar_login"><a href="#" class="login" id="linkTrayLogin" onclick="return false;">登录</a><a href="http://login.sina.com.cn/signup/signupmail.php?entry=blog&r=&srcuid=&src=blogicp" class="register" target="_blank" id="linkReg">注册</a></div><div class="topbar_ad" id="divPopularize"></div><div id="phprender" ></div>';}
+clearInterval(locInterval);
+locInterval = null;
+}
+},50);
+
+</script>
+<link rel="pingback" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php?rsd" />
+<link href="http://blog.sina.com.cn/blog_rebuild/blog/wlwmanifest.xml" type="application/wlwmanifest+xml" rel="wlwmanifest" />
+<link rel="alternate" type="application/rss+xml" href="http://blog.sina.com.cn/rss/1052413724.xml" title="RSS" />
+<link href="http://simg.sinajs.cn/blog7style/css/conf/blog/index.css" type="text/css" rel="stylesheet" /><style id="tplstyle" type="text/css">@charset "utf-8";@import url("http://simg.sinajs.cn/blog7newtpl/css/16/16_9/t.css");
+</style>
+<style id="positionstyle"  type="text/css">
+.sinabloghead .blogtoparea{ left:266px;top:93.1px;}
+.sinabloghead .blognav{ left:253px;top:162.25px;}
+</style>
+<style id="bgtyle"  type="text/css">
+</style>
+<style id="headtyle"  type="text/css">
+</style>
+<style id="navtyle"  type="text/css">
+</style>
+</head>
+<body>
+<!--$sinatopbar-->
+<div style="z-index:512;" class="sinatopbar">
+			<div class="topbar_main">
+				<a id="login_bar_logo_link_350" href="http://blog.sina.com.cn" target="_blank"><img class="topbar_logo" src="http://simg.sinajs.cn/blog7style/images/common/topbar/topbar_logo.gif" width="100" alt="新浪博客"/></a>
+
+				<div id="trayContainer" style="float:left">
+								</div>
+				<div class="topbar_floatR">
+					<span class="tb_wrtBlog">
+						<a target="_blank" href="http://control.blog.sina.com.cn/admin/article/article_add.php"><img class="SG_icon SG_icon15" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" title="博文" align="absmiddle"/>	发博文</a>
+
+						<span id="arrowAddArticle" class="wrtblog_arrow"></span>
+					</span>
+					<div class="topbar_search">
+						<form action="" target="_blank" method="get" id="loginBarSearchForm">
+							<div class="topbar_input">
+								<input id="loginBarSearchInput" name="k" class="topbar_txt" type="text" value=""/>
+							</div>
+							<div id="searchSelect" class="topbar_list">
+								<div id="loginBarSearchMenuLabel" class="anainp">博文</div>
+
+								<div class="arrow"></div>
+							</div>
+							<input type="submit" class="topbar_searchBtn" value="搜索"/>
+							<input type="hidden" id="ie" value="utf-8" name="ie"/>
+							<input type="hidden" id="loginBarSearchT" value="" name="t"/>
+							<input type="hidden" id="loginBarSearchTS" value="" name="ts"/>
+							<input type="hidden" id="loginBarSearchS" value="" name="s"/>
+							<input type="hidden" id="loginBarSearchType" value="" name="type"/>
+							<input type="hidden" id="loginBarSearchSType" value="" name="stype"/>
+
+							<input type="hidden" id="e" value="utf-8" name="e"/>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+			<div style="position:absolute;left:0;top:0;" id="trayFlashConnetion"></div>
+		</div>
+		
+<!--$end sinatopbar-->
+
+
+<div class="sinabloga" id="sinabloga">
+	<div id="sinablogb" class="sinablogb">
+
+	       
+ <div id="sinablogHead" class="sinabloghead">
+    <div style="display: none;" id="headflash" class="headflash"></div>
+   <div id="headarea" class="headarea">
+      <div id="blogTitle" class="blogtoparea">
+      <h1 id="blogname" class="blogtitle"><a href="http://blog.sina.com.cn/mirze"><span id="blognamespan">mirze的博客</span></a></h1>
+      <div id="bloglink" class="bloglink"><a href="http://blog.sina.com.cn/mirze">http://blog.sina.com.cn/mirze</a>  <a onclick="return false;" class="CP_a_fuc" href="#" id="SubscribeNewRss">[<cite>订阅</cite>]</a><a class="CP_a_fuc" href="javascript:void(scope.pa_add.add('1052413724'));">[<cite>手机订阅</cite>]</a></div>
+      </div>
+      <div class="blognav" id="blognav">
+      			  <div id="blognavBg" class="blognavBg"></div> <div class="blognavInfo"> 
+		<span><a  class="on" href="http://blog.sina.com.cn/mirze">首页</a></span>
+      <span><a  href="http://blog.sina.com.cn/s/articlelist_1052413724_0_1.html">博文目录</a></span>
+      <span><a href="http://photo.blog.sina.com.cn/mirze">图片</a></span>
+      <span class="last"><a  href="http://blog.sina.com.cn/s/profile_1052413724.html">关于我</a></span></div>
+      </div>
+      		      		 	
+      
+             <div class="autoskin" id="auto_skin">
+       </div>
+
+<div class="adsarea">
+     <a href="#"><div id="template_clone_pic" class="pic"></div></a>
+     <div id="template_clone_link" class="link wdc_HInf"></div>
+     <div id="template_clone_other" class="other"></div>        
+</div>
+    </div>
+    	    	    </div>    
+    <!--主题内容开始 -->
+    <div class="sinablogbody" id="sinablogbody">
+		
+	<!--第一列start-->
+    <div id="column_1" class="SG_colW21 SG_colFirst"><div class="SG_conn" id="module_901">
+    <div class="SG_connHead">
+            <span class="title" comp_title="个人资料">个人资料</span>
+            <span class="edit">
+                        </span>
+    </div>
+    <div class="SG_connBody">
+        <div class="info">
+            		        
+			<div class="info_img" id="comp_901_head"><img src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" real_src ="http://portrait5.sinaimg.cn/1052413724/blog/180" id="comp_901_head_image" width="180" height="180" alt="mirze" title="mirze" /></div>
+			
+       	    <div class="info_txt">
+		      <div class="info_nm">
+		        <img id="comp_901_online_icon" style="display:none;" class="SG_icon SG_icon1" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />
+		        <span class="SG_txtb"><strong id="ownernick">mirze</strong></span>
+		        
+                <div class="clearit"></div>
+              </div>
+		      <div class="info_btn1">
+			  <!--user['qing_url'] -->
+		        <a target="_blank" href="http://qing.weibo.com/discovery.html" onclick="v7sendLog && v7sendLog('79_01_01',scope.$pageid,'qingLink');"  class="SG_aBtn SG_aBtn_ico"><cite><img class="SG_icon SG_icon205" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />Qing</cite></a>
+		        <a target="_blank" href="http://weibo.com/u/1052413724?source=blog" class="SG_aBtn SG_aBtn_ico"><cite><img class="SG_icon SG_icon51" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />微博</cite></a>
+		        <div class="clearit"></div>
+		      </div>
+	<div class="SG_j_linedot"></div>		<div class="info_locate" id = "info_locate_id">
+<div class="SG_j_linedot"></div>
+<div class="info_btn2">
+	<p>
+	<a href="javascript:void(0);" class="SG_aBtn " id="comp901_btn_invite"><cite >加好友</cite></a>
+	<a href="javascript:void(0);" class="SG_aBtn" id="comp901_btn_sendpaper"><cite >发纸条</cite></a>
+	</p>
+	<p>
+	<a href="http://blog.sina.com.cn/s/profile_1052413724.html#write" class="SG_aBtn"   id="comp901_btn_msninfo"><cite>写留言</cite></a>
+	<a href="#" onclick="return false;" class="SG_aBtn"  id="comp901_btn_follow"><cite onclick="Module.SeeState.add()">加关注</cite></a>
+	</p>
+	<div class="clearit"></div>
+</div>
+<div class="SG_j_linedot"></div>
+</div>
+			      <div class="info_list">	  
+			   					<ul class="info_list1">
+					<li><span class="SG_txtc">博客等级：</span><span id="comp_901_grade"><img src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" real_src="http://simg.sinajs.cn/blog7style/images/common/number/1.gif"  /><img src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" real_src="http://simg.sinajs.cn/blog7style/images/common/number/4.gif"  /></span></li>
+					<li><span class="SG_txtc">博客积分：</span><span id="comp_901_score"><strong>524</strong></span></li>
+					</ul>
+					<ul class="info_list2">
+					<li><span class="SG_txtc">博客访问：</span><span id="comp_901_pv"><strong>45,045</strong></span></li>
+					<li><span class="SG_txtc">关注人气：</span><span id="comp_901_attention"><strong>14</strong></span></li>
+					</ul>
+		</div>
+<div class="clearit"></div>
+	</div>
+	<div class="clearit"></div>
+</div>
+            </div>       
+            <div class="SG_connFoot"></div>
+</div>
+<div id="module_3" class="SG_conn">
+  <div class="SG_connHead">
+  <span comp_title="分类" class="title">分类</span>
+  <span class="edit">
+	   </span> 
+  </div>
+  <div class="SG_connBody">
+  		<div class="classList">
+		<ul>
+		<li class="SG_dot"><a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_0_1.html">全部博文</a><em class="count SG_txtb">(213)</em></li>
+		<li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_1_1.html"  target="_blank">PHP</a><em>(68)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_2_1.html"  target="_blank">DB/Mysql</a><em>(14)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_7_1.html"  target="_blank">部署/架构/apache/Nginx</a><em>(16)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_3_1.html"  target="_blank">开发</a><em>(2)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_4_1.html"  target="_blank">ZF/QEEPHP/TP</a><em>(5)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_5_1.html"  target="_blank">JS jQuery</a><em>(22)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_6_1.html"  target="_blank">HTML CSS 网站</a><em>(21)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_10_1.html"  target="_blank">sys-linux/windows</a><em>(33)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_9_1.html"  target="_blank">CMS</a><em>(9)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_8_1.html"  target="_blank">职场/杂文</a><em>(16)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_11_1.html"  target="_blank">缓存/内存/优化</a><em>(5)</em></li><li class="SG_dot"><a href="http://blog.sina.com.cn/s/articlelist_1052413724_12_1.html"  target="_blank">mobile-android</a><em>(0)</em></li>		 </ul>
+		</div>
+     </div>
+  <div class="SG_connFoot"></div>
+</div>
+<div class="SG_conn" id="module_1002">
+            <div class="SG_connHead">
+            <span class="title" comp_title="thinkphp">thinkphp</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="diywidget"><div class="diyList"><p class="SG_dot"><a href="http://www.zfchina.org/" target="_blank">ZendFrameWork</a><p>ZF中文官方</p></p></div><div class="SG_j_linedot"></div><div class="diyList"><p class="SG_dot"><a href="http://qeephp.com/" target="_blank">qeephp</a><p>qeephp框架社区</p></p></div><div class="SG_j_linedot"></div><div class="diyList"><p class="SG_dot"><a href="http://thinkphp.cn/" target="_blank">thinkphp</a><p>thinkphp框架</p></p></div></div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_1003">
+            <div class="SG_connHead">
+            <span class="title" comp_title="友情链接">友情链接</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="diywidget"><div class="diyList"><p class="SG_dot"><a href="http://hexun.com/5154091/default.html" target="_blank">存储星空</a><p></p></p></div><div class="SG_j_linedot"></div><div class="diyList"><p class="SG_dot"><a href="http://blog.sina.com.cn/lxy8011" target="_blank">小宇博客</a><p></p></p></div></div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_43">
+            <div class="SG_connHead">
+            <span class="title" comp_title="草根名博">草根名博</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="cloneWidget"><div class="widgetcen">
+<div class="widgetconn"><textarea lazyload="true" style="display:none;"><iframe scrolling="no" frameborder="0" style="overflow: hidden; width: 190px; height: 366px;" allowtransparency="" src="http://blog.sina.com.cn/lm/iframe/xhtml/2008/0909/81.html"></iframe></textarea><div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div></div></div> <div class="cloneLink"><a href="javascript:;" onclick="return false;" class="SG_comClone"><img alt="添加到我的博客" src="http://simg.sinajs.cn/blog7style/images/widget/add1.gif" />添加到我的博客</a></div></div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_44">
+            <div class="SG_connHead">
+            <span class="title" comp_title="精品博文">精品博文</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="cloneWidget"><div class="widgetcen">
+<div class="widgetconn"><textarea lazyload="true" style="display:none;"><iframe scrolling="no" frameborder="0" style="overflow: hidden; width: 190px; height: 366px;" allowtransparency="" src="http://blog.sina.com.cn/lm/iframe/xhtml/2008/0909/80.html"></iframe></textarea><div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div></div></div> <div class="cloneLink"><a href="javascript:;" onclick="return false;" class="SG_comClone"><img alt="添加到我的博客" src="http://simg.sinajs.cn/blog7style/images/widget/add1.gif" />添加到我的博客</a></div></div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_1">
+            <div class="SG_connHead">
+            <span class="title" comp_title="评论">评论</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_2">
+            <div class="SG_connHead">
+            <span class="title" comp_title="留言">留言</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_17">
+            <div class="SG_connHead">
+            <span class="title" comp_title="好友">好友</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+<div class="SG_conn" id="module_12">
+            <div class="SG_connHead">
+            <span class="title" comp_title="访客">访客</span>
+                       <span class="edit">
+                        </span>
+            </div>
+            <div class="SG_connBody">
+            	<div class="wdtLoading"><img src="http://simg.sinajs.cn/blog7style/images/common/loading.gif" />加载中…</div>            </div>       
+            <div class="SG_connFoot"></div>
+          </div>
+</div>
+	<!--第一列end-->
+	
+	<!--第二列start-->
+	<div id="column_2" class="SG_colW73"><div id="module_10001" class="SG_conn">
+	<div class="SG_connHead">
+		<span comp_title="博文" class="title">博文</span>
+		<span class="edit">
+        		</span>
+	</div>
+	<div class="SG_connBody">
+															<div class="bloglist">
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c010129ox" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ox.html" target="_blank">mysql&nbsp;LOAD&nbsp;DATA&nbsp;导入大数据txt文件</a>
+							</div>
+														<span class="time SG_txtc">(2012-02-29 15:27)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c010129ox'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c010129ox');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=mysql&ts=bpost&stype=tag" target="_blank">mysql</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=load&ts=bpost&stype=tag" target="_blank">load</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=data&ts=bpost&stype=tag" target="_blank">data</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B5%BC%C8%EB&ts=bpost&stype=tag" target="_blank">导入</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B4%F3%CE%C4%BC%FE&ts=bpost&stype=tag" target="_blank">大文件</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_2_1.html">DB/Mysql</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							1. txt大数据文件导入: LOAD DATA<br />
+<br />
+格式：<br />
+LOAD DATA [LOW_PRIORITY | CONCURRENT] [LOCAL] INFILE
+'<em><code>file_name</code></em>'<br />
+&nbsp;<wbr>[REPLACE | IGNORE]<br />
+&nbsp;<wbr>INTO TABLE <em><code>tbl_name</code></em><br />
+&nbsp;<wbr>[CHARACTER SET <em><code>charset_name</code></em>]<br />
+&nbsp;<wbr>[{FIELDS | COLUMNS}<br />
+&nbsp;<wbr>&nbsp;<wbr> [TERMINATED BY '<em><code>string</code></em>']<br />
+&nbsp;<wbr>&nbsp;<wbr> [[OPTIONALLY] ENCLOSED BY
+'<em><code>char</code></em>']<br />
+&nbsp;<wbr>&nbsp;<wbr> [ESCAPED BY '<em><code>char</code></em>']<br />
+&nbsp;<wbr>]<br />
+&nbsp;<wbr>[LINES<br />
+&nbsp;<wbr>&nbsp;<wbr> [STARTING BY '<em><code>string</code></em>']<br />
+&nbsp;<wbr>&nbsp;<wbr> [TERMINATED BY '<em><code>string</code></em>']<br />
+&nbsp;<wbr>]<br />
+&nbsp;<wbr>[IGNORE <em><code>number</code></em> LINES]<br />
+&nbsp;<wbr>[(<em><code>col_name_or_user_var</code></em>,...)]<br />
+&nbsp;<wbr>[SET <em><code>col_name</code></em> =
+<em><code>expr</code></em>,...]<br />
+<span style='font-family: monospace;'><br />
+<br /></span> 例：<br />
+mysql&gt; LOAD DATA						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c010129ox" href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ox.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ox.html#comment" id="c_10001_3eba8f1c010129ox">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c010129ox');return false;">转载</a><a id="z_10001_3eba8f1c010129ox" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c010129ox');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c010129ox" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ox.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c010129ox"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c010129ny" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ny.html" target="_blank">PHP读取大文件</a>
+							</div>
+														<span class="time SG_txtc">(2012-02-29 15:22)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c010129ny'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c010129ny');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=php&ts=bpost&stype=tag" target="_blank">php</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=fseek&ts=bpost&stype=tag" target="_blank">fseek</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B6%C1%C8%A1&ts=bpost&stype=tag" target="_blank">读取</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B4%F3%CE%C4%BC%FE&ts=bpost&stype=tag" target="_blank">大文件</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_1_1.html">PHP</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							1. 读取大文件<br />
+$filePath = 'D:/wwwroot/tmp_file/csv/mobile_haoduan.txt';<br />
+<br />
+$a = 0;<br />
+$i=0 ;<br />
+$lines=155550; //总行数<br />
+$fp = fopen($filePath,'r') ;<br />
+if(is_resource($fp)){<br />
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> fseek($fp,0,SEEK_SET); //SEEK_SET从头开始<br />
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> $a = ftell($fp); //获取指针位置<br />
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> while($i &lt;= $lines){<br />
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> if(fgetc($fp) ==
+'\n'){<br />
+&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>$tmp =
+fgets($fp); //行内容<br />
+&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> echo
+$tmp.'\r\n';<br />
+<br />
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>
+$i++ ;<br />
+&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> }<br />
+&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>fseek($fp,$a) ;<br />
+&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>$a++ ;<br />
+<br />
+&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>if($i &gt;= $lines) {<br />
+&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr> &nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c010129ny" href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ny.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ny.html#comment" id="c_10001_3eba8f1c010129ny">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c010129ny');return false;">转载</a><a id="z_10001_3eba8f1c010129ny" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c010129ny');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c010129ny" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c010129ny.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c010129ny"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c010122vl" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c010122vl.html" target="_blank">SVN&nbsp;常用命令</a>
+							</div>
+														<span class="time SG_txtc">(2012-02-21 11:22)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c010122vl'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c010122vl');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=svn&ts=bpost&stype=tag" target="_blank">svn</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=checkout&ts=bpost&stype=tag" target="_blank">checkout</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=commit&ts=bpost&stype=tag" target="_blank">commit</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=update&ts=bpost&stype=tag" target="_blank">update</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%C3%FC%C1%EE&ts=bpost&stype=tag" target="_blank">命令</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_10_1.html">sys-linux/windows</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							<span style='font-weight: bold;'>获取有关 Subversion 的帮助</span><br />
+# svn help<br />
+<br />
+<b>创建仓库（Repository）</b><br />
+# svnadmin create /path/to/repository<br />
+<br />
+<b>添加新的项目（import new project）</b><br />
+# svn import project file:///repository_name/project -m
+'Comment'<br />
+# svn import project http://host/svn_dir/repository_name/project -m
+'Comment'<br />
+<br />
+<b>检出（checkout）项目</b>： <code><br /></code><code>svn checkout</code>
+<code>https://(项目名称).(域)/svn/(项目名称)/(DIR) (项目名称) --username
+[用户名]</code><br />
+# svn checkout file:///repository_name/project/trunk project<br />
+# svn checkout http://host/svn_dir/repository_name/project/trunk
+project<br />
+<br />
+<b>列出仓库中的项目（list）</b><br />
+# svn list --verbose file:///repository_name/project<br />
+# svn list --verbose
+http://host/svn_dir/repository_name/project<br />
+<br />
+<b>状态查询（status）</b>：给出新文件，已经改变的文件和被删除的文件列表;<br />
+# svn status<br />
+<br />						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c010122vl" href="http://blog.sina.com.cn/s/blog_3eba8f1c010122vl.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c010122vl.html#comment" id="c_10001_3eba8f1c010122vl">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c010122vl');return false;">转载</a><a id="z_10001_3eba8f1c010122vl" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c010122vl');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c010122vl" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c010122vl.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c010122vl"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c01011ypb" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011ypb.html" target="_blank">SSH&nbsp;常用命令</a>
+							</div>
+														<span class="time SG_txtc">(2012-02-15 17:06)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c01011ypb'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011ypb');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=linux&ts=bpost&stype=tag" target="_blank">linux</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=ssh&ts=bpost&stype=tag" target="_blank">ssh</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_10_1.html">sys-linux/windows</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							<strong>目录操作：</strong><br />
+rm -rf mydir<br />
+mkdir dirname<br />
+cd mydir<br />
+cd -<br />
+cd ..<br />
+cd ~<br />
+mv tools tool<br />
+ln -s tool bac<br />
+cp -a tool /home/vpser/www
+<p><strong>文件操作：</strong><br />
+rm go.tar&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr><br />
+find mt.cgi&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr><br />
+df
+–h&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr></p>
+<p><strong>解压缩：</strong><br />
+tar xvf wordpress.tar&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr><br />
+tar -tvf myfile.tar&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr></p>
+<p>tar cf toole.tar tool<br />
+tar cfz vpser.tar.gz tool</p>
+<p>tar jcvf&nbsp;<wbr>&nbsp;<wbr>/var/bak/www.tar.bz2
+/var/www/&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr><br />
+tar xjf www.tar.bz2</p>
+<p>gzip -d
+ge.tar.gz&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr><br />
+unzip phpbb.zip&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr>&nbsp;<wbr></p>
+<p><strong>下载：</strong><br />
+wget http://soft.vpser.net/web/nginx/nginx-0.8.0.tar.gz<br />
+<br />
+wget -c http://soft.vpser.net/web/ng</p>
+						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c01011ypb" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011ypb.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011ypb.html#comment" id="c_10001_3eba8f1c01011ypb">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011ypb');return false;">转载</a><a id="z_10001_3eba8f1c01011ypb" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c01011ypb');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c01011ypb" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011ypb.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c01011ypb"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c01011xx7" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011xx7.html" target="_blank">SQL&nbsp;Server&nbsp;和&nbsp;Oracle&nbsp;数据库数据类型的差别</a>
+							</div>
+														<span class="time SG_txtc">(2012-02-14 15:23)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c01011xx7'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011xx7');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=sql&ts=bpost&stype=tag" target="_blank">sql</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=server&ts=bpost&stype=tag" target="_blank">server</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=oracle&ts=bpost&stype=tag" target="_blank">oracle</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%CA%FD%BE%DD%BF%E2&ts=bpost&stype=tag" target="_blank">数据库</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%CA%FD%BE%DD%C0%E0%D0%CD&ts=bpost&stype=tag" target="_blank">数据类型</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_2_1.html">DB/Mysql</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							<table border='1' cellpadding='0' cellspacing='0' width='100%'>
+<tbody>
+<tr>
+<th>SQL Server</th>
+<th>Oracle</th>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>NUMBER(10)</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>NUMBER(6)</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td>NUMBER(3)</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>FLOAT</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>FLOAT</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>NUMBER(1)</td>
+</tr>
+<tr>
+<td>VARCHAR(n)</td>
+<td>VARCHAR2(n)</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>CLOB</td>
+</tr>
+<tr>
+<td>IMAGE</td>
+<td>BLOB</td>
+</tr>
+<tr>
+<td>BINARY(n)</td>
+<td>RAW(n) or BLOB</td>
+</tr>
+<tr>
+<td>VARBINARY</td>
+<td>RAW(n) or BLOB</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATE</td>
+</tr>
+<tr>
+<td>SMALL-DATETIME</td>
+<td>DATE</td>
+</tr>
+<tr>
+<td>MONEY</td>
+<td>NUMBER(19,4)</td>
+</tr>
+<tr>
+<td>NCHAR(n)</td>
+<td>CHAR(n*2)</td>
+</tr>
+<tr>
+<td>NVARCHAR(n)</td>
+<td>VARCHAR(n*2)</td>
+</tr>
+<tr>
+<td>SMALLMONEY</td>
+<td>NUMBER(10,4)</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>NUMBER</td>
+</tr>
+<tr>
+<td>SYSNAME</td>
+<td>VARCHAR2</td>
+</tr>
+</tbody>
+</table>
+						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c01011xx7" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011xx7.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011xx7.html#comment" id="c_10001_3eba8f1c01011xx7">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011xx7');return false;">转载</a><a id="z_10001_3eba8f1c01011xx7" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c01011xx7');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c01011xx7" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011xx7.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c01011xx7"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c01011sd0" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011sd0.html" target="_blank">mysql表类型&nbsp;MyISAM&nbsp;和&nbsp;Innodb&nbsp;备份</a>
+							</div>
+														<span class="time SG_txtc">(2012-02-07 10:55)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c01011sd0'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011sd0');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=mysql&ts=bpost&stype=tag" target="_blank">mysql</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=myisam&ts=bpost&stype=tag" target="_blank">myisam</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=innodb&ts=bpost&stype=tag" target="_blank">innodb</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B1%B8%B7%DD&ts=bpost&stype=tag" target="_blank">备份</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B5%BC%C8%EB&ts=bpost&stype=tag" target="_blank">导入</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%B5%BC%B3%F6&ts=bpost&stype=tag" target="_blank">导出</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_2_1.html">DB/Mysql</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							<div><strong style=
+'font-weight: bold; font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 25px; text-align: left; background-color: rgb(255, 255, 255);'>
+两种表类型：<code style='font-family:' courier="" font-size:=""
+white-space:=""><font size=
+'#'>MyISAM</font></code>&nbsp;<wbr>和<code style='font-family:' courier=
+"" font-size:="" white-space:=""><font size=
+'#'>Innodb数据备份</font></code></strong></div>
+<div><strong style=
+'font-weight: bold; font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 25px; text-align: left; background-color: rgb(255, 255, 255);'>
+<code style='font-family:' courier="" font-size:="" white-space:=
+""><font size='#'><br /></font></code></strong></div>
+<div>
+<div style='line-height: 21px;'><span style=
+'background-color: rgb(211, 249, 188);'><b>查看字符集设置</b>&nbsp;<wbr></span></div>
+<div style='line-height: 21px;'>
+<div>mysql&gt; show variables like 'collation_%'</div>
+</div>
+</div>
+						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c01011sd0" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011sd0.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011sd0.html#comment" id="c_10001_3eba8f1c01011sd0">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011sd0');return false;">转载</a><a id="z_10001_3eba8f1c01011sd0" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c01011sd0');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c01011sd0" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011sd0.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c01011sd0"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c01011d1z" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011d1z.html" target="_blank">archlinux&nbsp;应用</a>
+							</div>
+														<span class="time SG_txtc">(2012-01-10 10:25)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c01011d1z'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011d1z');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=archlinux&ts=bpost&stype=tag" target="_blank">archlinux</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%D3%A6%D3%C3&ts=bpost&stype=tag" target="_blank">应用</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%C3%FC%C1%EE&ts=bpost&stype=tag" target="_blank">命令</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_10_1.html">sys-linux/windows</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							1. 启用ifconfig
+<div># pacman -S net-tools</div>
+<div><br /></div>
+<div>2.&nbsp;<wbr></div>
+<div># pacman -Sy <b style=
+'color: rgb(51, 51, 255); font-family: 宋体, Arial; font-size: 12px; line-height: 18px; background-color: rgb(245, 247, 248);'>
+更新软件包列表</b></div>
+<div><span style='line-height: 21px;'># pacman -Su</span> <b style=
+'color: rgb(51, 51, 255); font-family: 宋体, Arial; font-size: 12px; line-height: 18px; background-color: rgb(245, 247, 248);'>
+升级系统</b></div>
+<div><br /></div>
+<div>3.&nbsp;<wbr>卸载软件包</div>
+<div><span style=
+'font-family: 宋体, Arial; font-size: 12px; line-height: 18px; background-color: rgb(245, 247, 248);'>
+# pacman --remove foo</span><br style=
+'font-family: 宋体, Arial; font-size: 12px; line-height: 18px; background-color: rgb(245, 247, 248);' />
+
+<span style=
+'font-family: 宋体, Arial; font-size: 12px; line-height: 18px; background-color: rgb(245, 247, 248);'>
+# pacman -R foo</span></div>
+						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c01011d1z" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011d1z.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c01011d1z.html#comment" id="c_10001_3eba8f1c01011d1z">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01011d1z');return false;">转载</a><a id="z_10001_3eba8f1c01011d1z" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c01011d1z');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c01011d1z" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c01011d1z.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c01011d1z"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c01010map" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c01010map.html" target="_blank">jqgrid&nbsp;使用案例</a>
+							</div>
+														<span class="time SG_txtc">(2011-12-06 09:08)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c01010map'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01010map');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=jquery&ts=bpost&stype=tag" target="_blank">jquery</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=jqgrid&ts=bpost&stype=tag" target="_blank">jqgrid</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=jsonread&ts=bpost&stype=tag" target="_blank">jsonread</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_5_1.html">JS&nbsp;jQuery</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							准备：（下载）
+<div>1. jQuery :&nbsp;<wbr><a href=
+'http://jquery.com/'>http://jquery.com/</a><br />
+<div>2. jQuery Grid :&nbsp;<wbr><a href=
+'http://www.trirand.com/blog/?page_id=6'>http://www.trirand.com/blog/?page_id=6</a></div>
+<div>&nbsp;<wbr> &nbsp;<wbr> &nbsp;<wbr> &nbsp;<wbr> &nbsp;<wbr> Demo :&nbsp;<wbr><a href=
+'http://www.trirand.com/blog/jqgrid/jqgrid.html'>http://www.trirand.com/blog/jqgrid/jqgrid.html</a></div>
+<div>3. jQuery UI :&nbsp;<wbr><a href=
+'http://jqueryui.com/'>http://jqueryui.com/</a>&nbsp;<wbr>
+(附加控件使用)</div>
+<div><br /></div>
+</div>
+<div>一、页面引入jquery grid ：静态模板页面(jq_table_grid.tpl)</div>
+<div>1. 引入头文件</div>
+<div>
+<div><i>&lt;!-- import jquery ui : 附加控件用：(本例用</i><b style=
+'background-color: rgb(211, 249, 188);'><i>datepicker)&nbsp;<wbr></i></b><i>--&gt;</i></div>
+<div><i>&lt;link rel='stylesheet' type='text/css'
+href='&lt;{$js_path}&gt;jq/ui/jquery-ui-1.8.16.custom.css'&gt;</i></div>
+<div><i>&lt;script type='text/javascript'
+src='&lt;{$js_path}&gt;jq/ui/jquery-ui-1.8.16.custom.min.js'&amp;</i></div>
+</div>
+						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c01010map" href="http://blog.sina.com.cn/s/blog_3eba8f1c01010map.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c01010map.html#comment" id="c_10001_3eba8f1c01010map">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c01010map');return false;">转载</a><a id="z_10001_3eba8f1c01010map" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c01010map');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c01010map" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c01010map.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c01010map"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c0101037f" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c0101037f.html" target="_blank">快速搭建linux环境下FTP服务</a>
+							</div>
+														<span class="time SG_txtc">(2011-11-15 12:02)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c0101037f'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c0101037f');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=centos&ts=bpost&stype=tag" target="_blank">centos</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=linux&ts=bpost&stype=tag" target="_blank">linux</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=ftp&ts=bpost&stype=tag" target="_blank">ftp</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=vsftpd&ts=bpost&stype=tag" target="_blank">vsftpd</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%D4%D3%CC%B8&ts=bpost&stype=tag" target="_blank">杂谈</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_10_1.html">sys-linux/windows</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							<div>快速搭建linux环境下FTP服务</div>
+<div>环境：(默认使用21端口)</div>
+<div>CENTOS 6</div>
+<div>VSFTPD 自带</div>
+<div><br /></div>
+<div>一、安装</div>
+<div># yum -y install vsftpd</div>
+<div><br /></div>
+<div>二、编辑vsftpd的配置文件</div>
+<div># vi /etc/vsftpd/vsftpd.conf</div>
+<div><br /></div>
+<div>清空, 添加如下内容:</div>
+<div><br /></div>
+<div>listen=YES</div>
+<div>background=YES</div>
+<div>anonymous_enable=NO</div>
+<div>local_enable=YES</div>
+<div>write_enable=YES</div>
+<div>local_umask=022</div>
+<div>anon_upload_enable=NO</div>
+<div>anon_mkdir_write_enable=NO</div>
+<div>dirmessage_enable=YES</div>
+<div>xferlog_enable=YES</div>
+<div>connect_from_port_20=YES</div>
+<div>chown_uploads=NO</div>
+<div>xferlog_file=/var/log/vsftpd.log</div>
+<div>xferlog_std_format=YES</div>
+<div>async_abor_enable=YES</div>
+<div>ascii_upload_enable=YES</div>
+<div>ascii_download_enable=YES</div>
+<div>ftpd_banner=Welcome to ftptest FTP servers</div>
+<div>pam_service_name=vsftpd</div>
+<div>chroot_local_u</div>
+						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c0101037f" href="http://blog.sina.com.cn/s/blog_3eba8f1c0101037f.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c0101037f.html#comment" id="c_10001_3eba8f1c0101037f">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c0101037f');return false;">转载</a><a id="z_10001_3eba8f1c0101037f" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c0101037f');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c0101037f" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c0101037f.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c0101037f"></div>
+						<div class="SG_j_linedot"></div>
+											<div class="blog_title_h">
+							<span class="img1"></span>
+														<div id="t_10001_3eba8f1c0100z6m3" class="blog_title">
+								<a href="http://blog.sina.com.cn/s/blog_3eba8f1c0100z6m3.html" target="_blank">常用的主机监控shell脚本[转]</a>
+							</div>
+														<span class="time SG_txtc">(2011-10-12 09:11)</span>
+									
+							<div class="turnBoxzz"><a href="javascript:;" class="SG_aBtn SG_aBtn_ico SG_turn"  action-type="reblog" action-data="{srcBlog:1, blogId:'3eba8f1c0100z6m3'}"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle">转载<em class="arrow">▼</em></cite></a></div>
+							<!--
+								<div class="turnBoxzz"><a  href="javascript:;"    onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c0100z6m3');return false;"  class="SG_aBtn SG_aBtn_ico SG_turn"><cite><img class="SG_icon SG_icon111" src="http://simg.sinajs.cn/blog7style/images/common/sg_trans.gif" width="15" height="15" align="absmiddle" />转载</cite></a></div>
+								—-->
+													</div>
+						<div class="articalTag">
+							<table>
+								<tr>
+									<td class="blog_tag">
+																			<span class="SG_txtb">标签：</span>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=linux&ts=bpost&stype=tag" target="_blank">linux</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=shell&ts=bpost&stype=tag" target="_blank">shell</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%D6%F7%BB%FA&ts=bpost&stype=tag" target="_blank">主机</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%BC%E0%BF%D8&ts=bpost&stype=tag" target="_blank">监控</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=%BD%C5%B1%BE&ts=bpost&stype=tag" target="_blank">脚本</a></h3>
+																																<h3><a href="http://uni.sina.com.cn/c.php?t=blog&k=it&ts=bpost&stype=tag" target="_blank">it</a></h3>
+																												</td>
+									<td class="blog_class">
+																			<span class="SG_txtb">分类：</span>
+										<a target="_blank" href="http://blog.sina.com.cn/s/articlelist_1052413724_10_1.html">sys-linux/windows</a>
+																		</td>
+								</tr>
+							</table>
+													</div>
+										<div class="content">
+							下面是我常用的几个主机监控的脚本，大家可以根据自己的情况在进行修改，希望能给大家一点帮助。<br />
+<br />
+1、查看主机网卡流量<br />
+<br />
+#!/bin/bash #network #Mike.Xu while ： ; do time='date +%m'-'%d'
+'%k'：'%M' day='date +%m'-'%d' rx_before='ifconfig eth0|sed -n
+'8'p|awk '{print $2}'|cut -c7-' tx_before='ifconfig eth0|sed -n
+'8'p|awk '{print $6}'|cut -c7-' sleep 2 rx_after='ifconfig eth0|sed
+-n '8'p|awk '{print $2}'|cut -c7-' tx_after='ifconfig eth0|sed -n
+'8'p|awk '{print $6}'|cut -c7-'
+rx_result=$[(rx_after-rx_before)/256]
+tx_result=$[(tx_after-tx_before)/256] echo '$time Now_In_Speed：
+'$rx_result'kbps Now_OUt_Speed： '$tx_result'kbps' sleep 2
+done<br />
+<br />
+2、系统状况监控<br />
+<br />
+#!/bin/sh #systemstat.sh #Mike.Xu IP=192.168.1.227 top -n 2| grep
+'Cpu' &gt;&gt;./temp/cpu.txt free -m | grep 'Mem' &gt;&gt;
+./temp/mem.txt df -k | grep 'sda1' &gt;&gt; ./temp/drive_sda1.txt
+#df -k | grep sda2 &gt;&gt; ./temp/drive_sda2.txt df -k | grep
+'/mnt/storage_0' &gt;&gt; ./temp/mnt_stora						</div>
+										
+						<div class="tagMore">
+							<div class="tag SG_txtc">
+								<a id="r_10001_3eba8f1c0100z6m3" href="http://blog.sina.com.cn/s/blog_3eba8f1c0100z6m3.html" target="_blank">阅读</a>&nbsp;
+								┆&nbsp;<a target="_blank" href="http://blog.sina.com.cn/s/blog_3eba8f1c0100z6m3.html#comment" id="c_10001_3eba8f1c0100z6m3">评论</a>&nbsp;																																						┆&nbsp;<a href="#" onclick="scope.articel_quote_alert && scope.articel_quote_alert('3eba8f1c0100z6m3');return false;">转载</a><a id="z_10001_3eba8f1c0100z6m3" href="#"  onclick="scope.articleQuoteShow  && scope.articleQuoteShow('3eba8f1c0100z6m3');return false;" class="zznum"></a>
+																																			┆&nbsp;<a id="f_10001_3eba8f1c0100z6m3" href="javascript:;" onclick="return false;">收藏</a>&nbsp;
+							</div>
+														<div class="more">
+								<span class="SG_more"><a href="http://blog.sina.com.cn/s/blog_3eba8f1c0100z6m3.html" target="_blank">查看全文</a>&gt;&gt;</span>
+							</div>
+													</div>
+						<div style="display: none;" class="blogzz_zzlist borderc" id="ff_3eba8f1c0100z6m3"></div>
+						<div class="SG_j_linedot"></div>
+											<div favmd5='{"3eba8f1c010129ox":"0f5cb8deb377ecf21174eec7e107d757","3eba8f1c010129ny":"be7428a8dc43234c35cd7cbe2edaa7b6","3eba8f1c010122vl":"ddbae2c09b2d6c4ecb0b2fa68c4bda93","3eba8f1c01011ypb":"488f935bf0f27ece3f12761ceab5a8ad","3eba8f1c01011xx7":"cf18bb1d6ff59940ef66319f2161a0f9","3eba8f1c01011sd0":"25fbdbf82ecfeed5247407e65079f8e8","3eba8f1c01011d1z":"45a12a54744900c4475eb56466d42a42","3eba8f1c01010map":"07fa0264ac97bd8c24f8ed6a9933e781","3eba8f1c0101037f":"560f3a46aecbcd88bf1c4ce0de7ae725","3eba8f1c0100z6m3":"eee6b74cbc9b9d8d07c4a4265839bcb2"}' classid="0" pagesize="10" total="213" id="pagination_10001" class="SG_page"></div>
+					</div>
+							  
+				</div>  
+    <div class="SG_connFoot"></div>
+</div></div>
+	<!--第二列start-->
+	
+	<!--第三列start-->
+	<div id="column_3" class="SG_colWnone"><div style="width:0px;height:0.1px;margin:0px;">&nbsp;&nbsp;</div></div>
+	<!--第三列end-->
+
+	
+    </div>
+   <!--主题内容结束 -->
+  
+
+	<div id="diggerFla" style="position:absolute;left:0px;top:0px;width:0px"></div>
+    <div class="sinablogfooter" id="sinablogfooter"  style="position:relative;">
+      
+      <p class="SG_linka"><a href="http://control.blog.sina.com.cn/admin/advice/advice_list.php" target="_blank">新浪BLOG意见反馈留言板</a>　<a href="javascript:;" onclick="window.open ('http://control.blog.sina.com.cn/admin/advice/impeach.php?url=http%3A//blog.sina.com.cn/s/blog_4cf7b4ec0100eudp.html%3Ftj%3D1', '','height=495, width=510, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');">不良信息反馈</a>　电话：4006900000 提示音后按1键（按当地市话标准计费）　欢迎批评指正</p>
+   
+      <p class="SG_linka"><a href="http://corp.sina.com.cn/chn/" target="_blank">新浪简介</a> | <a href="http://corp.sina.com.cn/eng/" target="_blank">About Sina</a> | <a href="http://emarketing.sina.com.cn/" target="_blank">广告服务</a> | <a href="http://www.sina.com.cn/contactus.html" target="_blank">联系我们</a> | <a href="http://corp.sina.com.cn/chn/sina_job.html" target="_blank">招聘信息</a> | <a href="http://www.sina.com.cn/intro/lawfirm.shtml" target="_blank">网站律师</a> | <a href="http://english.sina.com" target="_blank">SINA English</a> | <a href="http://members.sina.com.cn/apply/" target="_blank">会员注册</a> | <a href="http://help.sina.com.cn/" target="_blank">产品答疑</a> </p>
+      <p class="copyright SG_linka"> Copyright &copy; 1996 - 2012 SINA Corporation,  All Rights Reserved</p>
+      <p class="SG_linka"> 新浪公司 <a href="http://www.sina.com.cn/intro/copyright.shtml" target="_blank">版权所有</a></p>
+	  <a href="http://www.bj.cyberpolice.cn/index.jsp"  target="_blank" class="gab_link"></a>
+    </div>
+  </div>
+</div>
+<div id="swfbox"></div>
+<script id="PVCOUNTER_FORIE" type="text/javascript"></script>
+</body>
+<script type="text/javascript">
+var scope = {
+	$setDomain : true,
+	$uid : "1052413724",
+	$PRODUCT_NAME : "blog7",		//blog7photo,blog7icp
+	$pageid : "index",
+	$key :  "a391dbae5657dcc86cd92a23a28ff6cd",
+	$uhost : "mirze",
+	$private: {"cms":0,"hidecms":0,"blogsize":0,"ad":0,"sms":0,"adver":0,"tj":0,"p4p":0,"spamcms":0,"pageset":0,"invitationset":0,"top":0,"active":"4","medal":1,"headpic":1,"t_sina":"","oauth_token":"","oauth_token_secret":"","uname":"","p_push_t":0,"p_get_t":0},
+	$playids :"",
+		$babylevel:"",
+		$channel:0,
+		$is_photo_vip:0,
+		$nClass:0,
+		$isLevelUp:0,	component_lists:{"2":{"size":730,"list":[10001]},"1":{"size":210,"list":[901,3,1002,1003,43,44,1,2,17,12]}},
+	formatInfo:1,
+	UserPic:[{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"}],
+	UserBabyPic:{"photoX":null,"photoY":null,"photoURL":null,"angle":null,"zoom":null,"maskX":null,"maskY":null,"maskURL":null,"frameURL":null},
+	UserColor:1,
+	backgroundcolor:"rgb(0, 122, 177)",
+	tpl:"16_9"};
+var	$encrypt_code = "b000af9d7e1a278803bcda556c2a32a7";
+</script>
+
+<script type="text/javascript" src="http://sjs.sinajs.cn/blog7common/js/boot.js"></script>
+<script type="text/javascript">__load_js();</script>
+<script type="text/javascript">__render_page();</script>
+
+
+
+<!-- ALL CODE START--><!-- SUDA_CODE_START --> 
+<noScript> 
+<div style='position:absolute;top:0;left:0;width:0;height: 0;visibility:hidden'><img width=0 height=0 src='http://beacon.sina.com.cn/a.gif?noScript' border='0' alt='' /></div> 
+
+</noScript> 
+<!-- SUDA_CODE_END --> 
+
+<!-- START WRating v1.0 -->
+<script type="text/javascript" src="http://sina.wrating.com/a1.js"></script>
+<script type="text/javascript">
+try{
+var vjAcc="860010-0328010000";
+var wrUrl="http://sina.wrating.com/";
+vjTrack("");
+}catch(e){};
+</script>
+<noscript><img src="http://sina.wrating.com/a.gif?a=&amp;c=860010-0328010000" width="1" height="1" style="display: none;"/></noscript>
+<!-- END WRating v1.0 -->
+
+<!-- START Nielsen//NetRatings SiteCensus V5.2 -->
+<!-- COPYRIGHT 2006 Nielsen//NetRatings -->
+<script type="text/javascript">
+	var _rsCI="cn-sina2006";
+	var _rsCG="0";
+	var _rsDN="//secure-cn.imrworldwide.com/";
+	var _rsCC=0;
+	var _rsSE=1;
+	var _rsSM=0.01;
+	var _rsSS=1500;
+</script>
+<script type="text/javascript" src="//secure-cn.imrworldwide.com/v52.js"></script>
+
+<noscript><img src="//secure-cn.imrworldwide.com/cgi-bin/m?ci=cn-sina2006&cg=0" alt=""/> </noscript>
+<!-- END Nielsen//NetRatings SiteCensus V5.2 -->
+
+</html>

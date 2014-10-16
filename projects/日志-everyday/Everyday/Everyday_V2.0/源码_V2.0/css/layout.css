@@ -1,0 +1,107 @@
+﻿*
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+body
+{
+
+}
+
+#container
+{
+	width:1100px;
+	margin:0 auto;
+}
+
+#header
+{
+	text-align:right;
+}
+
+#username
+{
+	margin-right:10px;
+	color:af1616;
+}
+
+#middle
+{
+	overflow:auto;
+}
+
+#menu
+{
+	overflow:auto;
+}
+
+#menu ul
+{
+	text-align:center;
+}
+
+#menu ul li
+{
+	display:inline-block;
+}
+
+#content
+{
+	width:700px;
+	float:left;
+}
+
+#rightsidebar
+{
+	float:left;
+	width:383px;
+	margin-left:12px;
+}
+
+#footer
+{
+
+}
+
+#addEvent
+{
+	width:383px;
+}
+
+.hidden
+{
+	display:none;
+}
+
+#eventList li
+{
+	overflow:auto;
+}
+
+.datePad
+{
+	float:left;
+	clear:left;
+}
+
+.attrName, .attrContent
+{
+	display:inline-block;
+}
+
+.setMrgnLft
+{
+	margin-left:80px;
+}
+
+.right
+{
+	float:right;
+}
+
+#addEvent a.addEvt
+{
+	display:none;
+}

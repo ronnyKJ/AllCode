@@ -1,0 +1,95 @@
+﻿<html>
+<head><title>Gravity</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+	background: #333;
+}
+
+#c
+{
+	display: block;
+	background: #000;
+}
+
+#r
+{
+	position: relative;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: #AAA;
+	margin-top: 0px;
+	text-align: center;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas><div id="r">-- By Ronny 2011 --</div></body>
+<script type="text/javascript">
+var x=y=0;
+var g=0.6;
+var cellArray = [];
+var count = 1;
+r = Math.random;
+for(var i=0; i<count; i++)
+{
+	var cell = 
+	{
+		a: 0.005,
+		b: 0,
+		x: 100,
+		y: 0
+	};
+	cellArray.push(cell);
+}
+
+with(document.body)
+{
+	C = document.getElementById('c');
+	var w = 500;
+	C.width = w;
+	C.height = 400;
+	t = C.getContext("2d");
+	t.translate(250, 200);
+}
+timer = -250;
+while(timer<250){
+	timer+=1;
+	for(var i=0; i<count; i++)
+	{
+		var cell = cellArray[i];
+		
+		cell.y = cell.a*timer*timer+cell.b;
+		
+		//边缘碰撞
+		if(cell.x > C.width-cell.r)
+		{
+			cell.x = C.width-cell.r;
+			cell.xs *= -1;
+		}
+		else if(cell.x < cell.r)
+		{
+			cell.x = cell.r;
+			cell.xs *= -1;
+		}
+		 
+		//边缘碰撞
+		if(cell.y > 200)
+		{
+			cell.y = 200;
+		}
+		else if(cell.y < 0)
+		{
+			cell.y = 0;
+			cell.ys *= -1;
+		}
+				
+		t.fillStyle = "#F00";
+		t.arc(timer, cell.y, 1, 0, 360, true);
+		t.fill();
+	}
+};
+</script>
+</html>

@@ -1,0 +1,156 @@
+﻿<!doctype html> 
+<html> 
+	<head> 
+		<title>JS1k, 1k demo submission [22]</title> 
+		<meta charset="utf-8" /> 
+	</head> 
+	<body> 
+		<canvas id="c"></canvas>
+		<span id="time"></span>
+		<!--<canvas id="y"></canvas>-->
+		<script>
+			var d = document;
+			var time = d.getElementById("time");
+			setInterval(function(){
+				var date = new Date();
+				h=date.getHours();
+				m=checkNum(date.getMinutes());
+				s=checkNum(date.getSeconds());
+				function checkNum(num)
+				{
+					if(num<10)
+					{
+						num ="0"+num;
+					}
+					return num;
+				}
+				time.innerText = h+":"+m+":"+s;
+			},500);
+			
+			var c = d.getElementById("c");
+			var y = d.getElementById("y");
+			c.width = 200;
+			c.height = 200;
+			t = c.getContext("2d");
+			//y.width = 400;
+			//y.height = 500;
+			//yt = y.getContext("2d");
+			
+			function Clock(R,oX,oY,d,h,m,s,ctx)
+			{
+				//成员属性
+				this.R = R || 80;
+				this.oX = oX || 200;
+				this.oY = oY || 200;
+				this.dis = d || 6;
+				this.face = {width:1,lineClr:"#000",dotClr:"#000"};
+				this.hourCount = {count:12,len:h.len||45,width:h.width||1,color:h.color||"#000"};
+				this.minCount = {count:60,len:m.len||60,width:m.width||1,color:m.color||"#000"};
+				this.secCount = {count:60,len:s.len||70,width:s.width||1,color:s.color|"#000"};	
+				var q = this;
+				PI=Math.PI;
+				this.ctx = ctx;
+				//成员方法
+				this.drawFace = function(t)
+				{
+					t.fillStyle=q.face.lineClr;
+					t.beginPath();
+					t.arc(q.oX,q.oY,q.R,0,360,true);
+					t.stroke();
+					t.closePath();				
+				}
+
+				//画点
+				this.drawDot = function(count,r,ctx)
+				{
+					stp = (2*PI)/count;
+					dt = q.R-q.dis;
+					ctx.strokeStyle=q.face.dotClr;
+					for(var i=0; i<count; i++)
+					{
+						x=q.oX + dt*Math.cos(0 + i*stp);
+						y=q.oY + dt*Math.sin(0 + i*stp);
+						ctx.beginPath();
+						ctx.arc(x,y,r,0,360,true);
+						ctx.fill();
+						ctx.closePath();
+					}
+				}
+				//画指针
+				this.drawHand = function(count,i,r,ctx)
+				{
+					stp = (2*PI)/count;
+					x=q.oX+r*Math.cos(-PI/2 + i*stp);
+					y=q.oY+r*Math.sin(-PI/2 + i*stp);
+					ctx.beginPath();
+					ctx.moveTo(q.oX,q.oY);
+					ctx.lineTo(x,y);
+					ctx.stroke();
+					ctx.closePath();				
+				}
+				//指针旋转
+				this.walk = function()
+				{
+					t = q.ctx;
+					with(t){
+						beginPath();
+						arc(q.oX,q.oY,q.R,0,360,true);
+						stroke();
+						closePath();
+						var i=1;
+						fX=q.oX-q.R-10;
+						fY=q.oY-q.R-10;
+						fW=2*q.R+20;
+						q.drawDot(60,1,t);//分点
+						q.drawDot(12,2,t);//时针点
+						q.drawHand(60,0,q.secCount.len,t);
+						q.drawHand(3600,0,q.minCount.len,t);
+						q.drawHand(43200,0,q.hourCount.len,t);
+						setInterval(function(){
+							clearRect(fX, fY, fW, fW);
+							q.drawFace(t);
+							q.drawDot(60,1,t);//分点
+							q.drawDot(12,2,t);//时针点
+							q.drawHand(60,i,q.secCount.len,t);
+							q.drawHand(3600,i,q.minCount.len,t);
+							q.drawHand(43200,i,q.hourCount.len,t);
+							i++;
+						},1000);
+					}					
+				}
+				//设定时间
+				this.setTime = function()
+				{
+					t = q.ctx;
+					var date;
+					fX=q.oX-q.R-10;
+					fY=q.oY-q.R-10;
+					fW=2*q.R+20;
+					setInterval(function(){
+						date = new Date();
+						var w = parseInt(date.getTime()/1000)-4*3600;
+						i = w%(12*3600);
+						t.clearRect(fX, fY, fW, fW);
+						q.drawFace(t);
+						q.drawDot(60,1,t);//分点
+						q.drawDot(12,2,t);//时针点
+						q.drawHand(60,i,q.secCount.len,t);
+						q.drawHand(3600,i,q.minCount.len,t);
+						q.drawHand(43200,i,q.hourCount.len,t);
+						i++;
+					},500);
+				}
+			}
+
+			var clock = new Clock(80,c.width/2,c.height/2,6,{},{},{},t);
+			//clock.walk();
+			var date = new Date();
+			var w = parseInt(date.getTime()/1000);
+			clock.setTime(w);
+			//clock.walk(t);
+			//var cy = new Clock(80,y.width/2,y.height/2,6,{},{},{});
+			//cy.walk(yt);
+
+		</script> 
+	</body> 
+</html>

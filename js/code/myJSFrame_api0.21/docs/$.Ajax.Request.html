@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Ajax.Request</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$.Ajax.Request(<em>url</em>,<em>method</em>,<em>parameters</em>,<em>onComplete</em>,<em>onError</em>)</h1>
+<p class="info">
+发送异步请求。
+</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>url</em></dt>
+		<dd>必选项。数据发送的目标地址。</dd>
+		<dt><em>method</em></dt>
+		<dd>可选项。数据提交的方式，默认值为get。常用的还有post。</dd>
+		<dt><em>parameters</em></dt>
+		<dd>当 method 为 get 时是可选项，为 post 时是必选项。发送的数据，其形式为： name1=valeu1&amp; name2=value2&amp;name3=value3...... </dd>
+		<dt><em>onComplete</em></dt>
+		<dd>可选项。请求成功时执行的回调函数，该函数默认把当前使用 xmlhttp 对象作为第一个参数。</dd>
+		<dt><em>onError</em></dt>
+		<dd>可选项。请求异常时执行的回调函数，该函数默认把当前使用 xmlhttp 对象作为第一个参数。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">当前使用的 xmlhttp 对象。</p>	
+    <h2>描述</h2>
+	<p class="p">发送异步请求，并返回 xmlhttp 对象，请求成功则执行<em> onComplete</em>，失败则执行 <em>onError</em> 。<br />
+	$.Ajax.Request 是 Ajax.Request 方法的快捷调用方法，接口参数不能设置不常用的 setRequestHeader 。 </p>
+    <h2>示例</h2>
+	<p class="code">&lt;script type=&quot;text/javascript&quot; &gt;<br />
+	  function doneFun(xmlhttp){<br />
+	    &nbsp;&nbsp;&nbsp;&nbsp; document.write( xmlhttp.responseText);<br />
+      }<br />
+      function errFun(xmlhttp){<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;	alert( &quot;ERROR! \r\n error code: &quot;+xmlhttp.status + &quot;\r\n error text:&quot; + xmlhttp.statusText);<br />
+      } <br />
+	  var xmlHandle = <span class="core">$.Ajax.Request(&quot;http://www.google.cn/search&quot;,&quot;get&quot;,&quot;complete=1&amp;hl=zh-CN&amp;q=myJSFrame&amp;meta=&amp;aq=null&quot;,doneFun,errFun);</span><br />
+    &lt;/script&gt; </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>String.stripTags</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>String.stripTags()</h1>
+<p class="info">去除字符串里的所有标记。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>无</em></dt>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">两端去除空格后的新字符串。</p>	
+    <h2>描述</h2>
+	<p class="p">该方法适用于去除 html 代码中的标记，与 innerText 类似。</p>	
+    <h2>示例</h2>
+<p class="code">&lt;div class=&quot;box&quot; id=&quot;box&quot;&gt;<br />
+  &lt;h1 class=&quot;title&quot;&gt;奥林匹克会旗&lt;/h1&gt;<br />
+  &lt;p class=&quot;content&quot;&gt;会旗为白底无边，中央有五个相互套连的圆环，即我们所说的奥林匹克环。&lt;/p&gt;<br />
+&lt;/div&gt;<br />
+&lt;input type=&quot;button&quot; value=&quot;stripTags&quot; onclick=&quot;alert( $('box').innerHTML.stripTags() )&quot; /&gt; <span class="comment">//奥林匹克会旗<br />
+会旗为白底无边，中央有五个相互套连的圆环，即我们所说的奥林匹克环。</span> </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

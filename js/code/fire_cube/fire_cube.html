@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+w=63;b=255;d=document;h=d.body.style;h.backgroundColor="#000";h.textAlign="center";C=d.getElementById("c");C.width=w*6;C.height=w*6;G=C.getContext("2d");M=Math;Q=M.max;V=13;v=-V;c=[];i=w+1;f=[i];s=0;while(i--){c[i]=i*4+",0,0)";c[i+w]=b+","+i*4+",0)";c[i+127]=b+",255,"+i*4+")";f[i]=[]}function L(l,m,n,o){k=(o-m)/(n-l);m=m-l*k;for(i=M.min(l,n);i<Q(l,n);i+=1/Q(1,M.abs(k)))f[i&b][(k*i+m)&b]=b}function D(l,m,n,o,p,q){P=[l,o];R=[m,p];S=[n,q];X=[];Y=[];for(i=0;i<2;){Z=(-P[i]*O*O-R[i]*H*O+S[i]*H)+w;X[i]=w*((-P[i]*H+R[i]*O)/Z)+(w/2);Y[i]=w*((-P[i]*O*H-R[i]*H*H-S[i++]*O)/Z)+(w/2)+7}L(X[0],Y[0],X[1],Y[1])}setInterval(function(){H=M.sin(s+=.04);O=M.cos(s);for(y=0;y<w;y++)for(x=0;x<w;x++){f[x][y]=((f[(x-1)&w][y+1]+f[x][y+1]+f[x+1][y+1]+f[x][(y+2)&w])<<5)/170;G.fillStyle="rgb("+c[f[x][y]&b];G.fillRect(x*6,y*6,6,6)}for(y=0;y<72;)eval("D("+"vvvVvvVvvVVvVVvvVvvVvvvvvvVVvVVvVVVVVVVvVVvVVvvVvvVvvvVvVVvvVVVVVvvVVvVv".substring(y,y+=6).split("")+")")},25)
+</script>
+</html>

@@ -1,0 +1,27 @@
+﻿<html>
+<head><title>partical</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+	background: #000;
+}
+
+#r
+{
+	position: relative;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: #AAA;
+	margin-top: -30px;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas><div id="r">-- By Ronny 2011 --</div></body>
+<script type="text/javascript">
+(function(){var strings=["百度","UX","User","Value","Rule"];var stringData=[];var lightArray=[];var count=flag=nextString=timer=sIndex=0;with(document.body){C=document.getElementById('c');C.width=clientWidth;C.height=clientHeight;X=C.getContext("2d");}with(Math){r=random;Sin=sin;Cos=cos;Abs=abs;Floor=floor;Max=max;X.font="200px Times New Roman";X.textAlign='center';var s=[];var fontHeight=150;for(var i=0;i<strings.length;i++){X.fillStyle='rgb(1, 0, 0)';X.fillText(strings[i],C.width/2,C.height/2);var fontWidth=X.measureText(strings[i]).width;var tx=C.width/2-fontWidth/2;var ty=C.height/2-fontHeight;var arr=X.getImageData(tx,ty,fontWidth,fontHeight).data;var posArr=[];for(var j=0;j<arr.length;j+=4){if(arr[j]==1&&r()>0.98){posArr.push([tx+j/4%fontWidth,ty+Floor(j/4/fontWidth)]);}}s.push(posArr.length);stringData.push([strings[i],posArr]);X.fillStyle='#000';X.fillRect(0,0,C.width,C.height);}tmpCount=count=eval('Math.max('+s.join(",")+')');while(tmpCount-- >0){var data=stringData[sIndex][1];var speed=15*r();lightArray[tmpCount]={color:"rgb(40,40,"+min(255,floor(40+r()*255))+")",x:C.width/2,y:C.height/2,xDir:10,yDir:10,tarX:0,tarY:0,radius:4+8*r(),angle:r()*2*PI,l:speed,ol:speed};}}setInterval(function(){X.globalCompositeOperation='source-over';X.fillStyle='#000';X.fillRect(0,0,C.width,C.height);X.globalCompositeOperation='lighter';if(flag){for(index=count;(index--)>0;){light=lightArray[index];xDir=light.l*Cos(light.angle);yDir=light.l*Sin(light.angle);if(timer==0){light.l=light.ol;}light.l*=0.999;if(light.l<0.1)light.l*=3*r();light.x+=xDir;light.y+=yDir;if(light.x>C.width){light.x=C.width;light.angle=Math.PI-light.angle;}else if(light.x<0){light.x=0;light.angle=Math.PI-light.angle;}if(light.y>C.height){light.y=C.height;light.angle=2*Math.PI-light.angle;}else if(light.y<0){light.y=0;light.angle=2*Math.PI-light.angle;}X.fillStyle=light.color;X.beginPath();X.arc(light.x,light.y,light.radius,0,360,true);X.fill();}}else
+{for(index=count;(index--)>0;){light=lightArray[index];if(timer==0){var data=stringData[sIndex][1];light.tarX=data[index%data.length][0];light.tarY=data[index%data.length][1];}light.x=(light.tarX-light.x)*0.1+light.x;light.y=(light.tarY-light.y)*0.1+light.y;var tmpR=0.8*r()-0.5;light.x+=tmpR;light.y+=tmpR;X.fillStyle=light.color;X.beginPath();X.arc(light.x,light.y,light.radius,0,360,true);X.fill();}}if(timer++>100){flag=!flag;timer=0;if((++nextString)%2){sIndex++;if(sIndex==strings.length){sIndex=0;}}}},30);})();
+</script>
+</html>

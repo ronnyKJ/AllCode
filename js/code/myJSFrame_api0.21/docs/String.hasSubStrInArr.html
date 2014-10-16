@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>String.hasSubStrInArr</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>String.hasSubStrInArr(<em>strArr</em>)</h1>
+<p class="info">判断在字符串型数组中是否存在某元素，该元素被 String 包含。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>strArr</em></dt>
+		<dd>必选项。字符串型数组。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">布尔型。true/false</p>	
+    <h2>描述</h2>
+	<p class="p">该方法是 hasSubString 的扩展，hasSubString 方法只能传入一个子目标字符串，而 hasSubStrInArr 能传入一组子目标字符串，在这组子目标字符串中只要存在一个元素被 String 包含，就返回 true；如果全部元素都不被 String 包含，返回 false 。</p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var str = &quot;北京2008奥运会&quot;;<br />
+var strArr = [&quot;广东&quot;,&quot;北京&quot;,&quot;上海&quot;]; <br />
+alert( str.hasSubStrInArr(strArr) ); <span class="comment">//true</span><br />
+var strArr2 = [&quot;one world, one dream&quot;];<br />
+alert( str.hasSubStrInArr(strArr2) ); <span class="comment">//false</span><br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Spot Light</title>
+    <script type="text/javascript" src="Vector3.js"></script>
+    <script type="text/javascript" src="Ray3.js"></script>
+    <script type="text/javascript" src="IntersectResult.js"></script>
+    <script type="text/javascript" src="Sphere.js"></script>
+    <script type="text/javascript" src="Plane.js"></script>
+    <script type="text/javascript" src="Union.js"></script>
+    <script type="text/javascript" src="PerspectiveCamera.js"></script>
+    <script type="text/javascript" src="Color.js"></script>
+    <script type="text/javascript" src="LightSample.js"></script>
+    <script type="text/javascript" src="SpotLight.js"></script>
+    <script type="text/javascript" src="RenderLight.js"></script>
+</head>
+<body>
+<canvas id="renderCanvas" width="256" height="256"></canvas>
+<br />
+<textarea id="code" rows="20" cols="100">
+renderLight(
+    document.getElementById('renderCanvas'), 
+    new Union([
+        new Plane(new Vector3(0, 1, 0), 0),
+        new Plane(new Vector3(0, 0, 1), -50),
+        new Plane(new Vector3(1, 0, 0), -20),
+        new Sphere(new Vector3(0, 10, -10), 10)
+    ]),
+    [new SpotLight(Color.white.multiply(2000), new Vector3(30, 40, 20), new Vector3(-1, -1, -1), 20, 30, 0.5)],
+    new PerspectiveCamera(new Vector3(0, 10, 10), new Vector3(0, 0, -1), new Vector3(0, 1, 0), 90));
+</textarea>
+<br/>
+<button onclick="eval(document.getElementById('code').value)">Run</button>
+</body>
+</html>

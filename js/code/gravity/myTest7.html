@@ -1,0 +1,106 @@
+﻿<html>
+<head><title>Gravity</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+	background: #333;
+}
+
+#c
+{
+	display: block;
+	background: #000;
+	margin: 100px auto;
+}
+
+#r
+{
+	position: relative;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: #AAA;
+	margin-top: 0px;
+	text-align: center;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas><div id="r">-- By Ronny 2011 --</div></body>
+<script type="text/javascript">
+rr = document.getElementById('r');
+var x=y=0;
+var g=0.8;
+var cellArray = [];
+var count = 3;
+r = Math.random;
+Sin = Math.sin;
+Cos = Math.cos;
+PI = Math.PI;
+Atan = Math.atan2;
+
+	var initYSpeed = 1-2.5*r();
+	var cell = 
+	{
+		xs: 2*r(),
+		oys: initYSpeed,
+		ys: initYSpeed,
+		x: 0,
+		y: 0
+	};
+	cellArray.push(cell);
+			
+with(document.body)
+{
+	C = document.getElementById('c');
+	var w = 500;
+	C.width = w;
+	C.height = 400;
+	t = C.getContext("2d");
+	C.onmousemove = function()
+	{
+		//for(var i=0; i<count; i++)
+		//{
+		/*
+			var initYSpeed = 1-2.5*r();
+			var cell = 
+			{
+				xs: 2*r(),
+				oys: initYSpeed,
+				ys: initYSpeed,
+				x: x=event.layerX,
+				y: y=event.layerY
+			};
+			cellArray.push(cell);
+			*/
+		//}
+				x = event.layerX;
+				y = event.layerY;
+	}
+}
+
+timer = 0;
+setInterval(function(){
+	t.fillStyle = "#000";
+	t.fillRect(0, 0, C.width, C.height);
+	timer+=0.4;
+	for(var i=0; i<cellArray.length; i++)
+	{
+		var cell = cellArray[i];
+		
+		cell.ys = timer*g+cell.oys
+		cell.y += cell.ys;
+		cell.x += cell.xs;
+		
+		t.fillStyle = '#A9EA00';
+		t.beginPath();
+		t.arc(x, y, 5, 0, 360, true);
+		t.closePath();
+		t.fill();
+	}
+	
+	rr.innerText = x+' '+y;
+}, 20);
+</script>
+</html>

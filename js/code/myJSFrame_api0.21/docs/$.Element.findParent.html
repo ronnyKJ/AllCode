@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Element.findparent</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$(<em>Element</em>).findParent(<em>filter</em>)</h1>
+<p class="info">
+向上根据条件查找父节点。
+</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>Element</em></dt>
+		<dd>必选项。页面元素ID(字符串型)或者是文档节点(对象)。</dd>
+		<dt><em>filter</em></dt>
+		<dd>必选项。过滤条件，其类型为名称值对的对象。</dd>
+	</dl>
+<h2>返回值</h2>
+<p class="p">Node&nbsp;向上找到的父节点。<br />
+null 找不到结果。</p>
+<h2>描述</h2>
+	<p class="p">该方法用于在 $(<em>Element</em>) 所有的父节点（一直到文档根节点 document.documentElement）队列中，根据条件查找<em> Node</em> 所在的位置。</p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+  function getContainer(id){<br />
+  &nbsp;&nbsp;&nbsp; var p =$(id).findParent({className:&quot;container&quot;, myAttribute:&quot;hello&quot;, tagName:&quot;DIV&quot;});<br />
+  &nbsp;&nbsp;&nbsp; alert(p?&quot;I find it!&quot;:&quot;sorry!&quot;);<br />
+  }<br />
+  &lt;/script&gt;<br />
+  &lt;div  class=&quot;container&quot; myAttribute=&quot;hello&quot;&gt;<br />
+  &nbsp;&nbsp;&nbsp; &lt;div class=&quot;lefter&quot;&gt;<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div id=&quot;news&quot;&gt;demo&lt;/div&gt;<br />
+       &nbsp;&nbsp;&nbsp; &lt;/div&gt;<br />
+      &lt;/div&gt;<br />
+&lt;input type=&quot;button&quot; value=&quot;查找&quot; onclick=&quot;getContainer('news')&quot; /&gt;</p>	
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

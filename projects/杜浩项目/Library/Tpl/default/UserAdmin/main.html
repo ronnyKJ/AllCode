@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Library</title>
+<link rel='stylesheet' type='text/css' href='__ROOT__/css/style.css'>
+</head>
+<body>
+<h1>User Info</h1>
+
+<h3>Unauthorized book administrator info</h3>
+<table class="tbl">
+<tr><th>ID</th><th>Username</th><th>Password</th><th>E-mail</th><th>Type</th><th>Authorize</th></tr>
+<volist name="bookAdminUn" id="bau">
+<tr><td>{$bau.id}</td><td>{$bau.username}</td><td>{$bau.password}</td><td>{$bau.email}</td><td>{$bau.type}</td>
+<td><form method="POST" action="__URL__/authorize"><input name="id" type="hidden" value="{$bau.id}" /><input type="submit" value="Authorize" /></form></td>
+</tr>
+</volist>
+</table>
+
+<h3>Authorized book administrator info</h3>
+<table class="tbl">
+<tr><th>ID</th><th>Username</th><th>Password</th><th>E-mail</th><th>Type</th></tr>
+<volist name="bookAdminAu" id="ba">
+<tr><td>{$ba.id}</td><td>{$ba.username}</td><td>{$ba.password}</td><td>{$ba.email}</td><td>{$ba.type}</td></tr>
+</volist>
+</table>
+
+<h3>Book borrower info</h3>
+<table class="tbl">
+<tr><th>ID</th><th>Username</th><th>Password</th><th>E-mail</th><th>Type</th><th>Books</th></tr>
+<volist name="userList" id="ul">
+<tr><td>{$ul.id}</td><td>{$ul.username}</td><td>{$ul.password}</td><td>{$ul.email}</td><td>{$ul.type}</td>
+<td><a href="__URL__/checkUserBooks/uid/{$ul.id}">check</a></td>
+</tr>
+</volist>
+</table>
+</body>
+</html>

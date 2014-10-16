@@ -1,0 +1,132 @@
+﻿<html>
+<head><title>Fly</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des"></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+
+var t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+
+var initPosition = {x: 300, y:500};
+var targetPosition = {x: 600, y:300};
+t.fillStyle="#F00";
+t.arc(initPosition.x,initPosition.y,2,0,360,true);
+t.arc(targetPosition.x,targetPosition.y,2,0,360,true);
+t.fill();
+
+var angle = 0;
+var l=1;
+t.strokeStyle = COLOR;
+t.lineWidth = 1;
+
+setInterval(function(){
+	//t.fillRect(0,0,canvasW,canvasH);
+	/*
+	t.beginPath();
+	t.moveTo(initPosition.x,initPosition.y);
+	var random=r();
+	if(random<0.33)//大约各1/3的机会
+		angle=(angle+15)%16;
+	else if(random<0.66)
+		angle=(angle+16)%16;
+	else
+		angle=(angle+17)%16;
+	var tmpX = initPosition.x+Math.cos(angle*Math.PI/8)*l;
+	var tmpY = initPosition.y+Math.sin(angle*Math.PI/8)*l;
+	t.lineTo(tmpX, tmpY);
+	t.stroke();
+
+	initPosition.x=tmpX;
+	initPosition.y=tmpY;
+	*/
+	
+		//if(cycle==0 && flies.length<flyNumber)
+		//{
+		//	flies.push([{x:150,y:150,angle:q(n()*16)},{x:150,y:150}]);//当E为0(每100为0)时，就push数组a, angle为随机初始角度，从0到15
+		//}
+		b=Math;
+		k={x:initPosition.x,y:initPosition.y,angle:0};//苍蝇尾巴位置
+		m={x:initPosition.x,y:initPosition.x};//苍蝇头部问位置
+	
+		t.beginPath();
+		t.moveTo(k.x,k.y);
+		t.lineTo(m.x,m.y);
+		t.stroke();
+		
+		m.x=k.x;
+		m.y=k.y;
+		var tmpAngle=k.angle*Math.PI/8;//p = Math.PI, 从0到15/8*PI，刚好是一个圆
+		//计算苍蝇新的位置
+		k.x+=b.sin(tmpAngle)*2;
+		k.y-=b.cos(tmpAngle)*2;
+			
+		k.ox=targetPosition.x;//数字中各个选中的点x坐标
+		k.oy=targetPosition.y;//数字中各个选中的点y坐标
+		
+		//下面是运动方向判断
+
+			tmpAngle=Math.round(8*b.atan((k.x-k.ox)/(k.oy-k.y))/Math.PI);//-4~4
+	
+			if(k.y<k.oy)//当前位置在oy以上
+				tmpAngle+=24;//20~28
+			else
+				tmpAngle+=16;//12~20
+				
+			tmpAngle%=16;//至此，把目前的位置和原始位置的角度换算为0~15的范围
+			
+			if(tmpAngle==k.angle)
+				k.state=1;
+			else
+			{
+				if(tmpAngle<k.angle)
+					tmpAngle+=16;
+					
+				if(tmpAngle-k.angle<8)//初始角度顺时针180以内
+					k.state=2;
+				else//初始角度逆时针180以内
+					k.state=0;
+			}
+
+		
+		if(k.state==0)
+			k.angle+=15;//逆时针偏
+		else if(k.state==2)
+			k.angle+=17;//顺时针偏
+		else//k.state==1
+			k.angle+=16;//保持不变
+		
+		k.angle%=16
+		
+document.getElementById('des').innerText = tmpAngle;	
+	
+	
+},200);
+</script>
+</html>

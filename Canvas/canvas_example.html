@@ -1,0 +1,47 @@
+﻿<html>
+<head><title>ball-v4</title>
+</head>
+<body><canvas id="c" width='800' height='500'></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var context = t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+
+
+context.beginPath();//路径起点  
+context.arc(100,150,5,0,360,true);//以坐标(100,100)为圆心绘制一个半径为5的圆  
+	context.closePath();//闭合路径  
+	context.fillStyle = '#F00';//填充红色  
+	context.strokeStyle = '#0F0';//填充绿色  
+	context.fill();//填充  
+	context.stroke();//描边  
+
+
+	context.beginPath();  
+	context.moveTo(200,100);//以坐标(100,100)为起点  
+	context.lineTo(240,190);//连接到(100,150)  
+	context.lineTo(180,150); //连接到(180,150)  
+	context.strokeStyle = '#00F';  
+	context.stroke();  
+	context.closePath();  
+
+
+	context.beginPath();  
+	context.moveTo(300,100);//以坐标(100,100)为起点  
+	context.lineTo(360,150);//连接到(100,150)  
+	context.lineTo(500,150); //连接到(180,150)  
+	context.closePath();//闭合路径，即自动连接到(100,100)  
+	context.strokeStyle = '#F00';  
+	context.stroke();  
+	context.fillStyle = '#0F0';  
+	context.fill();//填充 
+
+</script>
+</html>

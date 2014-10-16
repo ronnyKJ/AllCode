@@ -1,0 +1,42 @@
+body
+{
+	font-family: Arial;
+}
+
+h3
+{
+	margin-top: 60px;
+}
+
+table.tbl
+{
+	background: #EEE;
+	text-align: center;
+}
+
+table.tbl th
+{
+	background: #92e372;
+	padding: 8px;
+}
+
+table.tbl tr:nth-child(odd)
+{
+	background: #CCC;
+}
+
+table.tbl tr:hover
+{
+	background: #c9e5be;
+}
+
+form
+{
+	margin: 0;
+	padding: 0;
+}
+
+.validateError
+{
+	color: #F00;
+}

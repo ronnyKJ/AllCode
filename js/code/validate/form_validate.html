@@ -1,0 +1,28 @@
+﻿<html>
+<head><title>Form Validate</title>
+</head>
+<body>
+<form id="form" method="POST" action="a.php">
+<table>
+<tr><td>Name:</td><td><input id="name" type="text" name="name" /></td></tr>
+<tr><td>Password:</td><td><input id="password" type="text" name="password" /></td></tr>
+<tr><td>Confirm:</td><td><input id="confirm" type="text" name="confirm" /></td></tr>
+<tr><td>E-mail:</td><td><input id="email" type="text" name="email" /></td></tr>
+<tr><td>QQ:</td><td><input id="qq" type="text" name="qq" /></td></tr>
+<tr><td></td><td><input type="submit" value="submit" /></td></tr>
+</table>
+</form>
+</body>
+<script type="text/javascript" src="validate.js"></script>
+<script type="text/javascript">
+(function(){
+	var _ = Validate.utility._;
+	Validate.setItems([
+		{element:_("name"), pattern: /[A-Za-z]/i, msg: "Name format error"},
+		{element:_("password"), pattern: /[0-9]/i, msg: "Password format error"}
+	]);
+	
+	_("form").onsubmit = Validate.submit;
+})();
+</script>
+</html>

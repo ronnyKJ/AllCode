@@ -1,0 +1,73 @@
+﻿<html>
+<head><title>Drop</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#c
+{
+	background: #dde5d1;
+}
+</style>
+</head>
+<body></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var t = c.getContext("2d");
+var canvasW = 500;
+var canvasH = 400;
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+t.translate(canvasW/2, canvasH/2);
+
+function circle(x, y, r, isFill, style)
+{
+	if(!isFill)
+	{
+		t.beginPath();
+		t.strokeStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.stroke();
+		t.closePath();
+	}
+	else
+	{
+		t.fillStyle = style;
+		t.beginPath();
+		t.arc(x,y,r,0,360,true);
+		t.closePath();
+		t.fill();
+	}
+}
+t.save();
+(function(){
+	//t.rotate(Math.PI/4);
+	t.strokeStyle = "#2a7f03";
+	t.lineWidth = 10;
+	t.beginPath();
+	for(var i=0; i<40; i++)
+	{
+		t.moveTo(-360, i*25-300);
+		t.lineTo(510, i*25-300);
+	}
+	t.stroke();
+	t.closePath();
+})();
+t.restore();
+
+var g = t.createRadialGradient(-15, 15, 50, 0, 0, 80);
+g.addColorStop(0,"rgba(0,0,0,0.1)");
+g.addColorStop(0.8,"rgba(0,0,0,0.6)");
+g.addColorStop(1,"rgba(0,0,0,0.9)");
+circle(0, 0, 80, true, g);
+</script>
+</html>

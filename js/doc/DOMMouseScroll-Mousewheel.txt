@@ -1,0 +1,26 @@
+在某个元素上滑动鼠标滚轮的时候，不同的浏览器都会出发一个事件：
+
+FF:
+
+obj . addEventListener('DOMMouseScroll', fn, false);
+
+IE:
+
+obj . attachEvent('onmousewheel', fn);
+
+这个事件一旦产生，就会有个参数可以利用:
+
+
+IE: event.wheelDelta,这个值，一旦你往上滚动一次鼠标，他就是120，如果你要是往下滚动一次，那么它的值就是-120。
+
+FF: event.detail,这个值，一旦你往上滚动一次鼠标，他就是-3，如果你要是往下滚动一次，那么它的值就是3。
+
+simWheel = function(e){
+   var delta = 0;
+   e = window.event || e;
+   if (e.wheelDelta) { // IE或者Opera.
+   delta = e.wheelDelta/120;
+   } else if (e.detail) { // 兼容Mozilla.
+   delta = -e.detail/3;
+   }
+    }

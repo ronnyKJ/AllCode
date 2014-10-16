@@ -1,0 +1,49 @@
+<html>  
+<head>  
+<script type="text/javascript">  
+    /** 
+    动物，父类 
+    */  
+    function Animal(name)   
+    {  
+        this.name = name;  
+        this.sleep = function ()   
+        {  
+            alert("name is :" + this.name +" ,\r\n it's a sleep function 。\r\n the caller is:" + this.sleep.caller);  
+        }  
+    }  
+    /** 
+        子类，老虎 
+    */  
+    function Tiger()
+    {  
+        var name = "tiger_onedear";  
+        Animal.call(this , name);   //将animal对象作为this指针调用tiger函数，调用父构造函数。换句话说就是tiger继承animal。  
+    }  
+    /** 
+        子类，小鸟 
+    */  
+    function Bird()   
+    {  
+        var name = "bird_onedear";  
+    }
+    Bird.prototype=new Animal("bird_onedear"); //建一个积累的对象作为子类原型的原型（原型继承），个人认为也可以勉强说是bird继承animal  
+    Bird.prototype.fly= function () {alert("i am fly" );} //对bird对象原型增加一个方法，这样bird与bird的子类都能用上  
+      
+    function testTiger()   
+    {  
+        new Tiger().sleep();  //tiger类定义处并没有sleep方法，但由于继承了animal类，所以子类调用正常  
+    }  
+      
+    function testBird()   
+    {  
+        new Bird().sleep();  
+        new Bird().fly();  
+    }     
+</script>  
+</head>  
+<body>  
+<input type="button" onclick="testTiger();" value="TtestTigeriger"/>  
+<input type="button" onclick="testBird();" value="testBird"/>  
+</body>  
+</html> 

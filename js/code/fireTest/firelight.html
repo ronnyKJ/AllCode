@@ -1,0 +1,54 @@
+﻿<html>
+<head><title>FireTest</title>
+<style>
+body
+{
+	background: #333;
+	margin: 0;
+	padding: 0;
+}
+
+#c
+{
+	display: block;
+}
+
+#r
+{
+	position: relative;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: #DDD;
+	margin-top: -30px;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas><div id="r">-- By Ronny 2011 --</div></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var t = c.getContext("2d");
+var canvasW = b.clientWidth;
+var canvasH = b.clientHeight;
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+t.globalCompositeOperation = 'lighter';
+d.onmousemove = function()
+{
+	var r = Math.random()*15;
+	var n = t.createRadialGradient(event.clientX,event.clientY,r,event.clientX,event.clientY,2*r);
+	n.addColorStop(0,"rgba(255,40,0,0.8)");
+	n.addColorStop(0.6,"rgba(0,0,0,0.2)");
+	n.addColorStop(1,"rgba(0,0,0,0)");
+	t.fillStyle = n;
+	//t.fillRect(event.clientX, event.clientY,100,100);
+	t.fillRect(0, 0, canvasW, canvasH);
+}
+</script>
+</html>

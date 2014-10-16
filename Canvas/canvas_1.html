@@ -1,0 +1,13 @@
+<!doctype html> 
+<html> 
+	<head> 
+		<title>JS1k, 1k demo submission [22]</title> 
+		<meta charset="utf-8" /> 
+	</head> 
+	<body> 
+		<canvas id="c"></canvas> 
+		<script> 
+			md=0;m=Math;mr=m.round;g=m.random;d=document;dl="addEventListener";w=window;d.body.style.backgroundColor="#000";c=d.getElementById("c");t=c.getContext("2d");r();x=c.width*0.5;y=c.height*0.5;d[dl]("mousemove",function(a){x=a.clientX;y=a.clientY},0);d[dl]("mousedown",function(){md=1},0);d[dl]("mouseup",function(){md=0},0);w.addEventListener("resize",r,0);l=[];i=0;while(++i<25){p={x:x,y:y,d:x,k:y,s:2+g(),a:0,b:0.01+g()*0.04,f:"#"+(g()*4210752+11184810|0).toString(16),o:55+(55*g())};l.push(p)}setInterval(function(){t.fillStyle="rgba(0,0,0,0.05)";t.fillRect(0,0,c.width,c.height);i=0;while(p=l[++i]){lp={x:p.x,y:p.y};p.a+=p.b;p.d+=(x-p.d)*p.b;p.k+=(y-p.k)*p.b;p.x=p.d+m.cos(i+p.a)*p.o;p.y=p.k+m.sin(i+p.a)*p.o;p.x=m.max(m.min(p.x,c.width),0);p.y=m.max(m.min(p.y,c.height),0);with(t){beginPath();fillStyle=p.f;strokeStyle=p.f;lineWidth=p.s;moveTo(lp.x,lp.y);lineTo(p.x,p.y);stroke();arc(p.x,p.y,p.s/2,0,m.PI*2,1>0);fill()}}},17);function r(){c.width=w.innerWidth-25;c.height=w.innerHeight-25}; 
+		</script> 
+	</body> 
+</html>

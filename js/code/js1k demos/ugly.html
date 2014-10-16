@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+c=(b=document.body).children[0],S=(M=Math).sin,C=M.cos,R=M.random,b.style.margin=z=r=i=u=t=0,g=e=m=f=.4,b.bgColor="#000",b.style.overflow="hidden",s=c.getContext("2d"),n=(w=c.width=innerWidth+32)*(h=c.height=innerHeight+32)/1000|0;with(c.style)position="absolute",left=top="-16px";for(p=[];i<n;i++)p.push({x:R()*w,y:R()*h});function F(a){a.x=(w+a.x+(S(a.y/53+u)+g))%w;a.y=(h+a.y+(C(a.x/47-u)+m))%h;r=10+(C((a.x+a.y)/50)+S((a.x-a.y)/27+u))*3;s.fillStyle="hsl("+((t+r*15+(a.x/w+a.y/h)*180)%360|0)+",100%,70%)";s.beginPath();s.arc(a.x,a.y,r,0,M.PI*2,0);s.closePath();s.fill()}function L(){z=new Date().getTime();s.fillStyle="rgba(0,0,0,.04)";s.fillRect(0,0,w,h);u=t*.05;for(i=0;i<n;i++)F(p[i]);t++;g=g+(e-g)*.05;m=m+(f-m)*.05;t%100==0&&(R()<0.5?e=-e:f=-f);setTimeout(L,M.max(30-new Date().getTime()+z,1))}L()
+</script>
+</html>

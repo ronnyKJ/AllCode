@@ -1,0 +1,52 @@
+JavaScript的Cookies
+使用 Cookies　　我们已经知道，在 document 对象中有一个 cookie 属性。但是 Cookie 又是什么？“某些 Web 站点在您的硬盘上用很小的文本文件存储了一些信息，这些文件就称为 Cookie。”—— MSIE 帮助。一般来说，Cookies 是 CGI 或类似，比 HTML 高级的文件、程序等创建的，但是 JavaScript 也提供了对 Cookies 的很全面的访问权利。
+　　在继续之前，我们先要学一学 Cookie 的基本知识。
+　　每个 Cookie 都是这样的：<cookie名>=<值>
+　　<cookie名>的限制与 JavaScript 的命名限制大同小异，少了“不能用 JavaScript 关键字”，多了“只能用可以用在 URL 编码中的字符”。后者比较难懂，但是只要你只用字母和数字命名，就完全没有问题了。<值>的要求也是“只能用可以用在 URL 编码中的字符”。
+　　每个 Cookie 都有失效日期，一旦电脑的时钟过了失效日期，这个 Cookie 就会被删掉。我们不能直接删掉一个 Cookie，但是可以用设定失效日期早于现在时刻的方法来间接删掉它。
+　　每个网页，或者说每个站点，都有它自己的 Cookies，这些 Cookies 只能由这个站点下的网页来访问，来自其他站点或同一站点下未经授权的区域的网页，是不能访问的。每一“组”Cookies 有规定的总大小（大约 2KB 每“组”），一超过最大总大小，则最早失效的 Cookie 先被删除，来让新的 Cookie“安家”。
+　　现在我们来学习使用 document.cookie 属性。
+　　如果直接使用 document.cookie 属性，或者说，用某种方法，例如给变量赋值，来获得 document.cookie 的值，我们就可以知道在现在的文档中有多少个 Cookies，每个 Cookies 的名字，和它的值。例如，在某文档中添加“document.write(document.cookie)”，结果显示：
+
+name=kevin; email=kevin@kevin.com; lastvisited=index.html
+这意味着，文档包含 3 个 Cookies：name, email 和 lastvisited，它们的值分别是 kevin, kevin@kevin.com 和 index.html。可以看到，两个 Cookies 之间是用分号和空格隔开的，于是我们可以用 cookieString.split('; ') 方法得到每个 Cookie 分开的一个数组（先用 var cookieString = document.cookie）。
+　　设定一个 Cookie 的方法是对 document.cookie 赋值。与其它情况下的赋值不同，向 document.cookie 赋值不会删除掉原有的 Cookies，而只会增添 Cookies 或更改原有 Cookie。赋值的格式：
+
+document.cookie = 'cookieName=' + escape('cookieValue')
+     + ';expires=' + expirationDateObj.toGMTString();
+是不是看到头晕了呢？以上不是粗体字的地方是要照抄不误的，粗体字是要按实际情况做出改动的。cookieName 表示 Cookie 的名称，cookieValue 表示 Cookie 的值，expirationDateObj 表示储存着失效日期的日期对象名，如果不需要指定失效日期，则不需要第二行。不指定失效日期，则浏览器默认是在关闭浏览器（也就是关闭所有窗口）之后过期。
+　　看到了上面的一些下划线了么？这些是应该注意的地方。
+　　首先 escape() 方法：为什么一定要用？因为 Cookie 的值的要求是“只能用可以用在 URL 编码中的字符”。我们知道“escape()”方法是把字符串按 URL 编码方法来编码的，那我们只需要用一个“escape()”方法来处理输出到 Cookie 的值，用“unescape()”来处理从 Cookie 接收过来的值就万无一失了。而且这两个方法的最常用途就是处理 Cookies。其实设定一个 Cookie 只是“document.cookie = 'cookieName=cookieValue'”这么简单，但是为了避免在 cookieValue 中出现 URL 里不准出现的字符，还是用一个 escape() 好。
+　　然后“expires”前面的分号：注意到就行了。是分号而不是其他。
+　　最后 toGMTString() 方法：设定 Cookie 的时效日期都是用 GMT 格式的时间的，其它格式的时间是没有作用的。
+　　现在我们来实战一下。设定一个“name=rose”的 Cookie，在 3 个月后过期。
+
+
+var expires = new Date();
+expires.setTime(expires.getTime() + 3 * 30 * 24 * 60 * 60 * 1000);
+/*   三个月 x 一个月当作 30 天 x 一天 24 小时
+   x 一小时 60 分 x 一分 60 秒 x 一秒 1000 毫秒 */
+document.cookie = 'name=rose;expires=' + expires.toGMTString();
+为什么没有用 escape() 方法？这是因为我们知道 rose 是一个合法的 URL 编码字符串，也就是说，'rose' == escape('rose')。一般来说，如果设定 Cookie 时不用 escape()，那获取 Cookie 时也不用 unescape()。
+
+　　再来一次：编写一个函数，作用是查找指定 Cookie 的值。
+
+function getCookie(cookieName) {
+  var cookieString = document.cookie;
+  var start = cookieString.indexOf(cookieName + '=');
+  // 加上等号的原因是避免在某些 Cookie 的值里有
+  // 与 cookieName 一样的字符串。
+  if (start == -1) // 找不到
+    return null;
+  start += cookieName.length + 1;
+  var end = cookieString.indexOf(';', start);
+  if (end == -1) return unescape(cookieString.substring(start));
+  return unescape(cookieString.substring(start, end));
+}
+这个函数用到了字符串对象的一些方法，如果你不记得了（你是不是这般没记性啊），请快去查查。这个函数所有的 if 语句都没有带上 else，这是因为如果条件成立，程序运行的都是 return 语句，在函数里碰上 return，就会终止运行，所以不加 else 也没问题。该函数在找到 Cookie 时，就会返回 Cookie 的值，否则返回“null”。
+　　现在我们要删除刚才设定的 name=rose Cookie。
+
+var expires = new Date();
+expires.setTime(expires.getTime() - 1);
+document.cookie = 'name=rose;expires=' + expires.toGMTString();
+可以看到，只需要把失效日期改成比现在日期早一点（这里是早 1 毫秒），再用同样的方法设定 Cookie，就可以删掉 Cookie 了。

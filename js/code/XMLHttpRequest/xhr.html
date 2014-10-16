@@ -1,0 +1,25 @@
+﻿<html>
+<head><title>XMLHttpRequest</title>
+<script type="text/javascript">
+var d1=new Date();
+var xhr;
+for(var i=0; i<100000; i++)
+{
+	new XMLHttpRequest();
+}
+var d2=new Date();
+alert(d2-d1);
+
+var d3=new Date();
+var xhr = {"xhr" : new XMLHttpRequest}, tmp, t;
+for(var i=0; i<100000; i++)
+{
+	t=xhr["xhr"];
+	if(t) tmp=t;
+}
+var d4=new Date();
+alert(d4-d3);
+</script>
+</head>
+<body></body>
+</html>

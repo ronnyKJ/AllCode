@@ -1,0 +1,125 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<style>
+#see
+{
+	width:300px;
+	height:160px;
+	overflow:hidden;
+}
+
+#map
+{
+	background:#EEE;
+}
+</style>
+<script type='text/javascript' src="js/jquery-1.7.2.js"></script>
+<script type='text/javascript' src="js/util.js"></script>
+<script type='text/javascript' src="js/geoData.js"></script>
+<script type='text/javascript' src="js/canvas.js"></script>
+<script type='text/javascript' src="js/geometryRender.js"></script>
+<script type='text/javascript' src="js/osm2geo.js"></script>
+<script type='text/javascript' src="js/debug.js"></script>
+</head>
+<body>
+<div id='see1'>
+	<canvas id="map" width="1200" height="700"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+var geoData, bbox=[114.33912,30.53129,114.34733,30.53991];
+bbox = [114.34757,30.52776,114.35596,30.53402]
+geoData = GeoData.retrieveData(bbox, false)
+var zoom = 1;
+var mapCanvas = $('#map')[0], ctx = mapCanvas.getContext('2d');
+
+var doZoom = function(canvas, zoom){
+	var bb = U.copyArray(geoData.bbox), x1 = bb[0], y1 = bb[1], x2 = bb[2], y2 = bb[3];
+	var cw = canvas.width, ch = canvas.height;
+	var gw = x2-x1, gh = y2-y1;
+	return {
+		bbox: bb,
+		x1: bb[0],
+		y1: bb[1],
+		x2: bb[2],
+		y2: bb[3],
+		width: cw,
+		height: ch,
+		geoWidth: gw,
+		geoHeight: gh,
+		x_scale: cw/gw*zoom,
+		y_scale: ch/gh*zoom,
+		zoom: zoom
+	}
+}
+
+mapConfig = doZoom(mapCanvas, zoom);
+
+var geoDataCopy;
+Debug.trace("render",function(){
+	tmpCopy = geoDataCopy = U.copyJSON(geoData);//数据副本
+	GeoData.geoToMapAll(geoDataCopy, mapConfig);//经纬度 转化为 xy像素
+	GeoRender.renderMap(geoDataCopy, ctx);//渲染地图
+});
+
+
+function trs(x, y)
+{
+	var w=1200, h=700;
+	ctx.save();
+	ctx.clearRect(0,0, w, h);
+	ctx.translate(x,y);
+	Debug.trace("render",function(){
+		GeoRender.renderMap(tmpCopy, ctx);//渲染地图
+	});
+	ctx.restore();
+}
+
+var tmpCopy, gX, gY;
+function direction(evt){
+	ctx.clearRect(0,0,1200,700);
+	evt = evt ||window.event; 
+	var key=evt.which||evt.keyCode; 
+	if (key == 37) zoom-=0.1; 
+	if (key == 38) zoom+=0.1; 
+	if (key == 39)	zoom+=0.1; 
+	if (key == 40)  zoom-=0.1; 
+	mapConfig = doZoom(mapCanvas, zoom);
+	tmpCopy = U.copyJSON(geoData);//数据副本
+	GeoData.geoToMapAll(tmpCopy, mapConfig);
+	
+	ctx.save();
+	ctx.translate(gX,gY);
+	GeoRender.renderMap(tmpCopy, ctx);//渲染地图
+	ctx.restore();
+	
+}
+document.onkeydown = direction;
+
+var wa = Debug.addWatcher();
+var dragMap = function(map, ctx)
+{
+	var x, y, pX, pY, tmpX=0, tmpY=0, isMouseDown=false;
+	map.onmouseup = function(){
+		isMouseDown = false;
+	}
+	map.onmousedown = function(){
+		isMouseDown = true;
+		pX = event.clientX, pY = event.clientY;
+	}
+	map.onmousemove = function(){
+		if(isMouseDown)
+		{
+			x=event.clientX-pX, y=event.clientY-pY;
+			tmpX+=x, tmpY+=y;
+			pX=event.clientX, pY=event.clientY;
+			
+			gX=tmpX, gY=tmpY;
+			trs(tmpX, tmpY);
+		}
+	}
+};
+
+dragMap(mapCanvas, ctx);
+</script>
+</html>

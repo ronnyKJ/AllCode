@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery自定radio样式表单美化插件-懒人建站</title>
+<meta name="keywords" content="网页特效,网页模板,导航菜单,焦点幻灯片,JS代码" />
+<meta name="description" content="懒人建站为您提供-HTML+CSS模板，JS广告代码，网页特效，导航菜单，焦点幻灯片代码，原创视频教程与网页模板和CSS技巧。" />
+
+	<link rel="stylesheet" href="jqtransformplugin/jqtransform.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="demo.css" type="text/css" media="all" />
+	
+	<script type="text/javascript" src="requiered/jquery.js" ></script>
+	<script type="text/javascript" src="jqtransformplugin/jquery.jqtransform.js" ></script>
+	<script language="javascript">
+		$(function(){
+			$('form').jqTransform({imgPath:'jqtransformplugin/img/'});
+		});
+	</script>
+	
+</head>
+<body>
+
+	<form action="post.php" method="POST">
+		<div class="rowElem"><label>Input Text:</label><input type="text" name="inputtext"/></div>
+		<div class="rowElem"><label>Input Password:</label><input type="password" /></div>
+		<div class="rowElem"><label>Checkbox: </label><input type="checkbox" name="chbox" id=""></div>
+		<div class="rowElem"><label>Radio :</label> 
+			<input type="radio" id="" name="question" value="oui" checked ><label>oui</label>
+			<input type="radio" id="" name="question" value="non" ><label>non</label></div>
+		<div class="rowElem"><label>Textarea :</label> <textarea cols="40" rows="12" name="mytext"></textarea></div>
+
+		<div class="rowElem">
+			<label>Select :</label>
+			<select name="select">
+				<option value="">1&nbsp;</option>
+				<option value="opt1">2&nbsp;</option>
+			</select>
+		</div>
+		<div class="rowElem">
+			<label>Select Redimentionné :</label>
+			<select name="select2" >
+				<option value="opt1">Big Option test line with more wordssss</option>
+				<option value="opt2">Option 2</option>
+				<option value="opt3">Option 3</option>
+				<option value="opt4">Option 4</option>
+				<option value="opt5">Option 5</option>
+				<option value="opt6">Option 6</option>
+				<option value="opt7">Option 7</option>
+				<option value="opt8">Option 8</option>
+			</select>
+		</div>
+		
+		<div class="rowElem"><label>Submit button:</label><input type="submit" value="Envoyer" /></div>
+		<div class="rowElem"><label>Reset button:</label><input type="reset" value="Annuler" /></div>
+		<div class="rowElem"><label>Input button:</label><input type="button" value="bouton" /></div>
+				
+	</form>
+
+
+
+
+
+
+<!--下面只是说明与程序代码无关-->
+<div style="width:95%; height:auto; display:block; margin:0 auto; margin-top:30px; font-size:10pt; line-height:150%;">
+<span>本代码由<a href="http://www.51xuediannao.com" style="color:#F00;">懒人建站网 收集整理 我要学电脑.COM →51xuediannao.com</a> </span><br>
+<a href="http://www.51xuediannao.com">懒人建站 http://www.51xuediannao.com</a><br /><br/>
+<span>我们为您提供-
+<a href="http://www.51xuediannao.com/html+css/">HTML+CSS模板</a>，
+<a href="http://www.51xuediannao.com/js/">JS代码</a>，
+<a href="http://www.51xuediannao.com/JS/texiao/">网页特效</a>，
+
+<a href="http://www.51xuediannao.com/JS/nav/">导航菜单</a>，
+<a href="http://www.51xuediannao.com/JS/Slide/">焦点幻灯片<a>，
+<a href="http://www.51xuediannao.com/JS/show/">网页欣赏</a>和
+<a href="http://www.51xuediannao.com/JS/jiqiao/css/">CSS技巧</a>；</span><br />
+<span>懒人建站只收录实用和能提高用户体验的代码</span><br />
+<span>我们只想解放出你的部分写代码时间来思考更高层次的设计，而不是要你懒惰、拼凑。</span>
+</div>
+
+
+
+<!--下面是广告，你的支持是我的动力之源-->
+<center>
+<script type='text/javascript'> 
+cpro_client='lanrennet2010_cpr';
+cpro_at='text'; 
+cpro_161=4; 
+cpro_flush=4; 
+cpro_w=960; 
+cpro_h=90; 
+cpro_template='text_default_960_90'; 
+cpro_cbd='#86AC5F'; 
+cpro_cbg='#242E37'; 
+cpro_ctitle='#6CA7C7'; 
+cpro_cdesc='#cfe0ee'; 
+cpro_curl='#008000'; 
+cpro_cflush='#ff7b0e'; 
+cpro_uap=1;
+cpro_cad=1;
+</script>
+<script language='JavaScript' type='text/javascript' src='http://cpro.baidu.com/cpro/ui/cp.js'></script>
+</center>
+<div id="tj" style="display:none;"><script src="http://s9.cnzz.com/stat.php?id=1015985&web_id=1015985" language="JavaScript" charset="gb2312"></script></div>
+</div>
+</body>
+</html>

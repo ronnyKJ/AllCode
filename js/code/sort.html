@@ -1,0 +1,62 @@
+﻿<html>
+<head><title></title>
+<script type="text/javascript">
+/*
+var arr = [{name:"a", age:2},{name:"b", age:1}];
+function sortAttr(attr)
+{
+	return function(obj1, obj2)
+	{
+		var v1 = obj1[attr];
+		var v2 = obj2[attr];
+		if(v1 > v2) return 1;
+		else if(v1 < v2) return -1;
+		else return 0;
+	}
+}
+arr.sort(sortAttr("age"));
+alert(arr[0].name + "   " + arr[0].age)
+*/
+
+/*
+function toAFunc()
+{
+	return function(num)
+	{
+		return num+10;
+	}
+}
+
+var a = toAFunc();
+var b=a;
+alert(b(3));
+*/
+
+function createFunctions()
+{
+	var result = new Array();
+	for(var i=0; i<10; i++)
+	{
+		/*
+		result[i] = function(num)//Method 1
+		{
+			return function()
+			{
+				return num;
+			}
+		}(i);
+		*/
+		result[i] = new Function("return " + i + ";");//Method 2
+	}
+	return result;
+}
+
+var funcs = createFunctions();
+for(var i=0; i<funcs.length; i++)
+{
+	document.write(funcs[i] + "<br />");
+}
+</script>
+</head>
+<body></body>
+</html>

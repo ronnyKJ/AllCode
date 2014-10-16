@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+M=Math;(e=(D=document).getElementById("c")).width=w=(W=window).innerWidth;e.height=h=W.innerHeight;c=e.getContext("2d");d="#000";C="js1k.com";o=0;x=[];y=[];a=[];s=[];f=[];g=[];(B=D.body.style).margin="0px";B.overflow="hidden";function m(p){return M.max(M.min(255,p),0)}function n(p){return M.floor(M.random()*p)}setInterval(function(){with(c){fillStyle=d;fillRect(0,0,w,h);beginPath();rect(50,0,300,530);clip();for(i=0;i<x.length;i++){v=y[i]-=s[i];j=a[i]-=f[i];u=x[i];k=g[i];b=createRadialGradient(u,v,1,u,v,k);t="rgba("+m(j)+","+m(j-256)+","+m(j-512)+",";b.addColorStop(0,t+"1)");b.addColorStop(1,t+"0)");fillStyle=b;fillRect(u-k,v-k,k*2,k*2)}for(;a[0]<=0;){l=[x,y,a,s,f,g];for(q in l)l[q].shift()}for(i=10;i--;){l=[x,n(300)+50,y,550,a,730+n(100),s,4+n(3),f,11+n(3),g,12+n(20)];for(q=0;q<l.length;)l[q++].push(l[q++]);fillStyle=strokeStyle=d;save();globalAlpha=.1-i/99;font="35px sans-serif";translate(200,455);rotate(o++/28);strokeText(C,-68,0);fillText(C,-68,0);restore()}o-=8;fillText("TotalDuke",51,529)}},10);
+</script>
+</html>

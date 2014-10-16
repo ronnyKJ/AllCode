@@ -1,0 +1,5 @@
+[ 2010-10-27T23:09:20+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002983s ]
+[ 2010-10-27T23:09:20+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.000433s ]
+[ 2010-10-27T23:09:42+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002182s ]
+[ 2010-10-27T23:09:42+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-10-27T23:09:42+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('dfsdf','sdfsdf','sdfsdfsd@dfd.asdasd','1',1288192182) [ RunTime:0.000403s ]

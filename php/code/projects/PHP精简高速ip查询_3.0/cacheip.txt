@@ -1,0 +1,1 @@
+a:12:{i:0;s:12:"www.ibtf.net";i:1;s:13:"www.ddung.org";i:2;s:14:"www.bitefu.net";i:3;s:17:"www.hbwanghai.com";i:4;s:14:"www.xiaogg.org";i:5;s:13:"buy.ddung.org";i:6;s:18:"bitefu.sinaapp.com";i:7;s:16:"ibtf.sinaapp.com";i:8;s:20:"taokehui.sinaapp.com";i:9;s:16:"tbip.sinaapp.com";i:10;s:17:"72e.hbwanghai.com";i:11;s:14:"shop.ddung.org";}

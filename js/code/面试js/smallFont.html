@@ -1,0 +1,57 @@
+﻿<html>
+<head><title>SmallFont</title>
+<style>
+body
+{
+	
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des"></span><canvas id="c"></canvas><br></body>
+<script type="text/javascript">
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+c.width = 80;
+c.height = 60;
+var t = c.getContext("2d");
+t.fillStyle = "#FFF";
+t.fillRect(0, 0, 80, 60);
+t.fillStyle = "#000";
+t.font = "12px Times New Roman";//该字体最小是12px
+t.textAlign = 'center';
+t.fillText("Hello", 40, 30);
+
+var arr = t.getImageData(0, 0, 80, 60).data;
+var l = arr.length;
+var p = 0 , s=[];
+t.fillStyle = "#F00";
+var x=y=0;
+for(var i=0; i<l; i+=4)
+{
+	if(arr[i] < 150)//阈值，这个条件下看起来比较可以接受
+	{
+		p++;
+		x=i/4%80;
+		y=Math.floor(i/240)*0.78 - 20;
+		t.beginPath();
+		t.arc(x, y, 0.6, 0, 360, true);
+		t.closePath();
+		t.fill();
+	}
+}
+</script>
+</html>

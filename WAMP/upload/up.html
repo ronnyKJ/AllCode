@@ -1,0 +1,16 @@
+<html>
+<head><title>Ajax Upload</title></head>
+<body>
+<form name="form" action="file.php" method="post" enctype="multipart/form-data" target="fr">
+<input id="file" name="file" type="file" />
+<input value="submit" type="submit" />
+<iframe name="fr" style="display:none"></iframe>
+</form>
+<div id="res"></div>
+</body>
+<script>
+function callback(url){
+	document.getElementById('res').innerHTML = '<img src="' + url + '" />';
+}
+</script>
+</html>

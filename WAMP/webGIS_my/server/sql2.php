@@ -1,0 +1,1 @@
+﻿<?phpinclude('util.php');$e = mysql_query("SELECT id FROM fid");dump($e);//mysql_close($con);?>

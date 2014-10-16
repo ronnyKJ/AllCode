@@ -1,0 +1,80 @@
+﻿<html>
+<head><title>Shuffle</title>
+<style>
+td
+{
+	background: #BBB;
+}
+</style>
+</head>
+<body>
+<table>
+<tr id="th"><th></th></tr>
+<tr id="before"><td>Before</td></tr>
+<tr id="after"><td>After</td></tr>
+</table>
+<p id="random"></p>
+<p id="shuffle"></p>
+</body>
+<script type="text/javascript">
+var _ = function(id)
+{
+	return document.getElementById(id);
+}
+
+var number = [], beforeArray = [], afterArray = [];
+//产生一副牌
+var getCards = function(count)
+{
+	var tmp = new Array(count);
+	for(var i=0; i<count; i++)
+	{
+		tmp[i] = i;
+	}
+	return tmp;	
+}
+
+//交换
+var swap = function(arr, a, b)
+{
+	var tmp = arr[a];
+	arr[a] = arr[b];
+	arr[b] = tmp;
+}
+
+//交换
+var shuffle = function(arr)
+{
+	var d = new Date();//计时开始
+	var l = arr.length;
+	for(var i=0; i<l; i++)
+	{
+		swap(arr, i, Math.floor(Math.random()*(l-i))+i);
+	}
+	_("shuffle").innerText = (new Date() - d) + "ms";//计时结束
+	return arr;
+}
+
+//数字填充到表格单元
+var fillCell = function(id, arr, eleType)
+{
+	var tr = document.getElementById(id);
+	var l = arr.length;
+	var td;
+	for(var i=0; i<l; i++)
+	{
+		td = document.createElement(eleType);
+		td.innerText = arr[i];
+		tr.appendChild(td);
+	}
+}
+
+//任务开始
+number = getCards(11);
+fillCell("th", number, "th");
+beforeArray = shuffle(number);
+fillCell("before", beforeArray, "td");
+afterArray = shuffle(beforeArray);
+fillCell("after", afterArray, "td");
+</script>
+</html>

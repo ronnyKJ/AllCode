@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" creationComplete="init()">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.charts.HitData;
+			import mx.charts.series.items.PieSeriesItem;
+			import mx.collections.ArrayCollection;
+			import mx.styles.StyleManager;
+			import mx.controls.ToolTip;
+				
+			[Bindable]public var data:ArrayCollection = new ArrayCollection([
+				{col1:"100", col2:"200", col3:"1A"},
+				{col1:"200", col2:"200", col3:"2B"},
+				{col1:"300", col2:"200", col3:"3C"},
+				{col1:"400", col2:"200", col3:"4D"}
+			]);
+			private function init():void
+			{
+//				var sm:StyleManager = new StyleManager();
+//				sm.getStyleDeclaration("mx.charts.HitDatap").setStyle("fontSize","20");
+			}
+			
+			private function pieChart_dataTipFunction(item:HitData):String
+			{
+				var pSI:PieSeriesItem = item.chartItem as PieSeriesItem;
+				return "<i>454456465465</i>";
+			}
+			private  var a:int = 0;
+			private  function dataTipFun(item:Object):String
+			{
+//				var dgc:DataGridColumn = item as DataGridColumn;
+//				var df:String = dgc.dataField;
+//				return item[df];
+				a++;
+				return "12121212";
+			}  
+		]]>
+	</fx:Script>
+
+	<mx:DataGrid x="3" y="260" dataProvider="{data}" toolTip="ToolTip">	
+		<mx:columns>
+			<mx:DataGridColumn headerText="列 1" dataField="col1" showDataTips="true" dataTipFunction="dataTipFun"/>
+			<mx:DataGridColumn headerText="列 2" dataField="col2" showDataTips="true" dataTipFunction="dataTipFun"/>
+			<mx:DataGridColumn headerText="列 3" dataField="col3" showDataTips="true" dataTipFunction="dataTipFun"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<mx:PieChart id="pieChart"
+				 dataProvider="{data}"
+				 dataTipFunction="{pieChart_dataTipFunction}"
+				 height="250"
+				 width="250"
+				 showDataTips="true">
+		<mx:series>
+			<mx:PieSeries id="pieSeries" field="col1" />
+		</mx:series>
+	</mx:PieChart>
+</s:Application>

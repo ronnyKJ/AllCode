@@ -1,0 +1,86 @@
+﻿<html>
+<head><title>txt</title></head>
+<body>
+<canvas id='map' width='1000' height='800' style='background: #DDD;'></canvas>
+</body>
+<script>
+var m =document.getElementById('map');
+var t = m.getContext('2d');
+var str = 'TEXTasdasasfffs';
+var x = 400, y = 400;
+t.fillStyle = 'rgba(100, 100, 0, 0.4)';
+
+function drawText(fontHeight, x, y, angle)// 以x, y为中心写文本
+{
+	t.save();
+	t.font = fontHeight+"pt Arial";
+	t.fillStyle = '#F00';
+	t.strokeStyle = '#0F0';
+	t.lineWidth = 2;
+	t.textAlign = 'center';
+	if(angle)
+	{
+		t.translate(x, y);
+		t.rotate(angle);
+		x=0, y=0;
+	}
+	//t.strokeText(str, x, y+fontHeight/2, 1000);
+	t.fillText(str, x, y+fontHeight/2, 1000);
+	//mark center
+	t.fillStyle = '#00F';
+	t.arc(x, y, 3, 0, 360, true);
+	t.fill();	
+	t.restore();
+}
+
+t.fillRect(600, 600, 200, 100);
+t.save();
+t.scale(0.5, 0.5);
+drawText(12, 700, 650, 0.2);
+t.restore();
+
+//*****************求弧度, 并且将弧度限制在 >= -90 和 <= 90 之间**********************
+var x1 = 95, y1 = 80;
+var x2 = 120, y2 = 40;
+var x3 = 30, y3 = 160;
+var x4 = 150, y4 = 160;
+
+var x5 = 20, y5 = 100;
+var x6 = 100, y6 = 40;
+var x7 = 130, y7 = 100;
+var x8 = 100, y8 = 160;
+
+function isInRange(val)
+{
+	return (val >= (-90/180*Math.PI)) && (val <= (90/180*Math.PI));
+}
+
+function getAngle(x, y)
+{
+	var x0 = 100, y0 = 100;
+	var arctan = (y-y0)/(x-x0);
+	return Math.atan(arctan);
+}
+
+a1 = getAngle(x1, y1);
+console.log(isInRange(a1));
+a2 = getAngle(x2, y2);
+console.log(isInRange(a2));
+a3 = getAngle(x3, y3);
+console.log(isInRange(a3));
+a4 = getAngle(x4, y4);
+console.log(isInRange(a4));
+
+a5 = getAngle(x5, y5);
+console.log(isInRange(a5));
+a6 = getAngle(x6, y6);
+console.log(isInRange(a6));
+a7 = getAngle(x7, y7);
+console.log(isInRange(a7));
+a8 = getAngle(x8, y8);
+console.log(isInRange(a8));
+
+t.fillRect(200, 200, 500, 300);
+drawText(30, 200+500/2, 200+300/2, a1);
+</script>
+</html>

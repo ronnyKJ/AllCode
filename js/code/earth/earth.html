@@ -1,0 +1,118 @@
+﻿<html>
+<head><title></title>
+<style>
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	background: #000;
+}
+
+#core
+{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	margin: 0 auto;
+	/*background: #666;*/
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: ro 40s infinite ease-in-out;
+	-webkit-animation-direction: alternate;
+}
+
+@-webkit-keyframes ro {
+	100%{-webkit-transform: rotateX(360deg) rotateY(-360deg);}
+}
+
+p
+{
+	position: absolute;
+	background: rgba(0, 255, 0, 0.5) url(earth.gif);
+	width: 20px;
+	height: 20px;
+	top: 0;
+	left: 0;
+}
+
+#glow
+{
+	background: rgba(255, 255, 255, 1);
+	width: 200px;
+	height: 200px;
+	margin: 240px auto -110px;
+	border-radius: 100px;
+	box-shadow: 0 0 10px 0px #DDD;
+}
+
+#mask
+{
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: -110px auto;
+	border-radius: 101px;
+	box-shadow: 0 0 150px 0px #000 inset;
+}
+
+#des
+{
+	font-family: Candara, Arial;
+	color: #FFF;
+	margin: 160px auto 100px;
+	width: 300px;
+	text-indent: 2em;
+}
+
+#right
+{
+	font-family: Candara, Arial;
+	text-align: center;
+	color: #DDD;
+	font-size: 10px;
+}
+</style>
+</head>
+<body>
+<div id="glow"></div>
+<div id="core"></div>
+<div id="mask"></div>
+<div id="des">For mercy, taking the first step to stay blue, care for the environment is everyone's responsibility.</div>
+<div id="right">-- By Ronny 2011 --</div>
+</body>
+<script type="text/javascript">
+d=document;
+_=function(id)
+{
+	return d.getElementById(id);
+}
+var core = _("core");
+var m = 31, n = 17;
+var p;
+for(var i=0; i<m; i++)
+{
+	var box = d.createElement("p");
+	box.style.webkitTransform = "rotateY("+(360/m*i)+"deg)";
+	box.style.webkitTransformStyle = "preserve-3d";
+	//box.style.background = "none";
+	//box.style.left = i*20;
+	core.appendChild(box);
+	for(var j=0; j<n; j++)
+	{
+		p = d.createElement("p");
+		p.style.webkitTransform = "rotateX("+(90-180/n*j)+"deg) translateZ("+100+"px)";
+		p.style.backgroundPosition = (-i*20)+"px "+(-j*20)+"px";
+		//p.style.top = j*20;
+		box.appendChild(p);
+	}
+	
+	p = d.createElement("p");
+	p.style.webkitTransform = "rotateX("+(90-180/n*j)+"deg) translateZ("+100+"px)";
+	p.style.backgroundColor = "#0e0e90";
+	box.appendChild(p);
+}
+</script>
+</html>

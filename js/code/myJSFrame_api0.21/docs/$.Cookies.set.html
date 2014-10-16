@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Cookies.set</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$.Cookies.set(<em>name</em>,<em>value</em>[,<em>expires</em>[,<em>path</em>[,<em>domain</em>[,<em>secure</em>]]]])</h1>
+<p class="info">
+设置指定名称的 Cookie 。
+</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>name</em></dt>
+		<dd>必选项。指定 Cookie 名称。</dd>
+		<dt><em>value</em></dt>
+		<dd>必选项。指定 Cookie 的值。</dd>
+		<dt><em>expires</em></dt>
+		<dd>可选项。指定 Cookie 的存活时间。如果为空，存活时间为当前会话结束的时间。类型：大于零的数字，单位：天。</dd>
+		<dt><em>path</em></dt>
+		<dd>可选项。指定 Cookie 生效的路径，子路径能访问父路径的 Cookie 。</dd>
+		<dt><em>domain</em></dt>
+		<dd>可选项。指定 Cookie 生效的站点域。父域的 Cookie 能够被子域访问。</dd>
+		<dt><em>secure</em></dt>
+		<dd>可选项。指定 Cookie 是否被加密传输。值为“secure”或为空。</dd>
+		
+	</dl>
+<h2>返回值</h2>
+	<p class="p">null 。</p>	
+    <h2>描述</h2>
+<p class="p">该方法是通过设置 document.cookie 的值实现 set 方法。</p>
+    <h2>示例</h2>
+	<p class="code">&lt;script type=&quot;text/javascript&quot; &gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	<span class="core">$.Cookies.set(&quot;userInfo&quot;,&quot;acai|26|male&quot;,7);</span>&nbsp; <span class="comment">//Cookie 名称为 userInfo，值为 acai|26|male，存活期 7 天。 </span><br />
+    &lt;/script&gt; </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

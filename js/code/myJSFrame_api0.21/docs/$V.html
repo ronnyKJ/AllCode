@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$V</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$V(<em>elemORid</em>)</h1>
+<p class="info">&nbsp;取控件或元素的值。<em> </em></p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>elemORid</em></dt>
+		<dd>文档元素或元素的ID。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">文档元素的内部代码或控件的值（innerHTML 或 value）。</p>	
+    <h2>描述</h2>
+	<p class="p">该方法只读。用于便捷地取到 $(&quot;id&quot;).value 或 $(&quot;id&quot;).innerHTML 。 </p>
+    <h2>示例</h2>
+<p class="code">&lt;div id=&quot;abc&quot;&gt;info&lt;/div&gt;<br />
+  &lt;input type=&quot;text&quot; id=&quot;name&quot; value=&quot;acai&quot; /&gt;<br />
+  &lt;script type=&quot;text/javascript&quot;&gt;<span class="comment"></span> <br />
+  alert( $V(&quot;abc&quot;) ) <span class="comment">//info</span> <br />
+  alert( $V(&quot;name&quot;) ) <span class="comment">//acai</span> <br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Element.show</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$(<em>Element</em>).show()</h1>
+<p class="info">
+显示指定的页面元素。
+</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>Element</em></dt>
+		<dd>必选项。页面元素ID(字符串型)或者是文档节点(对象)</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">元素的引用</p><h2>描述</h2>
+	<p class="p">设置指定元素的<strong>内联</strong>样式 display 为空值，并返回元素的引用。注意，该方法只能显示内联样式已设为 display:none 的元素。如果 display:none 存在于外联或外嵌样式表，则该方法的关键语句 display="" 无效，因为 display 等于空相当于什么也没执行。</p>	
+	<h2>例子</h2>
+	<p class="code">&lt;div id=&quot;box&quot; style=&quot;<span class="core">display:none</span>&quot; &gt;内容......&lt;/div&gt;<br />
+&lt;input type=&quot;button&quot; value=&quot;显示&quot; onclick=&quot;<span class="core">$('box').hide()</span>&quot; /&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

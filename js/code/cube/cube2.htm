@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+<title>cube</title>
+<style>
+.container {
+  width: 200px;
+  height: 200px;
+  margin:100px auto;
+  -webkit-perspective: 1000;
+}
+
+#cube {
+  width: 100%;
+  height: 100%;
+  line-height:200px;
+  font-size:100px;
+  color:#fff;
+  text-align:center;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation:cube 8s infinite linear;/*动画名为cube，周期8秒，次数无数，线性*/
+}
+@-webkit-keyframes cube{
+	50%{-webkit-transform:rotateX(0deg) rotateY(360deg);}/*绕Y轴旋转360度*/
+	100%{-webkit-transform:rotateX(360deg) rotateY(360deg);}/*绕X轴旋转360度*/
+}
+
+#cube p {
+  width: 196px;
+  height: 196px;
+  display: block;
+  position: absolute;
+  border: 2px solid black;
+}
+
+#cube .front  { -webkit-transform: rotateY(   0deg ) translateZ( 100px ); background:rgba(255,0,0,0.4) }
+#cube .back   { -webkit-transform: rotateX( 180deg ) translateZ( 100px ); background:rgba(0,255,0,0.4)}
+#cube .right  { -webkit-transform: rotateY(  90deg ) translateZ( 100px ); background:rgba(0,0,255,0.4)}
+#cube .left   { -webkit-transform: rotateY( -90deg ) translateZ( 100px ); background:rgba(255,255,0,0.4)}
+#cube .top    { -webkit-transform: rotateX(  90deg ) translateZ( 100px ); background:rgba(0,255,255,0.4)}
+#cube .bottom { -webkit-transform: rotateX( -90deg ) translateZ( 100px ); background:rgba(255,0,255,0.4)}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div id="cube">
+    <p class="front">1</p>
+    <p class="back">2</p>
+    <p class="right">3</p>
+    <p class="left">4</p>
+    <p class="top">5</p>
+    <p class="bottom">6</p>
+  </div>
+</div>
+
+
+</body></html>

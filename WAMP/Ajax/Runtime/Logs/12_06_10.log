@@ -1,0 +1,2 @@
+[ 2012-06-10T11:49:39+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:1.448160s ]
+[ 2012-06-10T11:49:39+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.001094s ]

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Library</title>
+<link rel='stylesheet' type='text/css' href='__ROOT__/css/style.css'>
+</head>
+<body>
+<h1>Books borrowed by ID {$id}:</h1>
+<if condition="count($booksList) eq 0">
+No books...<br><a href="__URL__/main">Go back</a>
+<else/>
+<table class="tbl">
+<tr><th>ID</th><th>Title</th></tr>
+<volist name="booksList" id="book">
+<tr><td>{$book.id}</td><td>{$book.booktitle}</td></tr>
+</volist>
+</table>
+<br><a href="__URL__/main">Go back</a>
+</if>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<html>
+<head><title>Sort</title>
+<style>
+.grid
+{
+	width: 20px;
+	margin: 0 4px;
+}
+
+.mark
+{
+	border-bottom: 1px #F00 solid;
+}
+</style>
+</head>
+<body>
+Origin:<span id="origin"></span><br>
+Sorted:<span id="sorted"></span>
+</body>
+<script type="text/javascript">
+var _ = function(id)
+{
+	return document.getElementById(id);
+}
+
+var arr = [1,6,3,9,2,10,45,4,2];
+var seq = [1,2,3,4,5,6,7,8,9];
+
+var mark = function()
+{
+	var l = arguments.length, i = 0;
+	var grids = _("sorted").getElementsByClassName("grid");
+	for(; i<l; i++)
+	{
+		grids[arguments[i]].className += " mark";
+	}
+}
+
+var next = function(arr)
+{
+	var i = 1, l = arr.length, tmp = arr[0];
+	/*
+	while(i<=l)
+	{
+		arr[i-1] = arr[i];
+		i++;
+	}
+	*/
+	_("sorted").innerHTML = "<span class='grid'>"+seq.join("</span><span class='grid'>")+"</span>";
+	mark(1, 0);
+	var c = function(k)
+	{
+		if(k<l)
+		{
+		
+				arr[k-1] = arr[k];
+				mark(k-1, k);
+				_("sorted").innerHTML = "<span class='grid'>"+seq.join("</span><span class='grid'>")+"</span>";
+
+			setTimeout(function(){
+				k++;
+				c(k);
+			}, 1000);
+		}
+		else
+		{
+			arr[l-1] = tmp;
+			_("sorted").innerHTML = "<span class='grid'>"+seq.join("</span><span class='grid'>")+"</span>";
+			//mark(k-1, 0);
+		}
+	}
+	//c(i);
+	setTimeout(function(){c(i)}, 1000);
+}
+
+//插入排序
+var Dir_Insert = function(arr)  //直接插入排序
+{
+    var j,t,N=arr.length;
+    for(var i=1;i<N;i++)
+    {
+        t=arr[i];
+        j=i-1;
+        while(arr[j]>t)
+        {
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=t;
+    }
+}
+
+//显示
+//_("origin").innerText = arr;
+//Dir_Insert(arr);
+//_("sorted").innerText = arr;
+_("origin").innerText = seq.join(" ");
+next(seq);
+</script>
+</html>

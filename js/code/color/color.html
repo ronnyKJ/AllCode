@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CLIP实现色彩渐变字体</title>
+<style type="text/css">
+body{font:12px/1.5 arial}
+h3{padding:10px;margin:0;background-color:#c00;border:1px dashed #fff;color:#fff;font:16px/1.5 arial;}
+.box{position:relative;background-color:#fff;width:auto;margin:0 auto;padding:0 30px;font:700 20px/1.5 "黑体",arial;border:1px dashed #f60;height:30px;margin-top:8px;}
+.box a{position:absolute;font-style:normal;white-space:nowrap;}
+.f999{color:#999;}
+a:link{text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:visited{text-decoration:none;}
+address{background-color:#f1f1f1;border:1px dashed #ddd;padding:10px;font-style:normal;color:#999;}
+address a,address a:visited{color:#c00;}
+</style>
+</head>
+
+<body>
+<div style="width:400px;margin:0 auto;background-color:#FFFFCC">
+<h3><strong>CSS多彩渐变字</strong></h3>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="10" colspan="2" align="center"></td>
+    </tr>
+  <tr>
+    <td width="19%" height="30" align="right">文字：</td>
+    <td width="81%"><input name="text" type="text" id="ctext" size="30" maxlength="16" value="请在此输入您需要生成渐变色的文字" onkeyup="setDiv()" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">R值：</td>
+    <td><select name="rvalue" id="rvalue"></select>
+    <span class="f999">初始化RGB颜色中的R值</span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">G值：</td>
+    <td><select name="gvalue" id="gvalue"></select>
+      <span class="f999">初始化RGB颜色中的G值</span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">B值：</td>
+    <td><select name="bvalue" id="bvalue"></select>
+      <span class="f999">初始化RGB颜色中的B值</span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">渐变方式：</td>
+    <td><select name="ctype" id="ctype"><option value="0">灰度渐变</option><option value="1" selected="selected">变化R值</option><option value="2">变化G值</option><option value="3">变化B值</option></select>
+    <span class="f999">相应的数值会强制在0~255之间变化</span></td>
+  </tr>
+</table>
+
+<div class="box" id="box"></div>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="javascript:createData()">渐变着色</button>
+<br />
+&nbsp;
+<address>
+Designed by Silence,转载请注明出处
+<br />
+<a href="http://www.silentash.com?id=109" title="文章地址">http://www.silentash.com/?id=109</a>
+</address>
+</div>
+<script type="text/javascript">
+var rs = document.getElementById("rvalue");
+var gs = document.getElementById("gvalue");
+var bs = document.getElementById("bvalue");
+function init(){
+	var str;
+	for(var i=0;i<=255;i++){
+		var opr = document.createElement("option");
+		var opg = document.createElement("option");
+		var opb = document.createElement("option");
+		opr.innerHTML = i;
+		opg.innerHTML = i;
+		opb.innerHTML = i;
+		switch(i){
+			case 100:opb.selected="selected";break;
+			case 200:opg.selected="selected";break;
+		}		
+		gs.appendChild(opg);
+		rs.appendChild(opr);
+		bs.appendChild(opb);
+	}
+	setDiv();
+}
+function setDiv(){
+	var font = document.getElementById("ctext").value;
+	var dObj = document.getElementById("box");
+	dObj.innerHTML=font;
+}
+function createData(){
+	var font = document.getElementById("ctext").value;
+	var r = rs.options[rs.selectedIndex].text;
+	var g = gs.options[gs.selectedIndex].text;
+	var b = bs.options[bs.selectedIndex].text;
+	var type = document.getElementById("ctype").value;
+	if(font==""||font=="undefined"){
+		font="文字不能为空，使用默认文字";
+		document.getElementById("ctext").value = font;
+	}
+	colorful('box',font,r,g,b,type);
+}
+function colorful(obj,font,r,g,b,type){
+	var boxObj;
+	if(typeof(obj)=="string"||typeof(obj)=="number"){
+		boxObj =  document.getElementById(obj);
+	}else{
+		boxObj = obj;
+	}
+	boxObj.innerHTML="<a href='#'>"+font+"</a>";
+	var num = boxObj.getElementsByTagName("a")[0].scrollWidth;
+	boxObj.innerHTML="";
+	for(var i=0;i<=num;i++){
+		var j=i+1;
+		var c=Math.round(255/num*i);
+		switch(Number(type)){
+			case 0:r=c;g=c;b=c;break;
+			case 1:r=c;break;
+			case 2:g=c;break;
+			case 3:b=c;break;
+		}
+		var iObj = document.createElement("A");
+		iObj.innerHTML=font;
+		iObj.style.clip="rect(auto "+j+"px auto "+i+"px)";
+		iObj.style.color="rgb("+r+","+g+","+b+")";
+		iObj.href="#";
+		boxObj.appendChild(iObj);
+	}
+}
+init();
+</script>
+</body>
+</html>

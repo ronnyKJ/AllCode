@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Workers example: Multiviewer</title>
+<script>
+var wins=[], n=0;
+var width=400, height=300;
+var topOffset = 100;
+var positions=
+[
+	"left=0 top="+topOffset,
+	"left="+width+" top="+topOffset,
+	"left="+width*2+" top="+topOffset,
+	"left=0 top="+height+topOffset,
+	"left="+width+" top="+height+topOffset,
+	"left="+width*2+" top="+height+topOffset,
+];
+
+function openViewer()
+{
+	var tmp = window.open ('chat.html',"_blank",positions[n]+" toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width="+width+", height="+height);
+	wins.push(tmp);
+	for(var w in wins)
+	{
+		wins[w].focus();
+	}
+	n++;
+	if(n>=6) n=0;
+}
+</script>
+</head>
+<body>
+	<p><button type=button onclick="openViewer()">Open a new chat window</button></p>
+	<p>Each user has a new window. You can have as many users as you like, they all view the same content.</p>
+</body>
+</html>

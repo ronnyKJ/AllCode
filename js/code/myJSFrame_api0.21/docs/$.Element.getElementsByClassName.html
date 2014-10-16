@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Element.getElementsByClassName</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+
+<h1>$(<em>Element</em>).getElementsByClassName(<em>className</em>)</h1>
+<p class="info">
+按样式类名查找元素。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>Element</em></dt>
+		<dd>必选项。页面元素ID(字符串型)或者是文档节点(对象)。</dd>
+		<dt><em>className</em></dt>
+		<dd>必选项。指定查找的 className。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">所有带有指定 className 的元素数组。</p>	
+    <h2>描述</h2>
+	<p class="p">在<em>Element</em>节点下查找带有指定className的元素，<em>Element</em>可以是当前文档 document。该方法是利用 getElementsByTagName(&quot;*&quot;) 实现的，由于 * 通配符匹配范围比较大，因此 getElementsByClassName 的查找速度与 getElementById 相比还有一定的距离。在循环中尽量避免使用此方法。</p>	
+<h2>示例</h2>
+<p class="code">&lt;div id=&quot;box&quot;&gt;<br />
+  &nbsp;&nbsp; &lt;h1 class=&quot;title&quot;&gt;标题&lt;/h1&gt; <br />
+  &nbsp;&nbsp; &lt;ul&gt;<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;文字&lt;/li&gt;<br />   
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li class=&quot;title&quot;&gt;张三&lt;/li&gt;<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li class=&quot;title&quot;&gt;李四&lt;/li&gt;<br />
+   &nbsp;&nbsp; &lt;/ul&gt;
+  <br />
+  &lt;/div&gt;<br />
+&lt;input type=&quot;button&quot; value=&quot;获取title&quot; onclick=&quot;<span class="core">alert( $('box').getElementsByClassName('title').length )</span>&quot; /&gt; <span class="comment">// 3 (标题、张三、李四)</span></p>
+	
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

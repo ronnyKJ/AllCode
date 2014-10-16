@@ -1,0 +1,44 @@
+﻿<!doctype html> 
+<html> 
+	<head> 
+		<title>JS1k, 1k demo submission [22]</title> 
+		<meta charset="utf-8" /> 
+	</head> 
+	<body> 
+		<canvas id="c"></canvas>
+		<!--<canvas id="y"></canvas>-->
+<script type="text/javascript">
+
+var x=0,y=0,dx=2,dy=3,context2D; // 小球从（0,0）开始移动，横向步长为 2，纵向步长为 3
+
+function draw(){
+
+context2D.clearRect(0, 0, canvas.width, canvas.height); // 清除整个 canvas 画面
+
+drawCircle(x, y); // 使用自定义的画圆方法，在当前（x,y）坐标出画一个圆
+
+// 判断边界值，调整 dx/dy 以改变 x/y 坐标变化方向。
+
+if (x + dx > canvas.width || x + dx < 0) dx = -dx;
+
+if (y + dy > canvas.height || y + dy < 0) dy = -dy;
+
+x += dx;
+
+y += dy;
+
+}
+
+window.onload = function (){
+
+var canvas = document.getElementById('c');
+
+context2D = canvas.getContext('2d');
+
+setInterval(draw, 20); // 设置绘图周期为 20 毫秒
+
+}
+
+</script>
+	</body> 
+</html>

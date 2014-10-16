@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.0.2">
+ <bounds minlat="30.5295000" minlon="114.3550000" maxlat="30.5300000" maxlon="114.3555000"/>
+ <node id="1201323321" lat="30.5306883" lon="114.3558528" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:27Z"/>
+ <node id="1201323352" lat="30.5293992" lon="114.3559762" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:29Z"/>
+ <node id="1201323325" lat="30.5307207" lon="114.3556221" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:27Z"/>
+ <node id="1201323389" lat="30.5294038" lon="114.3554129" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:30Z"/>
+ <node id="1201323385" lat="30.5293345" lon="114.3555202" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:30Z"/>
+ <node id="1201323452" lat="30.5295424" lon="114.3553324" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:32Z"/>
+ <node id="1201323315" lat="30.5305035" lon="114.3553324" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:27Z"/>
+ <node id="1201323320" lat="30.5306098" lon="114.3559654" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:27Z"/>
+ <node id="1201323317" lat="30.5307253" lon="114.3557348" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:27Z"/>
+ <node id="1201323318" lat="30.5293067" lon="114.3556114" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:27Z"/>
+ <node id="1201323329" lat="30.5306745" lon="114.3554934" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:28Z"/>
+ <node id="1201323299" lat="30.5304573" lon="114.3560620" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:26Z"/>
+ <node id="1201323351" lat="30.5295147" lon="114.3560459" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:28Z"/>
+ <node id="1201323328" lat="30.5292975" lon="114.3557294" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:28Z"/>
+ <node id="1201323354" lat="30.5293345" lon="114.3558796" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:29Z"/>
+ <node id="1201323363" lat="30.5306098" lon="114.3554075" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:29Z"/>
+ <node id="1201323426" lat="30.5305356" lon="114.3560301" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:31Z"/>
+ <way id="104108009" user="陽光遐想" uid="414582" visible="true" version="1" changeset="7553345" timestamp="2011-03-14T07:46:34Z">
+  <nd ref="1201323426"/>
+  <nd ref="1201323320"/>
+  <nd ref="1201323321"/>
+  <nd ref="1201323317"/>
+  <nd ref="1201323325"/>
+  <nd ref="1201323329"/>
+  <nd ref="1201323363"/>
+  <nd ref="1201323315"/>
+  <nd ref="1201323452"/>
+  <nd ref="1201323389"/>
+  <nd ref="1201323385"/>
+  <nd ref="1201323318"/>
+  <nd ref="1201323328"/>
+  <nd ref="1201323354"/>
+  <nd ref="1201323352"/>
+  <nd ref="1201323351"/>
+  <nd ref="1201323299"/>
+  <nd ref="1201323426"/>
+  <tag k="leisure" v="pitch"/>
+ </way>
+</osm>

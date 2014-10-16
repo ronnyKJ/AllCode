@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Statics Demo</title>
+<link rel='stylesheet' type='text/css' href='../css/pc.css'>
+<script type="text/javascript" src="../js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="../js/widget/statics.js"></script>
+<script type="text/javascript">
+$(function(){
+	var axis =[["一月",4,1,2,5], ["二月",1,1,1,9], ["三月",7,2,5,4], ["四月",5,3,4,2], ["五月",8,1,9,5], ["六月",2,5,3,3]];
+	$("#s1").schema({
+			type : 'histo',
+			event : axis,
+			items : ["足球","篮球","排球","冰球"],
+			diagramWidth : 2,
+			histoWidth : 5,
+			groupWidth : 20,
+			histoColor : ['#be1e2d', '#64669c', '#94d6ec', '#ee8310'],
+			canvasBgColor : 'transparent'
+		});
+		
+	$("#s2").schema({
+			type : 'diagram',
+			event : axis,
+			items : ["足球","篮球","排球","冰球"],
+			diagramWidth : 2,
+			histoWidth : 5,
+			groupWidth : 20,
+			histoColor : ['#be1e2d', '#64669c', '#94d6ec', '#ee8310'],
+			canvasBgColor : 'transparent'
+		});
+})
+</script>
+</head>
+<body>
+<div id="header">
+	<img id="logo" alt="DayPics" src="../img/labs-logo-text.png" />
+	<span id="subheading" class="second_font">Welcome to my laboratory.</span>
+</div>
+<h1 style="text-align: center;">Histo mode: </h1>
+<div id="s1" style="width: 600px; margin: 0 auto; margin-bottom: 80px;"></div>
+<h1 style="text-align: center;">Diagram mode: </h1>
+<div id="s2" style="width: 600px; margin: 0 auto; margin-bottom: 80px;"></div>
+<div id="bottom" class="second_font">-- By Ronaldinho 2011 --</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+<head><title>scale</title></head>
+<body>
+<canvas id='map' width='1000' height='800' style='background: #DDD;'></canvas>
+</body>
+<script>
+var m =document.getElementById('map');
+var t = m.getContext('2d');
+
+// scale -> translate
+t.save();
+t.scale(2,2);
+t.translate(100, 100);
+t.beginPath();
+t.fillStyle = '#F00';
+t.arc(0, 0, 5, 0, 360, true);
+t.closePath();
+t.fill();
+t.restore();
+
+// translate -> scale
+t.save();
+t.translate(100, 100);
+t.scale(2,2);
+t.beginPath();
+t.fillStyle = '#0F0';
+t.arc(0, 0, 5, 0, 360, true);
+t.closePath();
+t.fill();
+t.restore();
+</script>
+</html>

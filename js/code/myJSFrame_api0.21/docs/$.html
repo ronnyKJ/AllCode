@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$(<em>idORelemORselectors</em>)</h1>
+<p class="info">&nbsp;$ 函数是 myJSFrame 的最为核心的函数之一。由它实现了 DOM 的扩展，并支持强大的 <a href="$.cssselectors.html" target="conSrc">CSS 选择符</a>。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>idORelemORselectors</em></dt>
+		<dd>必选项。可以是元素 ID 或者 DOM 元素，或者是 CSS 选择符。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p"><table width="416" height="66" border="1" cellpadding="0" cellspacing="1">
+      <tr>
+        <th align="center" bgcolor="#eeeeee">参数</th>
+        <th align="center" bgcolor="#eeeeee">元素 ID</th>
+        <th align="center" bgcolor="#eeeeee">DOM 元素</th>
+        <th align="center" bgcolor="#eeeeee">CSS 选择符</th>
+      </tr>
+      <tr>
+        <th align="center" bgcolor="#eeeeee">返回值</th>
+        <td align="center">DOM 元素或 null</td>
+        <td align="center">DOM 元素</td>
+        <td align="center">DOM 元素组成的数组</td>
+      </tr>
+    </table>
+	</p>	
+    <h2>描述</h2>
+	<p class="p">该方法有两个作用：1、查找元素；2、让元素继承方法。 $ 函数实现继承方法的核心是使用 apply 方法把方法库(myJSFrame 中的 Element 方法集合)里的所有方法都应用到查找到的元素中去。由于把方法库的方法直接赋给元素，方法在元素属性里缓存，第二次用 $ 函数引用该元素时，$ 函数将忽略继承的步骤，可以直接使用缓存中的方法。</p>
+<h2>示例</h2>
+<p class="code">&lt;ul id=&quot;list&quot;&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href=&quot;#&quot;&gt;奥林匹克运动会&lt;/a&gt;&lt;/li&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href=&quot;#&quot;&gt;同一个世界，同一个梦想&lt;/a&gt;&lt;/li&gt;<br />
+  &lt;/ul&gt;<br />
+  &lt;script type=&quot;text/javascript&quot;&gt;<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(&quot;list&quot;).addClassName(&quot;abc&quot;);&nbsp; <span class="comment">//给 list 增加 abc 类名</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(&quot;#list li&quot;)[0].hide();&nbsp; <span class="comment">//隐藏 list 下第一个 li 元素。</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(document.body);&nbsp; <span class="comment">//让body元素继承 Element 的方法集合</span> <br />
+&lt;/script&gt;</p>
+
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

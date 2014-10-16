@@ -1,0 +1,88 @@
+﻿<html>
+<head><title></title>
+</head>
+<body></body>
+<script type="text/javascript">
+function ajax(para)
+{
+	var request = null;
+	if(window.XMLHttpRequest)
+	{
+		request = new XMLHttpRequest();
+	}
+	else
+	{
+		request = new ActiveXObject("Microsoft.XMLHttp");
+	}
+	
+	if(request)
+	{
+		request.open(para.type, para.url, para.asyn||false);
+		if(para.type == "POST")
+		{
+			request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");//post提交，这个语句一定要有,否则客户端就有可能出现乱码的情况
+		}
+		request.send(para.data);
+		setTimeout(function(){//设置超时
+			if(!(request.readyState == 4 && request.status == 200))
+			{
+				para.fail(request.readyState, request.status);
+			}
+		}, para.timeout||500);
+		request.onreadystatechange = function(){
+			if(request.readyState == 4 && request.status == 200)
+			{
+				para.callback(request.responseText);
+			}
+		}
+	}
+}
+
+//以GET方式提交，参数写在url后面
+ajax({
+	type: "GET",
+	url: "ajax.php?a=this_is_GET",
+	asyn: true,
+	data: null,
+	callback: function(msg)
+	{
+		alert(msg);
+	},
+	fail:function(readyState, status)
+	{
+		alert(readyState + "  " + status);
+	}
+});
+
+
+//以POST方式提交，参数写在send参数
+ajax({
+	type: "POST",
+	url: "ajax.php",
+	asyn: true,
+	data: "b=no&a=this_is_POST",
+	callback: function(msg)
+	{
+		alert(msg);
+	}
+});
+
+//找不到页面404
+ajax({
+	type: "GET",
+	url: "__.php",
+	asyn: true,
+	data: null,
+	callback: function(msg)
+	{
+		alert(msg);
+	},
+	timeout: 3000,
+	fail:function(readyState, status)
+	{
+		alert(readyState + "  " + status);
+	}
+});
+
+</script>
+</html>

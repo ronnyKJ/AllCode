@@ -1,0 +1,47 @@
+﻿<html>
+<head><title>Test-1</title>
+<script type="text/javascript">
+var slice = Array.prototype.slice;
+function bind(f, obj, var_args)
+{
+	var a = slice.call(arguments, 2);
+	return function()
+	{
+		var b = a.concat(slice.call(arguments));
+		return f.apply(obj, b);
+	};
+}
+
+function test(obj, func)
+{
+	var a = slice.call(arguments, 2);
+	func.apply(obj, a);
+}
+
+var orgin = {};
+orgin.name = "Tom";
+orgin.func = function(s)
+{
+	alert(s+":"+this.name)
+};
+
+//test(orgin, orgin.func, 's1');
+
+var add = function(a, b)
+{
+	alert(a+b);
+}
+
+//test({},add,5,6);//带任意参数的回调函数
+
+var proxy = function(functionName, args)
+{
+	var a = slice.call(arguments, 1);
+	this[functionName].apply({}, a);
+}
+
+proxy('add', 4,5);
+</script>
+</head>
+<body></body>
+</html>

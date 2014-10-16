@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Player</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"> -->
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+<style>
+.player{
+    position: relative;
+    width : 150px;
+    height: 150px;
+    /*-webkit-box-reflect: below 10px;*/
+}
+
+.player .rect{
+    position: absolute;
+    width : 150px;
+    height: 150px;
+    /*background: #DDD;*/
+}
+
+.player .rect.right{
+    clip: rect(0, 150px, 150px, 75px);
+}
+
+.player .rect.right .round{
+    -webkit-transform: rotate(-180deg);
+}
+
+.player .rect.left{
+    clip: rect(0, 75px, 150px, 0px);
+}
+
+.player .rect.left .round{
+    -webkit-transform: rotate(0deg);
+}
+
+.player .rect .round{
+    /*-webkit-transition-duration: 300ms;*/
+}
+
+.player .rect .round, .player .bottom{
+    position: absolute;
+    width : 134px;
+    height: 134px;
+    border-radius: 1000px;
+    border: #4AAFF3 8px solid;
+    clip: rect(0, 150px, 150px, 75px);
+    /*background: #EEE;*/
+}
+
+.player .bottom{
+    clip: auto;
+    border-color: #EEE;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 50px;
+    line-height: 140px;
+    color: #4AAFF3;
+    text-align: center;
+}
+
+.player .bottom .permil{
+    font-size: 25px;
+}
+
+
+.player .control{
+    position: absolute;
+    left: 45px;
+    top: 43px;
+}
+
+.player .control-pause{
+    width: 60px;
+    height: 60px;
+}
+
+.player .control-pause:before, .player .control-pause:after{
+    position: absolute;
+    top: 0;
+    content: '';
+    width: 10px;
+    height: 60px;
+    background: #4AAFF3;
+    display: block;
+}
+.player .control-pause:before{
+    left: 10px;
+}
+.player .control-pause:after{
+    right: 10px;
+}
+
+.player .control-play{
+    position: relative;
+    /*background: #AAA;*/
+    width: 60px;
+    height: 60px;
+}
+
+.player .control-play:before{
+    position: absolute;
+    left: 16px;
+    content: '';
+    width: 0px;
+    height: 0px;
+    display: block;
+    border-bottom: 30px solid transparent;
+    border-top: 30px solid transparent;
+    border-left: 40px solid #4AAFF3;
+}
+
+/*simple-loader*/
+.simple-loader{
+    position: relative;
+    width : 30px;
+    height: 30px;
+    -webkit-animation: rotate 1s infinite
+}
+
+@-webkit-keyframes rotate{
+    0%{ -webkit-transform: rotate(0deg);}
+    100%{ -webkit-transform: rotate(360deg);}
+}
+
+.simple-loader .rect{
+    position: absolute;
+    width : 30px;
+    height: 30px;
+    /*background: #DDD;*/
+}
+
+.simple-loader .rect.right{
+    clip: rect(0, 30px, 30px, 15px);
+}
+
+.simple-loader .rect.right .round{
+    -webkit-transform: rotate(20deg);
+}
+
+.simple-loader .rect.left{
+    /*clip: rect(0, 15px, 30px, 0px);*/
+}
+
+.simple-loader .rect.left .round{
+    -webkit-transform: rotate(160deg);
+}
+
+.simple-loader .rect .round{
+    /*-webkit-transition-duration: 300ms;*/
+}
+
+.simple-loader .rect .round, .simple-loader .bottom{
+    position: absolute;
+    width : 26px;
+    height: 26px;
+    border-radius: 1000px;
+    border: #4AAFF3 2px solid;
+    clip: rect(0, 30px, 30px, 15px);
+    /*background: #EEE;*/
+}
+
+
+.container{
+    width : 150px;
+    margin : 200px auto;
+}
+
+
+</style>
+</head>
+<body>
+<div class="simple-loader" style="margin:200px auto;">
+    <div class="rect right">
+       <div class="round"></div>
+    </div>
+    <div class="rect left">
+       <div class="round"></div>
+    </div>
+</div>
+<div class="container">
+
+</div>
+<script>
+var Player = (function(argument) {
+    var Player = function(conf){
+        var player = document.createElement('div');
+        player.classList.add('player');
+        player.innerHTML = 
+            '<div class="bottom"></div>'+
+            '<div class="rect right">'+
+                '<div class="round"></div>'+
+            '</div>'+
+            '<div class="rect left">'+
+                '<div class="round"></div>'+
+            '</div>'+
+            '<div class="control control-play"></div>';
+        this.player = player;
+        this.leftRound = player.querySelector('.rect.left .round');
+        this.rightRound = player.querySelector('.rect.right .round');
+        this.control = player.querySelector('.control');
+
+        this.bindAction();
+    };
+
+    Player.prototype = {
+        appendTo : function(container){
+            container.appendChild(this.player);
+        },
+        progress : function(per){
+            if(per>=1) return 1;
+            per>1 && (per = 1);
+            per<0 && (per = 0);
+            var angle = per*360;
+            var rightRotate = Math.max(180-angle, 0);
+            this.rightRound.style.webkitTransform = 'rotate(-'+rightRotate+'deg)';
+            var leftRotate = angle-180;
+            this.leftRound.style.webkitTransform = 'rotate('+(leftRotate>0 ? leftRotate : 0)+'deg)';
+            return per;
+        },
+        pause : function(){
+            this.control.className = 'control control-play';
+            this.onpause && this.onpause();
+        },
+        play : function(){
+            this.control.className = 'control control-pause';
+            this.onplay && this.onplay();
+        },
+        bindAction : function(){
+            var self = this;
+            this.control.addEventListener('touchstart', function(){
+                if(self.control.className.split(' ').indexOf('control-pause') >= 0){
+                    self.pause();
+                }else{
+                    self.play();
+                }
+            });
+        }
+    };
+
+    return Player;
+})();
+
+
+var loader = document.querySelector('.simple-loader');
+// loader.style.marginTop = (window.screen.height-30)/2+'px';
+
+
+var audio = document.createElement("audio");
+audio.src = "http://www.niumowang.org/wp-content/uploads/2012/03/beyond.ogg";
+// console.log(audio.readyState);
+// audio.addEventListener("canplaythrough",function() {audio.readyState
+//     loader.style.display = 'none';
+//     var player = new Player();
+//     player.appendTo(document.querySelectorAll('.container')[0]);
+//     player.onplay = function(){
+//         audio.play();
+//     }
+//     player.onpause = function(){
+//         audio.pause();
+//     }
+//     var timer = setInterval(function(){
+//         var per = player.progress(audio.currentTime/audio.duration);
+//         if(per >= 1) clearInterval(timer);
+//     }, 60);
+//     player.play();
+// }, false);
+
+
+var test = setInterval(function(){
+    if(audio.readyState == 4){
+        loader.style.display = 'none';
+        var player = new Player();
+        player.appendTo(document.querySelectorAll('.container')[0]);
+        player.onplay = function(){
+            audio.play();
+        }
+        player.onpause = function(){
+            audio.pause();
+        }
+        var timer = setInterval(function(){
+            var per = player.progress(audio.currentTime/audio.duration);
+            if(per >= 1) clearInterval(timer);
+        }, 60);
+        player.play();
+
+       clearInterval(test);
+    }
+}, 60);
+</script>
+</body>
+</html>

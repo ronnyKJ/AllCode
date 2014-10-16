@@ -1,0 +1,137 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<link href="map.css" rel="stylesheet" />
+<script type='text/javascript' src="jquery-1.7.2.js"></script>
+<script type='text/javascript' src="geoData.js"></script>
+</head>
+<body>
+	<div id="mapContainer"></div>
+</body>
+<script type="text/javascript">
+var container = $('#mapContainer')[0];
+
+Map = {
+	mapContainer: null,
+	SECTION_WIDTH: 400,
+	sectionsContainer: null,
+	sectionsWithDataIndex: [6,7,8,11,12,13],
+	sections: [],
+	initSectionsContainer: function(mapCon, xc, yc)
+	{
+		var mCon = $(mapCon);
+		var wid = this.SECTION_WIDTH;
+		var div = document.createElement("div");
+		div.className = "sections_container";
+		var divW = wid*xc, divH = wid*yc;
+		div.style.width = divW;
+		div.style.height = divH;
+		var t=(divH-mCon.height())/2, l=(divW-mCon.width())/2;
+		div.style.top = (-t)+"px";
+		div.style.left = (-l)+"px";
+		mCon.append(div);
+		this.sectionsContainer = div;
+	},
+	loadMap: function(mapCon)//mapCon is dom obj
+	{
+		this.mapContainer = mapCon;
+		this.initSectionsContainer(mapCon, 5, 4);
+		this.createSections(20, this.SECTION_WIDTH, this.sectionsContainer);
+	},
+	
+	createSections: function(n, width, container)
+	{
+		var str = [];
+		for(var i=0;i<n;i++)
+		{
+			str.push('<canvas width="'+width+'" height="'+width+'"></canvas>');
+		}
+		
+		$(this.sectionsContainer).html(str.join(''));
+		this.sectios = this.sectionsContainer.children;
+		//load geo data
+		this.loadSectionData(this.sectionsWithDataIndex);
+	},
+	loadSectionData: function(indexs)
+	{
+		var i, ctx, sec, wid=Map.SECTION_WIDTH;
+		for(i in indexs)
+		{
+			sec = this.sectios[indexs[i]];
+			ctx = sec.getContext('2d');
+			ctx.fillStyle = "#3f5671";
+			ctx.fillRect(0,0,wid,wid);
+		}
+	},
+	renderSection: function(ctx)
+	{
+		
+	}
+}
+
+Control = 
+{
+	setControlType: function()
+	{
+		var i;
+		for(i in arguments)
+		{
+			this[arguments[i]](Map.mapContainer);
+		}
+	},
+	enableZoom: function(map)
+	{
+		
+	},
+	enableDrag: function(map)
+	{
+		this.drag(map);
+	},
+	zoom: function()
+	{
+	
+	},
+	zoomTo: function()
+	{
+	
+	},
+	pane: function()
+	{
+	
+	},
+	paneTo: function()
+	{
+	
+	},
+	drag: function(map)
+	{
+		var self = this, isMouseDown=false, qmap=$(map), scs = Map.sectionsContainer.style;
+		var x, y, pX, pY, tmpX=0, tmpY=0;
+		//map.onmouseout = map.onmouseup = function(){
+		map.onmouseup = function(){
+			isMouseDown = false;
+		}
+		map.onmousedown = function(){
+			isMouseDown = true;
+			pX = event.clientX, pY = event.clientY;
+		}
+		map.onmousemove = function(){
+			if(isMouseDown)
+			{
+				x=event.clientX-pX, y=event.clientY-pY;
+				tmpX+=x, tmpY+=y;
+				scs.webkitTransform = 'translate('+tmpX+'px, '+tmpY+'px)';
+				pX=event.clientX, pY=event.clientY;
+				console.log(event.target.tagName);
+			}
+		}
+	},
+	marker: function()
+	{
+	
+	}
+}
+
+Map.loadMap(container);
+Control.setControlType("enableZoom", "enableDrag");
+</script>
+</html>

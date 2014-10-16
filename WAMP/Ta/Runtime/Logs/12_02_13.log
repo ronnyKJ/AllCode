@@ -1,0 +1,53 @@
+[ 2012-02-13T22:21:08+08:00 ] ERR: (ThinkException) 非法操作say
+[ 2012-02-13T22:25:11+08:00 ] ERR: (ThinkException) Unknown database 'ronnytest'
+[ 2012-02-13T23:02:21+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/default/Index/say.html]
+[ 2012-02-13T23:05:55+08:00 ] SQL: SHOW COLUMNS FROM tb_p_ta [ RunTime:0.002497s ]
+[ 2012-02-13T23:05:55+08:00 ] SQL: INSERT INTO `tb_p_ta` (`MY_NAME`,`MY_BIRTHDAY`,`TA_NAME`,`TA_BIRTHDAY`) VALUES ('p','6','o','7') [ RunTime:0.023524s ]
+[ 2012-02-13T23:05:55+08:00 ] SQL: SHOW COLUMNS FROM tb_p_msg [ RunTime:0.002537s ]
+[ 2012-02-13T23:05:55+08:00 ] SQL: INSERT INTO `tb_p_msg` (`RELATION_ID`,`MESSAGE_CONTENT`) VALUES (11,'vvv') [ RunTime:0.030420s ]
+[ 2012-02-13T23:05:55+08:00 ] SQL: SELECT * FROM tb_p_msg WHERE RELATION_ID=11 [ RunTime:0.000591s ]
+[ 2012-02-13T23:05:55+08:00 ] NOTIC: [8] Undefined index:  MESSAGE_CONTENT 3155bb9d0d55d4916c80bd58af8a110a.php 第 16 行.
+[ 2012-02-13T23:06:32+08:00 ] SQL: SHOW COLUMNS FROM tb_p_ta [ RunTime:0.002944s ]
+[ 2012-02-13T23:06:32+08:00 ] SQL: INSERT INTO `tb_p_ta` (`MY_NAME`,`MY_BIRTHDAY`,`TA_NAME`,`TA_BIRTHDAY`) VALUES ('p','6','o','7') [ RunTime:0.038115s ]
+[ 2012-02-13T23:06:32+08:00 ] SQL: SHOW COLUMNS FROM tb_p_msg [ RunTime:0.004067s ]
+[ 2012-02-13T23:06:32+08:00 ] SQL: INSERT INTO `tb_p_msg` (`RELATION_ID`,`MESSAGE_CONTENT`) VALUES (12,'vvv') [ RunTime:0.028414s ]
+[ 2012-02-13T23:06:32+08:00 ] SQL: SELECT * FROM tb_p_msg WHERE RELATION_ID=12 [ RunTime:0.000680s ]
+[ 2012-02-13T23:06:32+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:06:32+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:06:32+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:06:32+08:00 ] NOTIC: [8] Undefined index:  MESSAGE_CONTENT 3155bb9d0d55d4916c80bd58af8a110a.php 第 16 行.
+[ 2012-02-13T23:07:31+08:00 ] SQL: SHOW COLUMNS FROM tb_p_ta [ RunTime:0.002847s ]
+[ 2012-02-13T23:07:31+08:00 ] SQL: INSERT INTO `tb_p_ta` (`MY_NAME`,`MY_BIRTHDAY`,`TA_NAME`,`TA_BIRTHDAY`) VALUES ('p','6','o','7') [ RunTime:0.046679s ]
+[ 2012-02-13T23:07:31+08:00 ] SQL: SHOW COLUMNS FROM tb_p_msg [ RunTime:0.005215s ]
+[ 2012-02-13T23:07:31+08:00 ] SQL: INSERT INTO `tb_p_msg` (`RELATION_ID`,`MESSAGE_CONTENT`) VALUES (13,'vvv') [ RunTime:0.027487s ]
+[ 2012-02-13T23:07:31+08:00 ] SQL: SELECT * FROM tb_p_msg WHERE RELATION_ID=13 [ RunTime:0.000683s ]
+[ 2012-02-13T23:07:31+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:07:31+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:07:31+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:07:31+08:00 ] NOTIC: [8] Undefined variable: t 3155bb9d0d55d4916c80bd58af8a110a.php 第 16 行.
+[ 2012-02-13T23:08:34+08:00 ] SQL: SHOW COLUMNS FROM tb_p_ta [ RunTime:0.003031s ]
+[ 2012-02-13T23:08:34+08:00 ] SQL: INSERT INTO `tb_p_ta` (`MY_NAME`,`MY_BIRTHDAY`,`TA_NAME`,`TA_BIRTHDAY`) VALUES ('po','88','po','99') [ RunTime:0.083271s ]
+[ 2012-02-13T23:08:34+08:00 ] SQL: SHOW COLUMNS FROM tb_p_msg [ RunTime:0.005834s ]
+[ 2012-02-13T23:08:34+08:00 ] SQL: INSERT INTO `tb_p_msg` (`RELATION_ID`,`MESSAGE_CONTENT`) VALUES (14,'bdfbdfbdf') [ RunTime:0.081950s ]
+[ 2012-02-13T23:08:34+08:00 ] SQL: SELECT * FROM tb_p_msg WHERE RELATION_ID=14 [ RunTime:0.000815s ]
+[ 2012-02-13T23:08:34+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:08:34+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:08:34+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:08:34+08:00 ] NOTIC: [8] Undefined variable: t 3155bb9d0d55d4916c80bd58af8a110a.php 第 16 行.
+[ 2012-02-13T23:11:55+08:00 ] SQL: SHOW COLUMNS FROM tb_p_ta [ RunTime:0.002940s ]
+[ 2012-02-13T23:11:56+08:00 ] SQL: INSERT INTO `tb_p_ta` (`MY_NAME`,`MY_BIRTHDAY`,`TA_NAME`,`TA_BIRTHDAY`) VALUES ('vv','2','bb','3') [ RunTime:0.077469s ]
+[ 2012-02-13T23:11:56+08:00 ] SQL: SHOW COLUMNS FROM tb_p_msg [ RunTime:0.004529s ]
+[ 2012-02-13T23:11:56+08:00 ] SQL: INSERT INTO `tb_p_msg` (`RELATION_ID`,`MESSAGE_CONTENT`) VALUES (15,'rfdwf') [ RunTime:0.078756s ]
+[ 2012-02-13T23:11:56+08:00 ] SQL: SELECT * FROM tb_p_msg WHERE RELATION_ID=15 [ RunTime:0.000930s ]
+[ 2012-02-13T23:11:56+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:11:56+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:11:56+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:11:56+08:00 ] NOTIC: [8] Undefined variable: t 3155bb9d0d55d4916c80bd58af8a110a.php 第 16 行.
+[ 2012-02-13T23:12:40+08:00 ] SQL: SHOW COLUMNS FROM tb_p_ta [ RunTime:0.002523s ]
+[ 2012-02-13T23:12:40+08:00 ] SQL: INSERT INTO `tb_p_ta` (`MY_NAME`,`MY_BIRTHDAY`,`TA_NAME`,`TA_BIRTHDAY`) VALUES ('b','3e','b','re') [ RunTime:0.077090s ]
+[ 2012-02-13T23:12:40+08:00 ] SQL: SHOW COLUMNS FROM tb_p_msg [ RunTime:0.003983s ]
+[ 2012-02-13T23:12:40+08:00 ] SQL: INSERT INTO `tb_p_msg` (`RELATION_ID`,`MESSAGE_CONTENT`) VALUES (16,'egfgfd') [ RunTime:0.043018s ]
+[ 2012-02-13T23:12:40+08:00 ] SQL: SELECT * FROM tb_p_msg WHERE RELATION_ID=16 [ RunTime:0.000695s ]
+[ 2012-02-13T23:12:40+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:12:40+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.
+[ 2012-02-13T23:12:40+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\Ta\Runtime\~runtime.php:2) ~runtime.php 第 2 行.

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.0.2">
+ <bounds minlat="30.5300000" minlon="114.3545000" maxlat="30.5305000" maxlon="114.3550000"/>
+ <node id="1204185569" lat="30.5304882" lon="114.3548205" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:30Z"/>
+ <node id="1204185553" lat="30.5300908" lon="114.3541896" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:34Z"/>
+ <node id="1204185617" lat="30.5304844" lon="114.3541474" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:31Z"/>
+ <node id="1204185544" lat="30.5303611" lon="114.3548215" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:34Z"/>
+ <node id="1204185568" lat="30.5302051" lon="114.3548052" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:36Z"/>
+ <node id="1204185551" lat="30.5303573" lon="114.3541483" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:29Z"/>
+ <node id="1204185493" lat="30.5300874" lon="114.3548044" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:36Z"/>
+ <node id="1204185601" lat="30.5302085" lon="114.3541904" user="utopia" uid="38120" visible="true" version="2" changeset="8410058" timestamp="2011-06-11T21:04:33Z"/>
+ <way id="104372399" user="陽光遐想" uid="414582" visible="true" version="2" changeset="9080911" timestamp="2011-08-21T06:17:54Z">
+  <nd ref="1204185617"/>
+  <nd ref="1204185551"/>
+  <nd ref="1204185544"/>
+  <nd ref="1204185569"/>
+  <nd ref="1204185617"/>
+  <tag k="building" v="yes"/>
+  <tag k="name" v="学生宿舍2栋"/>
+ </way>
+ <way id="104372379" user="陽光遐想" uid="414582" visible="true" version="2" changeset="9080911" timestamp="2011-08-21T06:17:54Z">
+  <nd ref="1204185601"/>
+  <nd ref="1204185553"/>
+  <nd ref="1204185493"/>
+  <nd ref="1204185568"/>
+  <nd ref="1204185601"/>
+  <tag k="building" v="yes"/>
+  <tag k="name" v="学生宿舍1栋"/>
+ </way>
+</osm>

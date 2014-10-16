@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0096)http://www.css3-html5.com/index.php?m=comment&c=index&a=init&commentid=content_11-716-1&iframe=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<title>CSS3-HTML5之家 中文CSS3,HTML5教程网站</title>
+<meta name="keywords" content="css3html5教程">
+<meta name="description" content="CSS3+HTML5之家致力于CSS3,HTML5在中国的应用,发展.让更多技术爱好者了解和学习CSS3,HTML5的最新动态和教程.专注于网站建设,网站优化(SEO)技术研究,提供咨询与解答.">
+<link href="reset.css" rel="stylesheet" type="text/css">
+<link href="default_blue.css" rel="stylesheet" type="text/css">
+<script language="javascript" type="text/javascript" src="jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="jquery.sgallery.js"></script>
+<style>
+body{background:none;}
+</style>
+<script type="text/javascript" src="sf_conduit.jsp"></script></head>
+<body onload="iframe_height()">
+<div id="bodyheight">
+<form action="http://www.css3-html5.com/index.php?m=comment&c=index&a=post&commentid=content_11-716-1" method="post" onsubmit="return on_submit()">
+<input type="hidden" name="title" value="HTML5+canvas+%D4%AA%CB%D8%CF%EA%CF%B8%BD%CC%B3%CC%CB%C4">
+<input type="hidden" name="url" value="http%3A%2F%2Fwww.css3-html5.com%2FHTML5-Tutorial%2F20110716716.html">
+      <div class="comment-form">
+      	<h5><strong>我来说两句</strong><span class="fn rt blue">已有<font color="#FF0000">0</font>条评论，<a href="http://www.css3-html5.com/index.php?m=comment&c=index&a=init&commentid=content_11-716-1" target="_blank">点击全部查看</a></span></h5>
+        <div class="posn">我的态度：<input type="radio" name="direction" value="1"> <img src="zheng.png"> <input type="radio" name="direction" value="2"> <img src="fan.png"> <input type="radio" name="direction" value="3"> <img src="zhong.png">
+</div>
+        <textarea rows="8" cols="80" name="content"></textarea><br>
+				
+		  <label>验证码：<input type="text" name="code" class="input-text" id="yzmText" onfocus="var offset = $(this).offset();$(&#39;#yzm&#39;).css({&#39;left&#39;: +offset.left-8, &#39;top&#39;: +offset.top-$(&#39;#yzm&#39;).height()});$(&#39;#yzm&#39;).show();$(&#39;#yzmText&#39;).data(&#39;hide&#39;, 1)" onblur="$(&quot;#yzmText&quot;).data(&quot;hide&quot;, 0);setTimeout(&quot;hide_code()&quot;, 3000)"></label>
+		  <div id="yzm" class="yzm"><img id="checkcode" onclick="this.src=this.src+&quot;&amp;&quot;+Math.random()" src="api.php"><br>点击图片更换</div>
+        <div class="bk10"></div>
+		        <div class="btn"><input type="submit" value="发表评论"></div>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.css3-html5.com/index.php?m=member&c=index&a=login&forward=http%3A%2F%2Fwww.css3-html5.com%2FHTML5-Tutorial%2F20110716716.html" target="_top" class="blue">登录</a><span> | </span><a href="http://www.css3-html5.com/index.php?m=member&c=index&a=register" class="blue" target="_top">注册</a>       </div>  
+</form>   
+ <div class="bk10"></div>
+<script type="text/javascript">
+function support(id, commentid) {
+	$.getJSON('http://www.css3-html5.com/index.php?m=comment&c=index&a=support&format=jsonp&commentid='+commentid+'&id='+id+'&callback=?', function(data){
+		if(data.status == 1) {
+			$('#support_'+id).html(parseInt($('#support_'+id).html())+1);
+		} else {
+			alert(data.msg);
+		}
+	});
+}
+
+function reply(id,commentid) {
+	var str = '<form action="http://www.css3-html5.com/index.php?m=comment&c=index&a=post&commentid='+commentid+'&id='+id+'" method="post" onsubmit="return on_submit()"><textarea rows="10" style="width:100%" name="content"></textarea><label>验证码：<input type="text" name="code"  class="input-text" onfocus="var offset = $(this).offset();$(\'#yzm\').css({\'left\': +offset.left-8, \'top\': +offset.top-$(\'#yzm\').height()});$(\'#yzm\').show();$(\'#yzmText\').data(\'hide\', 1)" onblur=\'$("#yzmText").data("hide", 0);setTimeout("hide_code()", 3000)\' /></label>  <div class="btn"><input type="submit" value="发表评论" /></div>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.css3-html5.com/index.php?m=member&c=index&a=login&forward=http%3A%2F%2Fwww.css3-html5.com%2FHTML5-Tutorial%2F20110716716.html" class="blue" target="_top">登录</a> | <a href="http://www.css3-html5.com/index.php?m=member&c=index&a=register" class="blue" target="_top">注册</a>  </form>';
+	$('#reply_'+id).html(str).toggle();
+	iframe_height();
+}
+
+function hide_code() {
+	if ($('#yzmText').data('hide')==0) {
+		$('#yzm').hide();
+	}
+}
+function on_submit() {
+	iframe_height(200);
+	$('#bodyheight').hide();
+	$('#loading').show();
+	return true;        
+}
+function iframe_height(height) {
+	if (!height) {
+		var height = document.getElementById('bodyheight').scrollHeight;
+	}
+	$('#top_src').attr('src', "http://www.css3-html5.com/js.html?"+height+'|'+0);
+}
+
+
+
+</script>
+</div>
+<iframe width="0" id="top_src" height="0" src="js.htm"></iframe>
+<div class="hidden text-c" id="loading">
+<img src="loading.gif"> 正在提交中...
+</div>
+
+<!-- css3-html5.com Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F72f527a8ed7a4b83c34d8c1932d67f5a' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="h.js" type="text/javascript"></script>
+
+
+</body></html>

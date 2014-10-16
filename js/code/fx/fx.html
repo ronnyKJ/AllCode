@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>FX</title>
+<style>
+#pic
+{
+	background: #EEE url('pic.jpg') no-repeat;
+	height: 200px;
+}
+</style>
+<script type="text/javascript" src="fx_open_resource.js"></script>
+<script type="text/javascript">
+
+
+Number.go = function(){
+	return this;
+}
+alert(Number.go());
+
+Number.prototype.add = function(num){
+	return(this+num);
+}
+
+alert((3).add(4));
+
+window.a = function(d){return d;}
+
+alert(window.a("dsdsd"))
+</script>
+</head>
+<body>
+
+<div id="pic"></div>
+<script type="text/javascript">
+var moveBg0 = {type: 'backgroundx', to: 100, step: 50, delay: 500};
+var pic = document.getElementById('pic');
+ 
+//$fx(pic).fxAdd(moveBg0).fxRun(null, -1);
+</script>
+</div>
+</body>
+</html>

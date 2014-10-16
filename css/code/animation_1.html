@@ -1,0 +1,51 @@
+﻿<html>
+<head><title></title>
+<style>
+#box
+{
+	width: 100px;
+	height: 100px;
+	background: #FB0;
+	margin: 200px 0 0 400px;
+	/*-webkit-transform: scale(2, 2) rotate(0deg) translate(50px, 50px) skew(0deg, 0deg);*/
+	/*-webkit-transform: matrix(1, -0.2, 1, 1, 0, 0);*/
+	-webkit-transform-origin: 0 0;
+	-webkit-transform: rotate(20deg)
+}
+
+#box:hover
+{
+	background-color:blue;
+	-webkit-transform: rotate(340deg);
+	-webkit-transition-property:background-color -webkit-transform;
+	-webkit-transition-duration:2s;
+	-webkit-transition-timing-function:ease;
+	-webkit-transition-delay:200ms;
+}
+
+#rotate {
+	background: #FB6;
+	margin: 0 auto;
+	width: 600px;
+	height: 400px; 
+	/* 确保我们是在一个 3-D 空间 */
+	-webkit-transform-style: preserve-3d;
+	/*让整个行使用x-轴旋转、7秒中的动画、无限次播放以及线性 */
+	-webkit-animation-name: x-spin;
+	-webkit-animation-duration: 7s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear; 
+}
+
+/* 定义要调用的动画 */
+@-webkit-keyframes x-spin { 
+	0% { -webkit-transform: rotateX(0deg) skew(20deg, 40deg); } 
+	50% { -webkit-transform: rotateX(180deg); }
+	100% { -webkit-transform: rotateX(360deg); } 
+}
+</style>
+</head>
+<body>
+	<div id="box">Box</div><div id="rotate">Box</div>
+</body>
+</html>

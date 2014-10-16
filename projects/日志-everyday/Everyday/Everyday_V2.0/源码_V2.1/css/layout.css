@@ -1,0 +1,176 @@
+﻿*
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+body
+{
+
+}
+
+#container
+{
+	width:1100px;
+	margin:0 auto;
+}
+
+#header
+{
+	text-align:right;
+}
+
+#username
+{
+	margin-right:10px;
+	color:af1616;
+}
+
+#middle
+{
+	overflow:auto;
+	min-height:400px;
+}
+
+#menu
+{
+	overflow:auto;
+}
+
+#menu ul
+{
+	text-align:center;
+}
+
+#menu ul li
+{
+	display:inline-block;
+}
+
+#menu a
+{
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+#content
+{
+	width:700px;
+	float:left;
+}
+
+#rightsidebar
+{
+	float:left;
+	width:383px;
+	margin-left:12px;
+}
+
+#footer
+{
+
+}
+
+#addEvent
+{
+	width:383px;
+}
+
+.hidden
+{
+	display:none;
+}
+
+#eventList li
+{
+	overflow:auto;
+}
+
+.datePad
+{
+	float:left;
+	clear:left;
+}
+
+.attrName, .attrContent
+{
+	display:inline-block;
+}
+
+.attrName
+{
+	width:60px;
+}
+
+.setMrgnLft
+{
+	margin-left:80px;
+}
+
+.right
+{
+	float:right;
+}
+
+#addEvent a.addEvt
+{
+	display:none;
+}
+
+.rdSel
+{
+	margin-right:10px;
+}
+
+.rdunSel
+{
+	margin-right:10px;
+}
+
+#addCateTbl
+{
+	margin:10px 0 10px 14px;
+}
+
+#addCateTbl table
+{
+	
+}
+
+#addCateTbl table td
+{
+	vertical-align:top;
+	padding:4px 20px 4px 0;
+}
+
+#add
+{
+	text-align:left;
+}
+
+#loginContainer
+{
+	width:400px;
+	margin:60px auto;
+}
+
+#logoContainer
+{
+	width:324px;
+	height:68px;
+	margin-bottom:10px;
+}
+
+#loginForm tr
+{
+	height:30px;
+}
+
+#loginForm img
+{
+	margin:0 4px;
+	position:relative;
+	top:5px;
+}

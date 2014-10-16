@@ -1,0 +1,70 @@
+﻿<html>
+<head><title>FireTest</title>
+<style>
+body
+{
+	background: #333;
+	margin: 0;
+	padding: 0;
+}
+
+#xy, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xy"></span><span id="des"></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var t = c.getContext("2d");
+var canvasW = b.clientWidth;
+var canvasH = b.clientHeight;
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+
+
+
+var y=0;
+var timer = -15;
+var a = function()
+{
+	c.width = canvasW;
+	c.height = canvasH;
+	
+	t.translate(canvasW/2,canvasH/2);
+	t.fillStyle = "#333";
+	if(timer>0)
+		y += 0.1;
+	else
+		y -= 0.1;
+	t.scale(1, y+2.5);
+	t.fillRect(-canvasW/2, -canvasH/2, canvasW, canvasH);
+	
+	var n = t.createRadialGradient(0,-22,20,0,-40,40);
+	n.addColorStop(0,"rgba(255,255,0,0.8)");
+	n.addColorStop(0.2,"rgba(255,40,0,0.8)");
+	n.addColorStop(0.6,"rgba(0,0,0,0.2)");
+	n.addColorStop(1,"rgba(0,0,0,0)");
+	t.fillStyle = n;
+	t.fillRect(-canvasW/2, -canvasH/2, canvasW, canvasH);
+	
+	if(timer++ > 15)
+		timer = -15;
+}
+
+setInterval(a, 100)
+</script>
+</html>

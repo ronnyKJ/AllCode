@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<script type="text/javascript">
+/*
+function HelloWorld(_msg)
+{
+	this.msg = _msg;
+	this.say = function(say)
+	{
+		alert(say + " : " + this.msg);
+	};
+}
+
+var _word = "word...";
+
+HelloWorld.prototype = 
+{
+	word : _word,
+	show : function(){alert(this.word)}
+}
+
+HelloWorld.see = function(s)
+{
+	alert("see : " + s);
+}
+
+var b = new HelloWorld("new");
+b.say("b");
+b.show();
+HelloWorld.bird = "bird";
+HelloWorld.see(HelloWorld.bird);
+b.cat = "cat";
+b.say(b.cat);
+
+var a =  new HelloWorld("A");
+a.c="ac";
+alert(a.c);
+*/
+
+/*
+var Hi = function()
+{
+	word: "hi",
+	say: function()
+	{
+		alert(this.word);
+	}
+};
+var h = new Hi();
+*/
+var a = 1;
+function Car(sColor,iDoors,iMpg) {
+	this.color = sColor;
+	this.doors = iDoors;
+	this.mpg = iMpg;
+	this.drivers = new Array("Mike","John");
+	Car.prototype.showColor = function() {
+		alert(this.color);
+	};
+}
+
+
+
+var oCar1 = new Car("red",4,23);
+var oCar2 = new Car("blue",3,25);
+/*
+oCar1.drivers.push("Bill");
+alert(oCar1.drivers);	//输出 "Mike,John,Bill"
+alert(oCar2.drivers);	//输出 "Mike,John" 
+*/
+oCar1.showColor();
+oCar2.showColor();
+</script>
+</HEAD>
+
+<BODY>
+
+</BODY>
+</HTML>

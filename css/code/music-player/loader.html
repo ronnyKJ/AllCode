@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Player</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+<style>
+.player{
+    position: relative;
+    width : 110px;
+    height: 110px;
+    /*-webkit-box-reflect: below 10px;*/
+}
+
+.player .rect{
+    position: absolute;
+    width : 110px;
+    height: 110px;
+    /*background: #DDD;*/
+}
+
+.player .rect.right{
+    clip: rect(0, 110px, 110px, 55px);
+}
+
+.player .rect.right .round{
+    -webkit-transform: rotate(-180deg);
+}
+
+.player .rect.left{
+    clip: rect(0, 55px, 110px, 0px);
+}
+
+.player .rect.left .round{
+    -webkit-transform: rotate(0deg);
+}
+
+.player .rect .round{
+    /*-webkit-transition-duration: 300ms;*/
+}
+
+.player .rect .round{
+    position: absolute;
+    width : 134px;
+    height: 134px;
+    border-radius: 1000px;
+    border: #4AAFF3 8px solid;
+    clip: rect(0, 110px, 110px, 55px);
+    /*background: #EEE;*/
+}
+
+.container{
+    margin: 100px auto;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+</div>
+<script>
+var Loader = (function(argument) {
+    var Loader = function(conf){
+        var player = document.createElement('div');
+        player.classList.add('player');
+        player.innerHTML = 
+            ''+
+            '<div class="rect right">'+
+                '<div class="round"></div>'+
+            '</div>'+
+            '<div class="rect left">'+
+                '<div class="round"></div>'+
+            '</div>';
+        this.player = player;
+        this.leftRound = player.querySelector('.rect.left .round');
+        this.rightRound = player.querySelector('.rect.right .round');
+        this.percent = player.querySelector('.percent');
+    };
+
+    Loader.prototype = {
+        appendTo : function(container){
+            container.appendChild(this.player);
+        },
+        progress : function(per){
+            per>1 && (per = 1);
+            per<0 && (per = 0);
+            var angle = per*360;
+            var rightRotate = Math.max(180-angle, 0);
+            this.rightRound.style.webkitTransform = 'rotate(-'+rightRotate+'deg)';
+            var leftRotate = angle-180;
+            this.leftRound.style.webkitTransform = 'rotate('+(leftRotate>0 ? leftRotate : 0)+'deg)';
+        }
+    };
+
+    return Loader;
+})();
+
+var p = new Loader();
+p.appendTo(document.querySelectorAll('.container')[0]);
+
+var per = 0;
+var t = setInterval(function(){
+    p.progress(per);
+    if(per >= 1){
+        clearInterval(t);
+    }
+    per += 0.1;
+}, 600);
+</script>
+</body>
+</html>

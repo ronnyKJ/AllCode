@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Import</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$.Import(<em>jsFilePath</em>)</h1>
+<p class="info">&nbsp;载入 JavaScript 脚本库。</p>
+<h2>参数</h2>
+	<dl class="p">
+	    <dt><em>jsFilePath</em></dt>
+		<dd>必选项。脚本库的位置。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">无</p>	
+    <h2>描述</h2>
+	<p class="p">该方法相当的后台程序的 include 或者 import 语句，在脚本被解释执行的过程中临时加载并自动预编译一个脚本文件。本方法使用 <strong>XMLHTTP</strong> 对象并应用其<strong>同步</strong>方法加载一个 js 文件，然后把脚本字符串作为一个新创建的 script 元素的 text 属性，最后把 script 元素添加到文档的 head 节点中。</p>
+	<p class="p">需要注意的是，由于使用了 <strong>XMLHTTP</strong> 对象，因此，目标脚本库必须在同域内才能被加载，并且由于<strong>同步</strong>的作用，在加载脚本库的时候，页面可能会出现短暂的停顿现象，停顿时间的长短与网速、脚本库的体积有直接关系。</p>
+<h2>示例</h2>
+<p class="code"><span class="comment">comment.js 文件:</span><br />
+  function sayHello(){<br />
+    &nbsp;&nbsp;&nbsp; alert(&quot;Hello~~~&quot;);<br />
+  }<br />
+  <span class="comment">-------------------- 分割线 --------------------</span><br />
+&lt;script type=&quot;text/javascript&quot;&gt;<br />
+    $.Import(&quot;comment.js&quot;)<span class="comment"></span>;<br />
+    sayHello();<br />
+    &lt;/script&gt;<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

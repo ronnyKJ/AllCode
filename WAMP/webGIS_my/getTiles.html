@@ -1,0 +1,110 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<style>
+#see
+{
+	width:300px;
+	height:160px;
+	overflow:hidden;
+}
+
+#map
+{
+	background:#EEE;
+}
+</style>
+<script type='text/javascript' src="js/jquery-1.7.2.js"></script>
+<script type='text/javascript' src="js/util.js"></script>
+<script type='text/javascript' src="js/geoData.js"></script>
+<script type='text/javascript' src="js/canvas.js"></script>
+<script type='text/javascript' src="js/geometryRender.js"></script>
+<script type='text/javascript' src="js/osm2geo.js"></script>
+<script type='text/javascript' src="js/debug.js"></script>
+</head>
+<body>
+<div id='see1'>
+	<canvas id="map" width="1200" height="700"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+var mapCanvas = $('#map')[0], ctx = mapCanvas.getContext('2d');
+ctx.fillStyle='#aaa';
+ctx.strokeStyle='#000';
+ctx.lineWidth = 1;
+ctx.translate(300, 200);
+
+function reviseXY(num, b, p)
+{
+	var tmp = parseInt(num/b);
+	tmp*=b;
+	return (p==1)? tmp: tmp+b;
+}
+
+var doZoom = function(canvas, geoData, zoom){
+	var bb = U.copyArray(geoData.bbox), x1 = reviseXY(114.35324,0.0005,1), y1 = reviseXY(30.52911,0.0005,1), x2 = reviseXY(114.35599,0.0005,2), y2 = reviseXY(30.53002,0.0005,2);
+	var bb2 = [x1, y1, x2, y2];
+	var cw = canvas.width, ch = canvas.height;
+	var gw = x2-x1, gh = y2-y1;
+	return {
+		bbox: bb2,
+		bb2: bb2,
+		x1: x1,
+		y1: y1,
+		x2: x2,
+		y2: y2,
+		width: cw,
+		height: ch,
+		geoWidth: gw,
+		geoHeight: gh,
+		x_scale: cw/gw*zoom,
+		y_scale: ch/gh*zoom,
+		zoom: zoom
+	}
+}
+
+var files = ['0_0', '0_1', '0_2', '0_3', '1_0', '1_1', '1_2', '1_3'];
+files = ['0_0', '0_1'];
+
+var n=0;
+var arr = [];
+var mapConfig;
+var f='';
+for(var i in files)
+{
+	$.ajax({
+		async: true,
+		type: 'GET',
+		url: 'server/loadTiles.php?tile='+files[i],
+		dataType: 'json',
+		success: function(json)
+		{
+			var m = mapConfig = doZoom(mapCanvas, json, 0.6);
+			bb = json.bbox;
+			
+			GeoData.geoToMapAll(json, mapConfig);//经纬度 转化为 xy像素
+			GeoData.bboxGeoToMap(json.bbox, mapConfig);
+			GeoData.bboxGeoToMap(m.bb2, mapConfig);
+			
+			ctx.strokeStyle='rgba(0, 122, 255, 0.4)';
+			ctx.strokeRect(m.bb2[0], m.bb2[1], m.bb2[2]-m.bb2[0], m.bb2[3]-m.bb2[1]);
+			
+			arr.push(bb);
+			
+			ctx.save();
+			ctx.fillStyle='rgba(255, 80, 255, 0.4)';
+			ctx.fillRect(bb[0], bb[1], bb[2]-bb[0], bb[3]-bb[1]);
+			//ctx.fillRect(bb[0], bb[1], bb[2]-bb[0], bb[3]-bb[1]);
+ctx.font = "28px Arial";
+ctx.textAlign = 'center';
+ctx.strokeText((++n), bb[0], bb[1], 400);
+			ctx.restore();
+			
+			ctx.save();
+			GeoRender.renderMap(json, ctx);//渲染地图
+			//alert(n);
+			ctx.restore();
+		}
+	});
+}
+</script>
+</html>

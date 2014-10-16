@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+A=800;function i(a,b){return j.pow(-1,j.floor(a/b))}function D(s){c.strokeStyle=s}function n(a,b,g){e=o(b);$=u(b),f=o(a);x=u(a);for(h=[],d=0;d<8;++d){q=i(d+1,2),r=i(d,4),v=i(d,2),w=v*f-r*$*x+q*x*e-4;h.push([400+g*(q*$+r*e)/w,400+g*(v*x+r*$*f-q*e*f)/w])}c.beginPath();for(d=0;d<17;++d)c.lineTo.apply(c,h["01537123045674260"[d]]);c.stroke()}function s(a,b,g){for(B=o(b+a)/15,C=0;C<4;++C){k=i(C,1);n(a+i(C,2)*B,b+k*B,g);n(a+k*B,b,g);n(a,b+k*B,g)}}k=document,x=k.body.style;x.textAlign="center";x.background="#57a";k=k.getElementById("c");k.width=k.height=A;c=k.getContext("2d"),l=0,y=0,m=0,z=0,j=Math,t=j.random,o=j.sin,u=j.cos;window.setInterval(function(){c.clearRect(0,0,A,A);a=(t()-0.5)/20;if(t()>0.97)y=a;if(t()>0.97)z=a;l+=y;m+=z;D("#89b");for(a=1;a<30;++a)for(b=1;b<30;++b)c.strokeRect(a*25,b*25,25,25);D("#dde");c.strokeRect(37,37,725,725);s(m,l,200);D("#f70");s(m,l,400);D("#fff");s(m,l,A)},40)
+</script>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0039)http://liuzidong.iteye.com/blog/1151078 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站</title>
+    <meta name="description" content="转载:兼容IE和FF的js脚本做法（比较常用）--上 http://hi.baidu.com/qiang13/blog/item/c03b81125d74bcd7c3fd78a9.html 兼容IE和FF的js脚本做法（比较常用） --下  http://hi.baidu.com/qiang13/blog/item/5249bd35b1a0980890ef39a6.html   /*以下以 IE 代 ...">
+    <meta name="keywords" content="ie, firefox, javascript 兼容IE和FF的js脚本做法（比较常用）">
+    <link rel="shortcut icon" href="http://liuzidong.iteye.com/images/favicon.ico" type="image/x-icon">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://liuzidong.iteye.com/open_search.xml" title="ITeye">
+    <link href="http://liuzidong.iteye.com/rss" rel="alternate" title="咫尺天涯" type="application/rss+xml">
+    <link href="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/blog.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/orange.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/ga.js"></script><script src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/application.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', '.iteye.com']);
+  _gaq.push(['_setAllowHash', 'false']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+      <link href="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/SyntaxHighlighter.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/shCoreCommon.js" type="text/javascript"></script>
+<script src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/hotkey.js" type="text/javascript"></script>
+  <script src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/code_favorites.js" type="text/javascript"></script>
+<script src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/weiboshare.js" type="text/javascript"></script>
+  <style>
+    div#main {background-color: transparent; border: 0; padding: 0px; width: 740px;}
+  </style>
+  <style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style></head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="http://liuzidong.iteye.com/blog/1151078#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a href="http://www.iteye.com/job">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+      <div id="user_nav">
+      <a href="http://liuzidong.iteye.com/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="http://www.iteye.com/all" style="color:red">我的应用</a>
+    <a href="http://liuzidong.iteye.com/login">登录</a>
+    <a href="http://liuzidong.iteye.com/signup" class="nobg">注册</a>
+  </div>
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name"><h1><a href="http://liuzidong.iteye.com/">咫尺天涯</a></h1></div>
+        <div id="blog_preview">
+          
+        </div>
+        <div id="blog_domain">永久域名 <a href="http://liuzidong.iteye.com/">http://liuzidong.iteye.com</a></div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+          
+
+
+<div class="blog_main">
+  <div class="blog_nav">
+    
+    <div class="pre_next">
+      <a href="http://liuzidong.iteye.com/blog/1151181" class="next" title="jQuery之入门(ready)">jQuery之入门(ready)</a>
+      |
+      <a href="http://liuzidong.iteye.com/blog/1151001" class="pre" title="javascript基础知识">javascript基础知识</a>
+    </div>
+  </div>
+  <div class="blog_title">
+    <div class="date"><span class="year">2011</span><span class="sep_year">-</span><span class="month">08</span><span class="sep_month">-</span><span class="day">17</span></div>
+    <h3>
+      <a href="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站.htm">兼容IE和FF的js脚本做法（比较常用）</a>
+      <em class="actions">      </em>
+    </h3>
+    
+        <div class="news_tag"><a href="http://www.iteye.com/blogs/tag/ie">ie</a><a href="http://www.iteye.com/blogs/tag/firefox">firefox</a><a href="http://www.iteye.com/blogs/tag/javascript">javascript</a></div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    转载:兼容IE和FF的js脚本做法（比较常用）--上
+<br><a href="http://hi.baidu.com/qiang13/blog/item/c03b81125d74bcd7c3fd78a9.html" target="_blank">http://hi.baidu.com/qiang13/blog/item/c03b81125d74bcd7c3fd78a9.html</a>
+<br>兼容IE和FF的js脚本做法（比较常用） --下 
+<br><a href="http://hi.baidu.com/qiang13/blog/item/5249bd35b1a0980890ef39a6.html" target="_blank">http://hi.baidu.com/qiang13/blog/item/5249bd35b1a0980890ef39a6.html</a>
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%2F*%E4%BB%A5%E4%B8%8B%E4%BB%A5%20IE%20%E4%BB%A3%E6%9B%BF%20Internet%20Explorer%EF%BC%8C%E4%BB%A5%20MF%2FFF%20%E4%BB%A3%E6%9B%BF%20Mozzila%20Firefox%20*%2F%0A%0A%2F%2Fwindow.event%0AIE%EF%BC%9A%E6%9C%89window.event%E5%AF%B9%E8%B1%A1%0AFF%EF%BC%9A%E6%B2%A1%E6%9C%89window.event%E5%AF%B9%E8%B1%A1%E3%80%82%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E7%BB%99%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92event%E5%AF%B9%E8%B1%A1%E3%80%82%E5%A6%82onmousemove%3DdoMouseMove(event)%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9Avar%20event%20%3D%20event%20%7C%7C%20window.event%3B%0Aexample%3A%0A%3Cscript%3E%0Afunction%20test(event)%20%7B%0Avar%20event%20%3D%20event%20%7C%7C%20window.event%3B%0A%2F%2Fdo%20Something%0A%7D%0A%3C%2Fscript%3E%0A%3Cinput%20type%3D%22button%22%20value%3D%22click%22%20onclick%3D%22test(event)%22%2F%3E%0A%0A%0A%2F%2F%E9%BC%A0%E6%A0%87%E5%BD%93%E5%89%8D%E5%9D%90%E6%A0%87%0AIE%EF%BC%9Aevent.x%E5%92%8Cevent.y%E3%80%82%0AFF%EF%BC%9Aevent.pageX%E5%92%8Cevent.pageY%E3%80%82%0A%E9%80%9A%E7%94%A8%EF%BC%9A%E4%B8%A4%E8%80%85%E9%83%BD%E6%9C%89event.clientX%E5%92%8Cevent.clientY%E5%B1%9E%E6%80%A7%E3%80%82%0A%0A%2F%2F%E9%BC%A0%E6%A0%87%E5%BD%93%E5%89%8D%E5%9D%90%E6%A0%87(%E5%8A%A0%E4%B8%8A%E6%BB%9A%E5%8A%A8%E6%9D%A1%E6%BB%9A%E8%BF%87%E7%9A%84%E8%B7%9D%E7%A6%BB)%0AIE%EF%BC%9Aevent.offsetX%E5%92%8Cevent.offsetY%E3%80%82%0AFF%EF%BC%9Aevent.layerX%E5%92%8Cevent.layerY%E3%80%82%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%0A%3Cscript%3E%0Afunction%20test(event)%20%7B%0Avar%20event%20%3D%20event%20%7C%7C%20window.event%3B%0A%2F%2For%20var%20event%20%3D%20event%20%3F%20event%20%3A%20window.event%3B%2F%2F%E8%BF%992%E4%B8%AD%E9%83%BD%E5%8F%AF%E4%BB%A5%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%94%A8if%20else%EF%BC%88%E8%BF%99%E7%AE%80%E5%86%99%EF%BC%89%0Avar%20x%20%3D%20event.offsetX%20%7C%7C%20event.layerX%3B%0Avar%20y%20%3D%20event.offsetY%20%7C%7C%20event.layerY%3B%0A%2F%2Fdo%20Something%0A%7D%0A%3C%2Fscript%3E%0A%3Cdiv%20onmousedown%3D%22test(event)%22%3E%3C%2Fdiv%3E%0A%2F**%E5%85%B6%E4%BB%96%E7%9A%84%E5%85%BC%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E7%B1%BB%E4%BC%BC%EF%BC%8C%E4%B8%8D%E5%86%8D%E4%B8%80%E4%B8%80%E4%B8%BE%E4%BE%8B**%2F%0A%0A%2F%2Fevent.srcElement%E9%97%AE%E9%A2%98%0A%E8%AF%B4%E6%98%8E%3AIE%E4%B8%8B%2Cevent%E5%AF%B9%E8%B1%A1%E6%9C%89srcElement%E5%B1%9E%E6%80%A7%2C%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89target%E5%B1%9E%E6%80%A7%3BFirefox%E4%B8%8B%2Ceven%E5%AF%B9%E8%B1%A1%E6%9C%89target%E5%B1%9E%E6%80%A7%2C%0A%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89srcElement%E5%B1%9E%E6%80%A7.%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%3A%E4%BD%BF%E7%94%A8obj(obj%20%3D%20event.srcElement%20%3F%20event.srcElement%20%3A%20event.target%3B)%0A%E6%9D%A5%E4%BB%A3%E6%9B%BFIE%E4%B8%8B%E7%9A%84event.srcElement%E6%88%96%E8%80%85%0AFirefox%E4%B8%8B%E7%9A%84event.target.%20%E8%AF%B7%E5%90%8C%E6%97%B6%E6%B3%A8%E6%84%8Fevent%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%E3%80%82%0A%0A%2F%2Fevent.toElement%E9%97%AE%E9%A2%98%0A%E9%97%AE%E9%A2%98%EF%BC%9A%0AIE%E4%B8%8B%EF%BC%8Ceven%E5%AF%B9%E8%B1%A1%E6%9C%89srcElement%E5%B1%9E%E6%80%A7%EF%BC%8C%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89target%E5%B1%9E%E6%80%A7%EF%BC%9B%0AFirefox%E4%B8%8B%EF%BC%8Ceven%E5%AF%B9%E8%B1%A1%E6%9C%89target%E5%B1%9E%E6%80%A7%EF%BC%8C%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89srcElement%E5%B1%9E%E6%80%A7%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%0Avar%20target%20%3D%20e.relatedTarget%20%7C%7C%20e.toElement%3B%0A%0A%2F%2F%E6%A0%87%E7%AD%BE%E7%9A%84x%E5%92%8Cy%E7%9A%84%E5%9D%90%E6%A0%87%E4%BD%8D%E7%BD%AE%EF%BC%9Astyle.posLeft%20%E5%92%8C%20style.posTop%0AIE%EF%BC%9A%E6%9C%89%E3%80%82%0AFF%EF%BC%9A%E6%B2%A1%E6%9C%89%E3%80%82%0A%E9%80%9A%E7%94%A8%EF%BC%9Aobject.offsetLeft%20%E5%92%8C%20object.offsetTop%E3%80%82%0A%0A%2F%2F%E7%AA%97%E4%BD%93%E7%9A%84%E9%AB%98%E5%BA%A6%E5%92%8C%E5%AE%BD%E5%BA%A6%0AIE%EF%BC%9Adocument.body.offsetWidth%E5%92%8Cdocument.body.offsetHeight%E3%80%82%E6%B3%A8%E6%84%8F%EF%BC%9A%E6%AD%A4%E6%97%B6%E9%A1%B5%E9%9D%A2%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89body%E6%A0%87%E7%AD%BE%E3%80%82%0AFF%EF%BC%9Awindow.innerWidth%E5%92%8Cwindow.innerHegiht%EF%BC%8C%0A%E4%BB%A5%E5%8F%8Adocument.documentElement.clientWidth%E5%92%8Cdocument.documentElement.clientHeight%E3%80%82%0A%E9%80%9A%E7%94%A8%EF%BC%9Adocument.body.clientWidth%E5%92%8Cdocument.body.clientHeight%E3%80%82%0A%0A%2F%2F%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%0AIE%EF%BC%9Aelement.attachEvent(%22onclick%22%2C%20function)%3B%E3%80%82%0AFF%EF%BC%9Aelement.addEventListener(%22click%22%2C%20function%2C%20true)%E3%80%82%0A%E9%80%9A%20%E7%94%A8%EF%BC%9Aelement.onclick%3Dfunction%E3%80%82%E8%99%BD%E7%84%B6%E9%83%BD%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8onclick%E4%BA%8B%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%98%AFonclick%E5%92%8C%E4%B8%8A%E9%9D%A2%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E7%9A%84%E6%95%88%E6%9E%9C%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%EF%BC%8C%0Aonclick%20%E5%8F%AA%E6%9C%89%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E8%BF%87%E7%A8%8B%EF%BC%8C%E8%80%8CattachEvent%E5%92%8CaddEventListener%E6%89%A7%E8%A1%8C%E7%9A%84%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%87%E7%A8%8B%E5%88%97%E8%A1%A8%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%A4%9A%E4%B8%AA%E8%BF%87%E7%A8%8B%E3%80%82%0A%E4%BE%8B%E5%A6%82%EF%BC%9Aelement.attachEvent(%22onclick%22%2C%20func1)%3B%0Aelement.attachEvent(%22onclick%22%2C%20func2)%E8%BF%99%E6%A0%B7func1%E5%92%8Cfunc2%E9%83%BD%E4%BC%9A%E8%A2%AB%E6%89%A7%E8%A1%8C%E3%80%82%0A%0A%2F%2F%E6%A0%87%E7%AD%BE%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%0AIE%EF%BC%9A%E5%A6%82%E6%9E%9C%E7%BB%99%E6%A0%87%E7%AD%BEdiv1%E5%AE%9A%E4%B9%89%E4%BA%86%E4%B8%80%E4%B8%AA%E5%B1%9E%E6%80%A7value%EF%BC%8C%E5%8F%AF%E4%BB%A5div1.value%E5%92%8Cdiv1%5B%22value%22%5D%E5%8F%96%E5%BE%97%E8%AF%A5%E5%80%BC%E3%80%82%0AFF%EF%BC%9A%E4%B8%8D%E8%83%BD%E7%94%A8div1.value%E5%92%8Cdiv1%5B%22value%22%5D%E5%8F%96%E3%80%82%0A%E9%80%9A%E7%94%A8%EF%BC%9Adiv1.getAttribute(%22value%22)%E3%80%82%0A%0A%2F%2Fdocument.form.item%20%E9%97%AE%E9%A2%98%0AIE%3A%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%9A%E7%8E%B0%E6%9C%89%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%AD%98%E5%9C%A8%E8%AE%B8%E5%A4%9A%20document.formName.item(%22itemName%22)%20%E8%BF%99%E6%A0%B7%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%9C%A8%20MF%20%E4%B8%8B%E8%BF%90%E8%A1%8C%0AFF%2FIE%3A%20document.formName.elements%5B%22elementName%22%5D%0A%0A%2F%2F%E9%9B%86%E5%90%88%2F%E6%95%B0%E7%BB%84%E7%B1%BB%E5%AF%B9%E8%B1%A1%E9%97%AE%E9%A2%98%0A(1)%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%9A%0A%E7%8E%B0%E6%9C%89%E4%BB%A3%E7%A0%81%E4%B8%AD%E8%AE%B8%E5%A4%9A%E9%9B%86%E5%90%88%E7%B1%BB%E5%AF%B9%E8%B1%A1%E5%8F%96%E7%94%A8%E6%97%B6%E4%BD%BF%E7%94%A8%20()%EF%BC%8CIE%20%E8%83%BD%E6%8E%A5%E5%8F%97%EF%BC%8CMF%20%E4%B8%8D%E8%83%BD%E3%80%82%0A(2)%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%0A%E6%94%B9%E7%94%A8%20%5B%5D%20%E4%BD%9C%E4%B8%BA%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97%E3%80%82%E5%A6%82%EF%BC%9Adocument.forms(%22formName%22)%20%E6%94%B9%E4%B8%BA%20document.forms%5B%22formName%22%5D%E3%80%82%0A%E5%8F%88%E5%A6%82%EF%BC%9Adocument.getElementsByName(%22inputName%22)(1)%20%E6%94%B9%E4%B8%BA%20document.getElementsByName(%22inputName%22)%5B1%5D%0A%0A%2F%2FHTML%20%E5%AF%B9%E8%B1%A1%E7%9A%84%20id%20%E4%BD%9C%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%90%8D%E7%9A%84%E9%97%AE%E9%A2%98%0A(1)%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98%0A%E5%9C%A8%20IE%20%E4%B8%AD%EF%BC%8CHTML%20%E5%AF%B9%E8%B1%A1%E7%9A%84%20ID%20%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BA%20document%20%E7%9A%84%E4%B8%8B%E5%B1%9E%E5%AF%B9%E8%B1%A1%E5%8F%98%E9%87%8F%E5%90%8D%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E3%80%82%E5%9C%A8%20MF%20%E4%B8%AD%E4%B8%8D%E8%83%BD%E3%80%82%0A(2)%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%0A%E7%94%A8%20getElementById(%22idName%22)%20%E4%BB%A3%E6%9B%BF%20idName%20%E4%BD%9C%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%8F%98%E9%87%8F%E4%BD%BF%E7%94%A8%0A%0A%2F%2F%E7%94%A8idName%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%96%E5%BE%97%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%97%AE%E9%A2%98%0A(1)%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98%0A%E5%9C%A8IE%E4%B8%AD%EF%BC%8C%E5%88%A9%E7%94%A8%20eval(idName)%20%E5%8F%AF%E4%BB%A5%E5%8F%96%E5%BE%97%20id%20%E4%B8%BA%20idName%20%E7%9A%84%20HTML%20%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%9C%A8MF%20%E4%B8%AD%E4%B8%8D%E8%83%BD%E3%80%82%0A(2)%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%0A%E7%94%A8%20getElementById(idName)%20%E4%BB%A3%E6%9B%BF%20eval(idName)%E3%80%82%0A%0A%2F%2F%E5%8F%98%E9%87%8F%E5%90%8D%E4%B8%8E%E6%9F%90%20HTML%20%E5%AF%B9%E8%B1%A1%20id%20%E7%9B%B8%E5%90%8C%E7%9A%84%E9%97%AE%E9%A2%98%0A(1)%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98%0A%E5%9C%A8%20MF%20%E4%B8%AD%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%AF%B9%E8%B1%A1%20id%20%E4%B8%8D%E4%BD%9C%E4%B8%BA%20HTML%20%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%8D%E7%A7%B0%EF%BC%8C%E6%89%80%E4%BB%A5%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%B8%8E%20HTML%20%E5%AF%B9%E8%B1%A1%20id%20%E7%9B%B8%E5%90%8C%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D%EF%BC%8CIE%20%E4%B8%AD%E4%B8%8D%E8%83%BD%E3%80%82%0A(2)%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%0A%E5%9C%A8%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E6%97%B6%EF%BC%8C%E4%B8%80%E5%BE%8B%E5%8A%A0%E4%B8%8A%20var%20%EF%BC%8C%E4%BB%A5%E9%81%BF%E5%85%8D%E6%AD%A7%E4%B9%89%EF%BC%8C%E8%BF%99%E6%A0%B7%E5%9C%A8%20IE%20%E4%B8%AD%E4%BA%A6%E5%8F%AF%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C%E3%80%82%0A%E6%AD%A4%E5%A4%96%EF%BC%8C%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E5%8F%96%E4%B8%8E%20HTML%20%E5%AF%B9%E8%B1%A1%20id%20%E7%9B%B8%E5%90%8C%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D%EF%BC%8C%E4%BB%A5%E5%87%8F%E5%B0%91%E9%94%99%E8%AF%AF%E3%80%82%0A%0A%2F%2Fdocument.getElementsByName()%20%E5%92%8C%20document.all%5Bname%5D%20%E7%9A%84%E9%97%AE%E9%A2%98%0A%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%9A%E5%9C%A8%20IE%20%E4%B8%AD%EF%BC%8CgetElementsByName()%E3%80%81document.all%5Bname%5D%20%E5%9D%87%E4%B8%8D%E8%83%BD%E7%94%A8%E6%9D%A5%E5%8F%96%E5%BE%97%20div%20%E5%85%83%E7%B4%A0%0A%EF%BC%88%E6%98%AF%E5%90%A6%E8%BF%98%E6%9C%89%E5%85%B6%E5%AE%83%E4%B8%8D%E8%83%BD%E5%8F%96%E7%9A%84%E5%85%83%E7%B4%A0%E8%BF%98%E4%B8%8D%E7%9F%A5%E9%81%93%EF%BC%89%E3%80%82%0A%2F%2Fdocument.all%0AFirefox%E5%8F%AF%E4%BB%A5%E5%85%BC%E5%AE%B9document.all%EF%BC%8C%20%E4%BD%86%E4%BC%9A%E7%94%9F%E6%88%90%E4%B8%80%E6%9D%A1%E8%AD%A6%E5%91%8A%E3%80%82%E5%8F%AF%E4%BB%A5%E7%94%A8getElementById(%22*%22)%0A%E6%88%96%E8%80%85%20getElementByTagName(%22*%22)%E6%9D%A5%E4%BB%A3%E6%9B%BF%0A%E4%B8%8D%E8%BF%87%E5%AF%B9%E4%BA%8Edocument.all.length%E7%AD%89%E5%B1%9E%E6%80%A7%EF%BC%8C%E5%88%99%E5%AE%8C%E5%85%A8%E4%B8%8D%E5%85%BC%E5%AE%B9%0A%0A%2F%2Finput.type%E5%B1%9E%E6%80%A7%E9%97%AE%E9%A2%98%0A%E8%AF%B4%E6%98%8E%3AIE%E4%B8%8Binput.type%E5%B1%9E%E6%80%A7%E4%B8%BA%E5%8F%AA%E8%AF%BB%3B%E4%BD%86%E6%98%AFFirefox%E4%B8%8Binput.type%E5%B1%9E%E6%80%A7%E4%B8%BA%E8%AF%BB%E5%86%99%0A%0A%2F%2Fwindow.location.href%E9%97%AE%E9%A2%98%0A%E8%AF%B4%E6%98%8E%3AIE%E6%88%96%E8%80%85Firefox2.0.x%E4%B8%8B%2C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8window.location%E6%88%96window.location.href%3BFirefox1.5.x%E4%B8%8B%2C%0A%E5%8F%AA%E8%83%BD%E4%BD%BF%E7%94%A8window.location%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%3A%E4%BD%BF%E7%94%A8window.location%E6%9D%A5%E4%BB%A3%E6%9B%BFwindow.location.href%0A%0A%2F%2F%E6%A8%A1%E6%80%81%E5%92%8C%E9%9D%9E%E6%A8%A1%E6%80%81%E7%AA%97%E5%8F%A3%E9%97%AE%E9%A2%98%0A%E8%AF%B4%E6%98%8E%3AIE%E4%B8%8B%2C%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87showModalDialog%E5%92%8CshowModelessDialog%E6%89%93%E5%BC%80%E6%A8%A1%E6%80%81%E5%92%8C%E9%9D%9E%E6%A8%A1%E6%80%81%E7%AA%97%E5%8F%A3%3BFirefox%E4%B8%8B%E5%88%99%E4%B8%8D%E8%83%BD%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%3A%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8window.open(pageURL%2Cname%2Cparameters)%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3%E3%80%82%0A%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81%E5%B0%86%E5%AD%90%E7%AA%97%E5%8F%A3%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E5%9B%9E%E7%88%B6%E7%AA%97%E5%8F%A3%2C%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%AD%90%E7%AA%97%E5%8F%A3%E4%B8%AD%E4%BD%BF%E7%94%A8window.opener%E6%9D%A5%E8%AE%BF%E9%97%AE%E7%88%B6%E7%AA%97%E5%8F%A3.%0A%E4%BE%8B%E5%A6%82%EF%BC%9Avar%20parWin%20%3D%20window.opener%3B%20parWin.document.getElementById(%22Aqing%22).value%20%3D%22Aqing%22%3B%0A%0A%2F%2Fframe%E9%97%AE%E9%A2%98%0A%E4%BB%A5%E4%B8%8B%E9%9D%A2%E7%9A%84frame%E4%B8%BA%E4%BE%8B%EF%BC%9A%0A%3Cframe%20src%3D%22xxx.html%22%20mce_src%3D%22xxx.html%22%20id%3D%22frameId%22%20name%3D%22frameName%22%2F%3E%0A(1)%E8%AE%BF%E9%97%AEframe%E5%AF%B9%E8%B1%A1%3A%0AIE%3A%E4%BD%BF%E7%94%A8window.frameId%E6%88%96%E8%80%85window.frameName%E6%9D%A5%E8%AE%BF%E9%97%AE%E8%BF%99%E4%B8%AAframe%E5%AF%B9%E8%B1%A1.%20frameId%E5%92%8CframeName%E5%8F%AF%E4%BB%A5%E5%90%8C%E5%90%8D%E3%80%82%0AFF%3A%E5%8F%AA%E8%83%BD%E4%BD%BF%E7%94%A8window.frameName%E6%9D%A5%E8%AE%BF%E9%97%AE%E8%BF%99%E4%B8%AAframe%E5%AF%B9%E8%B1%A1.%0A%E5%8F%A6%E5%A4%96%EF%BC%8C%E5%9C%A8IE%E5%92%8CFirefox%E4%B8%AD%E9%83%BD%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8window.document.getElementById(%22frameId%22)%E6%9D%A5%E8%AE%BF%E9%97%AE%E8%BF%99%E4%B8%AAframe%E5%AF%B9%E8%B1%A1.%0A(2)%E5%88%87%E6%8D%A2frame%E5%86%85%E5%AE%B9%3A%0A%E5%9C%A8IE%E5%92%8CFirefox%E4%B8%AD%E9%83%BD%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8window.document.getElementById(%22testFrame%22).src%20%3D%22xxx.html%22%0A%E6%88%96window.frameName.location%3D%22xxx.html%22%E6%9D%A5%E5%88%87%E6%8D%A2frame%E7%9A%84%E5%86%85%E5%AE%B9.%0A%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81%E5%B0%86frame%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E5%9B%9E%E7%88%B6%E7%AA%97%E5%8F%A3(%E6%B3%A8%E6%84%8F%E4%B8%8D%E6%98%AFopener%2C%E8%80%8C%E6%98%AFparent%20frame)%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8frme%E4%B8%AD%E4%BD%BF%E7%94%A8parent%E6%9D%A5%E8%AE%BF%E9%97%AE%E7%88%B6%E7%AA%97%E5%8F%A3%E3%80%82%0A%E4%BE%8B%E5%A6%82%EF%BC%9Awindow.parent.document.form1.filename.value%3D%22Aqing%22%3B%0A%0A%2F%2Fbody%E9%97%AE%E9%A2%98%0AFirefox%E7%9A%84body%E5%9C%A8body%E6%A0%87%E7%AD%BE%E6%B2%A1%E6%9C%89%E8%A2%AB%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%8C%E5%85%A8%E8%AF%BB%E5%85%A5%E4%B9%8B%E5%89%8D%E5%B0%B1%E5%AD%98%E5%9C%A8%EF%BC%9B%E8%80%8CIE%E7%9A%84body%E5%88%99%E5%BF%85%E9%A1%BB%E5%9C%A8body%E6%A0%87%E7%AD%BE%E8%A2%AB%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%8C%E5%85%A8%E8%AF%BB%E5%85%A5%E4%B9%8B%E5%90%8E%E6%89%8D%E5%AD%98%E5%9C%A8%0A%0A%2F%2F%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E6%96%B9%E6%B3%95%0AIE%EF%BC%9Adocument.body.onload%20%3D%20inject%3B%20%2F%2FFunction%20inject()%E5%9C%A8%E8%BF%99%E4%B9%8B%E5%89%8D%E5%B7%B2%E8%A2%AB%E5%AE%9E%E7%8E%B0%0AFF%EF%BC%9Adocument.body.onload%20%3D%20inject()%3B%0A%0A%2F%2Ffirefox%E4%B8%8EIE%E7%9A%84%E7%88%B6%E5%85%83%E7%B4%A0(parentElement)%E7%9A%84%E5%8C%BA%E5%88%AB%0AIE%EF%BC%9Aobj.parentElement%0AFF%EF%BC%9Aobj.parentNode%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%3A%20%E5%9B%A0%E4%B8%BAFF%E4%B8%8EIE%E9%83%BD%E6%94%AF%E6%8C%81DOM%2C%E5%9B%A0%E6%AD%A4%E4%BD%BF%E7%94%A8obj.parentNode%E6%98%AF%E4%B8%8D%E9%94%99%E9%80%89%E6%8B%A9%0A%0A%2F%2FinnerText%E5%9C%A8IE%E4%B8%AD%E8%83%BD%E6%AD%A3%E5%B8%B8%E5%B7%A5%E4%BD%9C%EF%BC%8C%E4%BD%86%E6%98%AFinnerText%E5%9C%A8FireFox%E4%B8%AD%E5%8D%B4%E4%B8%8D%E8%A1%8C.%20%E9%9C%80%E7%94%A8textContent%0A%0A%2F%2FFireFox%E4%B8%AD%E8%AE%BE%E7%BD%AEHTML%E6%A0%87%E7%AD%BE%E7%9A%84style%E6%97%B6%EF%BC%8C%E6%89%80%E6%9C%89%E4%BD%8D%E7%BD%AE%E6%80%A7%E5%92%8C%E5%AD%97%E4%BD%93%E5%B0%BA%E5%AF%B8%E7%9A%84%E5%80%BC%E5%BF%85%E9%A1%BB%E5%90%8E%E8%B7%9Fpx%E3%80%82%E8%BF%99%E4%B8%AAie%E4%B9%9F%E6%98%AF%E6%94%AF%E6%8C%81%E7%9A%84%0A%0A%2F%2F%E7%88%B6%E8%8A%82%E7%82%B9%E3%80%81%E5%AD%90%E8%8A%82%E7%82%B9%E5%92%8C%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9%0AIE%EF%BC%9AparentElement%E3%80%81parement.children%EF%BC%8Celement.romoveNode(true)%E3%80%82%0AFF%EF%BC%9AparentNode%E3%80%81parentNode.childNodes%EF%BC%8Cnode.parentNode.removeChild(node)%E3%80%82%0A%0A%2F%2F%E5%AF%B9select%E7%9A%84options%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%0A%E6%9E%9A%E4%B8%BE%E5%85%83%E7%B4%A0%E9%99%A4%E4%BA%86%5B%5D%E5%A4%96%EF%BC%8CSelectName.options.item()%E4%B9%9F%E6%98%AF%E5%8F%AF%E4%BB%A5%E7%9A%84%2C%20%E5%8F%A6%E5%A4%96SelectName.options.length%2C%0ASelectName.options.add%2Fremove%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%B8%A4%E7%A7%8D%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A%E4%BD%BF%E7%94%A8%E3%80%82%0A%E6%B3%A8%E6%84%8F%E5%9C%A8add%E5%90%8E%E8%B5%8B%E5%80%BC%E5%85%83%E7%B4%A0%EF%BC%8C%E5%90%A6%E5%88%99%E4%BC%9A%E5%A4%B1%E8%B4%A5%0A%E5%8A%A8%E6%80%81%E5%88%A0%E9%99%A4select%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89options%EF%BC%9A%0Adocument.getElementById(%22ddlResourceType%22).options.length%3D0%3B%0A%E5%8A%A8%E6%80%81%E5%88%A0%E9%99%A4select%E4%B8%AD%E7%9A%84%E6%9F%90%E4%B8%80%E9%A1%B9option%EF%BC%9A%0Adocument.getElementById(%22ddlResourceType%22).options.remove(indx)%3B%0A%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0select%E4%B8%AD%E7%9A%84%E9%A1%B9option%3A%0Adocument.getElementById(%22ddlResourceType%22).options.add(new%20Option(text%2Cvalue))%3B%0AIE%20FF%20%E5%8A%A8%E6%80%81%E5%88%A0%E9%99%A4%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A%0Adocument.getElementById(%22ddlResourceType%22).options%5Bindx%5D%20%3Dnull%3B%0A%0A%2F%2F%E6%8D%95%E8%8E%B7%E4%BA%8B%E4%BB%B6%0A%E9%97%AE%E9%A2%98%EF%BC%9A%0AFF%E6%B2%A1%E6%9C%89setCapture()%E3%80%81releaseCapture()%E6%96%B9%E6%B3%95%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%0AIE%3A%0Aobj.setCapture()%3B%0Aobj.releaseCapture()%3B%0AFF%3A%0Awindow.captureEvents(Event.MOUSEMOVE%7CEvent.MOUSEUP)%3B%0Awindow.releaseEvents(Event.MOUSEMOVE%7CEvent.MOUSEUP)%3B%0Aif%20(!window.captureEvents)%20%7B%0Ao.setCapture()%3B%0A%7Delse%20%7B%0Awindow.captureEvents(Event.MOUSEMOVE%7CEvent.MOUSEUP)%3B%0A%7D%0Aif%20(!window.captureEvents)%20%7B%0Ao.releaseCapture()%3B%0A%7Delse%20%7B%0Awindow.releaseEvents(Event.MOUSEMOVE%7CEvent.MOUSEUP)%3B%0A%7D%0A%0A%0A%2F%2F%E7%A6%81%E6%AD%A2%E9%80%89%E5%8F%96%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%0A%E9%97%AE%E9%A2%98%EF%BC%9A%0AFF%E9%9C%80%E8%A6%81%E7%94%A8CSS%E7%A6%81%E6%AD%A2%EF%BC%8CIE%E7%94%A8JS%E7%A6%81%E6%AD%A2%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%0AIE%3A%20obj.onselectstart%20%3Dfunction()%20%7Breturnfalse%3B%7D%0AFF%3A%20-moz-user-select%3Anone%3B%0A%0A%0A%2F%2F%E7%94%BB%E5%9B%BE%0AIE%EF%BC%9AVML%E3%80%82%0AFF%EF%BC%9ASVG%E3%80%82%0A%0A%2F%2FCSS%EF%BC%9A%E9%80%8F%E6%98%8E%0AIE%EF%BC%9Afilter%3Aprogid%3ADXImageTransform.Microsoft.Alpha(style%3D0%2Copacity%3D60)%E3%80%82%0AFF%EF%BC%9Aopacity%3A0.6%E3%80%82%0A%0A%2F%2FCSS%EF%BC%9A%E5%9C%86%E8%A7%92%0AIE%EF%BC%9A%E4%B8%8D%E6%94%AF%E6%8C%81%E5%9C%86%E8%A7%92%E3%80%82%0AFF%EF%BC%9A-moz-border-radius%3A4px%EF%BC%8C%E6%88%96%E8%80%85-moz-border-radius-topleft%3A4px%3B-moz-border-radius-topright%3A4px%3B%0A-moz-border-radius-bottomleft%3A4px%3B-moz-border-radius-%20bottomright%3A4px%3B%E3%80%82%0A%0A%2F%2FCSS%EF%BC%9A%E5%8F%8C%E7%BA%BF%E5%87%B9%E5%87%B8%E8%BE%B9%E6%A1%86%0AIE%EF%BC%9Aborder%3A2px%20outset%3B%E3%80%82%0AFF%EF%BC%9A-moz-%20border-top-colors%3A%20%23d4d0c8%20white%3B-moz-border-left-colors%3A%20%23d4d0c8%20white%3B%0A-moz-border-right-colors%3A%23404040%20%23808080%3B-moz-border-bottom-colors%3A%23404040%20%23808080%3B%E3%80%82%20%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="comment">/*以下以&nbsp;IE&nbsp;代替&nbsp;Internet&nbsp;Explorer，以&nbsp;MF/FF&nbsp;代替&nbsp;Mozzila&nbsp;Firefox&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//window.event</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：有window.event对象&nbsp;&nbsp;</span></li><li><span>FF：没有window.event对象。可以通过给函数的参数传递event对象。如onmousemove=doMouseMove(event)&nbsp;&nbsp;</span></li><li><span>解决方法：var&nbsp;event&nbsp;=&nbsp;event&nbsp;||&nbsp;window.event;&nbsp;&nbsp;</span></li><li><span>example:&nbsp;&nbsp;</span></li><li><span>&lt;script&gt;&nbsp;&nbsp;</span></li><li><span>function&nbsp;test(event)&nbsp;{&nbsp;&nbsp;</span></li><li><span>var&nbsp;event&nbsp;=&nbsp;event&nbsp;||&nbsp;window.event;&nbsp;&nbsp;</span></li><li><span><span class="comment">//do&nbsp;Something</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&lt;/script&gt;&nbsp;&nbsp;</span></li><li><span>&lt;input&nbsp;type=<span class="string">"button"</span><span>&nbsp;value=</span><span class="string">"click"</span><span>&nbsp;onclick=</span><span class="string">"test(event)"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//鼠标当前坐标</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：event.x和event.y。&nbsp;&nbsp;</span></li><li><span>FF：event.pageX和event.pageY。&nbsp;&nbsp;</span></li><li><span>通用：两者都有event.clientX和event.clientY属性。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//鼠标当前坐标(加上滚动条滚过的距离)</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：event.offsetX和event.offsetY。&nbsp;&nbsp;</span></li><li><span>FF：event.layerX和event.layerY。&nbsp;&nbsp;</span></li><li><span>解决方法：&nbsp;&nbsp;</span></li><li><span>&lt;script&gt;&nbsp;&nbsp;</span></li><li><span>function&nbsp;test(event)&nbsp;{&nbsp;&nbsp;</span></li><li><span>var&nbsp;event&nbsp;=&nbsp;event&nbsp;||&nbsp;window.event;&nbsp;&nbsp;</span></li><li><span><span class="comment">//or&nbsp;var&nbsp;event&nbsp;=&nbsp;event&nbsp;?&nbsp;event&nbsp;:&nbsp;window.event;//这2中都可以，也可以用if&nbsp;else（这简写）</span><span>&nbsp;&nbsp;</span></span></li><li><span>var&nbsp;x&nbsp;=&nbsp;event.offsetX&nbsp;||&nbsp;event.layerX;&nbsp;&nbsp;</span></li><li><span>var&nbsp;y&nbsp;=&nbsp;event.offsetY&nbsp;||&nbsp;event.layerY;&nbsp;&nbsp;</span></li><li><span><span class="comment">//do&nbsp;Something</span><span>&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&lt;/script&gt;&nbsp;&nbsp;</span></li><li><span>&lt;div&nbsp;onmousedown=<span class="string">"test(event)"</span><span>&gt;&lt;/div&gt;&nbsp;&nbsp;</span></span></li><li><span><span class="comment">/**其他的兼容的解决方法类似，不再一一举例**/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//event.srcElement问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>说明:IE下,event对象有srcElement属性,但是没有target属性;Firefox下,even对象有target属性,&nbsp;&nbsp;</span></li><li><span>但是没有srcElement属性.&nbsp;&nbsp;</span></li><li><span>解决方法:使用obj(obj&nbsp;=&nbsp;event.srcElement&nbsp;?&nbsp;event.srcElement&nbsp;:&nbsp;event.target;)&nbsp;&nbsp;</span></li><li><span>来代替IE下的event.srcElement或者&nbsp;&nbsp;</span></li><li><span>Firefox下的event.target.&nbsp;请同时注意event的兼容性问题。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//event.toElement问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>问题：&nbsp;&nbsp;</span></li><li><span>IE下，even对象有srcElement属性，但是没有target属性；&nbsp;&nbsp;</span></li><li><span>Firefox下，even对象有target属性，但是没有srcElement属性&nbsp;&nbsp;</span></li><li><span>解决方法：&nbsp;&nbsp;</span></li><li><span>var&nbsp;target&nbsp;=&nbsp;e.relatedTarget&nbsp;||&nbsp;e.toElement;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//标签的x和y的坐标位置：style.posLeft&nbsp;和&nbsp;style.posTop</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：有。&nbsp;&nbsp;</span></li><li><span>FF：没有。&nbsp;&nbsp;</span></li><li><span>通用：object.offsetLeft&nbsp;和&nbsp;object.offsetTop。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//窗体的高度和宽度</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：document.body.offsetWidth和document.body.offsetHeight。注意：此时页面一定要有body标签。&nbsp;&nbsp;</span></li><li><span>FF：window.innerWidth和window.innerHegiht，&nbsp;&nbsp;</span></li><li><span>以及document.documentElement.clientWidth和document.documentElement.clientHeight。&nbsp;&nbsp;</span></li><li><span>通用：document.body.clientWidth和document.body.clientHeight。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//添加事件</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：element.attachEvent(<span class="string">"onclick"</span><span>,&nbsp;function);。&nbsp;&nbsp;</span></span></li><li><span>FF：element.addEventListener(<span class="string">"click"</span><span>,&nbsp;function,&nbsp;</span><span class="keyword">true</span><span>)。&nbsp;&nbsp;</span></span></li><li><span>通&nbsp;用：element.onclick=function。虽然都可以使用onclick事件，但是onclick和上面两种方法的效果是不一样的，&nbsp;&nbsp;</span></li><li><span>onclick&nbsp;只有执行一个过程，而attachEvent和addEventListener执行的是一个过程列表，也就是多个过程。&nbsp;&nbsp;</span></li><li><span>例如：element.attachEvent(<span class="string">"onclick"</span><span>,&nbsp;func1);&nbsp;&nbsp;</span></span></li><li><span>element.attachEvent(<span class="string">"onclick"</span><span>,&nbsp;func2)这样func1和func2都会被执行。&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//标签的自定义属性</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：如果给标签div1定义了一个属性value，可以div1.value和div1[<span class="string">"value"</span><span>]取得该值。&nbsp;&nbsp;</span></span></li><li><span>FF：不能用div1.value和div1[<span class="string">"value"</span><span>]取。&nbsp;&nbsp;</span></span></li><li><span>通用：div1.getAttribute(<span class="string">"value"</span><span>)。&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//document.form.item&nbsp;问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE:现有问题：现有代码中存在许多&nbsp;document.formName.item(<span class="string">"itemName"</span><span>)&nbsp;这样的语句，不能在&nbsp;MF&nbsp;下运行&nbsp;&nbsp;</span></span></li><li><span>FF/IE:&nbsp;document.formName.elements[<span class="string">"elementName"</span><span>]&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//集合/数组类对象问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>(<span class="number">1</span><span>)现有问题：&nbsp;&nbsp;</span></span></li><li><span>现有代码中许多集合类对象取用时使用&nbsp;()，IE&nbsp;能接受，MF&nbsp;不能。&nbsp;&nbsp;</span></li><li><span>(<span class="number">2</span><span>)解决方法：&nbsp;&nbsp;</span></span></li><li><span>改用&nbsp;[]&nbsp;作为下标运算。如：document.forms(<span class="string">"formName"</span><span>)&nbsp;改为&nbsp;document.forms[</span><span class="string">"formName"</span><span>]。&nbsp;&nbsp;</span></span></li><li><span>又如：document.getElementsByName(<span class="string">"inputName"</span><span>)(</span><span class="number">1</span><span>)&nbsp;改为&nbsp;document.getElementsByName(</span><span class="string">"inputName"</span><span>)[</span><span class="number">1</span><span>]&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//HTML&nbsp;对象的&nbsp;id&nbsp;作为对象名的问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>(<span class="number">1</span><span>)现有问题&nbsp;&nbsp;</span></span></li><li><span>在&nbsp;IE&nbsp;中，HTML&nbsp;对象的&nbsp;ID&nbsp;可以作为&nbsp;document&nbsp;的下属对象变量名直接使用。在&nbsp;MF&nbsp;中不能。&nbsp;&nbsp;</span></li><li><span>(<span class="number">2</span><span>)解决方法&nbsp;&nbsp;</span></span></li><li><span>用&nbsp;getElementById(<span class="string">"idName"</span><span>)&nbsp;代替&nbsp;idName&nbsp;作为对象变量使用&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//用idName字符串取得对象的问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>(<span class="number">1</span><span>)现有问题&nbsp;&nbsp;</span></span></li><li><span>在IE中，利用&nbsp;eval(idName)&nbsp;可以取得&nbsp;id&nbsp;为&nbsp;idName&nbsp;的&nbsp;HTML&nbsp;对象，在MF&nbsp;中不能。&nbsp;&nbsp;</span></li><li><span>(<span class="number">2</span><span>)解决方法&nbsp;&nbsp;</span></span></li><li><span>用&nbsp;getElementById(idName)&nbsp;代替&nbsp;eval(idName)。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//变量名与某&nbsp;HTML&nbsp;对象&nbsp;id&nbsp;相同的问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>(<span class="number">1</span><span>)现有问题&nbsp;&nbsp;</span></span></li><li><span>在&nbsp;MF&nbsp;中，因为对象&nbsp;id&nbsp;不作为&nbsp;HTML&nbsp;对象的名称，所以可以使用与&nbsp;HTML&nbsp;对象&nbsp;id&nbsp;相同的变量名，IE&nbsp;中不能。&nbsp;&nbsp;</span></li><li><span>(<span class="number">2</span><span>)解决方法&nbsp;&nbsp;</span></span></li><li><span>在声明变量时，一律加上&nbsp;var&nbsp;，以避免歧义，这样在&nbsp;IE&nbsp;中亦可正常运行。&nbsp;&nbsp;</span></li><li><span>此外，最好不要取与&nbsp;HTML&nbsp;对象&nbsp;id&nbsp;相同的变量名，以减少错误。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//document.getElementsByName()&nbsp;和&nbsp;document.all[name]&nbsp;的问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>现有问题：在&nbsp;IE&nbsp;中，getElementsByName()、document.all[name]&nbsp;均不能用来取得&nbsp;div&nbsp;元素&nbsp;&nbsp;</span></li><li><span>（是否还有其它不能取的元素还不知道）。&nbsp;&nbsp;</span></li><li><span><span class="comment">//document.all</span><span>&nbsp;&nbsp;</span></span></li><li><span>Firefox可以兼容document.all，&nbsp;但会生成一条警告。可以用getElementById(<span class="string">"*"</span><span>)&nbsp;&nbsp;</span></span></li><li><span>或者&nbsp;getElementByTagName(<span class="string">"*"</span><span>)来代替&nbsp;&nbsp;</span></span></li><li><span>不过对于document.all.length等属性，则完全不兼容&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//input.type属性问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>说明:IE下input.type属性为只读;但是Firefox下input.type属性为读写&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//window.location.href问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>说明:IE或者Firefox2.<span class="number">0</span><span>.x下,可以使用window.location或window.location.href;Firefox1.</span><span class="number">5</span><span>.x下,&nbsp;&nbsp;</span></span></li><li><span>只能使用window.location&nbsp;&nbsp;</span></li><li><span>解决方法:使用window.location来代替window.location.href&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//模态和非模态窗口问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>说明:IE下,可以通过showModalDialog和showModelessDialog打开模态和非模态窗口;Firefox下则不能&nbsp;&nbsp;</span></li><li><span>解决方法:直接使用window.open(pageURL,name,parameters)方式打开新窗口。&nbsp;&nbsp;</span></li><li><span>如果需要将子窗口中的参数传递回父窗口,可以在子窗口中使用window.opener来访问父窗口.&nbsp;&nbsp;</span></li><li><span>例如：var&nbsp;parWin&nbsp;=&nbsp;window.opener;&nbsp;parWin.document.getElementById(<span class="string">"Aqing"</span><span>).value&nbsp;=</span><span class="string">"Aqing"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//frame问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>以下面的frame为例：&nbsp;&nbsp;</span></li><li><span>&lt;frame&nbsp;src=<span class="string">"xxx.html"</span><span>&nbsp;mce_src=</span><span class="string">"xxx.html"</span><span>&nbsp;id=</span><span class="string">"frameId"</span><span>&nbsp;name=</span><span class="string">"frameName"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>(<span class="number">1</span><span>)访问frame对象:&nbsp;&nbsp;</span></span></li><li><span>IE:使用window.frameId或者window.frameName来访问这个frame对象.&nbsp;frameId和frameName可以同名。&nbsp;&nbsp;</span></li><li><span>FF:只能使用window.frameName来访问这个frame对象.&nbsp;&nbsp;</span></li><li><span>另外，在IE和Firefox中都可以使用window.document.getElementById(<span class="string">"frameId"</span><span>)来访问这个frame对象.&nbsp;&nbsp;</span></span></li><li><span>(<span class="number">2</span><span>)切换frame内容:&nbsp;&nbsp;</span></span></li><li><span>在IE和Firefox中都可以使用window.document.getElementById(<span class="string">"testFrame"</span><span>).src&nbsp;=</span><span class="string">"xxx.html"</span><span>&nbsp;&nbsp;</span></span></li><li><span>或window.frameName.location=<span class="string">"xxx.html"</span><span>来切换frame的内容.&nbsp;&nbsp;</span></span></li><li><span>如果需要将frame中的参数传回父窗口(注意不是opener,而是parent&nbsp;frame)，可以在frme中使用parent来访问父窗口。&nbsp;&nbsp;</span></li><li><span>例如：window.parent.document.form1.filename.value=<span class="string">"Aqing"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//body问题</span><span>&nbsp;&nbsp;</span></span></li><li><span>Firefox的body在body标签没有被浏览器完全读入之前就存在；而IE的body则必须在body标签被浏览器完全读入之后才存在&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//事件委托方法</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：document.body.onload&nbsp;=&nbsp;inject;&nbsp;<span class="comment">//Function&nbsp;inject()在这之前已被实现</span><span>&nbsp;&nbsp;</span></span></li><li><span>FF：document.body.onload&nbsp;=&nbsp;inject();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//firefox与IE的父元素(parentElement)的区别</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：obj.parentElement&nbsp;&nbsp;</span></li><li><span>FF：obj.parentNode&nbsp;&nbsp;</span></li><li><span>解决方法:&nbsp;因为FF与IE都支持DOM,因此使用obj.parentNode是不错选择&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//innerText在IE中能正常工作，但是innerText在FireFox中却不行.&nbsp;需用textContent</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//FireFox中设置HTML标签的style时，所有位置性和字体尺寸的值必须后跟px。这个ie也是支持的</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//父节点、子节点和删除节点</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：parentElement、parement.children，element.romoveNode(<span class="keyword">true</span><span>)。&nbsp;&nbsp;</span></span></li><li><span>FF：parentNode、parentNode.childNodes，node.parentNode.removeChild(node)。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//对select的options集合操作</span><span>&nbsp;&nbsp;</span></span></li><li><span>枚举元素除了[]外，SelectName.options.item()也是可以的,&nbsp;另外SelectName.options.length,&nbsp;&nbsp;</span></li><li><span>SelectName.options.add/remove都可以在两种浏览器上使用。&nbsp;&nbsp;</span></li><li><span>注意在add后赋值元素，否则会失败&nbsp;&nbsp;</span></li><li><span>动态删除select中的所有options：&nbsp;&nbsp;</span></li><li><span>document.getElementById(<span class="string">"ddlResourceType"</span><span>).options.length=</span><span class="number">0</span><span>;&nbsp;&nbsp;</span></span></li><li><span>动态删除select中的某一项option：&nbsp;&nbsp;</span></li><li><span>document.getElementById(<span class="string">"ddlResourceType"</span><span>).options.remove(indx);&nbsp;&nbsp;</span></span></li><li><span>动态添加select中的项option:&nbsp;&nbsp;</span></li><li><span>document.getElementById(<span class="string">"ddlResourceType"</span><span>).options.add(</span><span class="keyword">new</span><span>&nbsp;Option(text,value));&nbsp;&nbsp;</span></span></li><li><span>IE&nbsp;FF&nbsp;动态删除通用方法：&nbsp;&nbsp;</span></li><li><span>document.getElementById(<span class="string">"ddlResourceType"</span><span>).options[indx]&nbsp;=</span><span class="keyword">null</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//捕获事件</span><span>&nbsp;&nbsp;</span></span></li><li><span>问题：&nbsp;&nbsp;</span></li><li><span>FF没有setCapture()、releaseCapture()方法&nbsp;&nbsp;</span></li><li><span>解决方法：&nbsp;&nbsp;</span></li><li><span>IE:&nbsp;&nbsp;</span></li><li><span>obj.setCapture();&nbsp;&nbsp;</span></li><li><span>obj.releaseCapture();&nbsp;&nbsp;</span></li><li><span>FF:&nbsp;&nbsp;</span></li><li><span>window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);&nbsp;&nbsp;</span></li><li><span>window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);&nbsp;&nbsp;</span></li><li><span><span class="keyword">if</span><span>&nbsp;(!window.captureEvents)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>o.setCapture();&nbsp;&nbsp;</span></li><li><span>}<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li><li><span><span class="keyword">if</span><span>&nbsp;(!window.captureEvents)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>o.releaseCapture();&nbsp;&nbsp;</span></li><li><span>}<span class="keyword">else</span><span>&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//禁止选取网页内容</span><span>&nbsp;&nbsp;</span></span></li><li><span>问题：&nbsp;&nbsp;</span></li><li><span>FF需要用CSS禁止，IE用JS禁止&nbsp;&nbsp;</span></li><li><span>解决方法：&nbsp;&nbsp;</span></li><li><span>IE:&nbsp;obj.onselectstart&nbsp;=function()&nbsp;{returnfalse;}&nbsp;&nbsp;</span></li><li><span>FF:&nbsp;-moz-user-select:none;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//画图</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：VML。&nbsp;&nbsp;</span></li><li><span>FF：SVG。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//CSS：透明</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：filter:progid:DXImageTransform.Microsoft.Alpha(style=<span class="number">0</span><span>,opacity=</span><span class="number">60</span><span>)。&nbsp;&nbsp;</span></span></li><li><span>FF：opacity:<span class="number">0.6</span><span>。&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//CSS：圆角</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：不支持圆角。&nbsp;&nbsp;</span></li><li><span>FF：-moz-border-radius:4px，或者-moz-border-radius-topleft:4px;-moz-border-radius-topright:4px;&nbsp;&nbsp;</span></li><li><span>-moz-border-radius-bottomleft:4px;-moz-border-radius-&nbsp;bottomright:4px;。&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">//CSS：双线凹凸边框</span><span>&nbsp;&nbsp;</span></span></li><li><span>IE：border:2px&nbsp;outset;。&nbsp;&nbsp;</span></li><li><span>FF：-moz-&nbsp;border-top-colors:&nbsp;#d4d0c8&nbsp;white;-moz-border-left-colors:&nbsp;#d4d0c8&nbsp;white;&nbsp;&nbsp;</span></li><li><span>-moz-border-right-colors:#<span class="number">404040</span><span>&nbsp;#</span><span class="number">808080</span><span>;-moz-border-bottom-colors:#</span><span class="number">404040</span><span>&nbsp;#</span><span class="number">808080</span><span>;。&nbsp;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="java" style="display: none; " codeable_id="1151078" codeable_type="Blog" source_url="http://liuzidong.iteye.com/blog/1151078" pre_index="0" title="兼容IE和FF的js脚本做法（比较常用）">/*以下以 IE 代替 Internet Explorer，以 MF/FF 代替 Mozzila Firefox */
+
+//window.event
+IE：有window.event对象
+FF：没有window.event对象。可以通过给函数的参数传递event对象。如onmousemove=doMouseMove(event)
+解决方法：var event = event || window.event;
+example:
+&lt;script&gt;
+function test(event) {
+var event = event || window.event;
+//do Something
+}
+&lt;/script&gt;
+&lt;input type="button" value="click" onclick="test(event)"/&gt;
+
+
+//鼠标当前坐标
+IE：event.x和event.y。
+FF：event.pageX和event.pageY。
+通用：两者都有event.clientX和event.clientY属性。
+
+//鼠标当前坐标(加上滚动条滚过的距离)
+IE：event.offsetX和event.offsetY。
+FF：event.layerX和event.layerY。
+解决方法：
+&lt;script&gt;
+function test(event) {
+var event = event || window.event;
+//or var event = event ? event : window.event;//这2中都可以，也可以用if else（这简写）
+var x = event.offsetX || event.layerX;
+var y = event.offsetY || event.layerY;
+//do Something
+}
+&lt;/script&gt;
+&lt;div onmousedown="test(event)"&gt;&lt;/div&gt;
+/**其他的兼容的解决方法类似，不再一一举例**/
+
+//event.srcElement问题
+说明:IE下,event对象有srcElement属性,但是没有target属性;Firefox下,even对象有target属性,
+但是没有srcElement属性.
+解决方法:使用obj(obj = event.srcElement ? event.srcElement : event.target;)
+来代替IE下的event.srcElement或者
+Firefox下的event.target. 请同时注意event的兼容性问题。
+
+//event.toElement问题
+问题：
+IE下，even对象有srcElement属性，但是没有target属性；
+Firefox下，even对象有target属性，但是没有srcElement属性
+解决方法：
+var target = e.relatedTarget || e.toElement;
+
+//标签的x和y的坐标位置：style.posLeft 和 style.posTop
+IE：有。
+FF：没有。
+通用：object.offsetLeft 和 object.offsetTop。
+
+//窗体的高度和宽度
+IE：document.body.offsetWidth和document.body.offsetHeight。注意：此时页面一定要有body标签。
+FF：window.innerWidth和window.innerHegiht，
+以及document.documentElement.clientWidth和document.documentElement.clientHeight。
+通用：document.body.clientWidth和document.body.clientHeight。
+
+//添加事件
+IE：element.attachEvent("onclick", function);。
+FF：element.addEventListener("click", function, true)。
+通 用：element.onclick=function。虽然都可以使用onclick事件，但是onclick和上面两种方法的效果是不一样的，
+onclick 只有执行一个过程，而attachEvent和addEventListener执行的是一个过程列表，也就是多个过程。
+例如：element.attachEvent("onclick", func1);
+element.attachEvent("onclick", func2)这样func1和func2都会被执行。
+
+//标签的自定义属性
+IE：如果给标签div1定义了一个属性value，可以div1.value和div1["value"]取得该值。
+FF：不能用div1.value和div1["value"]取。
+通用：div1.getAttribute("value")。
+
+//document.form.item 问题
+IE:现有问题：现有代码中存在许多 document.formName.item("itemName") 这样的语句，不能在 MF 下运行
+FF/IE: document.formName.elements["elementName"]
+
+//集合/数组类对象问题
+(1)现有问题：
+现有代码中许多集合类对象取用时使用 ()，IE 能接受，MF 不能。
+(2)解决方法：
+改用 [] 作为下标运算。如：document.forms("formName") 改为 document.forms["formName"]。
+又如：document.getElementsByName("inputName")(1) 改为 document.getElementsByName("inputName")[1]
+
+//HTML 对象的 id 作为对象名的问题
+(1)现有问题
+在 IE 中，HTML 对象的 ID 可以作为 document 的下属对象变量名直接使用。在 MF 中不能。
+(2)解决方法
+用 getElementById("idName") 代替 idName 作为对象变量使用
+
+//用idName字符串取得对象的问题
+(1)现有问题
+在IE中，利用 eval(idName) 可以取得 id 为 idName 的 HTML 对象，在MF 中不能。
+(2)解决方法
+用 getElementById(idName) 代替 eval(idName)。
+
+//变量名与某 HTML 对象 id 相同的问题
+(1)现有问题
+在 MF 中，因为对象 id 不作为 HTML 对象的名称，所以可以使用与 HTML 对象 id 相同的变量名，IE 中不能。
+(2)解决方法
+在声明变量时，一律加上 var ，以避免歧义，这样在 IE 中亦可正常运行。
+此外，最好不要取与 HTML 对象 id 相同的变量名，以减少错误。
+
+//document.getElementsByName() 和 document.all[name] 的问题
+现有问题：在 IE 中，getElementsByName()、document.all[name] 均不能用来取得 div 元素
+（是否还有其它不能取的元素还不知道）。
+//document.all
+Firefox可以兼容document.all， 但会生成一条警告。可以用getElementById("*")
+或者 getElementByTagName("*")来代替
+不过对于document.all.length等属性，则完全不兼容
+
+//input.type属性问题
+说明:IE下input.type属性为只读;但是Firefox下input.type属性为读写
+
+//window.location.href问题
+说明:IE或者Firefox2.0.x下,可以使用window.location或window.location.href;Firefox1.5.x下,
+只能使用window.location
+解决方法:使用window.location来代替window.location.href
+
+//模态和非模态窗口问题
+说明:IE下,可以通过showModalDialog和showModelessDialog打开模态和非模态窗口;Firefox下则不能
+解决方法:直接使用window.open(pageURL,name,parameters)方式打开新窗口。
+如果需要将子窗口中的参数传递回父窗口,可以在子窗口中使用window.opener来访问父窗口.
+例如：var parWin = window.opener; parWin.document.getElementById("Aqing").value ="Aqing";
+
+//frame问题
+以下面的frame为例：
+&lt;frame src="xxx.html" mce_src="xxx.html" id="frameId" name="frameName"/&gt;
+(1)访问frame对象:
+IE:使用window.frameId或者window.frameName来访问这个frame对象. frameId和frameName可以同名。
+FF:只能使用window.frameName来访问这个frame对象.
+另外，在IE和Firefox中都可以使用window.document.getElementById("frameId")来访问这个frame对象.
+(2)切换frame内容:
+在IE和Firefox中都可以使用window.document.getElementById("testFrame").src ="xxx.html"
+或window.frameName.location="xxx.html"来切换frame的内容.
+如果需要将frame中的参数传回父窗口(注意不是opener,而是parent frame)，可以在frme中使用parent来访问父窗口。
+例如：window.parent.document.form1.filename.value="Aqing";
+
+//body问题
+Firefox的body在body标签没有被浏览器完全读入之前就存在；而IE的body则必须在body标签被浏览器完全读入之后才存在
+
+//事件委托方法
+IE：document.body.onload = inject; //Function inject()在这之前已被实现
+FF：document.body.onload = inject();
+
+//firefox与IE的父元素(parentElement)的区别
+IE：obj.parentElement
+FF：obj.parentNode
+解决方法: 因为FF与IE都支持DOM,因此使用obj.parentNode是不错选择
+
+//innerText在IE中能正常工作，但是innerText在FireFox中却不行. 需用textContent
+
+//FireFox中设置HTML标签的style时，所有位置性和字体尺寸的值必须后跟px。这个ie也是支持的
+
+//父节点、子节点和删除节点
+IE：parentElement、parement.children，element.romoveNode(true)。
+FF：parentNode、parentNode.childNodes，node.parentNode.removeChild(node)。
+
+//对select的options集合操作
+枚举元素除了[]外，SelectName.options.item()也是可以的, 另外SelectName.options.length,
+SelectName.options.add/remove都可以在两种浏览器上使用。
+注意在add后赋值元素，否则会失败
+动态删除select中的所有options：
+document.getElementById("ddlResourceType").options.length=0;
+动态删除select中的某一项option：
+document.getElementById("ddlResourceType").options.remove(indx);
+动态添加select中的项option:
+document.getElementById("ddlResourceType").options.add(new Option(text,value));
+IE FF 动态删除通用方法：
+document.getElementById("ddlResourceType").options[indx] =null;
+
+//捕获事件
+问题：
+FF没有setCapture()、releaseCapture()方法
+解决方法：
+IE:
+obj.setCapture();
+obj.releaseCapture();
+FF:
+window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+if (!window.captureEvents) {
+o.setCapture();
+}else {
+window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+}
+if (!window.captureEvents) {
+o.releaseCapture();
+}else {
+window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+}
+
+
+//禁止选取网页内容
+问题：
+FF需要用CSS禁止，IE用JS禁止
+解决方法：
+IE: obj.onselectstart =function() {returnfalse;}
+FF: -moz-user-select:none;
+
+
+//画图
+IE：VML。
+FF：SVG。
+
+//CSS：透明
+IE：filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=60)。
+FF：opacity:0.6。
+
+//CSS：圆角
+IE：不支持圆角。
+FF：-moz-border-radius:4px，或者-moz-border-radius-topleft:4px;-moz-border-radius-topright:4px;
+-moz-border-radius-bottomleft:4px;-moz-border-radius- bottomright:4px;。
+
+//CSS：双线凹凸边框
+IE：border:2px outset;。
+FF：-moz- border-top-colors: #d4d0c8 white;-moz-border-left-colors: #d4d0c8 white;
+-moz-border-right-colors:#404040 #808080;-moz-border-bottom-colors:#404040 #808080;。 
+</pre>
+  </div>
+
+  
+
+
+  <script type="text/javascript"><!--
+google_ad_client = "pub-1076724771190722";
+/* JE个人博客468x60 */
+google_ad_slot = "5506163105";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><iframe allowtransparency="true" frameborder="0" height="60" hspace="0" marginwidth="0" marginheight="0" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){i+=&#39;.call&#39;;setTimeout(h,0)}else if(h.match){i+=&#39;.nav&#39;;w.location.replace(h)}s.log&amp;&amp;s.log.push(i)}" scrolling="no" vspace="0" width="468" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+  
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type="sina" href="javascript:;" title="分享到新浪微博"><img src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/t_sina.gif"></a>
+      <a data-type="qq" href="javascript:;" title="分享到腾讯微博"><img src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/t_qq.gif"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="http://liuzidong.iteye.com/blog/1151181" class="next" title="jQuery之入门(ready)">jQuery之入门(ready)</a>
+      |
+      <a href="http://liuzidong.iteye.com/blog/1151001" class="pre" title="javascript基础知识">javascript基础知识</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>10:35</li>
+      <li><a href="http://liuzidong.iteye.com/blog/1151078#comments">评论</a> / 浏览 (0 / 76)</li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/web">Web前端</a></li>      
+      
+      <li class="last"><a href="http://www.iteye.com/wiki/blog/1151078" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="http://liuzidong.iteye.com/login" style="background-color:white;"> <img src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/login_icon.png" style="vertical-align:middle; margin-right: 10px;"></a><a href="http://liuzidong.iteye.com/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1151078;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', '兼容IE和FF的js脚本做法（比较常用）');
+  });
+  $$('#main .blog_comment > div').each(function(comment){// comment
+    var post_id = comment.id.substr(2);
+    $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+      var location = window.location;
+      source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+      source_url += "#" + comment.id;
+      pre.writeAttribute('codeable_id', post_id);
+      pre.writeAttribute('codeable_type', "Post");
+      pre.writeAttribute('source_url', source_url);
+      pre.writeAttribute('pre_index', index);
+      pre.writeAttribute('title', '兼容IE和FF的js脚本做法（比较常用）');
+    });
+  });
+  code_favorites_init();
+
+  fix_image_size($$('div.blog_content img'), 700);
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+            <div id="blog_owner_logo"><a href="http://liuzidong.iteye.com/"><img alt="liuzidong的博客" class="logo" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/cc73ac70-f8f8-3426-a4cf-f5846f153927.jpg" title="liuzidong的博客: 咫尺天涯"></a></div>
+            <div id="blog_owner_name">liuzidong</div>
+          </div>
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 97989 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/icon_minigender_1.gif" title="男"></li>
+              <li>来自: 成都</li>
+              <li><img src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/offline.gif"></li>
+              <li>
+                <a href="http://liuzidong.iteye.com/blog/profile" class="profile">详细资料</a>
+                <a href="http://liuzidong.iteye.com/blog/guest_book" class="guest_book">留言簿</a>
+              </li>
+              
+            </ul>
+            <h5>搜索本博客</h5>
+            <form action="http://liuzidong.iteye.com/blog/search" method="get">              <input class="text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text">
+              <input class="submit" type="submit" value="搜索">
+            </form>          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style="font-weight:normal;font-size:12px;padding-left:30px;"><a href="http://liuzidong.iteye.com/blog/user_visits">&gt;&gt;更多访客</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://ivan18248.iteye.com/" target="_blank"><img alt="ivan18248的博客" class="logo" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/ee9ccd80-1d87-3a93-9e5b-db92362d6bfd-thumb.jpg" title="ivan18248的博客: "></a></div>
+                <div class="left"><a href="http://ivan18248.iteye.com/" target="_blank">ivan18248</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://train2.iteye.com/" target="_blank"><img alt="train2的博客" class="logo" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/user-logo-thumb.gif" title="train2的博客: "></a></div>
+                <div class="left"><a href="http://train2.iteye.com/" target="_blank">train2</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://haotudou.iteye.com/" target="_blank"><img alt="haotudou的博客" class="logo" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/user-logo-thumb.gif" title="haotudou的博客: "></a></div>
+                <div class="left"><a href="http://haotudou.iteye.com/" target="_blank">haotudou</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://oudoud.iteye.com/" target="_blank"><img alt="oudoud的博客" class="logo" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/8f613a84-1314-3666-8f3d-825e38686c0d-thumb.bmp" title="oudoud的博客: 飞猪"></a></div>
+                <div class="left"><a href="http://oudoud.iteye.com/" target="_blank">oudoud</a></div>
+              </div>
+            
+          </div>
+                      <div id="blog_menu">
+              <h5>博客分类</h5>
+              <ul>
+                <li><a href="http://liuzidong.iteye.com/">全部博客 (297)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35011">J2EE (44)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35013">JavaScript (35)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35014">Spring (17)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35015">Struts (4)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35016">CSS (8)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35018">Hibernate (16)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35019">Java (54)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35020">DWR (4)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35023">JSON (2)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35240">XFIRE (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35241">Tomcat (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/35242">Ant (2)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/37406">设计模式 (2)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/37579">经典收藏 (2)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/57951">JSP (9)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/61764">Linux (0)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/81233">WebLogic (10)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/94425">myeclipse (11)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/95796">Buffalo (4)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/96408">文件上传相关 (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/97326">oracle (32)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/97334">html (6)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/98955">JSTL (3)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/115301">SVN (2)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/116646">GIT (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/118046">孙卫琴（Java网络编程精解） (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/118187">DOM4J (2)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/119008">Swing (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/119954">AJAX (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/120236">Eclipse (3)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/121464">日志组件 (3)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/125536">PowerDesigner (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/128849">Jquery (17)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/129243">IT技术开发相关网址 (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/132201">Nutz (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/132283">其它 (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/135264">Velocity (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/140162">WebService (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/143218">MySql (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/152509">Android (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/162890">Maven (1)</a></li>
+                
+                  <li><a href="http://liuzidong.iteye.com/category/163678">Quartz (11)</a></li>
+                
+              </ul>
+            </div>
+            
+            <div id="guest_books">
+              <h5>我的留言簿 <span style="font-weight:normal;font-size:12px;padding-left:20px;"><a href="http://liuzidong.iteye.com/blog/guest_book">&gt;&gt;更多留言</a></span></h5>
+              <ul>
+                
+                  <li>
+                  你说的这句话我不明白呀，关于那方面的呢<br>
+                  -- by <a href="http://liuzidong.iteye.com/blog/guest_book#44009">liuzidong</a>
+                  </li>
+                
+                  <li>
+                   漂过<br>
+                  -- by <a href="http://liuzidong.iteye.com/blog/guest_book#44008">liuzidong</a>
+                  </li>
+                
+                  <li>
+                  楼主能留qq吗，代码有点看不懂。<br>
+                  -- by <a href="http://liuzidong.iteye.com/blog/guest_book#44007">用手踢球</a>
+                  </li>
+                
+              </ul>
+            </div>
+            <div id="blog_others">
+              <h5>其他分类</h5>
+              <ul>
+                <li><a href="http://liuzidong.iteye.com/blog/favorite">我的收藏</a> (27)</li>
+                <li><a href="http://liuzidong.iteye.com/blog/code_favorite">我的代码</a> (0)</li>
+                                                <li><a href="http://liuzidong.iteye.com/blog/topic">我的论坛主题帖</a> (0)</li>
+                <li><a href="http://liuzidong.iteye.com/blog/post">我的所有论坛帖</a> (0)</li>
+                <li><a href="http://liuzidong.iteye.com/blog/article">我的精华良好帖</a> (0)</li>
+                              </ul>
+            </div>
+            <div id="recent_groups">
+              <h5>最近加入群组</h5>
+              <ul>
+                
+                  <li><a href="http://jquery.group.iteye.com/">Jquery</a></li>
+                
+                  <li><a href="http://fortune.group.iteye.com/">理财投资圈</a></li>
+                
+                  <li><a href="http://lucene-group.group.iteye.com/">lucene爱好者</a></li>
+                
+                  <li><a href="http://struts2.group.iteye.com/">struts2</a></li>
+                
+                  <li><a href="http://hzjavaeyer.group.iteye.com/">javascript研究小组</a></li>
+                
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档</h5>
+              <ul>
+                
+                  <li><a href="http://liuzidong.iteye.com/blog/monthblog/2011-09">2011-09</a> (14)</li>
+                
+                  <li><a href="http://liuzidong.iteye.com/blog/monthblog/2011-08">2011-08</a> (33)</li>
+                
+                  <li><a href="http://liuzidong.iteye.com/blog/monthblog/2011-07">2011-07</a> (15)</li>
+                
+                <li><a href="http://liuzidong.iteye.com/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+              <div id="comments_top">
+                <h5>评论排行榜</h5>
+                <ul>
+                  
+                    <li><a href="http://liuzidong.iteye.com/blog/1118992" title="Quartz2之入门示例">Quartz2之入门示例</a></li>
+                  
+                    <li><a href="http://liuzidong.iteye.com/blog/897047" title="Spring MVC入门(登录示例)">Spring MVC入门(登录示例)</a></li>
+                  
+                    <li><a href="http://liuzidong.iteye.com/blog/1069343" title="SpringMVC:整合JQUERY与JSON">SpringMVC:整合JQUERY与JSON</a></li>
+                  
+                    <li><a href="http://liuzidong.iteye.com/blog/935493" title="Struts2.2+Spring3.1+Hibernate3.6整合(登录示例及CRUD操作)">Struts2.2+Spring3.1+Hibernate3.6整合(登 ...</a></li>
+                  
+                    <li><a href="http://liuzidong.iteye.com/blog/1147402" title="java之面试题(字符串数组连接求最小无重复的字符串)">java之面试题(字符串数组连接求最小无重复 ...</a></li>
+                  
+                </ul>
+              </div>
+            
+            <div id="rss">
+              <ul>
+                <li><a href="http://liuzidong.iteye.com/rss" target="_blank"><img alt="Rss" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/rss.png"></a></li>
+                <li><a href="http://fusion.google.com/add?feedurl=http://liuzidong.iteye.com/rss" target="_blank"><img alt="Rss_google" src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/rss_google.gif"></a></li>
+              </ul>
+            </div>
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br>
+          © 2003-2011 ITeye.com.   All rights reserved.  [ 京ICP证110151号 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script><img src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/saved_resource" width="0" height="0">
+
+    
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./兼容IE和FF的js脚本做法（比较常用） - 咫尺天涯 - ITeye技术网站_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("liuzidong");
+pageTracker._trackPageview();
+</script>
+      
+  
+
+</body></html>

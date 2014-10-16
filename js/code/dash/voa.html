@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0060)http://www.lizhenwen.com/code-demo/HTML5APIs/sqldatabase.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>HTML5 APIs - 本地SQL数据库（Web SQL Database）</title>
+<style>
+body
+{
+	background: #EEE;
+	font-family: Arial;
+}
+
+.text
+{
+	font-family: Arial;
+	font-size: 20px;
+	padding: 10px;
+	background: #EEE;
+}
+</style>
+<script type="text/javascript" src="jquery-1.3.2.js"></script>
+<script type="text/javascript">
+/*
+var len = 0;
+$(function(){
+	var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024),
+		addMsg = function (msg) {
+			var box = document.getElementById('box'),
+				p = document.createElement('p');
+			p.innerHTML = msg;
+			box.appendChild(p);
+		};
+	
+	db.transaction(function (tx) {
+		tx.executeSql('CREATE TABLE IF NOT EXISTS voa (id unique, text)');
+		tx.executeSql('SELECT id FROM voa', [], function (tx, results) {
+			len = results.rows.length;
+			addMsg('Passage: '+len);
+
+			//for (var i = 0; i < len; i++){
+			//	addMsg("<b>" + results.rows.item(i).text + "</b>");
+			//}
+		}, null);
+	});
+	len++;
+	var index = 0;
+	$("#submit").click(function(){
+		db.transaction(function (tx) {
+			if(index == 0)
+			{
+				tx.executeSql('INSERT INTO voa (id, text) VALUES (' + len + ', "' + $("#passage").val() + '")');
+				index++;
+			}
+			else
+			{
+				//tx.executeSql('UPDATE voa SET (id, text) VALUES (' + len + ', "' + $("#passage").val() + '")');
+				tx.executeSql('UPDATE voa SET text = ? WHERE id = ?',['"'+$("#passage").val()+'"',1],function(tx,result){alert(result.rows.length+"  "+len)},function(tx,error){alert(error)});
+			}
+		});
+		//alert($("#passage").val())
+		$("#hint").text("Saved at " + (new Date()));
+	},3000);
+});
+*/
+$(function(){
+	var db = openDatabase('testSQL', '1.0', 'my first database', 2 * 1024 * 1024);
+	db.transaction(function (tx) {
+		tx.executeSql('CREATE TABLE IF NOT EXISTS testSQL (id unique, text)');
+		tx.executeSql('INSERT INTO testSQL (id, text) VALUES (1, "aaaaaaaaa")');
+		tx.executeSql('INSERT INTO testSQL (id, text) VALUES (2, "bbbbbbbbb")');
+		tx.executeSql('UPDATE testSQL set text=? WHERE id=?',["ccc", 2],function(tx,result){
+			alert(result);
+		},function(tx,error){alert(error);});
+		 tx.executeSql('DELETE from testSQL',[],function(tx,result){},function(tx,error){	 });
+	});
+})
+
+</script>
+</head>
+<body>
+<!--
+<audio id="a" src="" controls autoplay loop> 
+	HTML5 audio not supported
+</audio>
+<input id="play" type="button" value="play" /><input id="pause" type="button" value="pause" />
+<input id="submit" type="button" value="submit" />
+<input style="float:right" type="text" id="path"><br />
+<textarea id="passage" class="text" cols="124" rows="23"></textarea>
+
+<div id="box"></div>
+<div id="hint"></div>
+-->
+<div id="b"></div>
+</body>
+</html>

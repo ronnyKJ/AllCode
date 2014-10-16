@@ -1,0 +1,112 @@
+#main
+{
+	-webkit-perspective: 2000px;
+}
+
+#skill
+{
+	background: none;
+}
+
+#top-logo
+{
+	margin: 130px;
+	-webkit-animation: ro 4s infinite ease-in-out;
+	-webkit-animation-direction: alternate;
+}
+
+@-webkit-keyframes ro {
+	0%{-webkit-transform: rotate(-45deg);}
+	100%{-webkit-transform: rotate(45deg);}
+}
+
+#cube_container
+{
+	/*background: rgba(0, 0, 0, 0.4);*/
+	position: relative;
+	width: 360px;
+	height: 360px;
+	margin: 0px auto 130px;
+	padding: 0;
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: cube 6s infinite linear;
+	-webkit-transform:rotateX(80deg) rotateY(360deg);
+}
+
+#cube_container p
+{
+	position: absolute;
+	top: 0px;
+	width: 360px;
+	height: 360px;
+	margin: 0;
+	overflow-y: auto;
+}
+
+#cube_container p.front
+{
+	background: -webkit-gradient(radial,180 180,500,180 180,0,from(rgba(180, 180, 180, 0.95)),color-stop(1,rgba(255, 255, 255, 0.95)));
+	-webkit-transform: translateZ(180px);
+}
+#cube_container p.back
+{
+	background: -webkit-gradient(radial,180 180,500,180 180,0,from(rgba(180, 180, 180, 0.95)),color-stop(1,rgba(255, 255, 255, 0.95)));
+	-webkit-transform: rotateY(180deg) translateZ(180px);
+}
+#cube_container p.left
+{
+	background: -webkit-gradient(radial,180 180,500,180 180,0,from(rgba(180, 180, 180, 0.95)),color-stop(1,rgba(255, 255, 255, 0.95)));
+	-webkit-transform: rotateY(-90deg) translateZ(180px);
+}
+#cube_container p.right
+{
+	background: -webkit-gradient(radial,180 180,500,180 180,0,from(rgba(180, 180, 180, 0.95)),color-stop(1,rgba(255, 255, 255, 0.95)));
+	-webkit-transform: rotateY(90deg) translateZ(180px);
+}
+#cube_container p.top
+{
+	background: -webkit-gradient(radial,180 180,500,180 180,0,from(rgba(180, 180, 180, 0.95)),color-stop(1,rgba(255, 255, 255, 0.95)));
+	-webkit-transform: rotateX(-90deg) translateZ(180px);
+}
+#cube_container p.bottom
+{
+	background: -webkit-gradient(radial,180 180,500,180 180,0,from(rgba(180, 180, 180, 0.95)),color-stop(1,rgba(255, 255, 255, 0.95)));
+	-webkit-transform: rotateX(90deg) translateZ(180px);
+}
+
+#cube_container em
+{
+	display: inline-block;
+	margin: 20px 20px 0;
+}
+
+#cube_container span
+{
+	display: inline-block;
+	margin: 0 20px;
+}
+
+#cube_container span.experience, #cube_container span.year
+{
+	display: inline;
+	margin: 0 4px;
+}
+
+#cube_container span.time
+{
+	margin-left: 35px;
+}
+
+#cube_container span#skill
+{
+	margin-left: 35px;
+	padding: 0;
+}
+
+#cube_container b.label
+{
+	display: inline-block;
+	height: 20px;
+	margin: 6px 0;
+	padding: 0 10px;
+}

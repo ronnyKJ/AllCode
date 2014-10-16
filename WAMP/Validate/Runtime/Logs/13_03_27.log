@@ -1,0 +1,9 @@
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Use of undefined constant URL_REWRITE - assumed 'URL_REWRITE' Dispatcher.class.php 第 40 行.
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Use of undefined constant URL_COMPAT - assumed 'URL_COMPAT' Dispatcher.class.php 第 46 行.
+[ 2013-03-27T00:05:56+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.071656s ]
+[ 2013-03-27T00:05:56+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.002294s ]
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Use of undefined constant THINK_VERSION - assumed 'THINK_VERSION' View.class.php 第 186 行.
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Undefined variable: odd 0573c70d8602d961e53f714ea77bd87c.php 第 70 行.
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Undefined variable: odd 0573c70d8602d961e53f714ea77bd87c.php 第 70 行.
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Use of undefined constant URL_REWRITE - assumed 'URL_REWRITE' Dispatcher.class.php 第 40 行.
+[ 2013-03-27T00:05:56+08:00 ] NOTIC: [8] Use of undefined constant URL_COMPAT - assumed 'URL_COMPAT' Dispatcher.class.php 第 46 行.

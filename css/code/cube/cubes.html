@@ -1,0 +1,185 @@
+<html>
+<head><title></title>
+<style>
+.cube{
+	position: relative;
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	float: left;
+	/*-webkit-perspective: 9000px;*/
+	-webkit-transform-style: preserve-3d;
+	-webkit-animation: rotate 12s infinite ease;
+
+	-webkit-transform: rotateY(0deg) rotateX(0deg);
+	-webkit-animation-delay: 2.5s;
+}
+
+@-webkit-keyframes rotate
+{
+	5%{-webkit-transform: rotateX(90deg);}
+	20%{-webkit-transform: rotateX(90deg);}
+	25%{-webkit-transform: rotateY(90deg);}
+	40%{-webkit-transform: rotateY(90deg);}
+	45%{-webkit-transform: rotateY(180deg);}
+	60%{-webkit-transform: rotateY(180deg);}
+	65%{-webkit-transform: rotateY(270deg);}
+	80%{-webkit-transform: rotateY(270deg);}
+	85%{-webkit-transform: rotateY(360deg);}
+	100%{-webkit-transform: rotateY(360deg);}
+}
+
+.cube .face{
+	background: rgba(0, 0, 0, 0.3);
+	background-size: 800px;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left:0;
+	top:0;
+}
+
+.cube .f1{/*前*/
+	/*background: rgba(255, 0, 0, 1);*/
+	-webkit-transform : rotateY(0deg) translateZ(50px);
+}
+.cube .f2{/*后*/
+	/*background: rgba(0, 255, 0, 1);*/
+	-webkit-transform : rotateY(180deg) translateZ(50px);
+}
+.cube .f3{/*左*/
+	/*display: none;*/
+	/*background: rgba(0, 0, 255, 1);*/
+	-webkit-transform : rotateY(-90deg) translateZ(50px);
+}
+.cube .f4{/*右*/
+	/*display: none;*/
+	/*background: rgba(255, 255, 0, 1);*/
+	-webkit-transform : rotateY(90deg) translateZ(50px);
+}
+.cube .f5{/*上*/
+	/*display: none;*/
+	/*background: rgba(255, 0, 255, 1);*/
+	-webkit-transform : rotateX(90deg) translateZ(50px);
+}
+.cube .f6{/*下*/
+	/*display: none;*/
+	/*background: rgba(0, 255, 255, 1);*/
+	-webkit-transform : rotateX(-90deg) translateZ(50px);
+}
+
+.container{
+	width : 800px;
+	height : 500px;
+	margin: 50px auto;
+	display: none;
+}
+</style>
+
+</head>
+<body>
+<div class="container"></div>
+</body>
+<script>
+function transform(){
+	// var cubeHTML = '<div class="cube"><div class="face f1">前</div><div class="face f2">后</div><div class="face f3">左</div><div class="face f4">右</div><div class="face f5">上</div><div class="face f6">下</div></div>';
+	var cubeHTML = '<div class="cube"><div class="face f1"></div><div class="face f2"></div><div class="face f3"></div><div class="face f4"></div><div class="face f5"></div><div class="face f6"></div></div>';
+
+	var _ = function(slct){return document.querySelectorAll(slct);}
+
+	var cubes = [];
+	for (var i = 0; i < 8*5; i++) {
+		cubes.push(cubeHTML);
+	};
+	_('.container')[0].innerHTML = cubes.join('');
+	_('.container')[0].style.display = 'block';
+
+	var xL = yL = x = y = 0;
+	var f1 = _('.cube .f1');
+	var f2 = _('.cube .f2');
+	var f3 = _('.cube .f3');
+	var f4 = _('.cube .f4');
+	var f5 = _('.cube .f5');
+	var f6 = _('.cube .f6');
+
+	var cubeA = _('.cube');
+	for (var i = 0; i < cubeA.length; i++) {
+		cubeA[i].style.webkitAnimationDelay = 2.5 + 0.03*i + 's';
+	};
+
+	for (var i = 0; i < f1.length; i++) {
+		xL = i%8;
+		yL = parseInt(i/8);
+		x = -xL*100;
+		y = -yL*100;
+		f1[i].style.background = 'url(img/bg1.png) no-repeat '+x+'px '+y+'px';
+		f2[i].style.background = 'url(img/bg2.png) no-repeat '+x+'px '+y+'px';
+		f3[i].style.background = 'url(img/bg3.png) no-repeat '+x+'px '+y+'px';
+		f4[i].style.background = 'url(img/bg4.png) no-repeat '+x+'px '+y+'px';
+		f5[i].style.background = 'url(img/bg5.png) no-repeat '+x+'px '+y+'px';
+		f6[i].style.background = 'url(img/bg6.png) no-repeat '+x+'px '+y+'px';
+
+		f1[i].style.backgroundSize = '800px';
+		f2[i].style.backgroundSize = '800px';
+		f3[i].style.backgroundSize = '800px';
+		f4[i].style.backgroundSize = '800px';
+		f5[i].style.backgroundSize = '800px';
+		f6[i].style.backgroundSize = '800px';
+	};
+}
+
+function progress(src, callback){
+	var src = src || [];
+	var img, curr = 0, len = src.length;
+
+	var check = function(){
+		curr++;
+		var rate = curr/len;
+		progress.bar.innerHTML = parseInt(rate*100)+'%';
+		progress.bar.style.width = rate*200 + 'px';
+		if(curr == len){
+			progress.bar.style.display = 'none';
+			callback && callback();
+		}
+	}
+
+	if(!progress.bar){
+		progress.bar = document.createElement('div');
+		progress.bar.style.cssText = 'margin:200px auto; height:18px;width:0px;position:relative;text-align:center;font-size:8px;line-height:20px;color:#FFF;'+
+			'-moz-border-radius: 10px;'+
+			'-webkit-border-radius: 10px;'+
+			'border-radius: 10px; '+
+			'-moz-background-clip: padding;'+
+			'-webkit-background-clip: padding-box;'+
+			'background-clip: padding-box; '+
+			'background-color: #33adff; '+
+			'-moz-box-shadow: 0 3px 13px rgba(0,0,0,.26); '+
+			'-webkit-box-shadow: 0 3px 13px rgba(0,0,0,.26); '+
+			'box-shadow: 0 3px 13px rgba(0,0,0,.26); '+
+			'background-image: -moz-linear-gradient(bottom, #33adff 0%, #3ddcff 100%); '+
+			'background-image: -o-linear-gradient(bottom, #33adff 0%, #3ddcff 100%); '+
+			'background-image: -webkit-linear-gradient(bottom, #33adff 0%, #3ddcff 100%); '+
+			'background-image: linear-gradient(bottom, #33adff 0%, #3ddcff 100%);text-shadow: 0 -1px 0 rgba(0,0,0, .5); ';
+
+		progress.bar.innerHTML = '0%';
+		document.body.appendChild(progress.bar);
+	}
+
+	for (var i = 0; i < src.length; i++) {
+		img = new Image();
+		img.src = src[i];
+		img.onload = check;
+		img.onerror = check;
+	};
+}
+
+progress([
+		'img/bg1.png',
+		'img/bg2.png',
+		'img/bg3.png',
+		'img/bg4.png',
+		'img/bg5.png',
+		'img/bg6.png'
+	], transform);
+</script>
+</html>

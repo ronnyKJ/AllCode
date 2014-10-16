@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+<title>HTML5 Web GIS</title>
+<link href="css/index.css" rel="stylesheet" type="text/css"/>
+<script type='text/javascript' src="jquery-1.7.2.js"></script>
+<script type='text/javascript' src="debug.js"></script>
+</head>
+<body>
+	<canvas id="map"></canvas>
+</body>
+<script type="text/javascript">
+	var map = $("#map")[0];
+	map.width = $(document).width();
+	map.height = $(document).height();
+	
+	map.ontouchmove = function()
+	{
+	}
+	
+	map.ontouchend = function()
+	{
+		var i, j=event.changedTouches[0];
+		for(i in j)
+		{
+			Debug.print(i+' : '+j[i]);
+		}
+		event.preventDefault();
+	}	
+</script>
+</html>

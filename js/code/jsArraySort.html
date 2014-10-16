@@ -1,0 +1,23 @@
+﻿<html>
+<head><title>Array sort function</title>
+<script type="text/javascript">
+</script>
+</head>
+<body></body>
+<script> 
+/*js array sort 是 冒泡排序
+** 数组遵循从小到大的方向，返回1，表示第一个参数比第二个大，往后排；0表示一样大；返回-1，表示第一个参数比第二个小，留在在前面。
+*/
+var numArr = new Array(12,23,1,4,23,34,2,5);
+//var numArr = new Array(10,6);
+numArr.sort(function compare(a, b){
+	alert(a+" "+b);
+	return 1;
+});
+
+for (var i = 0; i<numArr.length; i++)
+{
+	document.write(numArr[i] +", ");  
+}  
+</script>
+</html>

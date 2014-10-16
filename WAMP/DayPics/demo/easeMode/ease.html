@@ -1,0 +1,160 @@
+﻿<html>
+<head><title></title>
+<style>
+body
+{
+	background: #000;
+}
+
+#easeMode
+{
+	position: absolute;
+	right: 40px;
+	top: 100px;
+	color: #DDD;
+}
+</style>
+<script type="text/javascript" src="easingMode.js"></script>
+</head>
+<body><canvas id="c"></canvas>
+<div id="easeMode">
+<ul>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">easeInBack</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">easeOutBack</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">easeInOutCubic</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">easeInOutBack</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">linear</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">elastic</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">easeOutBounce</li>
+	<li onclick="doEase(eval('easingMode.'+this.innerText));">gravity</li>
+</ul>
+</div></body>
+<script type="text/javascript">
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+c.width = canvasW;
+c.height = canvasH;
+var t = c.getContext("2d");
+
+Array.prototype.map = function(fn)
+{
+	var y = [];
+	for(var i = 0; i< this.length; i++)
+	{
+		y.push(fn(this[i]));
+	}
+	return y;
+};
+
+Array.prototype.max = function()
+{
+	return Math.max.apply({}, this);
+};
+
+Array.prototype.min = function()
+{
+	return Math.min.apply({}, this);
+};
+
+function getRange(start, end)
+{
+	return end - start;
+}
+
+function doEase(easeFn)
+{
+	var O = {x: 300, y: 550};
+	var H = 500;
+	var W = 500;
+	t.font = "10px Arial";
+	t.fillStyle = '#EEE';
+	t.fillText('O(0,0)', O.x-20, O.y+20, 200);
+	redrawRight();	
+	t.beginPath();
+	t.strokeStyle = '#EEE';
+	t.lineWidth = 0.4;
+	t.moveTo(O.x,O.y);
+	t.lineTo(O.x,O.y-H);
+	t.moveTo(O.x,O.y);
+	t.lineTo(O.x+W,O.y);
+	t.stroke();
+	t.moveTo(O.x,O.y-H);
+	t.lineTo(O.x+W,O.y-H);
+	t.moveTo(O.x+W,O.y-H);
+	t.lineTo(O.x+W,O.y);
+	t.stroke();
+	t.closePath();
+
+	var xAix = values =[];
+	for(var i = 0; i<= W; i++)
+	{
+		xAix.push(i/W);
+	}
+	values = xAix.map(easeFn);
+	//var max = Math.max(values.max(), H);
+	//var min = Math.min(values.min(), 0);
+	//var proportion = max/H;
+	values = values.map(function(a){return Math.floor(a*H);});
+	
+	t.fillText("1", O.x-30, O.y-H, 200);
+	t.fillText("1  (缓动函数的定义域为[0,1])", O.x+W, O.y+20, 200);
+	
+	t.fillStyle = '#A9EA00';
+	for(i=0; i<= W; i++)
+	{
+		t.beginPath();
+		t.arc(O.x+i,O.y-values[i],1,0,360,true);
+		t.fill();
+		t.closePath();
+	}
+
+	var timeout = 4;
+	var pace = 2;
+	var alpha = 0.02;
+	var j=0;
+	setTimeout(function(){
+		redrawLeft();
+		t.fillStyle = '#A9EA00';
+		t.beginPath();
+		t.arc(O.x-123,O.y-values[j],5,0,360,true);
+		
+		//t.fillText("time: " + j, O.x-180, O.y-200, 200);
+		//t.fillText("position: " + values[j], O.x-180, O.y-180, 200);
+		t.fill();
+		t.closePath();
+		if((j+=pace)<values.length)
+		{
+			setTimeout(arguments.callee, timeout);
+		}
+	}, timeout);
+	
+	function redrawLeft()
+	{
+		t.fillStyle = 'rgba(0,0,0,' + alpha + ')';
+		t.fillRect(O.x-200-5,O.y-H-360, 160, H+420);
+		t.beginPath();
+		t.strokeStyle = '#E00';
+		t.lineWidth = 0.4;
+		t.moveTo(O.x-200,O.y);
+		t.lineTo(O.x-50,O.y);
+		t.moveTo(O.x-200,O.y-H);
+		t.lineTo(O.x-50,O.y-H);
+		t.stroke();
+		t.closePath();
+	}
+	
+	function redrawRight()
+	{
+		t.save();
+		t.fillStyle = '#000';
+		t.fillRect(O.x-30, -300, 760, H+420);
+		t.restore();
+	}
+}
+</script>
+</html>

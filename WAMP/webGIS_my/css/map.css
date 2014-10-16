@@ -1,0 +1,27 @@
+﻿body
+{
+	background: #EEE;
+}
+
+#mapContainer
+{
+	position: relative;
+	border: 10px #AAA solid;
+	width: 800px;
+	height: 600px;
+	margin: 200px 0 0 200px;
+	overflow: hidden;
+	cursor: move;
+}
+
+.sections_container
+{
+	position: absolute;
+	opacity: 0.5;
+}
+
+.sections_container canvas
+{
+	background: #6EE;
+	outline: 1px #A3A solid;
+}

@@ -1,0 +1,13 @@
+对js回调函数的理解：
+function a(callback){}
+function b(c){}
+a(b(1));//这样的不是回调函数，仅仅是将b(1)函数执行完的返回值当做参数而已
+
+function a(callback){callback(8)}
+function b(c){}
+a(b);//这样b是a的回调函数
+
+但是照这样的理解，onclick = "b(c)"又如何理解呢？
+以及onclick = b(c)
+以及onclick = "b(c); d()"
+可以理解成这样，onclick真正的回调函数是匿名函数function(){}，所有的代码都被包装在其函数体执行。

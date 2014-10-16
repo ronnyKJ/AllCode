@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://www.lizhenwen.com/code-demo/HTML5APIs/sqldatabase.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>HTML5 APIs - 本地SQL数据库（Web SQL Database）</title>
+</head>
+
+<body>
+<h1><a href="http://www.vfresh.org/?p=1141" title="HTML5 js APIs">HTML5 APIs - 本地SQL数据库</a></h1>
+
+<div id="box">
+	<h2>Message</h2>
+<p>Table created and row inserted.</p><p>Found rows: 2</p><p><b>synergies</b></p><p><b>i love javascript</b></p></div>
+
+<script type="text/javascript">
+var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024),
+	addMsg = function (msg) {
+		var box = document.getElementById('box'),
+			p = document.createElement('p');
+		p.innerHTML = msg;
+		box.appendChild(p);
+	};
+
+db.transaction(function (tx) {
+	tx.executeSql('CREATE TABLE IF NOT EXISTS foo (id unique, text)');
+	tx.executeSql('INSERT INTO foo (id, text) VALUES (1, "synergies")');
+	tx.executeSql('INSERT INTO foo (id, text) VALUES (2, "i love javascript")');
+
+	addMsg('Table created and row inserted.');
+});
+
+db.transaction(function (tx) {
+  tx.executeSql('SELECT * FROM foo', [], function (tx, results) {
+   var len = results.rows.length, i;
+
+   addMsg('Found rows: '+len);
+
+   for (i = 0; i < len; i++){
+	addMsg("<b>" + results.rows.item(i).text + "</b>");
+   }
+ }, null);
+});
+</script>
+
+
+</body></html>

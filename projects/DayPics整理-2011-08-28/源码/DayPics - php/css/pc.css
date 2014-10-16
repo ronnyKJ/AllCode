@@ -1,0 +1,66 @@
+﻿*
+{
+	margin: 0;
+	padding:0;
+	font-family: "微软雅黑";
+	color: #666;
+	font-size: 14px;
+}
+
+body
+{
+	background-color: #fdfdfd;
+}
+
+#header
+{
+	width: 1000px;
+	margin: 0 auto;
+	height: 300px;
+}
+
+#main
+{
+	width: 1000px;
+	margin: 0 auto;
+	line-height: 1.5em;
+}
+
+#logo
+{
+	margin: 100px -144px 0 100px
+}
+
+#subheading, #copyright
+{
+	font-family: "Lucida Sans Unicode";
+}
+
+#current_date
+{
+	font-weight: bold;
+	text-align: right;
+	margin-top: 70px;
+}
+
+.word_container
+{
+	min-height: 35px;
+	margin-bottom: 80px;
+}
+
+#bottom
+{
+	text-align: center;
+	font-size: 10px;
+	margin-bottom: 20px;
+}
+
+#edit
+{
+	border-radius: 8px;
+	border: 2px solid #7ad696;
+	outline: none;
+	background-color: #f2f5f3;
+	padding: 4px 8px;
+}

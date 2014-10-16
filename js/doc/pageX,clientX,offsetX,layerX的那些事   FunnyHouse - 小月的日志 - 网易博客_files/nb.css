@@ -1,0 +1,54 @@
+body{color:#638a4e;}
+.fc00{color:#faffd0;}
+.fc01{color:#4e4e31;}
+.fc02,.fc02 a{color:#000000;}
+.fc03,.fc03 a,.fc11 a{color:#276904;}
+.fc04,.fc04 a{color:#998920;}
+.fc05{color:#638a4e;}
+.fc06{color:#a59974;}
+.fc07{color:#d0c39a;}
+.fc08{color:#000000;}
+.fc09{color:#faffd0;}
+.fc10{color:#1b312c;}
+.bdc0{border-color:#1b312c;}
+.bdc1{border-color:#74952b;}
+.bdc9t{border-top-color:#faffd0;}
+.bdc9r{border-right-color:#faffd0;}
+.bdc9b{border-bottom-color:#faffd0;}
+.bdc9l{border-left-color:#faffd0;}
+.bgc0,.bgc9:hover, .bgc9.js-bgc9-hover{background-color:#eff4bd;}
+.bgc1{background-color:#faffd0;}
+.bgc2{background-color:#708f1d;}
+.bgp0{background-image:url(img/-1.gif);}
+.nb-body{background:#c5d7b3;}
+.nb-wrap{background:url(img/pic_01.jpg) no-repeat center top;}
+.nb-bar{background:#1a1d00;}
+.nb-top .h{height:392px;}
+.nb-top .t{top:55px;left:350px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;}
+.nb-top .n{font-size:38px;}
+.nb-top .d{font-size:15px;}
+.nb-nav .h{height:80px;line-height:50px;}
+.nb-nav .c{margin:0 60px 0 150px;}
+.nb-nav .i{width:100px;font-weight:normal;font-size:14px;}
+.nb-nav .i:hover{font-weight:bold;}
+.nb-nav .selected{background:url(img/pic_04.png) no-repeat left top;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://b.bst.126.net/newpage/style/nblog/4238/img/pic_04.png',sizingMethod='crop');}
+.nb-nav .selected .i, .nb-nav .selected .i:hover{font-weight:bold;color:#1b312c;background:none;}
+.nb-cnt{background:url(img/pic_03.jpg) repeat left top;}
+.nb-cnt .wc{margin:0 20px 0 20px;}
+.nb-fot{background:url(img/pic_02.jpg) no-repeat left top;}
+.nb-fot .h{height:110px;}
+.nb-fot .k{padding-top:30px;}
+.nb-mdl{margin:10px 10px;}
+.nb-mdl .th{height:32px;line-height:40px;}
+.nb-mdl .bh{height:32px;}
+.nb-mt .tl{width:11px;background:url(img/pic_05.gif) no-repeat left top;}
+.nb-mt .tc{margin:0 11px 0 11px;font-size:14px;font-weight:bold;background:url(img/pic_07.gif) repeat-x left top;}
+.nb-mt .tr{width:11px;background:url(img/pic_06.gif) no-repeat left top;}
+.nb-mt .tm{right:5px;}
+.nb-mc .cl{width:10px;background:url(img/pic_11.gif) repeat-y left top;}
+.nb-mc .cc{margin:0 10px 0 10px;background:#faffd0;}
+.nb-mc .cr{width:10px;background:url(img/pic_12.gif) repeat-y right top;}
+.nb-mb{display:block;}
+.nb-mb .bl{width:10px;background:url(img/pic_08.gif) no-repeat left top;}
+.nb-mb .bc{margin:0 10px 0 10px;background:url(img/pic_10.gif) repeat left top;}
+.nb-mb .br{width:10px;background:url(img/pic_09.gif) repeat right top;}

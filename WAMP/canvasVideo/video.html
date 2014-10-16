@@ -1,0 +1,112 @@
+﻿<html>
+<head><title>Video</title>
+<style>
+body
+{
+	background: #000;
+	font-family: "Century Gothic";
+	color: #0092BF;
+}
+
+h1
+{
+	font-weight: normal;
+}
+
+#v
+{
+	margin-top: 20px;
+}
+
+canvas
+{
+	margin: 0;
+}
+
+p
+{
+	float: left;
+	margin: 0 130px;
+	font-size: 6px;
+}
+
+#right
+{
+	text-align: center;
+	font-size: 10px;
+	margin-top: 80px;
+}
+</style>
+</head>
+<body>
+<h1>Video Filter</h1>
+<canvas id="c1"></canvas>
+<canvas id="c2"></canvas>
+<canvas id="c3"></canvas>
+<p>Relief</p><p>Gray</p><p>Red</p>
+<video id="v" autoplay loop>
+	<source src="08.mp4" />
+</video><br/>
+<p>Origin</p>
+<div id="right">-- By Ronny 2011 --</div>
+</body>
+<script type="text/javascript">
+var w = window;
+var d = document;
+var b = d.body;
+var v = d.getElementById("v");
+var c1 = d.getElementById("c1");
+var t1 = c1.getContext("2d");
+var c2 = d.getElementById("c2");
+var t2 = c2.getContext("2d");
+var c3 = d.getElementById("c3");
+var t3 = c3.getContext("2d");
+
+var vW = 704, vH = 256;
+var wid = vW/2, hgt = wid/vW*vH;
+c1.width = c2.width = c3.width = wid;
+c1.height = c2.height = c3.height = hgt;
+
+var des = d.getElementById("des");
+function draw()
+{
+	t1.drawImage(v, 0, 0, wid, hgt);
+	t2.drawImage(v, 0, 0, wid, hgt);
+	t3.drawImage(v, 0, 0, wid, hgt);
+	var img1 = t1.getImageData(0,0, vW, vH);
+	var data1 = img1.data;
+	var img2 = t2.getImageData(0,0, vW, vH);
+	var data2 = img2.data;
+	var img3 = t3.getImageData(0,0, vW, vH);
+	var data3 = img3.data;
+	var l = data1.length;
+    for(var i = 0; i < l; i++)
+	{
+		if(i%4 != 3)
+			data1[i] = 127 + 2*data1[i] - data1[i + 4] - data1[i + 704*4];//浮雕
+		
+		if(i%4 == 0)
+		{
+			var r = data2[i];
+			var g = data2[i+1];
+			var b = data2[i+2];
+			var brightness = (3*r+4*g+b)>>>3;//灰度
+			data2[i] = data2[i+1] = data2[i+2] = brightness;
+			
+			//底片
+			data3[i] = r+90;
+			data3[i+1] = g;
+			data3[i+2] = b;			
+		}
+    }
+    img1.data = data1;
+	img2.data = data2;
+	img3.data = data3;
+    t1.putImageData(img1,0,0);
+	t2.putImageData(img2,0,0);
+	t3.putImageData(img3,0,0);
+	setTimeout(draw, 10);
+}
+draw();
+</script>
+</html>

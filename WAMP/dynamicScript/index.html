@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Dynamic Script</title>
+</head>
+<body>
+<script type="text/javascript">
+function myFunc1(json)
+{
+　　alert(json.a);
+}
+
+function myFunc2(json)
+{
+　　alert(json.b);
+}
+</script>
+<script type="text/javascript" src="http://localhost/dynamicScript/d1.js"></script><!-- src 可跨域 -->
+<script type="text/javascript">
+var s = document.createElement('script');
+s.src='http://localhost/dynamicScript/d2.js';
+document.getElementsByTagName('head')[0].appendChild(s);
+</script>
+</body>
+</html>

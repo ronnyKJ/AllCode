@@ -1,0 +1,42 @@
+@charset "utf-8";
+BODY {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-FAMILY: "verdana,Arial"  margin:0px; BACKGROUND: #fff; COLOR: #404040; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+DIV {
+	PADDING-BOTTOM: 0px; MARGIN: 0px auto; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+INPUT {
+	FONT-FAMILY: verdana,arial; FONT-WEIGHT: bold
+}
+#login_msg {
+	TEXT-ALIGN: center; COLOR: #ff7b00; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+#verify {
+	CURSOR: pointer
+}
+.login_button {
+	CURSOR: pointer
+}
+.wd{
+	WIDTH: 161px; background: url(../images/login_r2_c4.png); HEIGHT: 45px; FONT-SIZE: 14px
+}
+.wd1{
+	WIDTH: 103px; BACKGROUND: url(../images/login_r7_c4.png); HEIGHT: 27px;
+}
+.wd2{
+	WIDTH: 161px; BACKGROUND: url(../images/login_r5_c4.png); HEIGHT: 27px
+}
+.wd3{
+	WIDTH: 161px; BACKGROUND: url(../images/login_r3_c4.png); HEIGHT: 27px
+}
+.body{
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND: url(../images/bg.gif); PADDING-TOP: 110px
+}
+.inputtext{
+	PADDING-BOTTOM: 5px; BORDER-RIGHT-WIDTH: 0px; PADDING-LEFT: 5px; WIDTH: 150px; PADDING-RIGHT: 5px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 15px; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; PADDING-TOP: 5px;
+}
+.inputtext1{
+	PADDING-BOTTOM: 5px; BORDER-RIGHT-WIDTH: 0px; PADDING-LEFT: 5px; WIDTH: 92px; 
+	PADDING-RIGHT: 5px; BACKGROUND: none transparent scroll repeat 0% 0%; 
+	BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 15px; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; PADDING-TOP: 5px";
+}

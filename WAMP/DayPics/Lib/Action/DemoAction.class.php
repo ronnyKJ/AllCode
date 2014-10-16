@@ -1,0 +1,1 @@
+<?phpclass DemoAction extends Action{	// 首页	public function index(){		import("@.Action.MyPublicAction");		if(MyPublicAction::getBrowserType() != "Google Chrome")		{			$this->redirect('MyPublic/index');		}		$this->display();	}}?>

@@ -1,0 +1,46 @@
+﻿<html>
+<head><title>Web Worker</title>
+<style>
+*{margin:0;padding:0}
+body{margin:5px;font-family:"微软雅黑";color:#666;}
+#top{background:no-repeat;height:37px;line-height:37px;font-size:30px;text-indent:40px;}
+#log{height:225px;max-height:225px;margin-bottom:5px;overflow-y:auto;font-size:8px;}
+.txtBox{width:340px;}
+</style>
+</head>
+<body>
+<h1 id='top'></h1>
+<div id='log'></div>
+<form onsubmit="sendMsg.message = message.value; worker.port.postMessage(sendMsg); message.value = ''; return false;">
+	<input class='txtBox' type="text" name="message">
+	<button>Say</button>
+</form>
+</body>
+<script type="text/javascript">
+var worker = new SharedWorker('sharedWorker.js');
+var t = document.getElementById('top');
+var log = document.getElementById('log');
+var sendMsg = {};
+worker.port.onmessage = function(e)
+{
+	var data = e.data;
+	
+	if(data.isInit)
+	{
+		sendMsg.username = t.innerText = data.username;
+		t.style.backgroundImage = 'url('+data.url+')';
+		log.innerHTML = data.conversation;
+	}
+	else
+	{
+		var user = data.username;
+		if(user == sendMsg.username)
+			log.innerHTML += '<b style="color:#A30">'+user+'</b> : '+data.message+'<br>';
+		else
+			log.innerHTML += user+' : '+data.message+'<br>';
+	}
+	log.scrollTop = log.scrollHeight;
+}
+</script>
+</script>
+</html>

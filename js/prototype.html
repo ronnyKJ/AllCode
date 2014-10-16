@@ -1,0 +1,48 @@
+<!DOCTYPE html> <html>
+<head><script type="text/javascript">
+
+function A(){}
+
+A.prototype.a = function(){alert(1);};
+
+function B(){}
+c={a:function(){alert(2);}}
+B.prototype = c;
+
+x1 = new A();
+x2 = new B();
+
+function C(){}
+C.prototype = {a:function(){alert(3);}}
+x3 = new C();
+
+Function.prototype.tie = function(a){
+  var t = this;
+  var args = Array.prototype.slice.call(arguments, 1);
+  return function(){
+    var arr = args.concat(Array.prototype.slice.call(arguments));
+    t.apply(a, arr);
+  }
+};
+
+o1 = {
+  name : 'o1111'
+};
+
+o2 = {
+  name : 'o2',
+  say : function(){alert(this.name);}
+};
+
+// f = o2.say.tie(o1, 'k');
+// f('j');
+
+f = o2.say.tie(o1);
+f1 = f.tie(o2);
+f1();
+</script>
+</head>
+<body>
+
+</body>
+</html> 

@@ -1,0 +1,98 @@
+<html>
+<head><title></title>
+<style>
+body
+{
+	font-family: "Arial";
+	-webkit-perspective: 900px;
+}
+
+#clock
+{
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background: #DDD;
+	text-align: center;
+	margin: 300px auto;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform-origin: top top;
+	-webkit-animation: spin 5s infinite linear;
+}
+
+@-webkit-keyframes spin
+{
+	100%{-webkit-transform: rotateX(360deg) rotateY(-360deg);}
+}
+
+#clock p
+{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	background: rgba(30, 250, 0, 0.5);
+	border-radius: 10px;
+	margin: 0;
+}
+
+p.n1
+{
+	-webkit-transform: rotateY(0deg) translateZ(200px);
+}
+p.n2
+{
+	-webkit-transform: rotateY(30deg) translateZ(200px);
+}
+p.n3
+{
+	-webkit-transform: rotateY(60deg) translateZ(200px);
+}
+p.n4
+{
+	-webkit-transform: rotateY(90deg) translateZ(200px);
+}
+p.n5
+{
+	-webkit-transform: rotateY(120deg) translateZ(200px);
+}
+p.n6
+{
+	-webkit-transform: rotateY(150deg) translateZ(200px);
+}
+p.n7
+{
+	-webkit-transform: rotateY(180deg) translateZ(200px);
+}
+p.n8
+{
+	-webkit-transform: rotateY(210deg) translateZ(200px);
+}
+p.n9
+{
+	-webkit-transform: rotateY(240deg) translateZ(200px);
+}
+p.n10
+{
+	-webkit-transform: rotateY(270deg) translateZ(200px);
+}
+p.n11
+{
+	-webkit-transform: rotateY(300deg) translateZ(200px);
+}
+p.n12
+{
+	-webkit-transform: rotateY(330deg) translateZ(200px);
+}
+</style>
+<script>
+
+</script>
+</head>
+<body onload="">
+<div id="clock">
+	<p class="n1">1</p><p class="n2">2</p><p class="n3">3</p><p class="n4">4</p><p class="n5">5</p><p class="n6">6</p>
+	<p class="n7">7</p><p class="n8">8</p><p class="n9">9</p><p class="n10">10</p><p class="n11">11</p><p class="n12">12</p>
+</div>
+</body>
+</html>

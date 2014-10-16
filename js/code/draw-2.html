@@ -1,0 +1,46 @@
+﻿<html>
+<head><title></title>
+</head>
+<body>
+<div id="placeholder" style="WIDTH: 600px; HEIGHT: 600px">
+<canvas id="tutorial" width="150" height="150"></canvas>    
+  
+<canvas id="stockGraph" width="150" height="150">    
+  current stock price: $3.15 +0.15    
+</canvas>
+</div>
+</body>
+<script type="text/javascript">
+function constructCanvas() {  
+            function makeCanvas(width, height) {  
+                var c = document.createElement('canvas');  
+                c.width = width;  
+                c.height = height;  
+                if ($.browser.msie) // excanvas hack  
+                    c = window.G_vmlCanvasManager.initElement(c);  
+                return c;  
+            }              
+            canvasWidth = target.width();  
+            canvasHeight = target.height();  
+            target.html(""); // clear placeholder  
+            if (target.css("position") == 'static')  
+                target.css("position", "relative"); // for positioning labels and overlay  
+  
+            if (canvasWidth <= 0 || canvasHeight <= 0)  
+                throw "Invalid dimensions for plot, width = " + canvasWidth + ", height = " + canvasHeight;  
+  
+            if ($.browser.msie) // excanvas hack  
+                window.G_vmlCanvasManager.init_(document); // make sure everything is setup  
+              
+            // the canvas  
+            canvas = $(makeCanvas(canvasWidth, canvasHeight)).appendTo(target).get(0);  
+            ctx = canvas.getContext("2d");  
+  
+            // overlay canvas for interactive features  
+            overlay = $(makeCanvas(canvasWidth, canvasHeight)).css({ position: 'absolute', left: 0, top: 0 }).appendTo(target).get(0);  
+            octx = overlay.getContext("2d");  
+            octx.stroke();  
+        }
+constructCanvas();
+</script>
+</html>

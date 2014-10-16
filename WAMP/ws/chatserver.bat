@@ -1,0 +1,1 @@
+H:\Progra~1\wamp\php\php.exe H:\WAMP\ws\server.php

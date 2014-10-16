@@ -1,0 +1,57 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<style>
+#see
+{
+	width:300px;
+	height:160px;
+	overflow:hidden;
+}
+
+#map
+{
+	background:#EEE;
+}
+</style>
+<script type='text/javascript' src="js/jquery-1.7.2.js"></script>
+<script type='text/javascript' src="js/util.js"></script>
+<script type='text/javascript' src="js/geoData.js"></script>
+<script type='text/javascript' src="js/canvas.js"></script>
+<script type='text/javascript' src="js/geometryRender.js"></script>
+<script type='text/javascript' src="js/osm2geo.js"></script>
+<script type='text/javascript' src="js/debug.js"></script>
+</head>
+<body>
+<div id='see1'>
+	<canvas id="map" width="1200" height="700"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+var mapCanvas = $('#map')[0], ctx = mapCanvas.getContext('2d');
+ctx.strokeStyle='#F00';
+ctx.lineWidth=1;
+$.ajax({
+	async: true,
+	type: 'GET',
+	url: 'server/division.php',
+	dataType: 'json',
+	success: function(json)
+	{
+		var para = 30000*13;
+		var bor = 50;
+		var bboxX1 = json[0][0]['x1'], bboxY1 = json[0][0]['y1'];
+		var G=0;
+		for(var i=0; i<json.length;i++)
+		{
+			for(var j=0; j<json[i].length;j++)
+			{
+				var t = json[i][j];
+				G+=30;
+				ctx.fillStyle='rgba(255, '+G+', 255, 0.8)';
+				ctx.fillRect((t['x1']-bboxX1)*para,(t['y1']-bboxY1)*para,(t['x2']-t['x1'])*para,(t['y2']-t['y1'])*para);
+			}
+		}
+	}
+});
+</script>
+</html>

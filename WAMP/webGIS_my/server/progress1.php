@@ -1,0 +1,1 @@
+<?php	//$_SERVER['zkj'] = 55;	echo $_SERVER['zkj'];?>

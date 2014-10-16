@@ -1,0 +1,163 @@
+﻿<html>
+<head><title>Gradient</title>
+<link href="style.css" rel="stylesheet" type="text/css"></link>
+<script type="text/javascript">
+_Utility = {
+	_: function(id)
+	{
+		return document.getElementById(id);
+	},
+	_className: function(cn)
+	{
+		return document.getElementsByClassName(cn);
+	}
+}
+
+_Grd = {
+	Gradient: function(from, to, map)
+	{
+		this.element = _Utility._("gradient");
+		this.from = from;
+		this.to = to;
+		this.steps = 150;
+		this.gradientArray = [];
+		for(var i=0; i<=this.steps; i++)
+		{
+			var tmp = {};
+			with(Math)
+			{
+				tmp.r = ceil((this.to.r - this.from.r)/this.steps*i + this.from.r);
+				tmp.g = ceil((this.to.g - this.from.g)/this.steps*i + this.from.g);
+				tmp.b = ceil((this.to.b - this.from.b)/this.steps*i + this.from.b);
+			}
+			
+			if(map)
+			{
+				this.gradientArray.push(map(tmp));
+			}
+			else
+			{
+				this.gradientArray.push(tmp);
+			}
+		}
+		this.getGradientArray = function()
+		{
+			return this.gradientArray;
+		}
+	},
+	
+	ColorFormat: function(r, g, b)
+	{
+		if(typeof r != "string")
+		{
+			this.r = r;
+			this.g = g;
+			this.b = b;
+		}
+		else
+		{
+			var tmp = r.split(/[()]/g);
+			var rgb = tmp[1].split(",");
+			this.r = parseInt(rgb[0]);
+			this.g = parseInt(rgb[1]);
+			this.b = parseInt(rgb[2]);
+		}
+		this.toString = function(rad)
+		{
+			if(rad==16)
+			{
+				var r = this.r.toString(16);
+				if(this.r<10)
+					var r = "0"+this.r.toString(16);
+				var g = this.g.toString(16);
+				if(this.g<10)
+					var g = "0"+this.g.toString(16);
+				var b = this.b.toString(16);
+				if(this.b<10)
+					var b = "0"+this.b.toString(16);
+				return "#"+r+g+b;
+			}
+			else
+			{
+				return "rgb("+this.r+", "+this.g+", "+this.b+")";
+			}
+		}
+	}
+};
+
+function start()
+{
+	var ipts = _Utility._className("c");
+	var fr = parseInt(_Utility._("f_r").value);
+	var fg = parseInt(_Utility._("f_g").value);
+	var fb = parseInt(_Utility._("f_b").value);
+	var tr = parseInt(_Utility._("t_r").value);
+	var tg = parseInt(_Utility._("t_g").value);
+	var tb = parseInt(_Utility._("t_b").value);
+	for(var i=0; i<ipts.length; i++)
+	{
+		ipts[i].onkeyup = function()
+		{
+			fr = parseInt(_Utility._("f_r").value) || 0;
+			fg = parseInt(_Utility._("f_g").value) || 0;
+			fb = parseInt(_Utility._("f_b").value) || 0;
+			tr = parseInt(_Utility._("t_r").value) || 0;
+			tg = parseInt(_Utility._("t_g").value) || 0;
+			tb = parseInt(_Utility._("t_b").value) || 0;
+			
+			(fr<0)&&(fr=0);(fg<0)&&(fg=0);(fb<0)&&(fb=0);(tr<0)&&(tr=0);(tg<0)&&(tg=0);(tb<0)&&(tb=0);
+			
+			(fr>255)&&(fr=255);(fg>255)&&(fg=255);(fb>255)&&(fb=255);(tr>255)&&(tr=255);(tg>255)&&(tg=255);(tb>255)&&(tb=255);
+
+			var from = new _Grd.ColorFormat(fr, fg, fb);
+			var to = new _Grd.ColorFormat(tr, tg, tb);
+			_Utility._("f_16").innerText = from.toString(16);
+			_Utility._("t_16").innerText = to.toString(16);
+			
+			if((fr>=0&&fr<=255)&&(fg>=0&&fg<=255)&&(fb>=0&&fb<=255)&&(tr>=0&&tr<=255)&&(tg>=0&&tg<=255)&&(tb>=0&&tb<=255))
+				refresh(from, to);
+		}
+	}
+	var from = new _Grd.ColorFormat(fr, fg, fb);
+	var to = new _Grd.ColorFormat(tr, tg, tb);
+	_Utility._("f_16").innerText = from.toString(16);
+	_Utility._("t_16").innerText = to.toString(16);
+	refresh(from, to);
+}
+
+function refresh(from, to)
+{
+	var gradient = new _Grd.Gradient(from, to, map);
+	gradient.element.innerHTML = "";
+	var s = [];
+	var arr = gradient.getGradientArray();
+	for(i=0; i<=gradient.steps; i++)
+	{
+		s.push(arr[i]);
+	}
+	gradient.element.innerHTML = s.join("");
+}
+
+function map(i)
+{
+	return "<span style='background:"+new _Grd.ColorFormat(i.r,i.g,i.b).toString()+";'></span>";
+}
+</script>
+</head>
+<body onload="start()">
+<div id="head">
+	<img alt="" src="logo.png"/>
+</div>
+<div id="container">
+	<div id="gradient"></div>
+	<table id="data">
+		<tr><th id="t00"></th><th id="t01">From</th><th id="t02">To</th></tr>
+		<tr><td>R</td><td><input id="f_r" type="text" class="c" value="0" /></td><td><input id="t_r" type="text" class="c" value="255"/></td></tr>
+		<tr><td>G</td><td><input id="f_g" type="text" class="c" value="0" /></td><td><input id="t_g" type="text" class="c" value="255"/></td></tr>
+		<tr><td>B</td><td><input id="f_b" type="text" class="c" value="0" /></td><td><input id="t_b" type="text" class="c" value="255"/></td></tr>
+		<tr><td></td><td id="f_16"></td><td id="t_16"></td></tr>
+	</table>
+</div>
+<div id="right">-- By Ronny 2011 --</div>
+</body>
+</html>

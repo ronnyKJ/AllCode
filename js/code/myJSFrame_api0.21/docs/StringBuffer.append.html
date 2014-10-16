@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>StringBuffer.append</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>StringBuffer.append(<em>string</em>)</h1>
+<p class="info">给字符串缓冲器对象增加 <em>string 。 </em></p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>string</em></dt>
+		<dd>待连接的字符串。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">字符串缓冲器对象。</p>	
+    <h2>描述</h2>
+	<p class="p">在 IE 中 JavaScript 频繁地连接大字符串会损耗大量的性能，该方法模拟一个字符串缓冲器，所有要连接的字符串都使用 append 方法推入缓冲器中，最后由 toString 方法统一连接起来。效率得到提升，如果连接的字符串越大越多，效率提升得越明显。缓冲器由数组模拟实现，append 方法由 Array.push 演变而来，toString 方法由 Array.join(&quot;&quot;) 实现。</p>
+	<h2>性能测试</h2>
+	<p class="p"><a href="../demo/StringBuffer.html" target="_blank">点击打开</a></p>	
+    <h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var html = new StringBuffer();<br />
+html.append(&quot;&lt;ol&gt;&quot;);<br />
+for(var i=0; i&lt;2000; i++){<br />
+&nbsp;&nbsp; html.append(&quot;&lt;li&gt;&lt;table cellspacing=1 cellpadding=5 border=1&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/li&gt;&quot;); <br />
+}<br />
+html.append(&quot;&lt;/ol&gt;&quot;);<br />
+$(&quot;v2&quot;).innerHTML = html.toString();<br />
+html.clear();<br />
+&lt;/script&gt;</p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

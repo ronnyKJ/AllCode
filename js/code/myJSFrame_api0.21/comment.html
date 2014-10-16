@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style type="text/css">
+	@import url(css/main.css);
+	body { font-family:Tahoma; color:#666}
+	ol {list-style-type: decimal; margin-left:3.2em; font-size:11px}
+	li { margin:2em 1em 2em 0; line-height:1.5em}
+	h6 { font-size:11px; font-weight:normal; color:#000; height:18px; line-height:18px; background:#f9f9f9}
+	fieldset { margin:1em 0}
+	em { font-size:10px; font-style:normal; color:#999}
+	.commBox {vertical-align:top}
+	.postComm {}
+	.postComm div {clear:both; margin:0.6em 2em}
+	.postComm div label { float:left; width:70px; line-height:22px;}
+	.postComm div input{ padding:1px; width:200px}
+	.postComm div textarea {padding:2px; width:300px}
+  </style>
+  <script type="text/javascript" src="JavaScript/myJSFrame.js"></script>
+  <script type="text/javascript">
+  <!--
+
+function closeWin(evt){
+	var evt = evt?evt:window.event;
+	if(evt.keyCode==27)
+	window.close();		
+}
+document.onkeydown = closeWin;
+
+var Comment = {
+handle:"",
+postComm : function (id,obj){
+			if ($("username",0).value==""){
+				$("commInfo").innerHTML = "请填入你的昵称~";
+				$("username",0).focus();
+				return;
+			}
+			if ($("commBox").value==""){
+				$("commInfo").innerHTML = "请不要说空话~";
+				$("commBox",0).focus();
+				return;	
+			}
+			
+			$("commInfo").innerHTML = "";
+			var email = $V("useremail");
+			var site = $V("usersite");
+			if(email!="" && email.indexOf("@")==-1){
+				$("commInfo").innerHTML = "邮箱格式不正确！";
+				return;
+			}else{
+				$("commInfo").innerHTML = "";
+			}
+			if(site!="http://" && (site.indexOf(".")==-1 || site.substr(0,7)!="http://")){
+				$("commInfo").innerHTML = "网站 URL 格式不正确！";
+				return;
+			}else{
+				$("commInfo").innerHTML = "";
+			}
+			obj.disabled = true;
+			var para = "id=184&username="+$E($("username").value)+"&comment="+$E($("commBox").value.toString().replace(/ /g,"&nbsp;"))+"&email="+email+"&site="+site+"&title="+$E(document.title);
+			$.Ajax.post("http://www.happyshow.org/postComment.asp",para,function(x){
+						obj.disabled = false;
+						if (Comment.handle!=""){clearInterval(Comment.handle);}
+						if(!isNaN(x.responseText)){
+							$("commInfo").innerHTML = "评论发表成功！";								
+							//$("log_CommNums").innerHTML = x.responseText;
+							Comment.handle = setTimeout(function(){$("commInfo").innerHTML = "";},2000);
+							$("commBox").value = "";
+							$.Cookies.set("username",$V("username"),60);
+							$.Cookies.set("useremail",$V("useremail"),60);
+							$.Cookies.set("usersite",$V("usersite"),60);
+							Comment.loadData();
+						}else{								
+							eval("var fn="+x.responseText);
+							fn($("commInfo",0),obj);
+						}
+					},function(x){
+						$("commInfo").innerHTML = "提交失败！"+x.statusText;
+						obj.disabled = false;
+					});	
+		},
+strFilter : function (str){
+			return str.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\r\n/g,"<br />");
+		},
+loadData : function(){
+            try{
+			    $.Ajax.update("http://www.happyshow.org/getCommentForAPI.asp?id=184&title="+$E($E(document.title)),"list");
+			}catch(e){alert(e)}
+		}
+}
+  //-->
+  </script>
+ </head>
+ <body>
+	<fieldset>
+		<legend>用户评论</legend>
+		<div id="list"><div style="padding:0.7em 3em"><img src="images/indicator_flower.gif" width="15" height="15" style="margin-bottom:-3px" /> 正在加载...</div></div>
+	</fieldset>
+	<fieldset class="postComm">
+	  <legend>发表评论</legend>
+	  <div>
+		<label for="username">昵称：</label>
+		<input type="text" id="username" value="" maxlength="10" />
+		<em>*</em></div>
+	  <div>
+		<label for="useremail">邮箱：</label>
+		<input type="text" id="useremail" value="" maxlength="255"  />
+	  </div>
+	  <div>
+		<label for="usersite">网站：</label>
+		<input type="text" id="usersite" value="http://" maxlength="255"  />
+	  </div>
+	  <div>
+		<label for="commBox">评论内容：</label>
+		<textarea rows="5" cols="40" class="commBox" id="commBox"></textarea>
+		<em>*</em></div>
+	  <div>
+		<label>&nbsp;</label>
+		<button onclick="Comment.postComm(184,this)">发表评论</button>
+		<span id="commInfo" class="commInfo"></span></div>
+	</fieldset>
+<div style="padding-bottom:1em; text-align:right; font-size:11px">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+  <script type="text/javascript">
+  <!--    
+	(function(){document.title = (window.dialogArguments||window.opener).document.title;})()
+    Comment.loadData();	
+  //-->
+  </script>
+ </body>
+</html>

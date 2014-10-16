@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<title>DayPics</title>
+<link rel='stylesheet' type='text/css' href='__ROOT__/DayPics/css/phone.css'>
+<script type="text/javascript">
+var cur_url = "__URL__";
+var date_list = [
+	<volist id="date_list" name="date_list">
+	"{$date_list.date}",
+	</volist>
+];
+</script>
+<script type="text/javascript" src="__ROOT__/DayPics/js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="__ROOT__/DayPics/js/phone.js"></script>
+</head>
+<body>
+<div id="pic_container">
+	<volist id="list" name="list">
+	<img alt="" src="__ROOT__/DayPics/pics/{$list.filename}" width="100%" />
+	<p class="words" pid="{$list.id}">
+	<if condition="($list.words eq '')">...
+	<else />{$list.words}
+	</if></p>
+	</volist>
+</div>
+<div id="bottom">
+	<p id="left_btn"></p><p id="right_btn"></p>
+	<p id="current_date"></p>
+</div>
+<div id="mask"></div>
+<div id="pick_date">
+	<volist id="date" name="date">
+	<a href="__URL__/pick_date/device/phone/date/{$date.date}">{$date.date}</a>
+	</volist>
+<div>
+</body>
+</html>

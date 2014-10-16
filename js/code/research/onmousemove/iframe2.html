@@ -1,0 +1,30 @@
+<HTML>
+ <HEAD>
+  <TITLE></TITLE>
+ </HEAD>
+ <BODY bgcolor="black">
+  <IMG id="img2" name="img2" src="125.jpg">
+  <SCRIPT type="text/javascript">
+   var isIE = document.all ? true : false;
+   if (!isIE)
+   document.captureEvents(Event.MOUSEMOVE);
+   document.onmousemove = getMousePosition;
+   
+   function getMousePosition(e) {
+    var _x;
+    var _y;
+    if (!isIE) {
+     _x = e.clientX + 10 - 0;
+     _y = e.clientY + 85 - 0;
+    }
+    if (isIE) {
+     _x = event.clientX + document.body.scrollLeft + 12 - 0;
+     _y = event.clientY + document.body.scrollTop + 95 - 0;
+    }
+    window.parent.document.exf1.x.value = _x;
+    window.parent.document.exf1.y.value = _y;
+    return true;
+   }
+  </SCRIPT>
+ </BODY>
+</HTML>

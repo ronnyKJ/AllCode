@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F70A223614A91942009DAEAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70A223514A91942009DAEAE /* UIKit.framework */; };
+		F70A223814A91942009DAEAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70A223714A91942009DAEAE /* Foundation.framework */; };
+		F70A223A14A91942009DAEAE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70A223914A91942009DAEAE /* CoreGraphics.framework */; };
+		F70A224014A91942009DAEAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F70A223E14A91942009DAEAE /* InfoPlist.strings */; };
+		F70A224214A91942009DAEAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A224114A91942009DAEAE /* main.m */; };
+		F70A224614A91942009DAEAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A224514A91942009DAEAE /* AppDelegate.m */; };
+		F70A224914A91942009DAEAE /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70A224714A91942009DAEAE /* MainStoryboard.storyboard */; };
+		F70A224C14A91942009DAEAE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A224B14A91942009DAEAE /* ViewController.m */; };
+		F70A225314A91949009DAEAE /* iPhone 57.png in Resources */ = {isa = PBXBuildFile; fileRef = F70A225214A91949009DAEAE /* iPhone 57.png */; };
+		F70A225514A9194B009DAEAE /* iPhone4 114.png in Resources */ = {isa = PBXBuildFile; fileRef = F70A225414A9194B009DAEAE /* iPhone4 114.png */; };
+		F70A225814A91955009DAEAE /* Alien Face.png in Resources */ = {isa = PBXBuildFile; fileRef = F70A225614A91955009DAEAE /* Alien Face.png */; };
+		F70A225914A91955009DAEAE /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = F70A225714A91955009DAEAE /* Alien.png */; };
+		F70A225C14A91B03009DAEAE /* AlienViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A225B14A91B03009DAEAE /* AlienViewController.m */; };
+		F70A226314A9218E009DAEAE /* CustomAlienSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = F70A226214A9218E009DAEAE /* CustomAlienSegue.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F70A223114A91942009DAEAE /* helloAlien.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = helloAlien.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70A223514A91942009DAEAE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F70A223714A91942009DAEAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F70A223914A91942009DAEAE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F70A223D14A91942009DAEAE /* helloAlien-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "helloAlien-Info.plist"; sourceTree = "<group>"; };
+		F70A223F14A91942009DAEAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F70A224114A91942009DAEAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F70A224314A91942009DAEAE /* helloAlien-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "helloAlien-Prefix.pch"; sourceTree = "<group>"; };
+		F70A224414A91942009DAEAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F70A224514A91942009DAEAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F70A224814A91942009DAEAE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		F70A224A14A91942009DAEAE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F70A224B14A91942009DAEAE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F70A225214A91949009DAEAE /* iPhone 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone 57.png"; path = "../iPhone 57.png"; sourceTree = "<group>"; };
+		F70A225414A9194B009DAEAE /* iPhone4 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone4 114.png"; path = "../iPhone4 114.png"; sourceTree = "<group>"; };
+		F70A225614A91955009DAEAE /* Alien Face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alien Face.png"; sourceTree = "<group>"; };
+		F70A225714A91955009DAEAE /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alien.png; sourceTree = "<group>"; };
+		F70A225A14A91B03009DAEAE /* AlienViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlienViewController.h; sourceTree = "<group>"; };
+		F70A225B14A91B03009DAEAE /* AlienViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlienViewController.m; sourceTree = "<group>"; };
+		F70A226114A9218E009DAEAE /* CustomAlienSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlienSegue.h; sourceTree = "<group>"; };
+		F70A226214A9218E009DAEAE /* CustomAlienSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlienSegue.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F70A222E14A91942009DAEAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70A223614A91942009DAEAE /* UIKit.framework in Frameworks */,
+				F70A223814A91942009DAEAE /* Foundation.framework in Frameworks */,
+				F70A223A14A91942009DAEAE /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F70A222614A91942009DAEAE = {
+			isa = PBXGroup;
+			children = (
+				F70A223B14A91942009DAEAE /* helloAlien */,
+				F70A223414A91942009DAEAE /* Frameworks */,
+				F70A223214A91942009DAEAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F70A223214A91942009DAEAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F70A223114A91942009DAEAE /* helloAlien.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F70A223414A91942009DAEAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F70A223514A91942009DAEAE /* UIKit.framework */,
+				F70A223714A91942009DAEAE /* Foundation.framework */,
+				F70A223914A91942009DAEAE /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F70A223B14A91942009DAEAE /* helloAlien */ = {
+			isa = PBXGroup;
+			children = (
+				F70A224414A91942009DAEAE /* AppDelegate.h */,
+				F70A224514A91942009DAEAE /* AppDelegate.m */,
+				F70A224714A91942009DAEAE /* MainStoryboard.storyboard */,
+				F70A225A14A91B03009DAEAE /* AlienViewController.h */,
+				F70A225B14A91B03009DAEAE /* AlienViewController.m */,
+				F70A224A14A91942009DAEAE /* ViewController.h */,
+				F70A224B14A91942009DAEAE /* ViewController.m */,
+				F70A226114A9218E009DAEAE /* CustomAlienSegue.h */,
+				F70A226214A9218E009DAEAE /* CustomAlienSegue.m */,
+				F70A223C14A91942009DAEAE /* Supporting Files */,
+			);
+			path = helloAlien;
+			sourceTree = "<group>";
+		};
+		F70A223C14A91942009DAEAE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F70A225414A9194B009DAEAE /* iPhone4 114.png */,
+				F70A225214A91949009DAEAE /* iPhone 57.png */,
+				F70A225614A91955009DAEAE /* Alien Face.png */,
+				F70A225714A91955009DAEAE /* Alien.png */,
+				F70A223D14A91942009DAEAE /* helloAlien-Info.plist */,
+				F70A223E14A91942009DAEAE /* InfoPlist.strings */,
+				F70A224114A91942009DAEAE /* main.m */,
+				F70A224314A91942009DAEAE /* helloAlien-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F70A223014A91942009DAEAE /* helloAlien */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F70A224F14A91942009DAEAE /* Build configuration list for PBXNativeTarget "helloAlien" */;
+			buildPhases = (
+				F70A222D14A91942009DAEAE /* Sources */,
+				F70A222E14A91942009DAEAE /* Frameworks */,
+				F70A222F14A91942009DAEAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = helloAlien;
+			productName = helloAlien;
+			productReference = F70A223114A91942009DAEAE /* helloAlien.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F70A222814A91942009DAEAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "University of Colorado at Colorado Springs";
+			};
+			buildConfigurationList = F70A222B14A91942009DAEAE /* Build configuration list for PBXProject "helloAlien" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F70A222614A91942009DAEAE;
+			productRefGroup = F70A223214A91942009DAEAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F70A223014A91942009DAEAE /* helloAlien */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F70A222F14A91942009DAEAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70A224014A91942009DAEAE /* InfoPlist.strings in Resources */,
+				F70A224914A91942009DAEAE /* MainStoryboard.storyboard in Resources */,
+				F70A225314A91949009DAEAE /* iPhone 57.png in Resources */,
+				F70A225514A9194B009DAEAE /* iPhone4 114.png in Resources */,
+				F70A225814A91955009DAEAE /* Alien Face.png in Resources */,
+				F70A225914A91955009DAEAE /* Alien.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F70A222D14A91942009DAEAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70A224214A91942009DAEAE /* main.m in Sources */,
+				F70A224614A91942009DAEAE /* AppDelegate.m in Sources */,
+				F70A224C14A91942009DAEAE /* ViewController.m in Sources */,
+				F70A225C14A91B03009DAEAE /* AlienViewController.m in Sources */,
+				F70A226314A9218E009DAEAE /* CustomAlienSegue.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F70A223E14A91942009DAEAE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F70A223F14A91942009DAEAE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F70A224714A91942009DAEAE /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F70A224814A91942009DAEAE /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F70A224D14A91942009DAEAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F70A224E14A91942009DAEAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F70A225014A91942009DAEAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "helloAlien/helloAlien-Prefix.pch";
+				INFOPLIST_FILE = "helloAlien/helloAlien-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F70A225114A91942009DAEAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "helloAlien/helloAlien-Prefix.pch";
+				INFOPLIST_FILE = "helloAlien/helloAlien-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F70A222B14A91942009DAEAE /* Build configuration list for PBXProject "helloAlien" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F70A224D14A91942009DAEAE /* Debug */,
+				F70A224E14A91942009DAEAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F70A224F14A91942009DAEAE /* Build configuration list for PBXNativeTarget "helloAlien" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F70A225014A91942009DAEAE /* Debug */,
+				F70A225114A91942009DAEAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F70A222814A91942009DAEAE /* Project object */;
+}

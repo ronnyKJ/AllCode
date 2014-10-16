@@ -1,0 +1,49 @@
+﻿<html>
+<head><title></title>
+<style>
+#demo
+{
+	width: 100px;
+	background: #F00;
+}
+</style>
+</head>
+<body>
+<div id="demo" style="height: 200px;"></div>
+<ul id="list"><li>0</li><li>1</li><li>2</li><li>3</li></ul>
+<input id="ipt" value="textBox" />
+</body>
+<script type="text/javascript">
+var demo = document.getElementById("demo");
+var s = demo.style.width;
+//var r = document.defaultView.getComputedStyle(demo,null)['backgroundColor'];
+//var r  = demo.currentStyle['backgroundColor'];
+//alert(r);
+
+var ul = document.getElementById("list");
+var c = ul.childNodes[8];
+var f = ul.firstChild;
+var l = ul.lastChild;
+//alert(f.nextSibling.outerHTML);
+//alert(l.parentNode.outerHTML);
+//alert(l.previousSibling.outerHTML);
+var has = l.hasChildNodes();
+var attr = demo.getAttribute("style");
+//demo.setAttribute("style", "background: #0F0; height: 200px;");
+demo.setAttribute("say", "hello");
+//attr = demo.attributes.id;
+attr = demo.attributes;
+var obj = {a:32, b:"ds"};
+for(var i in obj)
+{
+	//alert(obj[i]);
+}
+//alert(attr);
+
+var ipt = document.getElementById("ipt");
+var nv = l.firstChild.nodeValue;
+//alert(nv);
+
+alert(navigator.appVersion);
+</script>
+</html>

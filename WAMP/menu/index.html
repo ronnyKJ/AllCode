@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>即时点菜</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div id="body">
+<div id="container">
+	<div id="left">
+		<header id="left-header">
+			<div class="header-top">
+				<i class="back icon">返回</i>
+				<i id="to-next" class="next icon">下一步</i>
+				眉州东坡酒楼
+			</div>
+			<div class="header-bottom">
+				<span class="ordered">已选<span id="order-count">0</span></span>
+				<span id="total-price" class="total-price">0元</span>
+			</div>
+		</header>
+		<aside id="menu-category">
+			<ul id="menu-category-list"></ul>
+		</aside>
+		<section id="menu-list">
+			<ul id="dish-list"></ul>			
+		</section>
+	</div>
+	<div id="right">
+		<div id="ordered-dishes-list"></div>
+		<div id="total-pay" class="total-pay"></div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

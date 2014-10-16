@@ -1,0 +1,44 @@
+﻿<html>
+<head><title>Diversity</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+d=document;
+var c=d.getElementById("c");
+c.width = 600;
+c.height = 400;
+c.style.background = "#000";
+var t = c.getContext("2d");
+circle(200, 300, 10, true, "#F00");
+
+var imagedata = t.getImageData(200, 300, 10, 10);
+for(var i=0,n=imagedata.data.length; i<n; i+=4)
+{
+//alert(imagedata.data[i+0]+" "+imagedata.data[i+1]+" "+imagedata.data[i+2]);
+	imagedata.data[i+0] = 255-imagedata.data[i+0];
+	imagedata.data[i+1] = 255-imagedata.data[i+1];
+	imagedata.data[i+2] = 255-imagedata.data[i+2];				
+}
+t.putImageData(imagedata,100,100);
+
+function circle(x, y, r, isFill, style)
+{
+	if(!isFill)
+	{
+		t.beginPath();
+		t.strokeStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.stroke();
+		t.closePath();
+	}
+	else
+	{
+		t.fillStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.fill();
+	}
+}
+</script>
+</html>

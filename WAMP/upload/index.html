@@ -1,0 +1,24 @@
+<html>
+<head><title>Ajax Upload</title></head>
+<body>
+<iframe id="fr" name="fr" src="file.html"></iframe>
+
+<!--<input id="file" name="file" type="file" />-->
+<input id="btn" value="upload" type="button" />
+
+</body>
+<script>
+var _ = function(id){
+	return document.getElementById(id);
+}
+
+var f = _('file');
+var btn = _('btn');
+var fr = _('fr');
+
+btn.onclick = function(){
+	window.frames[0].proxy();
+}
+
+</script>
+</html>

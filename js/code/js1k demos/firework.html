@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+m=Math;k=document.getElementById('c');k.height=300;k.width=500;c=k.getContext('2d');ep={x:250,y:150};mp=ep;k.onmousemove=q;k.onclick=z;p=[];g={x:0,y:.1};for(i=0;i<20;i++){b()};function b(){p.push({x:ep.x,y:ep.y,c:e(),a:d(),b:d(),s:r()*4+1})};setInterval(a,30);function e(){return [f(),f(),f()]};function f(){return m.round(r()*255)};function d(){return r()*3*2-3};function r(){return m.random()};function z(){g={x:r()/3-1/6,y:r()/3-1/6}};function a(){c.fillStyle="rgba(0,0,0,.1)";c.fillRect(0,0,500,300);for(i=p.length-1;i>=0;i--){c.fillStyle="rgb("+p[i].c[0]+","+p[i].c[1]+","+p[i].c[2]+")";c.beginPath();c.arc(p[i].x,p[i].y,p[i].s,0,m.PI*2,true);c.fill();p[i].x+=p[i].a;p[i].y+=p[i].b;p[i].a+=g.x;p[i].b+=g.y;if(p[i].x>500||p[i].x<0||p[i].y>300||p[i].y<0){p.splice(i,1)};}for(i=0;i<8;i++){b();};ep.x+=(mp.x-ep.x)/20;ep.y+=(mp.y-ep.y)/20;}function q(e){var x,y;if(e.offsetX){x=e.offsetX;y=e.offsetY;}else if(e.layerX){x=e.layerX;y=e.layerY;}mp={x:x,y:y};}
+</script>
+</html>

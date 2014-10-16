@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Element.setStyle</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$(<em>Element</em>).setStyle(<em>cssString</em>)</h1>
+<p class="info">
+设置元素的样式。
+</p>
+    <h2>参数</h2>
+	<dl class="p">
+		<dt><em>Element</em></dt>
+		<dd>必选项。页面元素ID(字符串型)或者是文档节点(对象)。</dd>
+		<dt><em>cssString</em></dt>
+		<dd>必选项。样式代码。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">元素的引用</p>
+<h2>描述</h2>
+	<p class="p">设置元素的样式。样式字符串为普通的 CSS 代码。 </p>	
+    <h2>示例</h2>
+<p class="code">&lt;div id=&quot;box&quot; style=&quot;width:200px&quot;&gt;&lt;div class='title'&gt;&lt;span&gt;&amp;times;&lt;/span&gt;标题&lt;/div&gt;content....&lt;/div&gt;<br />
+  &lt;input type=&quot;button&quot; value=&quot;设置浮动样式&quot; onclick=&quot;$('#box span')[0].setStyle('float:right; font-size:11px;')&quot; /&gt;<br />
+  &lt;input type=&quot;button&quot; value=&quot;设置标题样式&quot; onclick=&quot;$('#box div.title')[0].setStyle('font-size:12px; padding:2px; background-color:#ccc')&quot; /&gt;<br />
+  &lt;input type=&quot;button&quot; value=&quot;设置边框与背景色&quot; onclick=&quot;$('box').setStyle('height:300px; border:1px solid #999;background:#eeeeee ')&quot; /&gt;<br />
+&lt;input type=&quot;button&quot; value=&quot;设置页面居中&quot; onclick=&quot;$('box').setStyle('position:absolute;left:50%; top:50%; margin-left:-100px; margin-top:-150px;')&quot; /&gt;</p>	
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

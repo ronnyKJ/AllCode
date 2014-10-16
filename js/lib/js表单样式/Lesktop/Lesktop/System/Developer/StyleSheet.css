@@ -1,0 +1,401 @@
+﻿
+.placeHolder .ph_border_nw,
+.placeHolder .ph_border_n,
+.placeHolder .ph_border_ne,
+.placeHolder .ph_border_w,
+.placeHolder .ph_border_e,
+.placeHolder .ph_border_sw,
+.placeHolder .ph_border_s,
+.placeHolder .ph_border_se
+{
+}
+
+.placeHolder .ph_content
+{
+    font-size:12px;
+}
+
+.designerPanel
+{
+}
+
+.designerPanel .leftPanel
+{
+}
+
+.designerPanel .leftPanel .topPanel
+{
+    border:solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.designerPanel .leftPanel .propertySheet
+{
+    border:solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetHeader
+{
+    background-color:#EEEEEE;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetHeader table
+{
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetHeader .tr_header
+{
+    font-weight:bold;
+    font-size:14px;
+    text-align:left;
+    vertical-align:middle;
+    height:24px;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetHeader td
+{
+    padding:2px;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetHeader .tr_header .td_left
+{
+    width:130px;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetHeader .tr_header .td_right
+{
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetContent td
+{
+    padding:2px;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetContent .tr_property .td_right input
+{
+    border:solid 1px #D0D0D0;
+    width:90%;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetContent .tr_property .td_right select
+{
+    border:solid 1px #D0D0D0;
+    width:90%;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetContent table
+{
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetContent .tr_property .td_left
+{
+    width:130px;
+}
+
+.designerPanel .leftPanel .propertySheet .propertySheetContent .tr_property .td_right
+{
+}
+
+.phcontainer
+{
+    border:solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.designerPanel .rightPanel
+{
+    border:solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.ps_container
+{
+    border:solid 1px #D0D0D0;
+    overflow:auto;
+    padding:4px;
+}
+
+.prop_sheet
+{
+    padding:0px;
+    width:90%;
+}
+
+.prop_sheet td
+{
+    padding:4px;
+}
+
+.prop_sheet .header_tr
+{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.prop_sheet .prop_tr
+{
+    font-size:12px;
+}
+
+.prop_sheet .left_td
+{
+    width:60px;
+}
+
+.prop_sheet .right_td
+{
+}
+
+.prop_sheet .right_td select
+{
+    border: solid 1px #D0D0D0;
+    width:98%;
+}
+
+.prop_sheet .right_td input
+{
+    border: solid 1px #D0D0D0;
+    width:98%;
+}
+
+.codeEditor .objectView
+{
+    border: solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.codeEditor .editor
+{
+    border: solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.Developer_BtnNew
+{
+    background: url(image.gif) no-repeat 0px -100px;
+}
+
+.Developer_BtnOpen
+{
+    background: url(image.gif) no-repeat 0px -130px;
+}
+
+.Developer_BtnSave
+{
+    background: url(image.gif) no-repeat 0px -160px;
+}
+
+.Developer_BtnExec
+{
+    background: url(image.gif) no-repeat 0px 0px;
+}
+
+.Developer_BtnBuild
+{
+    background: url(image.gif) no-repeat 0px -190px;
+}
+
+
+.Developer_Control
+{
+    background: url(image.gif) no-repeat 0px -24px;
+}
+
+.Developer_Tree_Form
+{
+    background: url(image.gif) no-repeat 0px -50px;
+}
+
+.Developer_Tree_CustomControl
+{
+    background: url(image.gif) no-repeat 0px -220px;
+}
+
+.Developer_Tree_Ctrl
+{
+    background: url(image.gif) no-repeat 0px -70px;
+}
+
+.controlBox
+{
+    background-color: #F0EFE4;
+}
+
+.controlBox .controlBoxSelBtn
+{
+    cursor:default;
+    height: 22px;
+    width: 148px;
+    font-size: 12px;
+    
+    padding: 0px;
+    border: solid 1px #316AC5;
+    background-color: #C6D6EF;
+}
+
+.controlBox .controlBoxSelBtn div
+{
+    padding-left: 23px;
+    padding-top: 5px;
+    padding-right: 4px;
+    padding-bottom: 7px;
+}
+
+.controlBox .controlBoxSelBtn:hover
+{
+    margin: 0px;
+    border: solid 1px #316AC5;
+    background-color: #C6D6EF;
+}
+
+.controlBox .typeTitle
+{
+    cursor:default;
+    width: 144px;
+    border:solid 1px #ACA899;
+    padding:2px;
+    background-color:#CBC8B7;
+    font-weight:bold;
+}
+
+.controlBox .controlBoxButton
+{
+    cursor:default;
+    height: 22px;
+    width: 148px;
+    font-size: 12px;
+    padding: 1px;
+    border-width:0px;
+}
+
+.controlBox .controlBoxButton div
+{
+    padding-left: 23px;
+    padding-top: 5px;
+    padding-right: 4px;
+    padding-bottom: 7px;
+}
+
+.controlBox .controlBoxButton:hover
+{
+    padding: 0px;
+    border: solid 1px #316AC5;
+    background-color: #C6D6EF;
+}
+
+.defaultControlCss
+{
+    border:solid 1px #D0D0D0;
+    background-color:White;
+}
+
+.propertySheetContent .set
+{
+    padding-top:4px;
+    padding-bottom:4px;
+    width:90%;
+    cursor:pointer;
+    color:Blue;
+}
+
+.propertySheetContent .set:hover
+{
+    cursor:pointer;
+    color:Blue;
+    text-decoration:underline;
+}
+
+.tab_set_operation
+{
+    float:left;
+    cursor:pointer;
+    color:Blue;
+}
+
+.tab_set_operation:hover
+{
+    cursor:pointer;
+    color:Blue;
+    text-decoration:underline;
+}
+
+.placeholder_preview_common
+{
+    border:dotted 1px #D0D0D0;
+    background-color:White;
+}
+
+.placeholder_preview_control
+{
+    border:dotted 1px #D0D0D0;
+}
+
+.placeholder_preview_label
+{
+    border:dotted 1px #D0D0D0;
+}
+
+.placeholder_preview_radio
+{
+    background: url(image.gif) no-repeat 0px -280px;
+    padding-left:16px;
+}
+
+.placeholder_preview_checkbox
+{
+    background: url(image.gif) no-repeat 0px -250px;
+    padding-left:16px;
+}
+
+.placeholder_preview_dropdownlist
+{
+    border:solid 1px #7F9DB9;
+    background-color:White;
+}
+
+.placeholder_preview_dropdownlist .dropdown_btn
+{
+    float:right;
+    width:17px;
+    height:20px;
+    background: url(image.gif) no-repeat 0px -310px;
+}
+
+.DEVELOPER_IE6_TIP_BK
+{
+    background: url(IE6_TIP.png) no-repeat;
+}
+
+.DEVELOPER_IE6_TIP_BK .link_chrome
+{
+    display: block;
+    position:absolute;
+    left: 60px;
+    top: 110px;
+    width: 220px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.DEVELOPER_IE6_TIP_BK .link_firefox
+{
+    display: block;
+    position:absolute;
+    left: 60px;
+    top: 155px;
+    width: 220px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.DEVELOPER_IE6_TIP_BK .link_ie8
+{
+    display: block;
+    position:absolute;
+    left: 60px;
+    top: 199px;
+    width: 220px;
+    height: 32px;
+    cursor: pointer;
+}

@@ -1,0 +1,4 @@
+1. apply call 实现继承: a.apply(b, arguments ) - b继承a
+2. arguments 实现重载: 判断参数去调用不同的方法
+3. arguments.callee 调用函数本身，可用于递归等
+4. prototype为类添加public方法

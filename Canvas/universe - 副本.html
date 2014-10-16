@@ -1,0 +1,90 @@
+﻿<!doctype html> 
+<html> 
+	<head> 
+		<title>JS1k, 1k demo submission [173]</title> 
+		<meta charset="utf-8" /> 
+	</head> 
+	<body> 
+		<canvas id="c"></canvas> 
+		<script> 
+			d=document.body.style;
+			d.margin="0px";
+			d.overflow="hidden";
+			c=window,d=c.innerWidth,e=c.innerHeight,g=document.getElementById("c"),i=d/2,j=e/2;
+			g.width=d;
+			g.height=e;
+			k=g.getContext("2d");
+			k.globalAlpha=0.3;
+			l=Math,
+			m=l.random,
+			n=l.sin,
+			o=l.floor,
+			p=10,//频率和长短
+			q=[],//所有流星对象的数组
+			r=0,
+			s=0.1,//速度，介于0.1和1.0之间
+			V=1,//流星数目
+			W=190,
+			Q=0.3;
+			function E(n,f){g.addEventListener(n,f,false);}
+			E("mousemove",function(a){
+				i=a.clientX;
+				j=a.clientY
+			});
+			//鼠标滚轮
+			function t(a){
+				var f=0;
+				if(a.detail) f=-a.detail/3;
+				else f=a.wheelDelta/120;
+				if(f>0&&s<1||f<0&&s>0.1)s+=f/25
+			}
+			E("DOMMouseScroll",t);
+			E("mousewheel",t);
+			function u(a){
+				a.x=(0.51*d-d*0.5)*p;
+				a.y=(0.51*e-e*0.5)*p;
+				a.a=p;
+				a.b=0;
+				a.c=0
+			}
+			//for(var v=0,w;v<V;v++)
+			//{
+				w={};
+				u(w);
+				q.push(w)
+			//}
+			var x;
+			setInterval(function(){
+			//for(var ronny=0; ronny<40;ronny++)
+			//{
+				k.fillStyle="#000";
+				k.fillRect(0,0,d,e);
+				a=i-d/2+d/2;
+				f=j-e/2+e/2;
+				
+					b=q[0],
+					x=b.x/b.a,
+					y=b.y/b.a,
+					z=1/b.a*5+1,
+					C=n(Q*0+4+r)*64+W;
+					if(b.b!=0){
+						k.strokeStyle="#FFF";
+						k.lineWidth=z;
+						k.beginPath();
+						k.moveTo(x+a,y+f);
+						k.lineTo(b.b+a,b.c+f);
+						k.stroke()
+					}
+					b.b=x;
+					b.c=y;
+					b.a-=s;
+					if(b.a<s||b.b>d||b.c>e)
+					u(b)
+				
+				r+=0.1
+				//alert();
+			//}
+				},25); 
+		</script> 
+	</body> 
+</html>

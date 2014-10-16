@@ -1,0 +1,141 @@
+﻿<html>
+<head><title>Link table</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+var Link = function()
+{
+	var Struct = function(id, v, n)
+	{
+		this.id = id;
+		this.value = v;
+		this.previous = n;
+	}
+
+	var size = 0;
+	var first = last = null;
+	
+	this.create = function(v)
+	{
+		first = last = new Struct(size, v, null);
+		size++;
+	};
+	
+	this.add = function(v)
+	{
+		last = new Struct(size, v, last);
+		size++;
+		
+		if(!first)
+		{
+			first = last;
+		}
+	};
+	
+	this.getItemAt = function(i)
+	{
+		var tmp = last;
+		if(tmp.id == i)
+		{
+			return tmp;
+		}
+		while(tmp.previous)
+		{
+			if(tmp.previous.id == i)
+			{
+				return tmp.previous;
+			}
+			tmp = tmp.previous;
+		}
+		alert("id out of range");
+	}
+	
+	this.setItemAt = function(i, v)
+	{
+		this.getItemAt(i).value = v;
+	}
+	
+	this.size = function()
+	{
+		return size;
+	}
+	
+	this.getFirst = function()
+	{
+		return first;
+	}
+	
+	this.getLast = function()
+	{
+		return last;
+	}
+	
+	this.isEmpty = function()
+	{
+		if(size == 0)
+			return true;
+		else
+			return false;
+	}
+
+	this.pop = function()
+	{
+		last = last.previous;
+		size--;
+	}
+	
+	this.remove = function(p)
+	{
+		var tmp = last;
+		if(tmp == p)
+		{
+			this.pop();
+		}
+		while(tmp.previous)
+		{
+			if(tmp.previous == p)
+			{
+				tmp.previous = p.previous;
+				p = null;
+				size--;
+				break;
+			}
+			tmp = tmp.previous;
+		}
+	}
+}
+
+var println = function(s)
+{
+	document.write(s+"<br>");
+}
+
+var test = function()
+{
+	var link = new Link();
+	link.create("1.Tom--0");
+	link.add("2.Jim--1");
+	link.add("3.Pitt--2");
+	link.add("4.Lisa--3");
+	link.add("5.Marry--4");
+	println(link.size());
+	println(link.getFirst().value);
+	println(link.getLast().value);
+	var t = link.getItemAt(2);
+	println(link.getItemAt(2).value);
+	link.setItemAt(2, "3.XXX--2");
+	println(link.getItemAt(2).value);
+	println(link.isEmpty());
+	//link.pop();
+	link.remove(t);
+	t = link.getLast();
+	println(link.size());
+	println(link.getLast().value);
+	
+}
+
+test();
+</script>
+</html>

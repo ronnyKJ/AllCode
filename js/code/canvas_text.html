@@ -1,0 +1,45 @@
+﻿<html>
+<head><title></title>
+</head>
+<body>
+<canvas id="c">your browser doesn't support canvas...</canvas>
+<script type="text/javascript">
+var c = document.getElementById("c");
+var t = c.getContext("2d");
+t.strokeStyle="#F00";
+t.fillStyle="#0F0";
+t.beginPath();
+t.arc(100,100,10,0,360,true);
+t.stroke();
+t.closePath();
+
+t.beginPath();
+t.moveTo(10,10);
+t.lineTo(20,30);
+t.stroke();
+t.closePath();
+ 
+t.save();  
+t.font = "30px impact";
+t.fillStyle = '#996600';
+t.textAlign = 'center';
+t.fillText('Happy Trails!', 100, 20, 400); 
+t.restore();
+
+
+
+t.beginPath();
+t.arc(200,100,10,0,360,true);
+t.fill();
+t.closePath();
+
+t.save();  
+t.font = "28px Arial";
+t.strokeStyle = '#00F';
+t.textAlign = 'center';
+t.strokeText('Hello world!', 100, 60, 400);  
+t.restore(); 
+alert(t.isPointInPath(132, 22));
+</script>
+</body>
+</html>

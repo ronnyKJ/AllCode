@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Function.bind</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>Function.bind(obj,arg0,arg1,arg2,...)</h1>
+<p class="info">把一个公共方法当作（绑定）某一对象的一个私有方法使用。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>obj</em></dt>
+	  <dd>目标对象</dd>
+        <dt><em>argn</em></dt>
+		<dd>附带参数</dd>
+</dl>
+<h2>返回值</h2>
+	<p class="p">匿名函数</p>	
+    <h2>描述</h2>
+<p class="p">该方法是从 apply 方法封装而来。把方法(method)绑定到对象(object)，那么该对象就可以获得方法method，并能执行它。打个比喻，比如狼能嚎叫（嚎叫是一个method），默认嚎叫的声音为“噢喔~~~”，现在嚎叫方法绑定给狗，狗也能“噢喔~~~”地嚎叫了，如果狗嚎叫时再带一个参数“汪”，那么狗嚎叫时就发出长长的“汪~~~”声音，变了调子的狼。</p>
+<p class="p">从实际上看，把方法绑定给对象，执行时就是把对象替换方法中的this，执行一遍方法。其实给对象绑定方法，还有一种做法，如下面示例注释部分的方法二，它与方法一实质上是等效的。方法一中bind的返回值是一个匿名函数，即：<span class="comment">$(&quot;dog&quot;).onclick = function(){howl.apply($(&quot;dog&quot;),&quot;汪汪~~~&quot;);}</span><span class="code">，而 apply 方法在执行时会把方法</span><span class="comment">(howl)</span><span class="code">内部 this 的指针指向对象</span><span class="comment">($(&quot;dog&quot;))</span>，因此对比 howl 与 howl2 两个函数，不同的是把this改为传入的参数obj。</p>
+<h2>示例</h2>
+<p class="code">&lt;input type=&quot;button&quot; id=&quot;dog&quot; value=&quot;旺财&quot; /&gt;<br />
+  &lt;script type=&quot;text/javascript&quot; &gt;<br />
+  function howl(words){<br />
+  &nbsp;&nbsp;&nbsp;&nbsp; alert(this.voice = words || &quot;噢喔~~~&quot;);&nbsp;&nbsp;&nbsp;&nbsp;<br />
+  }<br />
+  $(&quot;dog&quot;).onclick = howl.bind($(&quot;dog&quot;),&quot;汪汪~~~&quot;); <span class="comment">//方法一</span><br />
+  <span class="comment">//方法二: $(&quot;dog&quot;).onclick = function(){howl2(this,&quot;汪汪~~~&quot;)}; function howl2(obj,words){alert(obj.voice=words||&quot;噢喔~~~&quot;)}</span><br />
+&lt;/script&gt; <br />
+<span class="comment">//点击“旺财”，“汪汪~~~”</span></p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

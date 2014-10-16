@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="JavaScript/myJSFrame.js" type="text/javascript"></script>
+<style type="text/css">
+	* { padding:0; margin:0}
+	html,body { overflow:hidden; height:100%; width:100%;}
+	body { font-size:12px; font-family:Arial, Helvetica, sans-serif}
+	.box { height:100%; overflow:auto; width:100%; 
+		scrollbar-face-color: #f2f2f2;
+		scrollbar-highlight-color: #ffffff;
+		scrollbar-shadow-color: #cccccc;
+		scrollbar-3dlight-color: #dddddd;
+		scrollbar-arrow-color: #336000;
+		scrollbar-track-color: #fff;
+		scrollbar-darkshadow-color: #ffffff;	
+	}	
+	ul { list-style:none}
+	ul ul { margin-left:1.4em; display:none}
+	.navBox { padding:0.4em}
+	a {color:#333; text-decoration:none;}
+	a:hover { text-decoration:underline}
+	li { margin:0.26em 0; zoom:1}
+	.navBox a { background:url(images/helprecord.gif) no-repeat 0 0; padding:1px 2px 1px 18px; display:block; line-height:1.2em; zoom:1}
+	.navBox a:visited {color:#666;}
+	.navBox a.folder { background:url(images/pkg-closed.gif) no-repeat 0 0; padding-left:34px; }
+	.navBox a.folder:visited {color:#333; font-style:normal}
+	.navBox a.open { background:url(images/pkg-open.gif) no-repeat 0 0;}
+</style>
+<script type="text/javascript">
+if($.Browse.isIE() && $.Browse.IEVer()==6){
+    document.execCommand("BackgroundImageCache", false, true); // 强制缓存css背景图
+}
+function winResize(){
+    $("box").style.height = (document.documentElement.clientHeight-30) + "px";
+}
+if(window.attachEvent){
+	window.attachEvent("onresize",winResize);
+}else{
+	window.addEventListener("resize",winResize,false);
+}
+function toggleExpand(obj){
+	var ul = $(obj).nextElement();
+	if(!ul || ul.tagName!="UL"){return;}	
+	ul.style.display = ul.getStyle("display")=="none" ? "block" : "none";
+	$(obj).toggleClassName("open");
+}
+function makeTab(){
+	var wp = window.parent;
+	wp.$("#tabList a[target=content]").each(function(a){a.removeClassName("cur")});
+	var tabTxt = this.innerHTML.stripTags();
+	var tabHref = this.href;
+	var tabID = this.id.substring(1);
+	var tab = wp.tabObject[tabID];
+	if(!tab){
+		wp.tabObject[tabID] = true;
+		//setTimeout(function(){			
+			var tab = wp.document.createElement("li");			
+			tab.innerHTML = "<a href='javascript:void(0)' class='closeTab' onclick='closeTab(this)'></a><a href='"+tabHref+"' id='tab"+tabID+"' target='content' class='cur' ondblclick='closeTab(this)' onclick='selectThisTab(this)' title='"+tabTxt+"'><em><span>"+tabTxt+"</span></em></a>";
+			wp.$("tabList").appendChild(tab);
+			var oneTabWidth =  132; //window.parent.$("#tabList li")[0].clientWidth;
+			var TabBoxWidthCanBeUse = wp.$("tabList").clientWidth - (wp.$("#tabList li").length)*132-27;
+			var MaxTab = Math.ceil(TabBoxWidthCanBeUse/oneTabWidth);
+			if(MaxTab<1){
+				wp.$("otherTabHandle").addClassName("tabArrowHigh");
+				wp.$("tabArrow").onmouseover = wp.showOtherTab;
+				wp.$("tabArrow").onmouseout = wp.hideOtherTab;
+				wp.$("otherTabBox").appendChild( wp.$("#tabList li")[0].remove() );
+			}
+		//},5);
+	}else{
+		if(document.fireEvent){
+			wp.$("tab"+tabID).fireEvent("onclick");
+		}else{
+			wp.$("tab"+tabID).onclick();
+		}
+	}
+}
+
+</script>
+<title>
+	App Help Tree
+</title></head>
+<body>    
+<div class="box" id="box">  
+			<ul id="navBox" class='navBox'>
+				<li><a href="docs/default.html" id="_0" target="content">首页</a></li>
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">$</a>
+					<ul>						
+   						<li><a href="docs/$.html" id="_1" target="content" >$ 函数</a></li>
+						<li><a href="docs/$.cssselectors.html" id="_2" target="content" >CSS 选择符</a></li>
+						<li><a href="docs/$.Request.html" target="content" id="_59" >$.Request</a></li>
+	    				<li><a href="docs/$.Redirect.html" target="content" id="_60" >$.Redirect</a></li>
+	    				<li><a href="docs/$.Import.html" target="content" id="_61" >$.Import</a></li>
+						<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Element</a>
+							<ul>
+								<li><a href="docs/$.Element.hide.html" id="_3" target="content" >hide</a></li>
+								<li><a href="docs/$.Element.show.html" id="_4"  target="content" >show</a></li>
+								<li><a href="docs/$.Element.getStyle.html" id="_5"  target="content" >getStyle</a></li>
+								<li><a href="docs/$.Element.setStyle.html" id="_6"  target="content" >setStyle</a></li>
+								<li><a href="docs/$.Element.toggle.html" id="_7"  target="content" >toggle</a></li>
+								<li><a href="docs/$.Element.remove.html" id="_8"  target="content" >remove</a></li>
+								<li><a href="docs/$.Element.hasClassName.html" id="_9"  target="content" >hasClassName</a></li>
+								<li><a href="docs/$.Element.addClassName.html" id="_10"  target="content" >addClassName</a></li>
+								<li><a href="docs/$.Element.removeClassName.html" id="_11"  target="content" >removeClassName</a></li>
+								<li><a href="docs/$.Element.toggleClassName.html" id="_12"  target="content" >toggleClassName</a></li>
+								<li><a href="docs/$.Element.getElementsByClassName.html" id="_13"  target="content" >getElementsByClassName</a></li>
+								<li><a href="docs/$.Element.getElementsByAttribute.html" id="_14"  target="content" >getElementsByAttribute</a></li>
+								<li><a href="docs/$.Element.subTag.html" id="_15"  target="content" >subTag</a></li>
+                                <li><a href="docs/$.Element.subElem.html" id="_57"  target="content" >subElem</a></li>
+								<li><a href="docs/$.Element.parentIndex.html" id="_16"  target="content" >parentIndex</a></li>
+                                <li><a href="docs/$.Element.findParent.html" id="_58"  target="content" >findParent</a></li>
+								<li><a href="docs/$.Element.nextElement.html" id="_17"  target="content" >nextElement</a></li>
+								<li><a href="docs/$.Element.previousElement.html" id="_18" target="content" >previousElement</a></li>
+							</ul>
+						</li>
+						<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Ajax</a>
+							<ul>
+								<li><a href="docs/$.Ajax.Ajax.Request.html" id="_19" target="content" >Ajax.Request</a></li>
+								<li><a href="docs/$.Ajax.Request.html" id="_20" target="content" >Request</a></li>			
+								<li><a href="docs/$.Ajax.post.html" id="_21" target="content" >post</a></li>
+								<li><a href="docs/$.Ajax.get.html" id="_22" target="content" >get</a></li>
+								<li><a href="docs/$.Ajax.update.html" id="_23" target="content" >update</a></li>
+							</ul>
+						</li>
+						<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Cookies</a>
+							<ul>
+								<li><a href="docs/$.Cookies.get.html" id="_24" target="content" >get</a></li>
+								<li><a href="docs/$.Cookies.set.html" id="_25" target="content" >set</a></li>
+								<li><a href="docs/$.Cookies.del.html" id="_26" target="content" >del</a></li>
+							</ul>
+						</li>
+						<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Form</a>
+							<ul>
+								<li><a href="docs/$.Form.Form.html" id="_27" target="content" >Form</a></li>
+								<li><a href="docs/$.Form.serialize.html" id="_28" target="content" >serialize</a></li>
+								<li><a href="docs/$.Form.$.Form.serialize.html" id="_29" target="content" >$.Form.serialize</a></li>			
+							</ul>
+						</li>
+						<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Browse</a>
+							<ul>
+								<li><a href="docs/$.Browse.isIE.html" id="_30" target="content" >isIE</a></li>
+								<li><a href="docs/$.Browse.isFF.html" id="_31" target="content" >isFF</a></li>
+								<li><a href="docs/$.Browse.isOpera.html" id="_32" target="content" >isOpera</a></li>
+								<li><a href="docs/$.Browse.isSafari.html" id="_33" target="content" >isSafari</a></li>
+								<li><a href="docs/$.Browse.isGecko.html" id="_34" target="content" >isGecko</a></li>
+								<li><a href="docs/$.Browse.IEVer.html" id="_35" target="content" >IEVer</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Array</a>
+					<ul>
+						<li><a href="docs/Array.indexOf.html" id="_36" target="content" >indexOf</a></li>
+						<li><a href="docs/Array.each.html" id="_37" target="content" >each</a></li>
+						<!--<li><a href="docs/Array.uniqStr.html" id="_38" target="content" >uniqStr</a></li>-->
+					</ul>
+				</li>
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">String</a>
+					<ul>
+						<li><a href="docs/String.trim.html" id="_39" target="content" >trim</a></li>
+						<li><a href="docs/String.stripTags.html" id="_40" target="content" >stripTags</a></li>
+						<li><a href="docs/String.cint.html" id="_41" target="content" >cint</a></li>
+						<li><a href="docs/String.format.html" id="_42" target="content" >format</a></li>
+						<li><a href="docs/String.camelize.html" id="_43" target="content" >camelize</a></li>
+						<li><a href="docs/String.hasSubString.html" id="_44" target="content" >hasSubString</a></li>
+						<li><a href="docs/String.hasSubStrInArr.html" id="_45" target="content" >hasSubStrInArr</a></li>
+						<li><a href="docs/String.toXMLString.html" id="_46" target="content" >toXMLString</a></li>
+						<li><a href="docs/String.uniq.html" id="_38" target="content" >uniq</a></li>
+						<!--<li><a target="content" >URLEncode</a></li>
+						<li><a target="content" >URLDecode</a></li>-->
+					</ul>
+				</li>
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Function</a>
+					<ul>
+						<li><a href="docs/Function.bind.html" id="_56" target="content" >bind</a></li>
+					</ul>
+				</li>
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">StringBuffer</a>
+					<ul>
+						<li><a href="docs/StringBuffer.append.html" id="_47" target="content" >append</a></li>
+						<li><a href="docs/StringBuffer.toString.html" id="_48" target="content" >toString</a></li>
+						<li><a href="docs/StringBuffer.length.html" id="_49" target="content" >length</a></li>
+						<li><a href="docs/StringBuffer.clear.html" id="_50" target="content" >clear</a></li>
+					</ul>
+				</li>
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">NameSpace</a>
+					<ul>
+						<li><a href="docs/NameSpace.copyChild.html" id="_51" target="content" >copyChild</a></li>
+					</ul>
+				</li>
+					
+			
+				
+				<li><a href="javascript:void(0)" class="folder" onclick="toggleExpand(this)">Other functions</a>
+					<ul>    					
+						<li><a href="docs/$A.html" target="content" id="_52" >$A</a></li>
+						<li><a href="docs/$D.html" target="content" id="_53">$D</a></li>
+						<li><a href="docs/$E.html" target="content" id="_54">$E</a></li>
+						<li><a href="docs/$V.html" target="content" id="_55">$V</a></li>
+					</ul>
+				</li>
+			</ul>
+</div>
+<script type="text/javascript">
+$("#box a[target=content]").each(function(a){a.onclick=makeTab;})
+winResize();
+</script>
+</body>
+</html>

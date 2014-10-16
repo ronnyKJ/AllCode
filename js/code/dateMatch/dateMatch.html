@@ -1,0 +1,85 @@
+﻿<html>
+<head><title>Date Match</title>
+</head>
+<body>
+<div id='date'></div>
+</body>
+<script type="text/javascript">
+function show(content)
+{
+	div.innerHTML += content+"<br>";
+}
+
+function getYear(date)
+{
+	return date.getFullYear();
+}
+
+function getMonth(date)
+{
+	return date.getMonth();
+}
+
+function getDate(date)
+{
+	return date.getDate();
+}
+
+function getDay(date)
+{
+	return date.getDay() || 7;
+}
+
+function getNextDate(date)
+{
+	return new Date(date*1+24*3600000);
+}
+
+function isLeapYear(year)
+{
+	if(year%100==0 && year%400==0)
+	{
+		return true;
+	}
+	else if(year%100==0 && year%400!=0)
+	{
+		return false;
+	}
+	else if(year%4==0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+var div = document.getElementById('date');
+var start = new Date(2012,9,7);
+show(start);
+
+var next = start;
+
+var total=0, match=0;
+var tmpDate, tmpDay;
+
+while(1)
+{
+	total++;
+	next = getNextDate(next);//get the next date
+	tmpDate = getDate(next);
+	tmpDay = getDay(next);
+	if(tmpDate == tmpDay)
+	{
+		match++;
+		if(isLeapYear(getYear(next)) && getMonth(next)==9 && getDate(next)==1)
+			break;
+	}
+}
+
+show("----------------");
+show("Rate is "+match/total*100+"%");
+show(next);
+</script>
+</html>

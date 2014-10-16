@@ -1,0 +1,171 @@
+﻿<html>
+<head><title>User Research</title>
+<style>
+body, #c, #frame, #mask
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#container
+{
+	position: relative;
+	width: 90%;
+	height: 90%;
+	margin: 0 auto;
+}
+
+#c, #frame, #mask
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#des
+{
+	text-align: center;
+	margin-top: 10px;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #FFF;
+	background: #333;
+	padding: 5px 0;
+}
+
+p
+{
+	position: absolute;
+	background: rgba(0, 0, 0, 0.8);
+	font-family: "微软雅黑";
+	color: #FFF;
+	font-size: 12px;
+	margin: 0;
+	padding: 4px 8px;
+	border-radius: 6px;
+	z-index: 5;
+}
+</style>
+<script type="text/javascript">
+$={
+	gradArray:function()
+	{
+		hueArray = [];
+		var group = [[2, 1, 0], [-1, 2, 0],[0, 2, 1],[0, -1, 2]];
+		for(var i=0; i<group.length; i++)
+		{
+			for(var j=0; j<256/4; j++)
+			{
+				var value = {};
+				for(var k=0; k<3; k++)
+				{
+					if(group[i][k]==2)
+					{
+						value[k] = 255;
+					}
+					else if(group[i][k]==1)
+					{
+						value[k] = j*4;
+					}
+					else if(group[i][k]==-1)
+					{
+						value[k] = 255 - j*4;
+					}
+					else
+					{
+						value[k] = 0;
+					}			
+				}
+				hueArray.push(value);
+			}
+		}
+		return hueArray;
+	},
+
+	init:function()
+	{
+		d=document;
+		c=d.getElementById("c");
+		con = d.getElementById("container");
+		c.width = con.clientWidth;
+		c.height = con.clientHeight;
+		ot = con.offsetTop;
+		ol = con.offsetLeft;
+		t=c.getContext("2d");
+		flag=true;
+		color=this.gradArray().reverse();
+		this.slow();
+		mask = d.getElementById("mask");
+		
+		mask.onmousemove = function()
+		{
+			if(flag)
+				return;
+			x=event.clientX-ol;
+			y=event.clientY-ot;
+			var g=t.createRadialGradient(x,y,10,x,y,50);
+			g.addColorStop(0,"rgba(0,0,0,0.1)");
+			g.addColorStop(1,"rgba(0,0,0,0)");
+			t.fillStyle=g;
+			t.fillRect(x-50,y-50,100,100);
+			var img = t.getImageData(x-50,y-50,100,100);
+			var data=img.data;
+			var l=data.length;
+			var s='';
+			for(var i=3; i<l; i+=4)
+			{
+				var tmp = color[data[i]];
+				data[i-3] = tmp[0];
+				data[i-2] = tmp[1];
+				data[i-1] = tmp[2];
+			}
+			img.data = data;
+			t.putImageData(img, x-50,y-50);
+			flag=!flag;
+		}
+	},
+	
+	slow:function()
+	{
+		setInterval(function(){flag=!flag;},5);
+	}
+}
+
+function start()
+{
+	$.init();
+}
+
+function show()
+{
+	c.style.zIndex = "2";
+	var x=event.clientX-ol;
+	var y=event.clientY-ot;
+	var g=t.createRadialGradient(x-3,y-3,0,x,y,10);
+	g.addColorStop(0,"rgba(255,230,230,1)");
+	g.addColorStop(0.6,"rgba(255,0,0,1)");
+	g.addColorStop(1,"rgba(150,0,0,1)");
+	t.fillStyle = g;
+	t.arc(x,y,10,0,360,true);
+	t.fill();
+	var p = d.createElement('p');
+	p.innerText = "这是您点击的位置";
+	p.style.top = y-14;
+	p.style.left = x+15;
+	con.appendChild(p);
+	d.getElementById("des").innerText = "以上图示是您鼠标移动位置，以及停留时间的热区，谢谢您协助用户行为的调研!";
+}
+</script>
+</head>
+<body onload="start()">
+<div id="container">
+	<canvas id="c"></canvas>
+	<iframe id="frame" src="http://www.qq.com" scrolling='no'></iframe>
+	<div id="mask" onclick="show()"></div>
+</div>
+<div id="des">请点击一个你感兴趣的链接。</div>
+</body>
+</html>

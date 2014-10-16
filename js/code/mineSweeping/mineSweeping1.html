@@ -1,0 +1,183 @@
+<html>
+<head><title></title>
+<style>
+#map
+{
+	width: 400px;
+	border: 1px #888 solid;
+}
+
+.grid
+{
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	display: inline-block;
+	border: 1px #888 solid;
+	background: #DDD;
+	vertical-align: middle;
+	text-align: center;
+}
+</style>
+<script>
+function MineMap(m ,n ,count)
+{
+	this.mines = {};
+	this.m = m;
+	this.n = n;
+	this.count = count;
+	var self = this;
+
+	this.resetMap = function()
+	{
+		if(_("map"))
+			document.body.removeChild(_("map"));
+		var div = document.createElement("div");
+		div.id = "map";
+		document.body.appendChild(div);
+	}
+
+	this.setMapArray = function()
+	{
+		var num = 0;
+		for(var i=0; i<this.m; i++)
+		{
+			for(var j=0; j<this.n; j++)
+			{
+				this.mines[i+""+j] = "";
+			}
+		}
+
+		var k=0;
+		while(k<this.count)
+		{
+			var number = Math.floor(Math.random()*this.m*this.n);
+			var n = getIndex(number);
+			
+			if(this.mines[n] != "*")
+			{
+				k++;
+				this.mines[n] = "*";
+				setNumber(n);
+			}
+		}
+		setNumber();
+		addGrid();
+	}
+	
+	this.gridClick = function()
+	{
+		var grids = document.getElementsByClassName("grid");
+		for(var i=0; i<grids.length; i++)
+		{
+			grids[i].onclick = (function(i){
+				return function(){
+					var s = self.mines[getIndex(i)];
+					grids[i].innerText = s;
+					grids[i].style.backgroundColor = "#00F";
+					if(s == "*")
+					{
+						grids[i].style.backgroundColor = "red";
+						if(confirm("You are dead... Try again?"))
+							begin();
+					}
+				}
+			})(i);
+		}
+	}
+
+	function getIndex(number)
+	{
+		if(number<10)
+		{
+			return "0" + number.toString();
+		}
+		else
+		{
+			var tmp = number.toString().split("");
+			return tmp[0]+""+tmp[1];
+		}
+	}
+
+	function setNumber()
+	{
+		for(var index in self.mines)
+		{
+			var num = 0;
+			var tmp = index.split("");
+			var x = parseInt(tmp[0]);
+			var y = parseInt(tmp[1]);
+			if(self.mines[index] != "*")
+			{
+				if(x-1>=0 && y-1 >=0 && self.mines[(x-1)+""+(y-1)] == "*")
+				{
+					num++;
+				}
+				if(y-1 >=0 && self.mines[x+""+(y-1)] == "*")
+				{
+					num++;
+				}
+				if(x+1<=self.n && y-1 >=0 && self.mines[(x+1)+""+(y-1)] == "*")
+				{
+					num++;
+				}
+				if(x-1>=0 && y+1 <=self.m && self.mines[(x-1)+""+(y+1)] == "*")
+				{
+					num++;
+				}
+				if(y+1 <=self.m && self.mines[x+""+(y+1)] == "*")
+				{
+					num++;
+				}
+				if(x+1<=self.n && y+1 <=self.m && self.mines[(x+1)+""+(y+1)] == "*")
+				{
+					num++;
+				}
+				if(x-1>=0 && self.mines[(x-1)+""+y] == "*")
+				{
+					num++;
+				}
+				if(x+1<=self.n && self.mines[(x+1)+""+y] == "*")
+				{
+					num++;
+				}			
+				
+				self.mines[index] = num;
+			}
+		}
+	}
+	
+	function addGrid()
+	{
+		var map = _("map");
+		for(var i=0; i<self.m; i++)
+		{
+			for(var j=0; j<self.n; j++)
+			{
+				var span = document.createElement("span");
+				span.className = "grid";
+				span.innerText = self.mines[i+""+j];
+				map.appendChild(span);
+				
+			}
+		}
+	}
+}
+
+function _(id)
+{
+	return document.getElementById(id);
+}
+
+function begin()
+{
+	var m = new MineMap(10, 10, 10);
+	m.resetMap();
+	m.setMapArray()
+	m.gridClick();
+}
+</script>
+</head>
+<body onload="begin()">
+</body>
+</html>

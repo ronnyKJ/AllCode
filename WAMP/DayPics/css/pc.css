@@ -1,0 +1,415 @@
+﻿*
+{
+	margin: 0;
+	padding:0;
+	font-family: "微软雅黑";
+	color: #555;
+	font-size: 14px;
+}
+
+body
+{
+	background: #fdfdfd;
+	/*background: #444 url('bg.jpg') no-repeat fixed center center;*/
+	overflow-x: hidden;
+}
+
+em
+{
+	color: #dc2252;
+	font-style: normal;
+}
+
+ul
+{
+	list-style: none;
+}
+
+#header
+{
+	position:relative;
+	width: 1000px;
+	margin: 0 auto;
+	height: 300px;
+}
+
+#menu
+{
+	position: absolute;
+	right:0;
+	top:10px;
+}
+
+#menu li
+{
+	float: left;
+	display: inline;
+	padding: 0 15px;
+}
+
+#menu a
+{
+	font-family: "Lucida Sans Unicode";
+	font-size: 10px;
+	color: #7ad696;
+	text-decoration: none;
+}
+
+#menu a:hover
+{
+	text-decoration: underline;
+}
+
+#main
+{
+	width: 1000px;
+	margin: 0 auto;
+	line-height: 1.5em;
+}
+
+#logo
+{
+	margin: 100px -144px 0 100px
+}
+
+#current_date
+{
+	font-weight: bold;
+	text-align: right;
+	margin-top: 70px;
+}
+
+.word_container
+{
+	min-height: 35px;
+	margin-bottom: 80px;
+}
+
+#bottom
+{
+	text-align: center;
+	font-size: 10px;
+	margin-bottom: 20px;
+}
+
+#edit
+{
+	background-color: #f2f5f3;
+	padding: 4px 8px;
+}
+
+/*----------------public class------------------*/
+.green_btn
+{
+	background-color: #7ad696;
+	border-radius: 8px;
+	border: 0;
+	color: #FFF;
+	padding: 4px 8px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.green_iptbox
+{
+	border-radius: 8px;
+	border: 2px solid #7ad696;
+	outline: none;
+	padding: 0 4px;
+}
+
+.second_font
+{
+	font-family: "Lucida Sans Unicode";
+}
+
+.indent
+{
+	text-indent: 2em;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+.underline
+{
+	text-decoration: underline;
+}
+/*----------------lab------------------*/
+.lab_item  h1
+{
+	background-color: rgba(0, 0, 0, 0.5);
+	height: 41px;
+	line-height: 41px;
+	padding-top: 1px;
+	padding-left: 5px;
+	margin-top: -42px;
+	position: relative;
+	z-index: 2;
+	border-bottom: 2px #333 solid;
+}
+
+.lab_item .num, .category .num
+{
+	display: inline-block;
+	width: 40px;
+	height:40px;
+	line-height:40px;
+	background-color: #7ad696;
+	text-align: center;
+	border-radius: 22px;
+	font-size: 22px;
+	color: #FFF;
+}
+
+.lab_item .title
+{
+	font-size: 18px;
+	padding-left: 10px;
+	color: #FFF;
+	width: 30px;
+	height:30px;
+	line-height:30px;
+}
+
+div.content
+{
+	background: url('../img/lab_item.png') repeat-y -188px 0;
+	padding-top: 20px;
+	margin-bottom: 80px;
+	font-size: 12px;
+}
+
+.content h2
+{
+	height: 45px;
+	width: 188px;
+}
+
+.content div.con
+{
+	padding: 10px 110px;
+}
+
+h2.overview
+{
+	background: url('../img/lab_item.png') no-repeat 0 1px;
+}
+
+h2.demo
+{
+	background: url('../img/lab_item.png') no-repeat 0 -131px;
+}
+
+h2.api
+{
+	background: url('../img/lab_item.png') no-repeat 0 -43px;
+}
+
+h2.link
+{
+	background: url('../img/lab_item.png') no-repeat 0 -87px;	
+}
+
+.content div a
+{
+	color: #ad2578;
+}
+
+.api_table
+{
+	border-top: 2px #7AD696 solid;
+}
+
+.api_table th
+{
+	color:#FFF;
+	background: #AAA;
+	height: 30px;
+}
+
+.api_table th, .api_table td
+{
+	border-right: 1px #FFF solid;
+}
+
+.api_table td
+{
+	background: #E8E8E8;
+	padding: 4px 8px;
+	font-size: 12px;
+}
+
+b.label
+{
+	font-weight: normal;
+	font-size: 8px;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	border-radius: 22px;
+	height: 12px;
+	color: #EEE;
+	padding: 1px 5px;
+}
+
+/*----------------drawing------------------*/
+div.category
+{
+	margin-bottom: 80px;
+}
+
+div.category .num
+{
+	border: 2px #FFF solid;
+	float: left;
+	margin: -7px 8px 0 4px;
+}
+
+div.category .foldername
+{
+	background: #777;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	color: #FFF;
+	font-size: 18px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+}
+
+div.category ul
+{
+	display: block;
+	overflow: auto;
+	padding: 0 40px;
+}
+
+div.category ul li
+{
+	float: left;
+	display: inline;
+	margin: 20px;
+	text-align: center;
+}
+
+
+div.category ul li span
+{
+	display: block;
+	width: 100px;
+	padding: 3px;
+	box-shadow: 0px 0px 3px #333;
+	margin-bottom: 6px;
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+div.category ul li:hover span
+{
+	background: #FE7F7F;
+}
+
+@-webkit-keyframes loading {
+	100%{-webkit-transform: rotate(360deg);}
+}
+
+/*----------------AboutMe------------------*/
+#resume
+{
+	line-height: 28px;
+	margin-left: 60px;
+}
+
+#search
+{
+	width: 400px;
+	background: #fdfdfd url('../img/search_margin_right_3px.png') no-repeat right center;
+	display: block;
+}
+
+#resume h1, #resume h1 em, #resume h1 span
+{
+	font-size: 16px;
+}
+
+.statement
+{
+	margin: 10px 0 30px;
+}
+
+.experience
+{
+	color: #7AD696;
+	margin: 0 5px;
+}
+
+.year
+{
+	color: #888;
+}
+
+.description
+{
+	color: #888;
+	display: block;
+	margin-left: 1em;
+	font-size: 12px;
+}
+
+#resume ul
+{
+	margin: 0 0 30px 30px;
+}
+
+#skill
+{
+	padding: 6px 0 6px 90px;
+	margin: 0 0 80px -60px;
+	background: #ddf5e4;
+}
+
+#skill b.label
+{
+	margin-right: 8px;
+}
+
+#contact
+{
+	position: absolute;
+	background: #fcfcfc;
+	right: 0;
+	bottom: 0px;
+	padding: 10px 50px 10px 20px;
+	border: 2px #6fd28d solid;
+	z-index: 10000;
+	box-shadow: 1px 1px 5px #666;
+	border-radius: 12px;
+	-webkit-transform: rotate(-13deg);
+	-moz-transform: rotate(-13deg);
+}
+
+#contact span.title
+{
+	color: #43b265;
+	font-weight: bold;
+}
+
+#contact span, #contact h2, #contact em
+{
+	font-size: 12px;
+	display: inline;
+}
+
+#contact .zkj
+{
+	font-size: 16px;
+	margin-right: 5px;
+}
+
+#contact .name
+{
+	margin: 15px 0;
+	text-align: center;
+}

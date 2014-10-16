@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent">
+        <ImageButton android:layout_height="109dp" android:id="@+id/WebBtn" android:layout_width="116dp" android:src="@drawable/icon"></ImageButton>
+        <TextView android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView1" android:text="WebSite" android:layout_width="wrap_content"></TextView>
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent">
+    <ImageButton android:layout_height="109dp" android:id="@+id/PhotoBtn" android:layout_width="116dp" android:src="@drawable/icon"></ImageButton>
+        <TextView android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView1" android:text="TakePhoto" android:layout_width="wrap_content"></TextView>
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent">
+        <ImageButton android:layout_height="109dp" android:id="@+id/GalleryBtn" android:layout_width="116dp" android:src="@drawable/icon"></ImageButton>
+        <TextView android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView1" android:text="Gallery" android:layout_width="wrap_content"></TextView>
+    </LinearLayout>
+</LinearLayout>

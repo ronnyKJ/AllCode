@@ -1,0 +1,26 @@
+[ 2010-10-28T09:08:37+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002883s ]
+[ 2010-10-28T09:08:37+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.000601s ]
+[ 2010-10-28T09:08:44+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.001985s ]
+[ 2010-10-28T09:08:44+08:00 ] SQL: SELECT * FROM `think_form` WHERE title='首都哈是看大家哈师大数据库的' LIMIT 1  [ RunTime:0.000492s ]
+[ 2010-10-28T09:09:00+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.006864s ]
+[ 2010-10-28T09:09:00+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-10-28T09:09:00+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('首都哈是看大家哈师大数据库的','发的身份了快乐的是解放军的考生可好附近的时间发收到','sds@sd.com','1',1288228140) [ RunTime:0.000451s ]
+[ 2010-10-28T09:47:36+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.004763s ]
+[ 2010-10-28T09:47:36+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.000451s ]
+[ 2010-10-28T09:47:38+08:00 ] ERR: (ThinkException) 非法操作queryCateAttr
+[ 2010-10-28T09:47:56+08:00 ] ERR: (ThinkException) 非法操作queryCateAttr
+[ 2010-10-28T09:49:10+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.005336s ]
+[ 2010-10-28T09:49:10+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.001754s ]
+[ 2010-10-28T09:49:41+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002530s ]
+[ 2010-10-28T09:49:41+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-10-28T09:49:41+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('计划分开的身份开始的积分卡积分就开始大幅','看房价快速的福建省的开发建设的飞','hfduh@343.com','1',1288230581) [ RunTime:0.000385s ]
+[ 2010-10-28T09:57:21+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.006164s ]
+[ 2010-10-28T09:57:21+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.002346s ]
+[ 2010-10-28T09:57:35+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002069s ]
+[ 2010-10-28T09:57:35+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-10-28T09:57:35+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('恢复还是的尽快返回','的司法局偶说的肌肤就是发动机开始大幅看斯蒂芬会计师的福克斯的开发斯蒂芬','hfduh@343.com','1',1288231055) [ RunTime:0.000343s ]
+[ 2010-10-28T09:58:00+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002550s ]
+[ 2010-10-28T09:58:00+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.000358s ]
+[ 2010-10-28T09:58:09+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002633s ]
+[ 2010-10-28T09:58:09+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-10-28T09:58:09+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('房价快速的回复接口还是大家看法合适的话飞是','的少年房价快速的烦恼即可撒放得开将扩大双方教科书费就可是地方经济凯撒的复合接口和萨芬','hfduh@343.com','1',1288231089) [ RunTime:0.000443s ]

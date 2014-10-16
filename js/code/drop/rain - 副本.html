@@ -1,0 +1,83 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+var e=q=i=a=0,f=document,g=Math,h=g.random,j=g.abs,k=g.pow,l=H=600,m=y=l/2,n=[];
+c=f.getElementById("c");
+c.width=l;
+c.height=H;
+c=c.getContext("2d");
+f.onclick=function()
+{
+	e=!e
+};
+f.onkeydown=function()
+{
+	n=[];
+	q=0;
+};
+
+f.onmousemove=function(b)
+{
+	if(!e)
+	{
+		m=b.clientX-9;
+		y=b.clientY-9;
+	}
+};
+
+setInterval(function()
+{
+	c.fillStyle="rgba(253,253,253,.4)";
+	c.fillRect(0,0,l,H);
+	for(i=2;i--;)
+		n[q++]={x:h()*l,y:0,b:0,a:0};
+	q%=400;
+	c.fillStyle="rgba(40,10,100,0.2)";
+	for(i=n.length;i--;)
+	{
+		var b=n[i],o=-0.4*h()*b.a-1;
+		b.y+=b.a;
+		b.a+=0.2;
+		b.x+=b.b;
+		var d=j(b.x-m);
+		aty=j(y-b.y);
+		if(d<60&&aty<119)
+		{
+			d={x:d,y:aty};
+			d.c=k(d.x*d.x+d.y*d.y,0.5);
+			if(d.c<94)
+			{
+				b.y=y-k(8836-d.x*d.x,0.5);
+				b.b+=(b.x-m<0?-1:1)*0.5*h();
+				b.a=h()*b.a<1?o:b.a=-h()*3
+			}
+		}
+		if(b.y>H)
+		{
+			b.a=h()<0.3?o:-h()*2;
+			b.b+=0.25-h()/2;
+			b.y=H;
+		}
+		c.fillRect(b.x,b.y,0.5,-2*j(b.a))
+	}
+	c.fillStyle="rgba(0,120,255,.6)";
+	c.beginPath();
+	c.arc(m-4,y,4,g.PI,0,1);
+	c.lineTo(m,y-96);
+	c.stroke();
+	c.beginPath();
+	c.arc(m,y,94,-2.3,2.3-g.PI,0);
+	y-=72;
+	a=0;
+	for(i=5;a=i*24,i--;)
+		c.quadraticCurveTo(m-60+a-12,y-8,m-60+a-24,y);
+		y+=72;
+		c.fill();
+		c.stroke();
+},10);
+</script>
+</html>

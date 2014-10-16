@@ -1,0 +1,170 @@
+[ 2011-08-27T23:15:37+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.003753s ]
+[ 2011-08-27T23:15:37+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.001573s ]
+[ 2011-08-27T23:15:37+08:00 ] SQL: UPDATE `viewcount` SET `time`='2011-08-27 23:08:37',`count`=2 WHERE ip=27.18.151.152 [ RunTime:0.000412s ]
+[ 2011-08-27T23:15:37+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.003816s ]
+[ 2011-08-27T23:15:37+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000382s ]
+[ 2011-08-27T23:15:37+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000891s ]
+[ 2011-08-27T23:15:37+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000135s ]
+[ 2011-08-27T23:15:37+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:15:37+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:15:37+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:16:24+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.003328s ]
+[ 2011-08-27T23:16:24+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000251s ]
+[ 2011-08-27T23:16:24+08:00 ] SQL: UPDATE `viewcount` SET `time`='2011-08-27 23:08:24',`count`=2 WHERE ip='27.18.151.152' [ RunTime:0.061244s ]
+[ 2011-08-27T23:16:24+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.025827s ]
+[ 2011-08-27T23:16:24+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000353s ]
+[ 2011-08-27T23:16:24+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000220s ]
+[ 2011-08-27T23:16:24+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000436s ]
+[ 2011-08-27T23:16:24+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:16:24+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:16:24+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:17:06+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.003099s ]
+[ 2011-08-27T23:17:06+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000516s ]
+[ 2011-08-27T23:17:06+08:00 ] SQL: UPDATE `viewcount` SET `time`='2011-08-27 23:08:06',`count`=2 WHERE ip='27.18.151.152' [ RunTime:0.101702s ]
+[ 2011-08-27T23:17:06+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.003182s ]
+[ 2011-08-27T23:17:06+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000541s ]
+[ 2011-08-27T23:17:06+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000184s ]
+[ 2011-08-27T23:17:06+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000416s ]
+[ 2011-08-27T23:17:06+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:17:06+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:17:06+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:17:10+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002410s ]
+[ 2011-08-27T23:17:10+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.001032s ]
+[ 2011-08-27T23:17:10+08:00 ] SQL: UPDATE `viewcount` SET `time`='2011-08-27 23:08:10',`count`=2 WHERE ip='27.18.151.152' [ RunTime:0.056965s ]
+[ 2011-08-27T23:17:10+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.003028s ]
+[ 2011-08-27T23:17:10+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000995s ]
+[ 2011-08-27T23:17:10+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000273s ]
+[ 2011-08-27T23:17:10+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000191s ]
+[ 2011-08-27T23:17:10+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:17:10+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:17:10+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:37+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.003110s ]
+[ 2011-08-27T23:27:37+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000658s ]
+[ 2011-08-27T23:27:37+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:37', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.041522s ]
+[ 2011-08-27T23:27:37+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002654s ]
+[ 2011-08-27T23:27:37+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.001411s ]
+[ 2011-08-27T23:27:37+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000459s ]
+[ 2011-08-27T23:27:37+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000413s ]
+[ 2011-08-27T23:27:37+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:37+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:37+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:44+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002784s ]
+[ 2011-08-27T23:27:44+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000782s ]
+[ 2011-08-27T23:27:44+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:44', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.043718s ]
+[ 2011-08-27T23:27:44+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002788s ]
+[ 2011-08-27T23:27:44+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000695s ]
+[ 2011-08-27T23:27:44+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000235s ]
+[ 2011-08-27T23:27:44+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000218s ]
+[ 2011-08-27T23:27:44+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:44+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:44+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:46+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002817s ]
+[ 2011-08-27T23:27:46+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.028287s ]
+[ 2011-08-27T23:27:47+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:46', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.092644s ]
+[ 2011-08-27T23:27:47+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.003589s ]
+[ 2011-08-27T23:27:47+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.001132s ]
+[ 2011-08-27T23:27:47+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000342s ]
+[ 2011-08-27T23:27:47+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000461s ]
+[ 2011-08-27T23:27:47+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:47+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:47+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:49+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002352s ]
+[ 2011-08-27T23:27:49+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000745s ]
+[ 2011-08-27T23:27:49+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:49', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.051828s ]
+[ 2011-08-27T23:27:49+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.004611s ]
+[ 2011-08-27T23:27:49+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.001859s ]
+[ 2011-08-27T23:27:49+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000312s ]
+[ 2011-08-27T23:27:49+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000274s ]
+[ 2011-08-27T23:27:49+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:49+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:27:49+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:03+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.003714s ]
+[ 2011-08-27T23:28:03+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000381s ]
+[ 2011-08-27T23:28:03+08:00 ] SQL: INSERT INTO `viewcount` (`ip`,`time`,`count`) VALUES ('27.18.151.152','2011-08-27 23:08:03',1) [ RunTime:0.052307s ]
+[ 2011-08-27T23:28:03+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002810s ]
+[ 2011-08-27T23:28:03+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000813s ]
+[ 2011-08-27T23:28:03+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000174s ]
+[ 2011-08-27T23:28:03+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000688s ]
+[ 2011-08-27T23:28:03+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:03+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:03+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:09+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002486s ]
+[ 2011-08-27T23:28:09+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000741s ]
+[ 2011-08-27T23:28:09+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:09', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.076002s ]
+[ 2011-08-27T23:28:09+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.003332s ]
+[ 2011-08-27T23:28:09+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000281s ]
+[ 2011-08-27T23:28:09+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000429s ]
+[ 2011-08-27T23:28:09+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000393s ]
+[ 2011-08-27T23:28:09+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:09+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:09+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:12+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002519s ]
+[ 2011-08-27T23:28:12+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000880s ]
+[ 2011-08-27T23:28:12+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:12', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.036672s ]
+[ 2011-08-27T23:28:12+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.004327s ]
+[ 2011-08-27T23:28:12+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000393s ]
+[ 2011-08-27T23:28:12+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000283s ]
+[ 2011-08-27T23:28:12+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000252s ]
+[ 2011-08-27T23:28:12+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:12+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:12+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:13+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002301s ]
+[ 2011-08-27T23:28:13+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000697s ]
+[ 2011-08-27T23:28:14+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:13', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.119641s ]
+[ 2011-08-27T23:28:14+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.003738s ]
+[ 2011-08-27T23:28:14+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000910s ]
+[ 2011-08-27T23:28:14+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000265s ]
+[ 2011-08-27T23:28:14+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000150s ]
+[ 2011-08-27T23:28:14+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:14+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:14+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:15+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002358s ]
+[ 2011-08-27T23:28:15+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000928s ]
+[ 2011-08-27T23:28:15+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:15', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.038944s ]
+[ 2011-08-27T23:28:15+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.004038s ]
+[ 2011-08-27T23:28:15+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.001061s ]
+[ 2011-08-27T23:28:15+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000292s ]
+[ 2011-08-27T23:28:15+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000278s ]
+[ 2011-08-27T23:28:15+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:15+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:15+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:16+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002680s ]
+[ 2011-08-27T23:28:16+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000803s ]
+[ 2011-08-27T23:28:16+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:16', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.030052s ]
+[ 2011-08-27T23:28:16+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002774s ]
+[ 2011-08-27T23:28:16+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000655s ]
+[ 2011-08-27T23:28:16+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000363s ]
+[ 2011-08-27T23:28:16+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000498s ]
+[ 2011-08-27T23:28:16+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:16+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:16+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:17+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002726s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000600s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:17', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.039380s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002376s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000702s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000247s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000160s ]
+[ 2011-08-27T23:28:17+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:17+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:17+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:17+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.003068s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000419s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:17', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.041099s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002709s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000749s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000419s ]
+[ 2011-08-27T23:28:17+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000297s ]
+[ 2011-08-27T23:28:17+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:17+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:17+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:18+08:00 ] SQL: SHOW COLUMNS FROM viewcount [ RunTime:0.002679s ]
+[ 2011-08-27T23:28:18+08:00 ] SQL: SELECT COUNT(ip) ip_count FROM viewcount where ip ='27.18.151.152' [ RunTime:0.000865s ]
+[ 2011-08-27T23:28:18+08:00 ] SQL: UPDATE viewcount SET time='2011-08-27 23:08:18', count=count+1 WHERE ip='27.18.151.152' [ RunTime:0.041142s ]
+[ 2011-08-27T23:28:18+08:00 ] SQL: SHOW COLUMNS FROM pics [ RunTime:0.002530s ]
+[ 2011-08-27T23:28:18+08:00 ] SQL: SELECT left(date, 10) date FROM pics ORDER BY date desc LIMIT 1 [ RunTime:0.000875s ]
+[ 2011-08-27T23:28:18+08:00 ] SQL: SELECT * FROM pics WHERE left(date, 10) = '2011-08-27' ORDER BY date desc [ RunTime:0.000199s ]
+[ 2011-08-27T23:28:18+08:00 ] SQL: SELECT distinct left(date, 10) date FROM pics order by date desc [ RunTime:0.000158s ]
+[ 2011-08-27T23:28:18+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:18+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.
+[ 2011-08-27T23:28:18+08:00 ] NOTIC: [2] Cannot modify header information - headers already sent by (output started at H:\WAMP\DayPics\Lib\Action\IndexAction.class.php:1) ~runtime.php 第 2 行.

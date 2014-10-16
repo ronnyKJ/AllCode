@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DCA16C4C157963B5006BECF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA16C4B157963B5006BECF9 /* UIKit.framework */; };
+		DCA16C4E157963B5006BECF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA16C4D157963B5006BECF9 /* Foundation.framework */; };
+		DCA16C50157963B5006BECF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA16C4F157963B5006BECF9 /* CoreGraphics.framework */; };
+		DCA16C56157963B5006BECF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C54157963B5006BECF9 /* InfoPlist.strings */; };
+		DCA16C58157963B5006BECF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16C57157963B5006BECF9 /* main.m */; };
+		DCA16C5C157963B6006BECF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16C5B157963B6006BECF9 /* AppDelegate.m */; };
+		DCA16C5F157963B6006BECF9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C5D157963B6006BECF9 /* MainStoryboard.storyboard */; };
+		DCA16C62157963B6006BECF9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16C61157963B6006BECF9 /* MainViewController.m */; };
+		DCA16C65157963B6006BECF9 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16C64157963B6006BECF9 /* FlipsideViewController.m */; };
+		DCA16C6C1579643C006BECF9 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C6B1579643C006BECF9 /* Default-Landscape~ipad.png */; };
+		DCA16C841579647C006BECF9 /* 01 Major Pentatonic, 1st mode Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C6E1579647C006BECF9 /* 01 Major Pentatonic, 1st mode Acoustic.png */; };
+		DCA16C851579647C006BECF9 /* 01 Major Pentatonic, 1st mode.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C6F1579647C006BECF9 /* 01 Major Pentatonic, 1st mode.png */; };
+		DCA16C861579647C006BECF9 /* 02 Major Pentatonic, 2nd mode Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C701579647C006BECF9 /* 02 Major Pentatonic, 2nd mode Acoustic.png */; };
+		DCA16C871579647C006BECF9 /* 02 Major Pentatonic, 2nd mode.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C711579647C006BECF9 /* 02 Major Pentatonic, 2nd mode.png */; };
+		DCA16C881579647C006BECF9 /* 03 Mixolydian Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C721579647C006BECF9 /* 03 Mixolydian Acoustic.png */; };
+		DCA16C891579647C006BECF9 /* 03 Mixolydian.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C731579647C006BECF9 /* 03 Mixolydian.png */; };
+		DCA16C8A1579647C006BECF9 /* 04 Minor Pentatonic, 5th of major Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C741579647C006BECF9 /* 04 Minor Pentatonic, 5th of major Acoustic.png */; };
+		DCA16C8B1579647C006BECF9 /* 04 Minor Pentatonic, 5th of major.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C751579647C006BECF9 /* 04 Minor Pentatonic, 5th of major.png */; };
+		DCA16C8C1579647D006BECF9 /* 05 Blues Minor Hexatonic Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C761579647C006BECF9 /* 05 Blues Minor Hexatonic Acoustic.png */; };
+		DCA16C8D1579647D006BECF9 /* 05 Blues Minor Hexatonic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C771579647C006BECF9 /* 05 Blues Minor Hexatonic.png */; };
+		DCA16C8E1579647D006BECF9 /* 06 Dominant bebop Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C781579647C006BECF9 /* 06 Dominant bebop Acoustic.png */; };
+		DCA16C8F1579647D006BECF9 /* 06 Dominant bebop.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C791579647C006BECF9 /* 06 Dominant bebop.png */; };
+		DCA16C901579647D006BECF9 /* 07 Aeolian Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C7A1579647C006BECF9 /* 07 Aeolian Acoustic.png */; };
+		DCA16C911579647D006BECF9 /* 07 Aeolian.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C7B1579647C006BECF9 /* 07 Aeolian.png */; };
+		DCA16C921579647D006BECF9 /* 08 Phrygian Acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C7C1579647C006BECF9 /* 08 Phrygian Acoustic.png */; };
+		DCA16C931579647D006BECF9 /* 08 Phrygian.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C7D1579647C006BECF9 /* 08 Phrygian.png */; };
+		DCA16C941579647D006BECF9 /* icon 160 x 180  acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C7E1579647C006BECF9 /* icon 160 x 180  acoustic.png */; };
+		DCA16C951579647D006BECF9 /* icon 160 x 180  electric.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C7F1579647C006BECF9 /* icon 160 x 180  electric.png */; };
+		DCA16C961579647D006BECF9 /* icon 80 x 90 acoustic.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C801579647C006BECF9 /* icon 80 x 90 acoustic.png */; };
+		DCA16C971579647D006BECF9 /* icon 80 x 90 electric.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C811579647C006BECF9 /* icon 80 x 90 electric.png */; };
+		DCA16C981579647D006BECF9 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C821579647C006BECF9 /* pause.png */; };
+		DCA16C991579647D006BECF9 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C831579647C006BECF9 /* play.png */; };
+		DCA16CAB15796559006BECF9 /* 01 Major Pentatonic 1st mode acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C9B15796559006BECF9 /* 01 Major Pentatonic 1st mode acoustic.m4a */; };
+		DCA16CAC15796559006BECF9 /* 01 Major Pentatonic 1st mode electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C9C15796559006BECF9 /* 01 Major Pentatonic 1st mode electric.m4a */; };
+		DCA16CAD15796559006BECF9 /* 02 Major Pentatonic 2nd mode acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C9D15796559006BECF9 /* 02 Major Pentatonic 2nd mode acoustic.m4a */; };
+		DCA16CAE15796559006BECF9 /* 02 Major Pentatonic 2nd mode electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C9E15796559006BECF9 /* 02 Major Pentatonic 2nd mode electric.m4a */; };
+		DCA16CAF15796559006BECF9 /* 03 Mixolydian 5th mode acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16C9F15796559006BECF9 /* 03 Mixolydian 5th mode acoustic.m4a */; };
+		DCA16CB015796559006BECF9 /* 03 Mixolydian 5th mode electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA015796559006BECF9 /* 03 Mixolydian 5th mode electric.m4a */; };
+		DCA16CB115796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA115796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major acoustic.m4a */; };
+		DCA16CB215796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA215796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major electric.m4a */; };
+		DCA16CB315796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA315796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 acoustic.m4a */; };
+		DCA16CB415796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA415796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 electric.m4a */; };
+		DCA16CB515796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA515796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian acoustic.m4a */; };
+		DCA16CB615796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA615796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian electric.m4a */; };
+		DCA16CB715796559006BECF9 /* 07 Aelian and Phtygian acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA715796559006BECF9 /* 07 Aelian and Phtygian acoustic.m4a */; };
+		DCA16CB815796559006BECF9 /* 07 Aelian and Phtygian electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA815796559006BECF9 /* 07 Aelian and Phtygian electric.m4a */; };
+		DCA16CB915796559006BECF9 /* 08 Phrygian Dominant acoustic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CA915796559006BECF9 /* 08 Phrygian Dominant acoustic.m4a */; };
+		DCA16CBA15796559006BECF9 /* 08 Phrygian Dominant electric.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DCA16CAA15796559006BECF9 /* 08 Phrygian Dominant electric.m4a */; };
+		DCA16CC11579677C006BECF9 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16CBC1579663C006BECF9 /* AudioPlayer.m */; };
+		DCA16CC21579677C006BECF9 /* PlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16CBE1579663C006BECF9 /* PlayButton.m */; };
+		DCA16CC31579677C006BECF9 /* Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA16CC01579663C006BECF9 /* Scale.m */; };
+		DCA16CC515796840006BECF9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA16CC415796840006BECF9 /* AudioToolbox.framework */; };
+		DCA16CC715796CAD006BECF9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA16CC615796CAD006BECF9 /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DCA16C47157963B5006BECF9 /* utilityScales.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = utilityScales.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA16C4B157963B5006BECF9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DCA16C4D157963B5006BECF9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DCA16C4F157963B5006BECF9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DCA16C53157963B5006BECF9 /* utilityScales-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "utilityScales-Info.plist"; sourceTree = "<group>"; };
+		DCA16C55157963B5006BECF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DCA16C57157963B5006BECF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DCA16C59157963B6006BECF9 /* utilityScales-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "utilityScales-Prefix.pch"; sourceTree = "<group>"; };
+		DCA16C5A157963B6006BECF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DCA16C5B157963B6006BECF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DCA16C5E157963B6006BECF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		DCA16C60157963B6006BECF9 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		DCA16C61157963B6006BECF9 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		DCA16C63157963B6006BECF9 /* FlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlipsideViewController.h; sourceTree = "<group>"; };
+		DCA16C64157963B6006BECF9 /* FlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
+		DCA16C6B1579643C006BECF9 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		DCA16C6E1579647C006BECF9 /* 01 Major Pentatonic, 1st mode Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01 Major Pentatonic, 1st mode Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C6F1579647C006BECF9 /* 01 Major Pentatonic, 1st mode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01 Major Pentatonic, 1st mode.png"; sourceTree = "<group>"; };
+		DCA16C701579647C006BECF9 /* 02 Major Pentatonic, 2nd mode Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02 Major Pentatonic, 2nd mode Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C711579647C006BECF9 /* 02 Major Pentatonic, 2nd mode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02 Major Pentatonic, 2nd mode.png"; sourceTree = "<group>"; };
+		DCA16C721579647C006BECF9 /* 03 Mixolydian Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03 Mixolydian Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C731579647C006BECF9 /* 03 Mixolydian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03 Mixolydian.png"; sourceTree = "<group>"; };
+		DCA16C741579647C006BECF9 /* 04 Minor Pentatonic, 5th of major Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04 Minor Pentatonic, 5th of major Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C751579647C006BECF9 /* 04 Minor Pentatonic, 5th of major.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04 Minor Pentatonic, 5th of major.png"; sourceTree = "<group>"; };
+		DCA16C761579647C006BECF9 /* 05 Blues Minor Hexatonic Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05 Blues Minor Hexatonic Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C771579647C006BECF9 /* 05 Blues Minor Hexatonic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05 Blues Minor Hexatonic.png"; sourceTree = "<group>"; };
+		DCA16C781579647C006BECF9 /* 06 Dominant bebop Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06 Dominant bebop Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C791579647C006BECF9 /* 06 Dominant bebop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06 Dominant bebop.png"; sourceTree = "<group>"; };
+		DCA16C7A1579647C006BECF9 /* 07 Aeolian Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07 Aeolian Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C7B1579647C006BECF9 /* 07 Aeolian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07 Aeolian.png"; sourceTree = "<group>"; };
+		DCA16C7C1579647C006BECF9 /* 08 Phrygian Acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08 Phrygian Acoustic.png"; sourceTree = "<group>"; };
+		DCA16C7D1579647C006BECF9 /* 08 Phrygian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08 Phrygian.png"; sourceTree = "<group>"; };
+		DCA16C7E1579647C006BECF9 /* icon 160 x 180  acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 160 x 180  acoustic.png"; sourceTree = "<group>"; };
+		DCA16C7F1579647C006BECF9 /* icon 160 x 180  electric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 160 x 180  electric.png"; sourceTree = "<group>"; };
+		DCA16C801579647C006BECF9 /* icon 80 x 90 acoustic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 80 x 90 acoustic.png"; sourceTree = "<group>"; };
+		DCA16C811579647C006BECF9 /* icon 80 x 90 electric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon 80 x 90 electric.png"; sourceTree = "<group>"; };
+		DCA16C821579647C006BECF9 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		DCA16C831579647C006BECF9 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		DCA16C9B15796559006BECF9 /* 01 Major Pentatonic 1st mode acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01 Major Pentatonic 1st mode acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16C9C15796559006BECF9 /* 01 Major Pentatonic 1st mode electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01 Major Pentatonic 1st mode electric.m4a"; sourceTree = "<group>"; };
+		DCA16C9D15796559006BECF9 /* 02 Major Pentatonic 2nd mode acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02 Major Pentatonic 2nd mode acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16C9E15796559006BECF9 /* 02 Major Pentatonic 2nd mode electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02 Major Pentatonic 2nd mode electric.m4a"; sourceTree = "<group>"; };
+		DCA16C9F15796559006BECF9 /* 03 Mixolydian 5th mode acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "03 Mixolydian 5th mode acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16CA015796559006BECF9 /* 03 Mixolydian 5th mode electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "03 Mixolydian 5th mode electric.m4a"; sourceTree = "<group>"; };
+		DCA16CA115796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "04 Minor Pentatonic 5th mode of Major acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16CA215796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "04 Minor Pentatonic 5th mode of Major electric.m4a"; sourceTree = "<group>"; };
+		DCA16CA315796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "05 Blues Minor Hexatonic Minor Pentatonic dim 5 acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16CA415796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "05 Blues Minor Hexatonic Minor Pentatonic dim 5 electric.m4a"; sourceTree = "<group>"; };
+		DCA16CA515796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "06 Dominant Bebop raisd 7th to Mixolydian acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16CA615796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "06 Dominant Bebop raisd 7th to Mixolydian electric.m4a"; sourceTree = "<group>"; };
+		DCA16CA715796559006BECF9 /* 07 Aelian and Phtygian acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "07 Aelian and Phtygian acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16CA815796559006BECF9 /* 07 Aelian and Phtygian electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "07 Aelian and Phtygian electric.m4a"; sourceTree = "<group>"; };
+		DCA16CA915796559006BECF9 /* 08 Phrygian Dominant acoustic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "08 Phrygian Dominant acoustic.m4a"; sourceTree = "<group>"; };
+		DCA16CAA15796559006BECF9 /* 08 Phrygian Dominant electric.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "08 Phrygian Dominant electric.m4a"; sourceTree = "<group>"; };
+		DCA16CBB1579663C006BECF9 /* AudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		DCA16CBC1579663C006BECF9 /* AudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		DCA16CBD1579663C006BECF9 /* PlayButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayButton.h; sourceTree = "<group>"; };
+		DCA16CBE1579663C006BECF9 /* PlayButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayButton.m; sourceTree = "<group>"; };
+		DCA16CBF1579663C006BECF9 /* Scale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scale.h; sourceTree = "<group>"; };
+		DCA16CC01579663C006BECF9 /* Scale.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Scale.m; sourceTree = "<group>"; };
+		DCA16CC415796840006BECF9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DCA16CC615796CAD006BECF9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCA16C44157963B5006BECF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA16CC715796CAD006BECF9 /* AVFoundation.framework in Frameworks */,
+				DCA16CC515796840006BECF9 /* AudioToolbox.framework in Frameworks */,
+				DCA16C4C157963B5006BECF9 /* UIKit.framework in Frameworks */,
+				DCA16C4E157963B5006BECF9 /* Foundation.framework in Frameworks */,
+				DCA16C50157963B5006BECF9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DCA16C3C157963B5006BECF9 = {
+			isa = PBXGroup;
+			children = (
+				DCA16C51157963B5006BECF9 /* utilityScales */,
+				DCA16C4A157963B5006BECF9 /* Frameworks */,
+				DCA16C48157963B5006BECF9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCA16C48157963B5006BECF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCA16C47157963B5006BECF9 /* utilityScales.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCA16C4A157963B5006BECF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCA16CC615796CAD006BECF9 /* AVFoundation.framework */,
+				DCA16CC415796840006BECF9 /* AudioToolbox.framework */,
+				DCA16C4B157963B5006BECF9 /* UIKit.framework */,
+				DCA16C4D157963B5006BECF9 /* Foundation.framework */,
+				DCA16C4F157963B5006BECF9 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCA16C51157963B5006BECF9 /* utilityScales */ = {
+			isa = PBXGroup;
+			children = (
+				DCA16CBB1579663C006BECF9 /* AudioPlayer.h */,
+				DCA16CBC1579663C006BECF9 /* AudioPlayer.m */,
+				DCA16CBD1579663C006BECF9 /* PlayButton.h */,
+				DCA16CBE1579663C006BECF9 /* PlayButton.m */,
+				DCA16CBF1579663C006BECF9 /* Scale.h */,
+				DCA16CC01579663C006BECF9 /* Scale.m */,
+				DCA16C5A157963B6006BECF9 /* AppDelegate.h */,
+				DCA16C5B157963B6006BECF9 /* AppDelegate.m */,
+				DCA16C5D157963B6006BECF9 /* MainStoryboard.storyboard */,
+				DCA16C60157963B6006BECF9 /* MainViewController.h */,
+				DCA16C61157963B6006BECF9 /* MainViewController.m */,
+				DCA16C63157963B6006BECF9 /* FlipsideViewController.h */,
+				DCA16C64157963B6006BECF9 /* FlipsideViewController.m */,
+				DCA16C52157963B5006BECF9 /* Supporting Files */,
+			);
+			path = utilityScales;
+			sourceTree = "<group>";
+		};
+		DCA16C52157963B5006BECF9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCA16C9A15796559006BECF9 /* Audio Files */,
+				DCA16C6D1579647C006BECF9 /* Images */,
+				DCA16C6B1579643C006BECF9 /* Default-Landscape~ipad.png */,
+				DCA16C53157963B5006BECF9 /* utilityScales-Info.plist */,
+				DCA16C54157963B5006BECF9 /* InfoPlist.strings */,
+				DCA16C57157963B5006BECF9 /* main.m */,
+				DCA16C59157963B6006BECF9 /* utilityScales-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DCA16C6D1579647C006BECF9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DCA16C6E1579647C006BECF9 /* 01 Major Pentatonic, 1st mode Acoustic.png */,
+				DCA16C6F1579647C006BECF9 /* 01 Major Pentatonic, 1st mode.png */,
+				DCA16C701579647C006BECF9 /* 02 Major Pentatonic, 2nd mode Acoustic.png */,
+				DCA16C711579647C006BECF9 /* 02 Major Pentatonic, 2nd mode.png */,
+				DCA16C721579647C006BECF9 /* 03 Mixolydian Acoustic.png */,
+				DCA16C731579647C006BECF9 /* 03 Mixolydian.png */,
+				DCA16C741579647C006BECF9 /* 04 Minor Pentatonic, 5th of major Acoustic.png */,
+				DCA16C751579647C006BECF9 /* 04 Minor Pentatonic, 5th of major.png */,
+				DCA16C761579647C006BECF9 /* 05 Blues Minor Hexatonic Acoustic.png */,
+				DCA16C771579647C006BECF9 /* 05 Blues Minor Hexatonic.png */,
+				DCA16C781579647C006BECF9 /* 06 Dominant bebop Acoustic.png */,
+				DCA16C791579647C006BECF9 /* 06 Dominant bebop.png */,
+				DCA16C7A1579647C006BECF9 /* 07 Aeolian Acoustic.png */,
+				DCA16C7B1579647C006BECF9 /* 07 Aeolian.png */,
+				DCA16C7C1579647C006BECF9 /* 08 Phrygian Acoustic.png */,
+				DCA16C7D1579647C006BECF9 /* 08 Phrygian.png */,
+				DCA16C7E1579647C006BECF9 /* icon 160 x 180  acoustic.png */,
+				DCA16C7F1579647C006BECF9 /* icon 160 x 180  electric.png */,
+				DCA16C801579647C006BECF9 /* icon 80 x 90 acoustic.png */,
+				DCA16C811579647C006BECF9 /* icon 80 x 90 electric.png */,
+				DCA16C821579647C006BECF9 /* pause.png */,
+				DCA16C831579647C006BECF9 /* play.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		DCA16C9A15796559006BECF9 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCA16C9B15796559006BECF9 /* 01 Major Pentatonic 1st mode acoustic.m4a */,
+				DCA16C9C15796559006BECF9 /* 01 Major Pentatonic 1st mode electric.m4a */,
+				DCA16C9D15796559006BECF9 /* 02 Major Pentatonic 2nd mode acoustic.m4a */,
+				DCA16C9E15796559006BECF9 /* 02 Major Pentatonic 2nd mode electric.m4a */,
+				DCA16C9F15796559006BECF9 /* 03 Mixolydian 5th mode acoustic.m4a */,
+				DCA16CA015796559006BECF9 /* 03 Mixolydian 5th mode electric.m4a */,
+				DCA16CA115796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major acoustic.m4a */,
+				DCA16CA215796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major electric.m4a */,
+				DCA16CA315796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 acoustic.m4a */,
+				DCA16CA415796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 electric.m4a */,
+				DCA16CA515796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian acoustic.m4a */,
+				DCA16CA615796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian electric.m4a */,
+				DCA16CA715796559006BECF9 /* 07 Aelian and Phtygian acoustic.m4a */,
+				DCA16CA815796559006BECF9 /* 07 Aelian and Phtygian electric.m4a */,
+				DCA16CA915796559006BECF9 /* 08 Phrygian Dominant acoustic.m4a */,
+				DCA16CAA15796559006BECF9 /* 08 Phrygian Dominant electric.m4a */,
+			);
+			path = "Audio Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCA16C46157963B5006BECF9 /* utilityScales */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA16C68157963B6006BECF9 /* Build configuration list for PBXNativeTarget "utilityScales" */;
+			buildPhases = (
+				DCA16C43157963B5006BECF9 /* Sources */,
+				DCA16C44157963B5006BECF9 /* Frameworks */,
+				DCA16C45157963B5006BECF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = utilityScales;
+			productName = utilityScales;
+			productReference = DCA16C47157963B5006BECF9 /* utilityScales.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCA16C3E157963B5006BECF9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Iron Sheep Productions, LLC";
+			};
+			buildConfigurationList = DCA16C41157963B5006BECF9 /* Build configuration list for PBXProject "utilityScales" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DCA16C3C157963B5006BECF9;
+			productRefGroup = DCA16C48157963B5006BECF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCA16C46157963B5006BECF9 /* utilityScales */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCA16C45157963B5006BECF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA16C56157963B5006BECF9 /* InfoPlist.strings in Resources */,
+				DCA16C5F157963B6006BECF9 /* MainStoryboard.storyboard in Resources */,
+				DCA16C6C1579643C006BECF9 /* Default-Landscape~ipad.png in Resources */,
+				DCA16C841579647C006BECF9 /* 01 Major Pentatonic, 1st mode Acoustic.png in Resources */,
+				DCA16C851579647C006BECF9 /* 01 Major Pentatonic, 1st mode.png in Resources */,
+				DCA16C861579647C006BECF9 /* 02 Major Pentatonic, 2nd mode Acoustic.png in Resources */,
+				DCA16C871579647C006BECF9 /* 02 Major Pentatonic, 2nd mode.png in Resources */,
+				DCA16C881579647C006BECF9 /* 03 Mixolydian Acoustic.png in Resources */,
+				DCA16C891579647C006BECF9 /* 03 Mixolydian.png in Resources */,
+				DCA16C8A1579647C006BECF9 /* 04 Minor Pentatonic, 5th of major Acoustic.png in Resources */,
+				DCA16C8B1579647C006BECF9 /* 04 Minor Pentatonic, 5th of major.png in Resources */,
+				DCA16C8C1579647D006BECF9 /* 05 Blues Minor Hexatonic Acoustic.png in Resources */,
+				DCA16C8D1579647D006BECF9 /* 05 Blues Minor Hexatonic.png in Resources */,
+				DCA16C8E1579647D006BECF9 /* 06 Dominant bebop Acoustic.png in Resources */,
+				DCA16C8F1579647D006BECF9 /* 06 Dominant bebop.png in Resources */,
+				DCA16C901579647D006BECF9 /* 07 Aeolian Acoustic.png in Resources */,
+				DCA16C911579647D006BECF9 /* 07 Aeolian.png in Resources */,
+				DCA16C921579647D006BECF9 /* 08 Phrygian Acoustic.png in Resources */,
+				DCA16C931579647D006BECF9 /* 08 Phrygian.png in Resources */,
+				DCA16C941579647D006BECF9 /* icon 160 x 180  acoustic.png in Resources */,
+				DCA16C951579647D006BECF9 /* icon 160 x 180  electric.png in Resources */,
+				DCA16C961579647D006BECF9 /* icon 80 x 90 acoustic.png in Resources */,
+				DCA16C971579647D006BECF9 /* icon 80 x 90 electric.png in Resources */,
+				DCA16C981579647D006BECF9 /* pause.png in Resources */,
+				DCA16C991579647D006BECF9 /* play.png in Resources */,
+				DCA16CAB15796559006BECF9 /* 01 Major Pentatonic 1st mode acoustic.m4a in Resources */,
+				DCA16CAC15796559006BECF9 /* 01 Major Pentatonic 1st mode electric.m4a in Resources */,
+				DCA16CAD15796559006BECF9 /* 02 Major Pentatonic 2nd mode acoustic.m4a in Resources */,
+				DCA16CAE15796559006BECF9 /* 02 Major Pentatonic 2nd mode electric.m4a in Resources */,
+				DCA16CAF15796559006BECF9 /* 03 Mixolydian 5th mode acoustic.m4a in Resources */,
+				DCA16CB015796559006BECF9 /* 03 Mixolydian 5th mode electric.m4a in Resources */,
+				DCA16CB115796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major acoustic.m4a in Resources */,
+				DCA16CB215796559006BECF9 /* 04 Minor Pentatonic 5th mode of Major electric.m4a in Resources */,
+				DCA16CB315796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 acoustic.m4a in Resources */,
+				DCA16CB415796559006BECF9 /* 05 Blues Minor Hexatonic Minor Pentatonic dim 5 electric.m4a in Resources */,
+				DCA16CB515796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian acoustic.m4a in Resources */,
+				DCA16CB615796559006BECF9 /* 06 Dominant Bebop raisd 7th to Mixolydian electric.m4a in Resources */,
+				DCA16CB715796559006BECF9 /* 07 Aelian and Phtygian acoustic.m4a in Resources */,
+				DCA16CB815796559006BECF9 /* 07 Aelian and Phtygian electric.m4a in Resources */,
+				DCA16CB915796559006BECF9 /* 08 Phrygian Dominant acoustic.m4a in Resources */,
+				DCA16CBA15796559006BECF9 /* 08 Phrygian Dominant electric.m4a in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCA16C43157963B5006BECF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA16CC11579677C006BECF9 /* AudioPlayer.m in Sources */,
+				DCA16CC21579677C006BECF9 /* PlayButton.m in Sources */,
+				DCA16CC31579677C006BECF9 /* Scale.m in Sources */,
+				DCA16C58157963B5006BECF9 /* main.m in Sources */,
+				DCA16C5C157963B6006BECF9 /* AppDelegate.m in Sources */,
+				DCA16C62157963B6006BECF9 /* MainViewController.m in Sources */,
+				DCA16C65157963B6006BECF9 /* FlipsideViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DCA16C54157963B5006BECF9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCA16C55157963B5006BECF9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DCA16C5D157963B6006BECF9 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCA16C5E157963B6006BECF9 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DCA16C66157963B6006BECF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		DCA16C67157963B6006BECF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCA16C69157963B6006BECF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "utilityScales/utilityScales-Prefix.pch";
+				INFOPLIST_FILE = "utilityScales/utilityScales-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DCA16C6A157963B6006BECF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "utilityScales/utilityScales-Prefix.pch";
+				INFOPLIST_FILE = "utilityScales/utilityScales-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCA16C41157963B5006BECF9 /* Build configuration list for PBXProject "utilityScales" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA16C66157963B6006BECF9 /* Debug */,
+				DCA16C67157963B6006BECF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA16C68157963B6006BECF9 /* Build configuration list for PBXNativeTarget "utilityScales" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA16C69157963B6006BECF9 /* Debug */,
+				DCA16C6A157963B6006BECF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCA16C3E157963B5006BECF9 /* Project object */;
+}

@@ -1,0 +1,1 @@
+﻿<?phpinclude('util.php');$con = mysql_connect("localhost","root","");//连接数据库if (!$con){	die('Could not connect: ' . mysql_error());}$webgis = mysql_select_db("webgis", $con);//选择数据库if (!$webgis){	die ("Can't use webgis : " . mysql_error());}// do//$d = mysql_query("INSERT INTO fid (id) VALUES (12344)");//dump($d);?>

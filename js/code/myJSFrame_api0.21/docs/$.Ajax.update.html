@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Ajax.update</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style></head>
+<body>
+<h1>$.Ajax.update(<em>url</em>,<em>ID</em>)</h1>
+<p class="info">
+发送异步请求，并把结果输出到指定(ID)的容器中。</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>url</em></dt>
+		<dd>必选项。数据发送的目标地址，可以在 url 中携带数据。</dd>
+		<dt><em>ID</em></dt>
+		<dd>必选项。请求成功时结果输出的容器ID。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">当前使用的 xmlhttp 对象。</p>	
+    <h2>描述</h2>
+<p class="p">该方法可以非常方便的更新某一容器的内容。这里的容器可以是 div、span、p、td 等结构元素，也可以是表单元素：input、textarea、select、button，该方法会自动判断 ID 的 tag 类型，并自动选择给 innerHTML 或者 value 赋值。<br />
+$.Ajax.update 是 $.Ajax.get 方法的快捷调用方法 。 </p>
+    <h2>示例</h2>
+<p class="code">&lt;div id=&quot;content&quot;&gt;Loading...&lt;/div&gt;<br />
+  &lt;input id=&quot;username&quot; type=&quot;text&quot; readonly /&gt;<br />
+	  &lt;script type=&quot;text/javascript&quot; &gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	<span class="core">$.Ajax.update(&quot;http://localhost/content.asp?type=getdetail&quot;,&quot;content&quot;);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="core">$.Ajax.update(&quot;http://localhost/user.asp?id=000001&quot;,&quot;username&quot;);</span><br />
+&lt;/script&gt; </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

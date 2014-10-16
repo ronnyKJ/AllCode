@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+ig=document.getElementById("c");ig.width=320;ig.height=240;var p1=0,p2=0,p3=0,p4=0,t1,t2,t3,t4,aSin=[],ti=1,cv=ig.getContext('2d'),cd=cv.createImageData(ig.width,ig.height),rad,i,j,x,idx,as=2.6,fd=0.4,as1=4.4,fd1=2.2,ps=-4.4,ps2=3.3;function init(){var i=512;while(i--){rad=(i*0.703125)*0.0174532;aSin[i]=Math.sin(rad)*1024}}function main(){init();draw()}function rand(va){return Math.random(va)}document.onclick=function(){as=rand(300)*5;fd=rand(300)*10;as1=rand(200)*50;fd2=rand(300)*50;ps=(rand(200)*20)-10;ps2=(rand(200)*40)-20};function draw(){cdData=cd.data;t4=p4;t3=p3;i=320;while(i--){t1=p1+5;t2=p2+3;t3&=511;t4&=511;j=240;while(j--){t1&=511;t2&=511;x=aSin[t1]+aSin[t2]+aSin[t3]+aSin[t4];idx=(i+j*ig.width)*4;cdData[idx+0]=x/as;cdData[idx+1]=x/fd;cdData[idx+2]=x/ps;cdData[idx+3]=255;t1+=5;t2+=3}t4+=as1;t3+=fd1}cd.data=cdData;cv.putImageData(cd,0,0);p1+=ps;p3+=ps2;setTimeout(draw,ti)}main();
+</script>
+</html>

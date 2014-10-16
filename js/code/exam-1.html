@@ -1,0 +1,38 @@
+﻿<html>
+<head><title>对象深度克隆</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+var f = {f1:"f"};
+var o = {o1:10,o2:"o2",o3:f};
+var org = {a:2, b:"3", c:function(){return this.a;}, d:{a:1,b:"2"}, e:o};
+Object.clone = function(o)
+{
+	function Obj(){}
+	Obj.prototype = o;
+	var obj = new Obj();
+	var arg1 = arguments[1];
+	if(arg1&&true)
+	{
+		var i;
+		for(i in obj)
+		{
+			if(typeof obj[i] == "object")
+			{
+				obj[i] = arguments.callee(obj[i], arg1);
+			}
+		}
+	}
+	return obj;
+}
+
+var o1 = Object.clone(org, true);
+o1.e.o3.f1 = 3333;
+alert(org.e.o3.f1 + "   " + o1.e.o3.f1 + "  深度克隆");
+
+o1 = Object.clone(org);
+o1.e.o3.f1 = 3333;
+alert(org.e.o3.f1 + "   " + o1.e.o3.f1 + "  浅度克隆");
+</script>
+</html>

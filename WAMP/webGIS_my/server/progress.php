@@ -1,0 +1,1 @@
+<?php	$c = count(scandir("../data"))-3;	echo $c;		$_SERVER['zkj'] = 55;	echo $_SERVER['zkj'];?>

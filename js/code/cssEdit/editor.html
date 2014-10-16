@@ -1,0 +1,287 @@
+﻿<html>
+<head><title>Css Editor</title>
+<style>
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	font-family: 'Courier New', Courier, monospace;
+	background: #F4F4F4 url('../mineSweeping/bg.gif');
+}
+
+#container, #editors
+{
+	margin: 0 auto;
+	width: 770px;
+	background-color: #AAA;
+	overflow: auto;
+}
+
+h2
+{
+	position: relative;
+	font-size: 80px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #0092BF;
+	text-indent: 30px;
+	text-shadow: 0px 3px 3px rgba(0,0,0,0.5);
+}
+
+h2 p
+{
+	position: absolute;
+	right: 10px;
+}
+
+h2 #ele
+{
+	bottom: -30px;
+}
+
+h2 #btnVal
+{
+	bottom: -60px;
+}
+
+h2 input, h2 select
+{
+	width: 100px;
+}
+
+h2 span
+{
+	font-family: Arial;
+	font-size: 10px;
+	font-weight: bold;
+	color: #0092BF;
+	text-shadow: none;
+}
+
+#edit, #hover, #anim
+{
+	float: left;
+}
+
+#effect
+{
+	width: 770px;
+	height: 150px;
+	background: #F1F1F1;/* url('../mineSweeping/bg.gif');*/
+}
+
+#edit, #hover, #anim
+{
+	height: 400px;
+	background: #F8F8F8;
+	font-family: Courier New;
+	font-size: 10px;
+	padding: 10px;
+	box-shadow: 0px 0px 4px #333;
+	width: 230px;
+}
+
+#anim
+{
+	margin-right: 0;
+	height: 250px;
+}
+
+#btn
+{
+	margin: 60px 0 0 250px;
+}
+
+#animCtrl
+{
+	font-family: Arial;
+	font-size: 10px;
+	margin: 20px 5px 0;
+	float: left;
+}
+
+#animCtrl span
+{
+	width: 100px;
+	display: inline-block;
+	font-weight: bold;
+}
+
+#animCtrl input, #animCtrl select
+{
+	width: 80px;	
+}
+
+#editors
+{
+	margin-top: 3px;
+}
+
+#editors .col
+{
+	width: 250px;
+	display: inline-block;
+}
+
+#editors .title
+{
+	font-size: 20px;
+	font-weight: bold;
+	color: #FFF;
+	background: #0092BF;
+	padding: 5px 0;
+	text-indent: 10px;
+}
+
+#right
+{
+	text-align: center;
+	margin: 15px 0 10px;
+	font-size: 10px;
+	color: #0092BF;
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<h2>CSS Editor
+		<p id="ele">
+			<span>Element: </span>
+			<select id="element">
+				<option>div</option>
+				<option>span</option>
+				<option>p</option>
+				<option>text</option>
+				<option>button</option>
+			</select>
+		</p>
+		<p id="btnVal">
+			<span>Text: </span>
+			<input id="btnTxt" type="text" value="Button"/>
+		</p>
+	</h2>
+	<div id="effect"><input id="btn" class="button" type="button" /></div>
+	<div id="editors">
+		<span class="col"><h4 class="title">Normal</h4><span id="edit" contenteditable></span></span>
+		<span class="col"><h4 class="title">Hover</h4><span id="hover" contenteditable></span></span>
+		<span class="col"><h4 class="title">Animation</h4>
+			<span>
+				<span id="anim" contenteditable></span>
+				<div id="animCtrl">
+					<span>Duration: </span><input id="duration" type="text" value="1"/> s<br/>
+					<span>Iteration: </span><input id="iteration" type="text" value="infinite"/><br/>
+					<span>Timing function: </span><select id="function"><option>linear</option><option>ease</option></select><br/>
+					<span>Direction: </span><select id="direction"><option>alternate</option></select>
+				</div>	
+			</span>
+		</span>
+	</div>
+	<div id="right">-- By Ronny 2011 --</div>
+</div>
+</body>
+<script type="text/javascript">
+var effect = document.getElementById("effect");
+var btn = document.getElementById("btn");
+var edit = document.getElementById("edit");
+var btnVal = document.getElementById("btnVal");
+var btnTxt = document.getElementById("btnTxt");
+var ele = document.getElementById("element");
+var hover = document.getElementById("hover");
+var anim = document.getElementById("anim");
+
+var dur = document.getElementById("duration");
+var iter = document.getElementById("iteration");
+var func = document.getElementById("function");
+var dir = document.getElementById("direction");
+
+var style = document.getElementsByTagName("style")[0];
+
+var s = ".button{", t="";
+t += "background: -webkit-gradient(linear, left top, left bottom, from(#2e98e2), color-stop(0.56, #2a81be), color-stop(0.56, #276ea0), color-stop(1, #2879b2));"+
+"width: 100px;height: 30px;border: 0px;border-radius: 5px;box-shadow: 0px 2px 5px #333;color: #EEE;font-weight: bold;text-shadow: 0px -1px 0px #000;";
+s += t + "}";
+edit.innerHTML = t.replace(/(;)/g, ';<br/>');
+style.appendChild(document.createTextNode(s));
+edit.onkeyup = function()
+{
+	style.childNodes[1].nodeValue = ".button{" + edit.innerText + "}";
+};
+
+btn.value = btnTxt.value;
+btnTxt.onkeyup = function()
+{
+	if(btn.value)
+		btn.value = btnTxt.value;
+	else
+		btn.innerText = btnTxt.value;
+};
+
+var h1 = "background: -webkit-gradient(linear, left top, left bottom, from(#227ebe), color-stop(0.56, #2a81be), color-stop(0.56, #1d79b9), color-stop(1, #1870ad));";
+var h = ".button:hover{", h2 = "-webkit-animation: btn 1s infinite linear;-webkit-animation-direction: alternate;";
+hover.innerText = h1;
+style.appendChild(document.createTextNode(h + h1 + h2 + "}"));
+hover.onkeyup = function()
+{
+	style.childNodes[2].nodeValue = h + hover.innerText + getAnimParas() + "}";;
+};
+
+dur.onkeyup = function()
+{
+	style.childNodes[2].nodeValue = h + hover.innerText + getAnimParas() + "}";;
+};
+
+iter.onkeyup = function()
+{
+	style.childNodes[2].nodeValue = h + hover.innerText + getAnimParas() + "}";;
+};
+
+func.onchange = function()
+{
+	style.childNodes[2].nodeValue = h + hover.innerText + getAnimParas() + "}";;
+};
+
+dir.onchange = function()
+{
+	style.childNodes[2].nodeValue = h + hover.innerText + getAnimParas() + "}";;
+};
+
+
+
+var k1 = "100%{box-shadow: 0px 2px 10px #333;}";
+var k = "@-webkit-keyframes btn{" + k1 + "}";
+anim.innerText = k1;
+style.appendChild(document.createTextNode(k));
+anim.onkeyup = function()
+{
+	k = "@-webkit-keyframes btn{" + anim.innerText + "}";
+	style.childNodes[3].nodeValue = k;
+};
+
+function getAnimParas()
+{
+	return "-webkit-animation: btn "+dur.value+"s "+iter.value+" "+func.value+";-webkit-animation-direction: "+dir.value+";";
+}
+
+ele.onchange = function()
+{
+	var type = this.value;
+	if(type == "text" || type == "button")
+	{
+		var v = effect.childNodes[0].value;
+		effect.innerHTML = '<input id="btn" class="button" type="' + type + '" value="' + v + '" />';
+		btn = document.getElementById("btn");
+		btn.value = btnTxt.value;
+	}
+	else
+	{
+		effect.innerHTML = '<' + type + ' id="btn" class="button" style="display: inline-block"></' + type + '>';
+		btn = document.getElementById("btn");
+		btn.innerText = btnTxt.value;
+	}
+};
+</script>
+</html>

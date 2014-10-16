@@ -1,0 +1,26 @@
+﻿<li>
+	<span class="_attrCtId hidden">{$vo.aid}</span>
+	<span class="_evtId hidden">{$vo.eventid}</span>
+	<span class="_attrId hidden">{$vo.attributeid}</span>
+	<span class="_uid hidden">{$vo.userid}</span>
+	<span class="_ctgrId hidden">{$vo.cid}</span>
+	<span class="_ctgr hidden">{$vo.categoryid}</span>
+	<span class="_cnt hidden">{$vo.count}</span>
+	<span class="_ctrl hidden">{$vo.ctrl_type}</span>
+	<span class="_lbl hidden">{$vo.label}</span>
+	<span class="_date hidden">{$vo.date}</span>
+	<span class="_stTime hidden">{$vo.starttime}</span>
+	<span class="_edTime hidden">{$vo.endtime}</span>
+	<span class="_ctgrNm hidden">{$vo.categoryname}</span>
+	<span class="_attrNm hidden">{$vo.name}</span>
+	<span class="_attrCt hidden">{$vo.content}</span>
+	
+	<div class="datePad">
+		<div class="dateD"><?php echo substr($list[$i-1]['date'],8); ?></div>
+		<div class="dateYM"><?php echo substr($list[$i-1]['date'],0,7); ?></div>
+	</div>
+	<span class="right operation"><a title="删除" class="delete" href="__URL__/deleteEvt/id/{$vo.id}"><i>删除</i></a></span>
+	<span class="right operation"><a title="编辑" class="edit" href="javascript:;" onclick="edit(this,{$vo.eventid})"><i>编辑</i></a></span>
+	<h3 class="_title setMrgnLft evtTitle">{$vo.title}</h3>
+	<p class="setMrgnLft evtTime">起始时间: {$vo.starttime}-{$vo.endtime}<span>{$vo.categoryname}({$vo.count})</span></p>
+	<p class="setMrgnLft"><span class="attrName">{$vo.name}: </span><span class="attrContent"><include file="type" /></span></p>

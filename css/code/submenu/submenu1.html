@@ -1,0 +1,48 @@
+<!DOCTYPE html>   
+<html> 
+<head>   
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />   
+<title>submenu</title>
+<style type="text/css">   
+*{margin:0;padding:0;}    
+.menu{position:relative;z-index:100;}    
+.menu ul{list-style:none;}    
+.menu li {float:left;position:relative;}    
+.menu ul ul {display:none;position:absolute;left:141px; top:0px;}    
+.menu table {position:absolute; top:0; left:0;}    
+.menu ul li:hover ul, .menu ul a:hover ul{display:block;}    
+.menu a{display:block; border:1px solid #AAA; width: 140px; height 200px;}
+.menu ul ul{border:1px solid #AAA; width: 300px; height 200px; padding: 15px;background: #FFF;}    
+.menu ul ul li {float:left; border-bottom:1px #DDD dotted; margin:10px 20px; width: 100px;padding-bottom:10px;}    
+.menu ul ul li a{display:block;border:0;}    
+.menu ul ul li a:hover{}
+span.mainLink{margin:8px;border:0;display:inline-block;}
+span.shadow{display:block; background: #DDD; width: 300px; height: 200px;position:absolute;top:0px; left:140px;}
+.menu ul ul li.line{width:1px; background: #FFF; border:none;position:absolute;top: -10px;left: -21px;height: 92px;}
+</style>   
+</head>   
+   
+<body>   
+   
+<div class="menu">   
+    <ul>   
+        <li><a class="main" href="">
+			<span class="mainLink" href="">产品系列描述</span><br>
+			<span class="mainLink" href="">主菜单2</span><br>
+			<span class="mainLink" href="">主菜单3</span>
+            <!--[if IE 7]><!--></a><!--<![endif]-->   
+            <!--[if lte IE 6]><table><tr><td><![endif]-->   
+            <ul>
+				<li class="line"></li>
+                <li><a href="">Think产品11</a><span>产品描述</span></li>
+				<li><a href="">Think产品11</a><span>产品描述</span></li>
+				<li><a href="">Think产品11</a><span>产品描述</span></li>
+				<li><a href="">Think产品11</a><span>产品描述</span></li>
+				<li><a href="">Think产品11</a><span>产品描述</span></li>
+            </ul>
+            <!--[if lte IE 6]></td></tr></table></a><![endif]-->   
+        </li>
+    </ul>
+</div>
+</body>   
+</html>

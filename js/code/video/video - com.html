@@ -1,0 +1,56 @@
+﻿<html>
+<head><title>Video</title>
+<style>
+body
+{
+	background: #000;
+	font-family: "Century Gothic";
+	color: #0092BF;
+}
+
+h1
+{
+	font-weight: normal;
+}
+
+#v
+{
+	margin-top: 20px;
+}
+
+canvas
+{
+	margin: 0;
+}
+
+p
+{
+	float: left;
+	margin: 0 130px;
+	font-size: 6px;
+}
+
+#right
+{
+	text-align: center;
+	font-size: 10px;
+	margin-top: 80px;
+}
+</style>
+</head>
+<body>
+<h1>Video Filter</h1>
+<canvas id="c1"></canvas>
+<canvas id="c2"></canvas>
+<canvas id="c3"></canvas>
+<p>Relief</p><p>Gray</p><p>Red</p>
+<video id="v" autoplay loop>
+	<source src="08.mp4" />
+</video><br/>
+<p>Origin</p>
+<div id="right">-- By Ronny 2011 --</div>
+</body>
+<script type="text/javascript">
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('5 w=R;5 d=O;5 b=d.N;5 v=d.f("v");5 k=d.f("k");5 t=k.y("A");5 e=d.f("e");5 p=e.y("A");5 j=d.f("j");5 n=j.y("A");5 a=F,c=M;5 9=a/2,h=9/a*c;k.B=e.B=j.B=9;k.D=e.D=j.D=h;5 E=d.f("E");J u(){t.C(v,0,0,9,h);p.C(v,0,0,9,h);n.C(v,0,0,9,h);5 s=t.x(0,0,a,c);5 7=s.8;5 q=p.x(0,0,a,c);5 6=q.8;5 o=n.x(0,0,a,c);5 m=o.8;5 l=7.Q;P(5 i=0;i<l;i++){G(i%4!=3)7[i]=S+2*7[i]-7[i+4]-7[i+F*4];G(i%4==0){5 r=6[i];5 g=6[i+1];5 b=6[i+2];5 H=(3*r+4*g+b)>>>3;6[i]=6[i+1]=6[i+2]=H;m[i]=r+I;m[i+1]=g;m[i+2]=b}}s.8=7;q.8=6;o.8=m;t.z(s,0,0);p.z(q,0,0);n.z(o,0,0);L(u,K)}u();',55,55,'|||||var|data2|data1|data|wid|vW||vH||c2|getElementById||hgt||c3|c1||data3|t3|img3|t2|img2||img1|t1|draw|||getImageData|getContext|putImageData|2d|width|drawImage|height|des|704|if|brightness|90|function|10|setTimeout|256|body|document|for|length|window|127'.split('|')))
+</script>
+</html>

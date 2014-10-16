@@ -1,0 +1,29 @@
+﻿<html>
+<head><title>HTML5 Web GIS</title>
+<style>
+canvas{background:#aaa;margin: 0;float:left}
+</style>
+<script type='text/javascript' src="js/jquery-1.7.2.js"></script>
+<script type='text/javascript' src="js/util.js"></script>
+<script type='text/javascript' src="js/geoData.js"></script>
+<script type='text/javascript' src="js/canvas.js"></script>
+<script type='text/javascript' src="js/geometryRender.js"></script>
+<script type='text/javascript' src="js/osm2geo.js"></script>
+<script type='text/javascript' src="js/debug.js"></script>
+</head>
+<body>
+	<canvas id="map1" width="800" height="600"></canvas>
+</body>
+<script type="text/javascript">
+
+var m1 = $('#map1')[0], ctx = m1.getContext('2d');
+//ctx.translate(400, 300);
+ctx.scale(15,15);
+ctx.fillStyle='#F00';
+ctx.strokeStyle='#00F';
+ctx.lineWidth = 1;
+ctx.arc(400,300,10,0,360,true);
+ctx.arc(0,0,10,0,360,true);
+ctx.stroke();
+</script>
+</html>

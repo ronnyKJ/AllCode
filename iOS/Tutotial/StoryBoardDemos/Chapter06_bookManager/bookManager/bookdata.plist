@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>authors</key>
+	<array>
+		<dict>
+			<key>authorId</key>
+			<integer>1</integer>
+			<key>firstName</key>
+			<string>Rory</string>
+			<key>lastName</key>
+			<string>Lewis</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>2</integer>
+			<key>firstName</key>
+			<string>Tim</string>
+			<key>lastName</key>
+			<string>Duckett</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>3</integer>
+			<key>firstName</key>
+			<string>Gary</string>
+			<key>lastName</key>
+			<string>Bennett</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>4</integer>
+			<key>firstName</key>
+			<string>Mario</string>
+			<key>lastName</key>
+			<string>Zechner</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>5</integer>
+			<key>firstName</key>
+			<string>Satya</string>
+			<key>lastName</key>
+			<string>Komatineni</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>6</integer>
+			<key>firstName</key>
+			<string>James</string>
+			<key>lastName</key>
+			<string>Weaver</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>7</integer>
+			<key>firstName</key>
+			<string>Adam</string>
+			<key>lastName</key>
+			<string>Freeman</string>
+		</dict>
+	</array>
+	<key>books</key>
+	<array>
+		<dict>
+			<key>authorId</key>
+			<integer>1</integer>
+			<key>bookDescription</key>
+			<string>iPhone and iPad Apps for Absolute Beginners, iOS 5 Edition 2nd Edition, Dr. Rory Lewis. This update of an Apress bestseller walks you through creating your first iOS 5 app that runs on iPhone or iPad, using plain English and practical examples. It cuts through the fog of jargon and misinformation that surrounds iPhone and iPad apps development, and gives you simple, step-by-step instructions to get you started.</string>
+			<key>bookId</key>
+			<integer>1</integer>
+			<key>categoryId</key>
+			<integer>1</integer>
+			<key>title</key>
+			<string>iPhone and iPad Apps for Absolute Beginners</string>
+			<key>year</key>
+			<string>2010</string>
+			<key>imageName</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>1</integer>
+			<key>bookDescription</key>
+			<string>iPhone and iPad Apps for Absolute Beginners, Dr. Rory Lewis. So how do you build an iPhone application? Don&apos;t you need to spend years learning complicated programming languages? The answer is NO! Anybody can start building simple applications for the iPhone, and this book will show you how.</string>
+			<key>bookId</key>
+			<integer>2</integer>
+			<key>categoryId</key>
+			<integer>1</integer>
+			<key>title</key>
+			<string>iPhone and iPad Apps for Absolute Beginners iOS5 Edition</string>
+			<key>year</key>
+			<string>2012</string>
+			<key>imageName</key>
+			<string>2</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>1</integer>
+			<key>bookDescription</key>
+			<string>Beginning iOS Storyboarding with Xcode. Dr. Rory Lewis, Yuli aMcCarthy, Stephen Moraco. Apple says that storyboarding allows one to layout the workflow of your app using the new Storyboards feature built into the design tools of Xcode. Created for apps that use navigation and tab bars to transition between views, Storyboards eases the development by managing the view controllers for you. You can specify the transitions and segues that are used when switching between views without having to code them by hand.  Storyboarding enables you to seamlessly interact and link all the screens in your application without the cumbersome code we had to write for the transitions between the screens and the controls used to trigger the transitions. It allows you to see every possible path through your application graphically, greatly reducing the amount of code you need to write for a complex multiscreen application.</string>
+			<key>bookId</key>
+			<integer>3</integer>
+			<key>categoryId</key>
+			<integer>1</integer>
+			<key>title</key>
+			<string>Beginning iOS Storyboarding with Xcode</string>
+			<key>imageName</key>
+			<string>3</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>2</integer>
+			<key>bookDescription</key>
+			<string>Pro iOS Table Views, Tim Duckett. Table views are the bread and butter of iOS apps. With them, you can create everything from the simplest of lists to fully tricked-out user interfaces. This comprehensive guide takes you behind the scenes and shows you how.</string>
+			<key>bookId</key>
+			<integer>4</integer>
+			<key>categoryId</key>
+			<integer>1</integer>
+			<key>title</key>
+			<string>Pro iOS Table Views</string>
+			<key>year</key>
+			<string>2012</string>
+			<key>imageName</key>
+			<string>4</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>3</integer>
+			<key>bookDescription</key>
+			<string>Objective-C for Absolute Beginners 2nd Edition, Gary Bennett, Mitchell Fisher, Brad Lees. Objective-C for Absolute Beginners, Second Edition teaches you how to program iPhone, iPad, and Mac apps using Objective-C, a powerful language with a rich set of developer tools.</string>
+			<key>bookId</key>
+			<integer>5</integer>
+			<key>categoryId</key>
+			<integer>1</integer>
+			<key>title</key>
+			<string>Objective-C for Absolute Beginners Second Edition</string>
+			<key>year</key>
+			<string>2012</string>
+			<key>imageName</key>
+			<string>5</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>4</integer>
+			<key>bookDescription</key>
+			<string>Beginning Android 4 Games Development offers everything you need to join the ranks of successful Android game developers. You&apos;ll start with game design fundamentals and programming basics, and then progress toward creating your own basic game engine and playable game that works on Android 4.0 and earlier devices.</string>
+			<key>bookId</key>
+			<integer>6</integer>
+			<key>categoryId</key>
+			<integer>2</integer>
+			<key>title</key>
+			<string>Beginning Android 4 Games Development</string>
+			<key>year</key>
+			<string>2011</string>
+			<key>imageName</key>
+			<string>6</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>5</integer>
+			<key>bookDescription</key>
+			<string>Pro Android Games, Vladimir Silva. Do you remember landmark games like Wolfenstein 3D, Doom, and Asteroids? Well, here&apos;s an exciting opportunity to build and/or port these games to one of the hottest mobile and netbooks platforms today: Google&apos;s Android.</string>
+			<key>bookId</key>
+			<integer>7</integer>
+			<key>categoryId</key>
+			<integer>2</integer>
+			<key>title</key>
+			<string>Pro Android 4</string>
+			<key>year</key>
+			<string>2012</string>
+			<key>imageName</key>
+			<string>7</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>6</integer>
+			<key>bookDescription</key>
+			<string>JavaFX 2.0: Introduction by Example, Carl Dea. JavaFX 2.0: Introduction by Example provides a quick start to developing graphically rich and exciting client applications using your existing Java skills and the JavaFX 2.0 platform.</string>
+			<key>bookId</key>
+			<integer>8</integer>
+			<key>categoryId</key>
+			<integer>3</integer>
+			<key>title</key>
+			<string>Pro JavaFX 2</string>
+			<key>year</key>
+			<string>2012</string>
+			<key>imageName</key>
+			<string>8</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>7</integer>
+			<key>bookDescription</key>
+			<string>Pro jQuery, Adam Freeman. jQuery is one of the most popular and powerful JavaScript libraries available today. In this book, learn how to get the most from jQuery by focusing on the features you need for your project.</string>
+			<key>bookId</key>
+			<integer>9</integer>
+			<key>categoryId</key>
+			<integer>3</integer>
+			<key>title</key>
+			<string>Pro jQuery</string>
+			<key>year</key>
+			<string>2012</string>
+			<key>imageName</key>
+			<string>9</string>
+		</dict>
+		<dict>
+			<key>authorId</key>
+			<integer>7</integer>
+			<key>bookDescription</key>
+			<string>The Definitive Guide to HTML5 provides the breadth of information you&apos;ll need to start creating the next generation of HTML5 websites. It covers all the base knowledge required for standards-compliant, semantic, modern website creation. It also covers the full HTML5 ecosystem and the associated APIs that complement the core HTML5 language.</string>
+			<key>bookId</key>
+			<integer>10</integer>
+			<key>categoryId</key>
+			<integer>3</integer>
+			<key>title</key>
+			<string> The Definitive Guide to HTML5</string>
+			<key>year</key>
+			<string>2011</string>
+			<key>imageName</key>
+			<string>10</string>
+		</dict>
+	</array>
+	<key>categories</key>
+	<array>
+		<dict>
+			<key>categoryId</key>
+			<integer>1</integer>
+			<key>categoryName</key>
+			<string>iOS</string>
+		</dict>
+		<dict>
+			<key>categoryId</key>
+			<integer>2</integer>
+			<key>categoryName</key>
+			<string>Android</string>
+		</dict>
+		<dict>
+			<key>categoryId</key>
+			<integer>3</integer>
+			<key>categoryName</key>
+			<string>Web Development</string>
+		</dict>
+	</array>
+</dict>
+</plist>

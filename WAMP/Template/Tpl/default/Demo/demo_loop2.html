@@ -1,0 +1,27 @@
+<div class="box">
+    <h3>多层嵌套输出</h3>
+    <table summary="多层嵌套">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>other</th>
+            <th>子元素</th>
+        </tr>
+        <iterate name="data" id="vo">
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>{$vo.email}</td>
+            <td>{$vo.other}</td>
+            <td>
+                <ul>
+                    <iterate name="vo['sub']" id="sub" key="k">
+                        <li>({$k}) sub_{$sub.id} | sub_{$sub.name}</li>
+                    </iterate>
+                </ul>
+            </td>
+        </tr>
+        </iterate>
+    </table>
+</div>

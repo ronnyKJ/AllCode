@@ -1,0 +1,29 @@
+﻿<html>
+<head><title></title>
+</head>
+<body onclick="alert('current is body');">
+<div id="div0" onclick="alert('current is '+this.id)">
+	<div id="div1" onclick="alert('current is '+this.id)">
+		<div id="div2" onclick="alert('current is '+this.id)">
+			<div id="event_source"
+				onclick="alert('current is '+this.id)"
+				style="height:200px;width:200px;background-color:red;">
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+var div2 = document.getElementById('div2');
+addEventHandler(div2, 'click', function(event){
+	event = event || window.event;
+	if(event.stopPropagation)
+	event.stopPropagation();
+	else event.cancelBubble = true;
+}, false);
+
+document.body.addEventListener('click', function(event){
+	event.stopPropagation();
+}, true);
+</script>
+</html>

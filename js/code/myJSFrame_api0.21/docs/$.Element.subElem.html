@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Element.subElem</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$(<em>Element</em>).subElem(<em>CssSelector</em>)</h1>
+<p class="info">在一元素里用CSS选择符查找子元素。</p>
+    <h2>参数</h2>
+	<dl class="p">
+		<dt><em>Element</em></dt>
+		<dd>必选项。页面元素ID(字符串型)或者是文档节点(对象)。</dd>
+		<dt><em>CssSelector</em></dt>
+		<dd>必选项。<a href="$.cssselectors.html">CSS选择符</a>。</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">所有符合CSS选择条件的元素数组。</p>	
+<h2>描述</h2>
+	<p class="p">该方法可在一个未知的DOM节点上，向下用CSS选择符取子元素，比如 $(document.body.firstChild).subElem(&quot;input[type=text]&quot;);</p>
+<h2>示例</h2>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+  function getTitle(x){<br />
+  &nbsp;&nbsp;&nbsp; var title = $(x).subElem(&quot;strong.t&quot;)[0];<br />
+  &nbsp;&nbsp;&nbsp; alert(title);<br />
+  }<br />
+  &lt;/script&gt;<br />
+  &lt;div id=&quot;title&quot;&gt;&lt;strong class=&quot;t&quot;&gt;I have a dream!&lt;/strong&gt;Written by &lt;strong&gt;Martin Luther King, Jr.&lt;/strong&gt;&lt;/div&gt;<br />
+&lt;input type=&quot;button&quot; value=&quot;获取Title&quot; onclick=&quot;getTitle('title')&quot; /&gt;</p>
+		
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

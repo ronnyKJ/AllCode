@@ -1,0 +1,75 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+  <meta charset="utf-8" /> 
+</head> 
+<body> 
+<canvas id="canvas" width="600" height="300"></canvas><br> 
+<button style="width:80px;background-color:yellow;" onclick='linecolor = "yellow";'>YELLOW</button> 
+<button style="width:80px;background-color:red;" onclick='linecolor = "red";'>RED</button> 
+<button style="width:80px;background-color:blue;" onclick='linecolor = "blue";'>BLUE</button> 
+<button style="width:80px;background-color:green;" onclick='linecolor = "green";'>GREEN</button> 
+<button style="width:80px;background-color:white;" onclick='linecolor = "white";'>WHITE</button> 
+<button style="width:80px;background-color:black;color:white;" onclick='linecolor = "black";'>BLACK</button> 
+ 
+<br> 
+<button style="width:80px;background-color:white;" onclick="linw = 4;">4px</button> 
+<button style="width:80px;background-color:white;" onclick="linw = 8;">8px</button> 
+<button style="width:80px;background-color:white;" onclick="linw = 16;">16px</button> 
+<br> 
+<button style="width:80px;background-color:pink;" onclick="copyimage();">EXPORT</button> 
+<br> 
+<img src="" id="image_png"  width="600" height="300"> 
+<script type="text/javascript"> 
+var canvas = document.getElementById("canvas");  
+var ctx = canvas.getContext("2d");  
+//画一个黑色矩形  
+ctx.fillStyle="black";  
+ctx.fillRect(0,0,600,300);  
+//按下标记  
+var onoff = false;  
+var oldx = -10;  
+var oldy = -10;  
+//设置颜色  
+var linecolor = "white";  
+//设置线宽  
+var linw = 4;  
+//添加鼠标移动事件  
+canvas.addEventListener("mousemove",draw,true);  
+//添加鼠标按下事件  
+canvas.addEventListener("mousedown",down,false);  
+//添加鼠标弹起事件  
+canvas.addEventListener("mouseup",up,false);  
+function down(event){  
+ onoff = true;  
+ oldx = event.pageX-10;  
+ oldy = event.pageY-10;  
+}  
+function up(){  
+ onoff = false;  
+}  
+function draw(event){  
+ if(onoff == true){  
+  var newx = event.pageX-10;  
+  var newy = event.pageY-10;  
+ 
+  ctx.beginPath();  
+  ctx.moveTo(oldx,oldy);  
+  ctx.lineTo(newx,newy);  
+  ctx.strokeStyle=linecolor;  
+  ctx.lineWidth=linw;  
+  ctx.lineCap="round";  
+  ctx.stroke();  
+ 
+  oldx = newx;  
+  oldy = newy;  
+ };  
+};  
+function copyimage(event){  
+ var img_png_src = canvas.toDataURL("image/png");  //*****************************************
+ document.getElementById("image_png").src = img_png_src;  
+}  
+</script> 
+ 
+</body> 
+</html> 

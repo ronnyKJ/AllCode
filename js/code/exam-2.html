@@ -1,0 +1,40 @@
+﻿<html>
+<head><title>计算最多字符数</title>
+<script type="text/javascript">
+function strToObj(s)
+{
+	var obj = {};
+	var i;
+	for(i=0;i<s.length;i++)
+	{
+		if(obj[s[i]])
+		{
+			obj[s[i]]++;
+		}
+		else
+		{
+			obj[s[i]] = 1;
+		}
+	}
+	return obj;
+}
+function objToArr(obj)
+{
+	var arr = [];
+	for(var i in obj)
+	{
+		arr.push(obj[i]);
+	}
+	return arr;
+}
+var s = "abbccdgdfhjgfhjsdgahjfgsdhfhdgfyughjrgfhjdsjgshjdgfuiwegfgirfhgshgfh";
+//s = s.split("");
+var o = strToObj(s);
+var arr = objToArr(o);
+var max = Math.max.apply({}, arr);
+alert(arr);
+
+</script>
+</head>
+<body></body>
+</html>

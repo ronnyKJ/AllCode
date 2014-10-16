@@ -1,0 +1,230 @@
+﻿<html>
+<head><title>3D-3</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#xyz, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xyz"></span><span id="des"></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+canvasW = getOdd(canvasW);
+canvasH = getOdd(canvasH);
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+t.translate(canvasW/2,canvasH/2);
+
+//-----code-------
+var z_pro = 0.2;
+var x_pro = 0.9;
+var near = c.width;
+var far = near*z_pro;
+var l=600;
+
+var allLines = [];
+allLines.redraw = function()
+{
+	t.clearRect(0-c.width/2, 0-c.height/2,c.width, c.height);
+	
+	function getPointPair(line)
+	{
+		var zTmp = line.z_pace*line.z_index;
+		var x_w = x_width(zTmp, line.z_dis);
+		line.x_pace = x_w/line.x_steps;
+		var xTmp = line.x_pace*line.x_index;
+		return {up:{x:xTmp, y:zSize(zTmp, line.l, xTmp, x_w, line.z_dis)/2}, down:{x:xTmp, y:-zSize(zTmp, line.l, xTmp, x_w, line.z_dis)/2}}
+	}
+	
+	for(var i=0; i<allLines.length/4;i++)
+	{	
+		var l1 = getPointPair(allLines[i*4]);
+		var l2 = getPointPair(allLines[i*4+1]);
+		var l3 = getPointPair(allLines[i*4+2]);
+		var l4 = getPointPair(allLines[i*4+3]);
+		rectangle(l1, l2, "rgba(255, 255, 0, 0.6)");
+		rectangle(l2, l3, "rgba(255, 255, 0, 0.6)");
+		rectangle(l3, l4, "rgba(255, 255, 0, 0.6)");
+		//rectangle(l4, l1, "rgba(255, 255, 0, 0.6)");
+	}
+}
+
+allLines.showData = function()
+{
+	var s="";
+	for(var i=0; i<allLines.length;i++)
+	{	
+		s += i + ". x:"+allLines[i].x_index+" z:"+allLines[i].z_index+" l:"+allLines[i].l+"<br>";
+	}
+	d.getElementById("xyz").innerHTML = s;
+}
+
+var zSize = function(pos, l, x, x_w, z_dis)
+{
+	var a = (l*z_pro-l)/z_dis;
+	return xSize(x, a*pos+l, x_w);
+}
+var xSize = function(pos, l, w)
+{
+	(pos<-w/2)&&(pos=(-w/2));
+	(pos>w/2)&&(pos=w/2);
+	var a = (l*x_pro-l)/w;
+	(pos<0)&&(a=(-a));
+	return 2*a*pos+l;
+}
+var x_width = function(pos, z_dis)
+{
+	return near-(pos/z_dis)*(near-far)
+}
+	
+function vLine(xi, zi, l)
+{
+	this.x_index = xi;
+	this.x_steps = 10;
+	this.x_pace = 10;//在外面具体去算，初始值没有意义
+	this.z_dis = 400;
+	this.z_index = zi;
+	this.z_steps = 10;
+	this.z_pace = this.z_dis/this.z_steps;
+	this.l = l;
+	
+	allLines.push(this);
+	this.posInArr = allLines.length-1;
+	allLines.showData();
+	
+	this.move = function(dir)
+	{
+		with(this)
+		{
+			if (dir == "left") (--x_index<(-x_steps/2))&&(x_index=-x_steps/2); 
+			if (dir == "up") (++z_index>z_steps)&&(z_index=z_steps);
+			if (dir == "right") (++x_index>x_steps/2)&&(x_index=x_steps/2); 
+			if (dir == "down") (--z_index<0)&&(z_index=0);
+		
+			allLines[this.posInArr].x_index = x_index;
+			allLines[this.posInArr].z_index = z_index;
+		}
+		allLines.showData();
+	}
+}
+
+var v_arr = [];
+for(var i=0; i<8;i++)
+{
+	var X = Math.round(Math.random()*10)-5;
+	var Z = Math.round(Math.random()*10);
+	var L = Math.round(Math.random()*400)+100;
+	v_arr.push(new vLine(X, Z, L));
+	v_arr.push(new vLine(X, Z-2, L));
+	v_arr.push(new vLine(X-3, Z-2, L));
+	v_arr.push(new vLine(X-3, Z, L));
+}
+
+allLines.redraw();
+d.onkeydown = function(evt){
+	evt = evt ||window.event; 
+	var key=evt.which||evt.keyCode; 
+	if (key == 37) dir("left"); 
+	if (key == 38) dir("up");
+	if (key == 39) dir("right");
+	if (key == 40) dir("down");
+	
+	function dir(d)
+	{
+		for(var i=0; i<v_arr.length;i++)
+		{
+			v_arr[i].move(d);
+		}		
+	}
+	allLines.redraw();
+	basement();
+}
+
+basement();
+
+//函数定义
+function getOdd(a)
+{
+	(a%2==1)&&(a--);
+	return a;
+}
+
+function circle(x, y, r, type, style)
+{
+	if(type=="stroke")
+	{
+		t.beginPath();
+		t.strokeStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.stroke();
+		t.closePath();
+	}
+	else
+	{
+		t.fillStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.fill();
+	}
+}
+
+function path(x1, y1, x2, y2, style)
+{
+	t.beginPath();
+	t.strokeStyle = style;
+	t.moveTo(x1,y1);
+	t.lineTo(x2,y2);
+	t.stroke();
+	t.closePath();
+}
+
+function rectangle(l1, l2, style)
+{
+	t.beginPath();
+	t.fillStyle = style;
+	t.moveTo(l1.up.x,l1.up.y);
+	t.lineTo(l1.down.x,l1.down.y);
+	t.lineTo(l2.down.x,l2.down.y);
+	t.lineTo(l2.up.x,l2.up.y);
+	t.fill();
+	t.closePath();
+}
+
+function basement()
+{
+	path(0, 200, 0, -200, "rgba(39, 156, 0, 0.4)");
+	path(-200, 0, 200, 0, "rgba(39, 156, 0, 0.4)");
+	path(-far/2, l*z_pro/2, -far/2, -l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	path(-far/2, -l*z_pro/2, far/2, -l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	path(far/2, -l*z_pro/2, far/2, l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	path(-far/2, l*z_pro/2, far/2, l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	
+	path(-far/2, -l*z_pro/2, -canvasW/2, -l/2, "rgba(60, 0, 170, 0.8)");
+	path(-far/2, l*z_pro/2, -canvasW/2, l/2, "rgba(60, 0, 170, 0.8)");
+	path(far/2, -l*z_pro/2, canvasW/2, -l/2, "rgba(60, 0, 170, 0.8)");
+	path(far/2, l*z_pro/2, canvasW/2, l/2, "rgba(60, 0, 170, 0.8)");
+	circle(0, 0, 1, "fill", "800");
+}
+</script>
+</html>

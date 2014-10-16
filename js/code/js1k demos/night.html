@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+M=Math;_=M.floor;$=M.random;P=M.PI;var d,j,k,T=1E3,Y=600,U=250;this.addEventListener("load",function(){var f=document.body.children[0];a=f.getContext("2d");f.width=T;f.height=Y;d=a.createLinearGradient(0,0,0,Y);x=["0000","2f7f","2850","1f3f"];for(i=0;i<4;)d.addColorStop(i*.33,"#00"+x[i++]);j=[];for(i=U;i--;){f=$()*T/2,l=Y-f/2;l=[$()*T,Y,l];j.push([f,$()*.3,$()*($()<.5?.7:-.7),l,"rgb(0,"+_($()*40)+",0)"])}k=[];for(i=3E3;i--;)k.push(_($()*T));setInterval(function(){F="fillStyle";a[F]=d;K="fillRect";a[K](0,0,T,Y);var b=(new Date).getTime();a[F]="gray";for(i=80;i<3E3;){k[i]+=.1*(i%3+1);k[i]%=T;a[K](k[i++],k[i++],1.5,1.5)}s=M.sin;c=M.cos;Q=b*3E-4;z=s(Q);x=c(Q);i=0;for(a[F]="yellow";i<80;){b=P*2*z+i*P/50;var e=50*x;a[K](U+.5*k[i++]+150*x+e*c(b),U+.5*k[i++]+20*z+e*s(b),3,3)}i=U;for(B="beginPath";--i;){h=j[i];e=h[2]+P/2+z*h[1]*x;g=h[3];b=g[0]+3+h[0]*c(e);e=g[1]-h[0]*s(e);a[B]();a.moveTo(g[0],g[1]);R="bezierCurveTo";a[R](g[0],g[1],g[0]-2,g[2],b,e);a[R](b,e,g[0]-2,g[2],g[0]+6,g[1]);a[F]=h[4];a.fill()}},30)}(),false);
+</script>
+</html>

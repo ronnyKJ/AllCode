@@ -1,0 +1,10 @@
+[ 2010-11-10T08:50:29+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.032518s ]
+[ 2010-11-10T08:50:29+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.006038s ]
+[ 2010-11-10T08:50:43+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002238s ]
+[ 2010-11-10T08:50:43+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-11-10T08:50:43+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('sdadsa','ds\nsd\n\nds\nds\nd\ns\nd','sada@d.k','1',1289350243) [ RunTime:0.000420s ]
+[ 2010-11-10T08:51:40+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002207s ]
+[ 2010-11-10T08:51:40+08:00 ] SQL: SELECT * FROM `think_form` ORDER BY id desc LIMIT 5  [ RunTime:0.000553s ]
+[ 2010-11-10T08:51:50+08:00 ] SQL: SHOW COLUMNS FROM think_form [ RunTime:0.002766s ]
+[ 2010-11-10T08:51:50+08:00 ] NOTIC: [8] Undefined offset:  3 Model.class.php 第 858 行.
+[ 2010-11-10T08:51:50+08:00 ] SQL: INSERT INTO `think_form` (`title`,`content`,`email`,`status`,`create_time`) VALUES ('asdasd','a\nf\ng\nh\njh\nj\nj','assadsa@d.c','1',1289350310) [ RunTime:0.000335s ]

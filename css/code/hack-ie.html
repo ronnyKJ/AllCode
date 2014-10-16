@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head><title></title>
+<style>
+p{ 
+	height:60px;
+	text-align:center;
+	line-height:60px;
+	border:1px dashed #bbb;
+	font:15px;
+
+background:red\9;    /* 区别出IE8，只有IE6/7/8能识别*/
+*background:green;     /* 区别出IE7，只有IE6/7能识别 */
+_background:blue;     /* 区别出IE6 ，只有IE6能识别*/
+} 
+</style>
+</head>
+<body><p>CSS HACK</p>
+<!--[if IE 8]>不错不错，挺先进的嘛，使用IE8呢！文字是褐色的。<![endif]--> 
+<!--[if IE 7]>你，IE7，红色文字！<![endif]--> 
+<!--[if IE 6]>孩子，虽然显示的是绿色文字，不过，IE6可不是好东西呢！<![endif]--> 
+</body>
+</html>

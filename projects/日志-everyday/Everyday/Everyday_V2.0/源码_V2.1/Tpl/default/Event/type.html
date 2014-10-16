@@ -1,0 +1,51 @@
+﻿<?php
+	if($list[$i-1]['ctrl_type']=="radiobutton")
+	{
+		$l = split(" ",$list[$i-1]['label']);
+		$j = intval($list[$i-1]['content']); 
+		for($q=0; $q<count($l); $q++)
+		{
+			if($j == $q)
+			{
+				echo '<input type="radio" disabled="true" checked="true" /><span class="rdSel">'.$l[$q]."</span>";
+			}
+			else
+			{
+				echo '<input type="radio" disabled="true" /><span class="rdunSel">'.$l[$q]."</span>";
+			}
+		}
+	}
+	else if($list[$i-1]['ctrl_type']=="checkbox")
+	{
+		$l2 = split(" ",$list[$i-1]['label']);
+		$j2 = split(";",$list[$i-1]['content']);
+		$flag = true;
+		for($q2=0; $q2<count($l2); $q2++)
+		{
+			for($p2=0; $p2<count($j2)-1; $p2++)
+			{
+				if(intval($j2[$p2]) == $q2)
+				{
+					echo '<input type="checkbox" disabled="true" checked="true" /><span class="rdSel">'.$l2[$q2]."</span>";
+					$flag = false;
+					break;
+				}
+			}
+			if($flag)
+			{
+				echo '<input type="checkbox" disabled="true" /><span class="rdunSel">'.$l2[$q2]."</span>";
+			}
+			$flag = true;
+		}
+	}
+	else if($list[$i-1]['ctrl_type']=="select")
+	{
+		$l3 = split(" ",$list[$i-1]['label']);
+		$j3 = intval($list[$i-1]['content']);
+		echo $l3[$j3];
+	}
+	else
+	{
+		echo $list[$i-1]['content'];
+	}
+?>

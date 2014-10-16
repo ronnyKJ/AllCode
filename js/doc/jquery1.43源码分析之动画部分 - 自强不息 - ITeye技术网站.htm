@@ -1,0 +1,1887 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)http://woshiliulidiyi.iteye.com/blog/795021 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站</title>
+    <meta name="description" content="js实现动画的原理跟动画片的制作一样.动画片是把一些差距不大的原画以一定帧数播放.js动画是靠连续改变元素的某个css属性值,比如left, top.达到视觉的动画效果. 这几年出现了不少优秀的js游戏, 比如前段时间的《js版植物大战僵尸》.其实js游戏主要就是这4个部分组成. 绘图, 移动, 碰撞检测, 逻辑设定.如果用jquery来做的话, 前三项都会变得相当容易. 去年我也用jquery写了 ...">
+    <meta name="keywords" content="jQuery, Swing, prototype, 面试, 算法 jquery1.43源码分析之动画部分">
+    <link rel="shortcut icon" href="http://woshiliulidiyi.iteye.com/images/favicon.ico" type="image/x-icon">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://woshiliulidiyi.iteye.com/open_search.xml" title="ITeye">
+    <link href="http://woshiliulidiyi.iteye.com/rss" rel="alternate" title="自强不息" type="application/rss+xml">
+    <link href="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/blog.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/blue.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/ga.js"></script><script src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/application.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', '.iteye.com']);
+  _gaq.push(['_setAllowHash', 'false']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+      <link href="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/SyntaxHighlighter.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/shCoreCommon.js" type="text/javascript"></script>
+<script src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/hotkey.js" type="text/javascript"></script>
+  <script src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/code_favorites.js" type="text/javascript"></script>
+<script src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/weiboshare.js" type="text/javascript"></script>
+  <style>
+    div#main {background-color: transparent; border: 0; padding: 0px; width: 740px;}
+  </style>
+  </head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="http://woshiliulidiyi.iteye.com/blog/795021#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a href="http://www.iteye.com/job">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+      <div id="user_nav">
+      <a href="http://woshiliulidiyi.iteye.com/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="http://www.iteye.com/all" style="color:red">我的应用</a>
+    <a href="http://woshiliulidiyi.iteye.com/login">登录</a>
+    <a href="http://woshiliulidiyi.iteye.com/signup" class="nobg">注册</a>
+  </div>
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name"><h1><a href="http://woshiliulidiyi.iteye.com/">自强不息</a></h1></div>
+        <div id="blog_preview">
+          
+        </div>
+        <div id="blog_domain">永久域名 <a href="http://woshiliulidiyi.iteye.com/">http://woshiliulidiyi.iteye.com</a></div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+          
+
+
+<div class="blog_main">
+  <div class="blog_nav">
+    
+    <div class="pre_next">
+      <a href="http://woshiliulidiyi.iteye.com/blog/795030" class="next" title="JSP学习笔记">JSP学习笔记</a>
+      |
+      <a href="http://woshiliulidiyi.iteye.com/blog/795014" class="pre" title="jquery1.43源码分析之核心部分">jquery1.43源码分析之核心部分</a>
+    </div>
+  </div>
+  <div class="blog_title">
+    <div class="date"><span class="year">2010</span><span class="sep_year">-</span><span class="month">10</span><span class="sep_month">-</span><span class="day">26</span></div>
+    <h3>
+      <a href="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站.htm">jquery1.43源码分析之动画部分</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class="blog_categories"><strong>博客分类：</strong> <li><a href="http://woshiliulidiyi.iteye.com/category/127855">AJAX</a></li> </ul>
+        <div class="news_tag"><a href="http://www.iteye.com/blogs/tag/jQuery">jQuery</a><a href="http://www.iteye.com/blogs/tag/Swing">Swing</a><a href="http://www.iteye.com/blogs/tag/prototype">prototype</a><a href="http://www.iteye.com/blogs/tag/%E9%9D%A2%E8%AF%95">面试</a><a href="http://www.iteye.com/blogs/tag/%E7%AE%97%E6%B3%95">算法</a></div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    js实现动画的原理跟动画片的制作一样.动画片是把一些差距不大的原画以一定帧数播放.js动画是靠连续改变元素的某个css属性值,比如left, top.达到视觉的动画效果.
+<br>
+<br>这几年出现了不少优秀的js游戏, 比如前段时间的《js版植物大战僵尸》.其实js游戏主要就是这4个部分组成. 绘图, 移动, 碰撞检测, 逻辑设定.如果用jquery来做的话, 前三项都会变得相当容易.
+<br>
+<br>去年我也用jquery写了2个小游戏(jquery坦克大战和jquery泡泡堂).也写了自己的动画类.不过当时限于水平,没有深入分析 jQuery.fx类的实现. 这几天读过源码之后, 感受很多. jquery的fx类虽然只有600多行代码.也没有牵涉到太高深的js知识.里面的逻辑却比较复杂,很多处理也很精妙.当真正披荆斩棘弄懂这一部分之后,相信对javascript的理解都会新上一层,当然也会更加喜欢jquery.
+<br>
+<br>闲话少说, 在看源码之前, 先大概了解一下fx类的实现思想.
+<br>首先fx类非常依赖jquery的队列机制,没有这个东西的话,一切都无从谈起.有关jquery队列机制, 见http://www.iteye.com/topic/783260 .
+<br>回忆一下这句代码
+<br>$(‘div’).show(1000).hide(1000);
+<br>让这个div在1000ms内渐渐显示,然后再渐渐隐藏. 这2个动画是按次序执行的.在javascript的单线程异步模式下,管理异步的函数是很难的.在时间戳上, 既无法知道它准确的开始时间,又不能得到它准确的结束时间. 由于可能发生线程阻塞, 这些时间并不精确. 而让它们有序的执行, 最好的办法就是把元素上所有的动画都放入队列. 当第一个动画结束后, 在回调函数里通知第二个动画执行.
+<br>
+<br>好比有个公司招聘, 只有一个面试官,而有很多应聘者在排队等候, 一个人面试完之后,出门的时候顺便告诉第二个人进去面试.以此反复. 而作为面试官, 只需要通知第一个面试者.
+<br>
+<br>对于jquery, 当你使用animate函数执行动画的时候,这个动画并没有马上被执行, 它会先存入元素的队列缓存里. 然后看是不是已经有正在执行的动画. 如果没有, 就取出队列里的第一个动画并且执行(此时队伍里可能还有别人, 只是被stop函数暂停了), 如果有,那么要等到队列前面的所有动画执行完之后才会被通知执行.
+<br>
+<br>就好像, 现在来了一位应聘者, 他先看看是不是已经有人在里面面试. 如果没有, 那么他可以直接进去面试. 如果有, 他必须得加入到队伍的最后一个. 等前面的人全部面试完了才轮到他.
+<br>
+<br>animate函数的主要功能并不是执行动画. 它只作为api的入口,修正参数.然后把参数扔给fx类去执行动画. jquery的动画模块也并没有细化得太离谱, 有几个方法是比较重要的.
+<br>jQuery.fn.animate&nbsp; 修正参数
+<br>jQuery.speed&nbsp;&nbsp;&nbsp; 静态方法, 帮助animate修正参数, 并且重写回调函数.重写回调函数大概就是
+<br>callback = function(){
+<br>callback();
+<br>$(this.dequeue());
+<br>}
+<br>jQuery.fx&nbsp;&nbsp; 构造函数, 跟动画有关的具体操作都在这个构造函数的原型方法里.
+<br>jQuery.fx.tick&nbsp; 静态方法, 作为定时器的方法, 监控所有动画的执行情况.
+<br>
+<br>我们最好先抛开复杂的参数修正等枝枝叶叶.直接从主干部分下手.先分析一下这个要使得这个动画类基本够用, 需要一些什么条件.
+<br>1&nbsp; 至少需要一个定时器来执行动画, 而且最好只有一个,即使有多个动画需要同时执行. 毕竟setTimeout和setInterval的开销是巨大的.
+<br>2&nbsp; 需要一个队列机制来管理动画顺序, jquery已经提供了queue和dequeue.
+<br>3&nbsp; 需要一种算法来计算属性的当前值.比如当前位置,当前大小.
+<br>4&nbsp; 需要一个具体执行动画的函数.
+<br>对于1, 我们制造一个tick函数来设置定时器, 并且在定时器中观察动画的执行情况.
+<br>对于2&nbsp; 直接用jquery的队列机制就可以了
+<br>对于3&nbsp; jquery提供了默认的swing和liner. 我们还可以用一些别的算法, 比如tween.
+<br>对于4&nbsp; 这个函数得自己构建.怎么构建随意.不过它最好还带上停止动画等功能.
+<br>
+<br>好吧, 现在正式开始.我们不在一开始就钻进jquery的源码里去.先模仿jquery的思想. 自己实现一个动画fx类. 通过这个简化了的fx类, 再来反过头来了解jquery.
+<br>
+<br>
+<br>实现原理是这样, 修正参数后为每个属性的动画都生成一个动画对象fx.比如一个元素要改变left和top, 那么为left和top分别创建一个动画fx对象, 然后把这些fx对象都push到全局timers数组.在定时器里循环这些fx对象, 每隔一段时间把他们对应的元素属性重新绘制一帧.直到达到指定的动画持续时间.这时触发这次animate的callback函数.并且从全局timer 数组把元素的这些fx对象都清除出去.直到timers里没有fx对象,表示页面的动画全部结束,此时清空定时器.当然这中间少不了队列控制.
+<br>
+<br>
+<br>先定义一个数组和一个定时器. 数组用来装载页面上所有动画. 当数组里没有动画时, 表示所有动画执行完毕, 这时清掉定时器.
+<br>var timers = [];
+<br>var timerId;
+<br>
+<br>然后是animate函数. 我们叫它myAnimate. 它传入4个参数. 分别是{"left":500}这样的property-value对象,动画持续时间, 动画算法, 回调函数.
+<br>myAnimate里调用一个getOpt函数. getOpt的作用是把参数组装成对象返回. 并且在回调函数里加上通知下一个动画执行的动作. 即.dequeue()
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. $.fn.extend({&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; myAnimate: function(property, duration, easing, callback){&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var operate = jQuery.getOpt(duration, easing, callback);&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; //得到一个包含了duration， easing， callback等参数的对象.并且callback已经被修正.&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(this).queue(function(){&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp; //把具体执行动画的函数放入队列, 注意这里如果队列中没有动画函数, 就直接执行这个匿名function了.&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var elem = this;&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $.each(property, function(name, value){&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //遍历每个属性, 为每个属性的动画都生成一个fx对象.&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var fx = new FX(elem, operate, name);&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var start = parseInt($(elem).css(name));&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //计算属性开始的值&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var end = value;&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //属性结束的值&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fx.custom(elem, start, end);&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //转交给FX的prototype方法cunstom执行动画&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; })&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; })&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this;&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //返回this, 以便链式操作.&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 22. })&nbsp; 
+<br>
+<br>$.fn.extend({
+<br>	myAnimate: function(property, duration, easing, callback){
+<br>		var operate = jQuery.getOpt(duration, easing, callback);
+<br>	//得到一个包含了duration， easing， callback等参数的对象.并且callback已经被修正.
+<br>		$(this).queue(function(){
+<br>	//把具体执行动画的函数放入队列, 注意这里如果队列中没有动画函数, 就直接执行这个匿名function了.
+<br>			var elem = this;
+<br>			$.each(property, function(name, value){
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //遍历每个属性, 为每个属性的动画都生成一个fx对象.
+<br>					var fx = new FX(elem, operate, name);
+<br>					var start = parseInt($(elem).css(name));
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //计算属性开始的值
+<br>					var end = value;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //属性结束的值
+<br>					fx.custom(elem, start, end);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //转交给FX的prototype方法cunstom执行动画
+<br>			})
+<br>		})
+<br>		return this;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //返回this, 以便链式操作.
+<br>	}
+<br>})
+<br>
+<br>
+<br>FX构造函数
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. function FX(elem, options, name){&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; this.elem = elem;&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp; this.options = options;&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; this.name = name;&nbsp; 
+<br>&nbsp;&nbsp; 5. }&nbsp; 
+<br>
+<br>function FX(elem, options, name){
+<br>	this.elem = elem;
+<br>	this.options = options;
+<br>	this.name = name;
+<br>}
+<br>
+<br>
+<br>FX构造函数里只初始化3个实例属性.比如
+<br>this.elem =&nbsp; elem.
+<br>this.options={"duration": 500, "easing":"swing", callback:fn}
+<br>this.name = "left"
+<br>其他属性留在后面动态生成.
+<br>
+<br>custom 方法
+<br>custom方法的任务主要是把当前fx对象放入全局的timer,并且启动定时器来观察动画执行情况.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. FX.prototype.custom = function(from, to){&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; this.startTime = jQuery.now();&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp; //开始的时间, 和当前时间一起就可以计算已消耗时间.&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp; //再用已消耗时间和持续时间相比就知道动画是否结束.&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; this.start = from;&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp; //属性初始的值&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp; this.end = to;&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp; //属性动画后的值&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp; timers.push(this);&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp; //把每个fx对象都push进全局的动画堆栈.&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp; FX.tick（);&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp; //启动定时器.&nbsp; 
+<br>&nbsp; 13. }&nbsp; 
+<br>
+<br>FX.prototype.custom = function(from, to){
+<br>	this.startTime = jQuery.now();
+<br>&nbsp;&nbsp; //开始的时间, 和当前时间一起就可以计算已消耗时间.
+<br>&nbsp;&nbsp; //再用已消耗时间和持续时间相比就知道动画是否结束. 
+<br>	this.start = from;
+<br>	//属性初始的值
+<br>	this.end = to;
+<br>	//属性动画后的值
+<br>	timers.push(this);
+<br>&nbsp;&nbsp; //把每个fx对象都push进全局的动画堆栈.
+<br>	FX.tick（);
+<br>&nbsp;&nbsp; //启动定时器.
+<br>}
+<br>
+<br>
+<br>FX.tick
+<br>用来监控动画执行情况
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. FX.tick = function(){&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (timerId) return;&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp; //只需要一个定时器,所以如果该定时器已经存在了,直接return&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timerId = setInterval(function(){&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var i = 0, c; c = timers[i++];){&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp; //每隔13ms, 遍历timerId里的每个动画对象fx, 让它们执行下一步.&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.step();&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!timers.length){&nbsp; 
+<br>&nbsp; 10. //如果timers没有元素, 说明页面的所有动画都执行完毕, 清除定时器.&nbsp; 
+<br>&nbsp; 11. //这个全局定时器就像一个总考官, 它会每隔一段时间巡视每个考生,&nbsp;&nbsp; 
+<br>&nbsp; 12. //督促他们赶紧答题.&nbsp; 
+<br>&nbsp; 13. //如果考生全部考试完毕交卷了, 他会进入休息状态.&nbsp; 
+<br>&nbsp; 14. //这时如果又进来了考生, 他又进入工作状态.&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FX.stop();&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, 13);&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>FX.tick = function(){
+<br>		if (timerId) return;
+<br>&nbsp; //只需要一个定时器,所以如果该定时器已经存在了,直接return
+<br>		timerId = setInterval(function(){
+<br>			for (var i = 0, c; c = timers[i++];){
+<br>&nbsp; //每隔13ms, 遍历timerId里的每个动画对象fx, 让它们执行下一步.
+<br>				c.step();
+<br>			}
+<br>			if (!timers.length){
+<br>//如果timers没有元素, 说明页面的所有动画都执行完毕, 清除定时器.
+<br>//这个全局定时器就像一个总考官, 它会每隔一段时间巡视每个考生, 
+<br>//督促他们赶紧答题.
+<br>//如果考生全部考试完毕交卷了, 他会进入休息状态.
+<br>//这时如果又进来了考生, 他又进入工作状态.
+<br>				FX.stop();
+<br>			}
+<br>		}, 13);
+<br>	}
+<br>
+<br>
+<br>FX.stop
+<br>清空定时器
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. FX.stop = function(){&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; clearInterval(timerId);&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp; timerId = null&nbsp; 
+<br>&nbsp;&nbsp; 4. }&nbsp; 
+<br>
+<br>FX.stop = function(){
+<br>	clearInterval(timerId);	
+<br>	timerId = null
+<br>}
+<br>
+<br>
+<br>
+<br>FX.prototype.step
+<br>执行每一步动画
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. FX.prototype.step = function(){&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var t = jQuery.now();&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp; //当前时间&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var nowPos;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; //当前属性值&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (t &gt; this.startTime + this.options.duration){&nbsp; 
+<br>&nbsp;&nbsp; 7. //如果现在时间超过了开始时间 + 持续时间, 说明动画应该结束了&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nowPos = this.end;&nbsp; 
+<br>&nbsp;&nbsp; 9. //动画的确切执行时间总是13ms的倍数, 很难刚好等于要求的动画持续时间,所以一般可能会有小小的误差, 修正下动画最后的属性值.&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.callback.call(this.elem);&nbsp; 
+<br>&nbsp; 11. //执行回调函数&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.stop();&nbsp; 
+<br>&nbsp; 13. //把已经完成动画的任务fx对象从全局timer中删除.&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }else{&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var n = t - this.startTime;&nbsp; 
+<br>&nbsp; 16.&nbsp; //动画已消耗的时间&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var state = n / this.options.duration;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp; var pos = jQuery.easing[this.options.easing](state, n, 0, 1, this.options.duration);&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nowPos = this.start + ((this.end - this.start) * pos);&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp; //根据时间比和easing算法, 算出属性的当前值&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.update(nowPos, this.name);&nbsp; 
+<br>&nbsp; 23.&nbsp;&nbsp;&nbsp; //给属性设置值&nbsp; 
+<br>&nbsp; 24.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>FX.prototype.step = function(){
+<br>		var t = jQuery.now();
+<br>	//当前时间
+<br>		var nowPos;
+<br>	//当前属性值
+<br>		if (t &gt; this.startTime + this.options.duration){
+<br>//如果现在时间超过了开始时间 + 持续时间, 说明动画应该结束了
+<br>			nowPos = this.end;
+<br>//动画的确切执行时间总是13ms的倍数, 很难刚好等于要求的动画持续时间,所以一般可能会有小小的误差, 修正下动画最后的属性值.
+<br>			this.options.callback.call(this.elem);
+<br>//执行回调函数
+<br>			this.stop();
+<br>//把已经完成动画的任务fx对象从全局timer中删除.
+<br>		}else{
+<br>			var n = t - this.startTime;
+<br> //动画已消耗的时间
+<br>			var state = n / this.options.duration;		
+<br>	var pos = jQuery.easing[this.options.easing](state, n, 0, 1, this.options.duration);
+<br>			nowPos = this.start + ((this.end - this.start) * pos);
+<br>		}
+<br>&nbsp;&nbsp; //根据时间比和easing算法, 算出属性的当前值
+<br>			this.update(nowPos, this.name);
+<br>&nbsp;&nbsp; //给属性设置值
+<br>	}
+<br>
+<br>
+<br>FX.prototype.stop
+<br>
+<br>从全局timer中删除一个已经完成动画任务的fx对象.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. FX.prototype.stop = function(){&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; for ( var i = timers.length - 1; i &gt;= 0; i--){&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (timers[i] === this){&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timers.splice(i, 1);&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp;&nbsp; 7. }&nbsp; 
+<br>
+<br>	FX.prototype.stop = function(){
+<br>		for ( var i = timers.length - 1; i &gt;= 0; i--){
+<br>			if (timers[i] === this){
+<br>				timers.splice(i, 1);
+<br>			}
+<br>		}
+<br>	}
+<br>
+<br>
+<br>FX.prototype.update
+<br>给属性设置值
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 2. FX.prototype.update = function(value, name){&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.elem.style[name] = value;&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>	
+<br>FX.prototype.update = function(value, name){
+<br>		this.elem.style[name] = value;
+<br>	}
+<br>
+<br>
+<br>注意FX.stop和FX.prototype.stop是不同的. 前者是取消定时器, 这样页面的所有动画都会结束. 后者是停止某个fx对象的动画.比如left, opacity.
+<br>
+<br>下面是可供测试的全部代码
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. &lt;style type="text/css"&gt;&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 3. #div1 {&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; background:#aaa;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; width:188px;&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp; height:188px;&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp; position:absolute;&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp; top:10px;&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp; left: 110px;&nbsp; 
+<br>&nbsp; 10. }&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp; 
+<br>&nbsp; 12. #div2 {&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp; background:#aaa;&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp; width:188px;&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp; height:188px;&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp; position:absolute;&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp; top:310px;&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp; left: 110px;&nbsp; 
+<br>&nbsp; 19. }&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp; 
+<br>&nbsp; 21. &lt;/style&gt;&nbsp;&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp; 
+<br>&nbsp; 23. &lt;body&gt;&nbsp;&nbsp; 
+<br>&nbsp; 24. &lt;/body&gt;&nbsp; 
+<br>&nbsp; 25.&nbsp;&nbsp; 
+<br>&nbsp; 26. &lt;div id="div1"&gt;我是一个div&lt;/div&gt;&nbsp; 
+<br>&nbsp; 27. &lt;div id="div2"&gt;我是另一个div&lt;/div&gt;&nbsp; 
+<br>&nbsp; 28.&nbsp;&nbsp; 
+<br>&nbsp; 29. &lt;script type="text/javascript" src="jquery1.43.js"&gt;&lt;/script&gt;&nbsp;&nbsp; 
+<br>&nbsp; 30. &lt;script type="text/javascript"&gt;&nbsp; 
+<br>&nbsp; 31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 32.&nbsp;&nbsp; 
+<br>&nbsp; 33. var timers = [];&nbsp; 
+<br>&nbsp; 34. var timerId;&nbsp; 
+<br>&nbsp; 35.&nbsp;&nbsp; 
+<br>&nbsp; 36.&nbsp;&nbsp; 
+<br>&nbsp; 37. $.fn.extend({&nbsp; 
+<br>&nbsp; 38.&nbsp;&nbsp;&nbsp;&nbsp; myAnimate: function(property, duration, easing, callback){&nbsp; 
+<br>&nbsp; 39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var operate = jQuery.getOpt(duration, easing, callback);&nbsp; 
+<br>&nbsp; 40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(this).queue(function(){&nbsp; 
+<br>&nbsp; 41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var elem = this;&nbsp; 
+<br>&nbsp; 42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $.each(property, function(name, value){&nbsp; 
+<br>&nbsp; 43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var fx = new FX(elem, operate, name);&nbsp; 
+<br>&nbsp; 44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var start = parseInt($(elem).css(name));&nbsp; 
+<br>&nbsp; 45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var end = value;&nbsp; 
+<br>&nbsp; 46.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fx.custom(start, end);&nbsp; 
+<br>&nbsp; 47.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; })&nbsp; 
+<br>&nbsp; 48.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; })&nbsp; 
+<br>&nbsp; 49.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this;&nbsp; 
+<br>&nbsp; 50.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 51. })&nbsp; 
+<br>&nbsp; 52.&nbsp;&nbsp; 
+<br>&nbsp; 53. function FX(elem, options, name){&nbsp; 
+<br>&nbsp; 54.&nbsp;&nbsp;&nbsp;&nbsp; this.elem = elem;&nbsp; 
+<br>&nbsp; 55.&nbsp;&nbsp;&nbsp;&nbsp; this.options = options;&nbsp; 
+<br>&nbsp; 56.&nbsp;&nbsp;&nbsp;&nbsp; this.name = name;&nbsp; 
+<br>&nbsp; 57. }&nbsp; 
+<br>&nbsp; 58.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 59. FX.prototype.custom = function(from, to){&nbsp; 
+<br>&nbsp; 60.&nbsp;&nbsp;&nbsp;&nbsp; this.startTime = jQuery.now();&nbsp; 
+<br>&nbsp; 61.&nbsp;&nbsp;&nbsp;&nbsp; this.start = from;&nbsp; 
+<br>&nbsp; 62.&nbsp;&nbsp;&nbsp;&nbsp; this.end = to;&nbsp; 
+<br>&nbsp; 63.&nbsp;&nbsp;&nbsp;&nbsp; timers.push(this);&nbsp; 
+<br>&nbsp; 64.&nbsp;&nbsp;&nbsp;&nbsp; FX.tick();&nbsp; 
+<br>&nbsp; 65. }&nbsp; 
+<br>&nbsp; 66.&nbsp;&nbsp; 
+<br>&nbsp; 67. FX.prototype.step = function(){&nbsp; 
+<br>&nbsp; 68.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var t = jQuery.now();&nbsp; 
+<br>&nbsp; 69.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var nowPos;&nbsp; 
+<br>&nbsp; 70.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (t &gt; this.startTime + this.options.duration){&nbsp; 
+<br>&nbsp; 71.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nowPos = this.end;&nbsp; 
+<br>&nbsp; 72.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.callback.call(this.elem);&nbsp; 
+<br>&nbsp; 73.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.stop();&nbsp; 
+<br>&nbsp; 74.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }else{&nbsp; 
+<br>&nbsp; 75.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var n = t - this.startTime;&nbsp; 
+<br>&nbsp; 76.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var state = n / this.options.duration;&nbsp; 
+<br>&nbsp; 77.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var pos = jQuery.easing[this.options.easing](state, n, 0, 1, this.options.duration);&nbsp; 
+<br>&nbsp; 78.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nowPos = this.start + ((this.end - this.start) * pos);&nbsp; 
+<br>&nbsp; 79.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 80.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.update(nowPos, this.name);&nbsp; 
+<br>&nbsp; 81.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 82.&nbsp;&nbsp; 
+<br>&nbsp; 83.&nbsp;&nbsp;&nbsp;&nbsp; FX.prototype.stop = function(){&nbsp; 
+<br>&nbsp; 84.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( var i = timers.length - 1; i &gt;= 0; i--){&nbsp; 
+<br>&nbsp; 85.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (timers[i] === this){&nbsp; 
+<br>&nbsp; 86.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timers.splice(i, 1);&nbsp; 
+<br>&nbsp; 87.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 88.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 89.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 90.&nbsp;&nbsp; 
+<br>&nbsp; 91.&nbsp;&nbsp;&nbsp;&nbsp; FX.prototype.update = function(value, name){&nbsp; 
+<br>&nbsp; 92.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.elem.style[name] = value;&nbsp; 
+<br>&nbsp; 93.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 94.&nbsp;&nbsp; 
+<br>&nbsp; 95.&nbsp;&nbsp; 
+<br>&nbsp; 96.&nbsp;&nbsp;&nbsp;&nbsp; FX.tick = function(){&nbsp; 
+<br>&nbsp; 97.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (timerId) return;&nbsp; 
+<br>&nbsp; 98.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var self = this;&nbsp; 
+<br>&nbsp; 99.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timerId = setInterval(function(){&nbsp; 
+<br> 100.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var i = 0, c; c = timers[i++];){&nbsp; 
+<br> 101.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.step();&nbsp; 
+<br> 102.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 103.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!timers.length){&nbsp; 
+<br> 104.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FX.stop();&nbsp; 
+<br> 105.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 106.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, 13);&nbsp; 
+<br> 107.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 108.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 109.&nbsp;&nbsp;&nbsp;&nbsp; FX.stop = function(){&nbsp; 
+<br> 110.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; clearInterval(timerId);&nbsp;&nbsp; 
+<br> 111.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timerId = null&nbsp; 
+<br> 112.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 113.&nbsp;&nbsp; 
+<br> 114. jQuery.getOpt = function(duration, easing, callback){&nbsp; 
+<br> 115.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 116.&nbsp;&nbsp;&nbsp;&nbsp; var obj = {&nbsp; 
+<br> 117.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "duration": duration,&nbsp; 
+<br> 118.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "easing": easing&nbsp; 
+<br> 119.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 120.&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 121.&nbsp;&nbsp;&nbsp;&nbsp; obj.callback = function(){&nbsp; 
+<br> 122.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; callback &amp;&amp; callback();&nbsp; 
+<br> 123.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(this).dequeue();&nbsp;&nbsp;&nbsp; 
+<br> 124.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 125.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 126.&nbsp;&nbsp;&nbsp;&nbsp; return obj;&nbsp; 
+<br> 127. }&nbsp; 
+<br> 128.&nbsp;&nbsp; 
+<br> 129. $.fn.stop = function(){&nbsp; 
+<br> 130.&nbsp;&nbsp;&nbsp;&nbsp; for ( var i = timers.length - 1; i &gt;= 0; i-- ) {&nbsp; 
+<br> 131.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (timers[i].elem === this[0]){&nbsp; 
+<br> 132.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timers[i].stop();&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 133.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 134.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 135. }&nbsp; 
+<br> 136.&nbsp;&nbsp; 
+<br> 137.&nbsp;&nbsp; 
+<br> 138.&nbsp;&nbsp; 
+<br> 139. $("#div1").myAnimate({"top":500}, 1000, "swing").myAnimate({"top":100}, 500, "swing").myAnimate({"left":500}, 500, "swing").myAnimate({"top":500}, 500, "swing");&nbsp; 
+<br> 140.&nbsp;&nbsp; 
+<br> 141. $("#div2").myAnimate({"left":1000}, 1000, "swing")&nbsp; 
+<br> 142.&nbsp;&nbsp; 
+<br> 143.&nbsp;&nbsp; 
+<br> 144. function stop(){&nbsp; 
+<br> 145.&nbsp;&nbsp;&nbsp;&nbsp; $("#div1").stop();&nbsp;&nbsp;&nbsp; 
+<br> 146. }&nbsp; 
+<br> 147.&nbsp;&nbsp; 
+<br> 148. function cont(){&nbsp; 
+<br> 149.&nbsp;&nbsp;&nbsp;&nbsp; $("#div1").dequeue();&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 150. }&nbsp; 
+<br> 151.&nbsp;&nbsp; 
+<br> 152. &lt;/script&gt;&nbsp;&nbsp; 
+<br> 153. &lt;button onclick="stop()"&gt;停止&lt;/button&gt;&nbsp; 
+<br> 154. &lt;button onclick="cont()"&gt;继续后面的动画&lt;/button&gt;&nbsp; 
+<br>
+<br>&lt;style type="text/css"&gt;
+<br>
+<br>#div1 {
+<br>	background:#aaa;
+<br>	width:188px;
+<br>	height:188px;
+<br>	position:absolute;
+<br>	top:10px;
+<br>	left: 110px;
+<br>}
+<br>
+<br>#div2 {
+<br>	background:#aaa;
+<br>	width:188px;
+<br>	height:188px;
+<br>	position:absolute;
+<br>	top:310px;
+<br>	left: 110px;
+<br>}
+<br>
+<br>&lt;/style&gt; 
+<br>
+<br>&lt;body&gt; 
+<br>&lt;/body&gt;
+<br>
+<br>&lt;div id="div1"&gt;我是一个div&lt;/div&gt;
+<br>&lt;div id="div2"&gt;我是另一个div&lt;/div&gt;
+<br>
+<br>&lt;script type="text/javascript" src="jquery1.43.js"&gt;&lt;/script&gt; 
+<br>&lt;script type="text/javascript"&gt;
+<br>	
+<br>
+<br>var timers = [];
+<br>var timerId;
+<br>
+<br>
+<br>$.fn.extend({
+<br>	myAnimate: function(property, duration, easing, callback){
+<br>		var operate = jQuery.getOpt(duration, easing, callback);
+<br>		$(this).queue(function(){
+<br>			var elem = this;
+<br>			$.each(property, function(name, value){
+<br>					var fx = new FX(elem, operate, name);
+<br>					var start = parseInt($(elem).css(name));
+<br>					var end = value;
+<br>					fx.custom(start, end);
+<br>			})
+<br>		})
+<br>		return this;
+<br>	}
+<br>})
+<br>
+<br>function FX(elem, options, name){
+<br>	this.elem = elem;
+<br>	this.options = options;
+<br>	this.name = name;
+<br>}
+<br>	
+<br>FX.prototype.custom = function(from, to){
+<br>	this.startTime = jQuery.now();
+<br>	this.start = from;
+<br>	this.end = to;
+<br>	timers.push(this);
+<br>	FX.tick();
+<br>}
+<br>
+<br>FX.prototype.step = function(){
+<br>		var t = jQuery.now();
+<br>		var nowPos;
+<br>		if (t &gt; this.startTime + this.options.duration){
+<br>			nowPos = this.end;
+<br>			this.options.callback.call(this.elem);
+<br>			this.stop();
+<br>		}else{
+<br>			var n = t - this.startTime;
+<br>			var state = n / this.options.duration;
+<br>			var pos = jQuery.easing[this.options.easing](state, n, 0, 1, this.options.duration);
+<br>			nowPos = this.start + ((this.end - this.start) * pos);
+<br>		}
+<br>			this.update(nowPos, this.name);
+<br>	}
+<br>
+<br>	FX.prototype.stop = function(){
+<br>		for ( var i = timers.length - 1; i &gt;= 0; i--){
+<br>			if (timers[i] === this){
+<br>				timers.splice(i, 1);
+<br>			}
+<br>		}
+<br>	}
+<br>
+<br>	FX.prototype.update = function(value, name){
+<br>		this.elem.style[name] = value;
+<br>	}
+<br>
+<br>
+<br>	FX.tick = function(){
+<br>		if (timerId) return;
+<br>		var self = this;
+<br>		timerId = setInterval(function(){
+<br>			for (var i = 0, c; c = timers[i++];){
+<br>				c.step();
+<br>			}
+<br>			if (!timers.length){
+<br>				FX.stop();
+<br>			}
+<br>		}, 13);
+<br>	}
+<br>	
+<br>	FX.stop = function(){
+<br>		clearInterval(timerId);	
+<br>		timerId = null
+<br>	}
+<br>
+<br>jQuery.getOpt = function(duration, easing, callback){
+<br>	
+<br>	var obj = {
+<br>		"duration": duration,
+<br>		"easing": easing
+<br>	}
+<br>&nbsp; 
+<br>	obj.callback = function(){
+<br>		callback &amp;&amp; callback();
+<br>		$(this).dequeue();	
+<br>	}
+<br>	
+<br>	return obj;
+<br>}
+<br>
+<br>$.fn.stop = function(){
+<br>	for ( var i = timers.length - 1; i &gt;= 0; i-- ) {
+<br>		if (timers[i].elem === this[0]){
+<br>			timers[i].stop();	
+<br>		}		
+<br>	}
+<br>}
+<br>
+<br>
+<br>
+<br>$("#div1").myAnimate({"top":500}, 1000, "swing").myAnimate({"top":100}, 500, "swing").myAnimate({"left":500}, 500, "swing").myAnimate({"top":500}, 500, "swing");
+<br>
+<br>$("#div2").myAnimate({"left":1000}, 1000, "swing")
+<br>
+<br>
+<br>function stop(){
+<br>	$("#div1").stop();	
+<br>}
+<br>
+<br>function cont(){
+<br>	$("#div1").dequeue();	
+<br>}
+<br>
+<br>&lt;/script&gt; 
+<br>&lt;button onclick="stop()"&gt;停止&lt;/button&gt;
+<br>&lt;button onclick="cont()"&gt;继续后面的动画&lt;/button&gt;
+<br>
+<br>
+<br>--------------------分割线---------------------------------
+<br>
+<br>上面的代码跟jquery有少许不同, 因为我写的时候有的地方忘记jquery是怎么搞的了.不过思路还是一样的.
+<br>尽管这样, jquery的做法要麻烦很多. 毕竟作为一个库, 要考虑的东西是非常非常多的.
+<br>
+<br>一行一行来看代码.
+<br>首先定义一个常量
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. fxAttrs = [&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // height animations&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ "height", "marginTop", "marginBottom", "paddingTop", "paddingBottom" ],&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // width animations&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ "width", "marginLeft", "marginRight", "paddingLeft", "paddingRight" ],&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // opacity animations&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ "opacity" ]&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp; ]&nbsp; 
+<br>
+<br>fxAttrs = [
+<br>		// height animations
+<br>		[ "height", "marginTop", "marginBottom", "paddingTop", "paddingBottom" ],
+<br>		// width animations
+<br>		[ "width", "marginLeft", "marginRight", "paddingLeft", "paddingRight" ],
+<br>		// opacity animations
+<br>		[ "opacity" ]
+<br>	]
+<br>
+<br>
+<br>这个东西是为了得到当用动画形式执行show,hide,slideDown, slideUp时,所需要改变的属性值.比如show,需要改变的并不仅仅是width和height.还包括marginLeft,paddingLeft等属性.
+<br>
+<br>jQuery.prototype.show
+<br>show和hide这两个常用的方法实现都比较简单. show和hide可以直接隐藏/显示元素,也可以以动画渐变的方式来达到效果.直接隐藏和显示就是设置display属性,动画效果则要用 animate函数改变width,height,marginLeft等.不过设置display的时候还要考虑css属性对元素可见性的影响,以及尽量避免reflow回流.留在css部分讨论.
+<br>
+<br>jQuery.prototype.toggle
+<br>切换元素的可见状态, 就是show和hide这两个操作集中到一起.
+<br>toggle有好几种调用方式,
+<br>1&nbsp; 不传递任何参数, 这时仅仅只切换元素的可见状态
+<br>2&nbsp; 只有一个boolean类型的参数. 这个参数实际是一个返回值为boolean的表达式. 当这个表达式结果为true的时候显示元素, 反之隐藏. 即toggle(switch)形式. 比如
+<br>var flip = 0;&nbsp;&nbsp; 
+<br>$("button").click(function () {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $("p").toggle( flip++ % 3 == 0 );&nbsp;&nbsp; 
+<br>});
+<br>3&nbsp; 传入一些函数, 当点击元素的时候, 按顺序执行这些函数的某一个.
+<br>
+<br>4&nbsp; 可以传入3个参数, 分别为speed, easing, callback. 即以动画的形式切换可见性.
+<br>
+<br>这几个方法的源码都跟动画的核心机制关系不大, 反而是和css, evnet模块联系比较密切. 就不放在这里讨论了.
+<br>
+<br>现在看看关键的animate函数.前面讲过, animate的作用主要是修正参数, 把参数传递给fx类去实现动画.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. animate: function( prop, speed, easing, callback ) {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //prop是{"left":"100px", "paddingLeft": "show"}这种形式,可以由用户自己传进来, 在show,&nbsp;&nbsp; hide等方法里, 是由genfx&nbsp; 
+<br>&nbsp;&nbsp; 3. //函数转化而来.&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var optall = jQuery.speed(speed, easing, callback);&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //optall是一个包含了修正后的动画执行时间, 动画算法, 回调函数的对象.&nbsp; 
+<br>&nbsp;&nbsp; 6. //speed方法把animate函数的参数包装成一个对象方便以后调用，&nbsp; 
+<br>&nbsp;&nbsp; 7. //并且修正callback回调函数, 加上dequeue的功能.&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( jQuery.isEmptyObject( prop ) ) {&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //prop 是个空对象.不需要执行动画,直接调用回调函数.&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this.each( optall.complete );&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this[ optall.queue === false ? "each" : "queue" ](function() {&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果参数里指定了queue 为false, 单独执行这次动画,&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //而不是默认的加入队列.&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var opt = jQuery.extend({}, optall), p,&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //复制一下optall对象.&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; isElement = this.nodeType === 1,&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //是否是有效dom节点.&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hidden = isElement &amp;&amp; jQuery(this).is(":hidden"),&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //元素的可见性&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self = this;&nbsp; 
+<br>&nbsp; 23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //保存this的引用, 在下面的闭包中this指向会被改变&nbsp; 
+<br>&nbsp; 24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( p in prop ) {&nbsp; 
+<br>&nbsp; 25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //遍历"left", "top"等需要执行动画的属性.&nbsp; 
+<br>&nbsp; 26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var name = jQuery.camelCase( p );&nbsp; 
+<br>&nbsp; 27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //把margin-left之类的属性转换成marginLeft&nbsp; 
+<br>&nbsp; 28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( p !== name ) {&nbsp; 
+<br>&nbsp; 29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prop[ name ] = prop[ p ];&nbsp; 
+<br>&nbsp; 30.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //把值复制给camelCase转化后的属性&nbsp; 
+<br>&nbsp; 31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete prop[ p ];&nbsp; 
+<br>&nbsp; 32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //删除已经无用的属性&nbsp; 
+<br>&nbsp; 33.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p = name;&nbsp; 
+<br>&nbsp; 34.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 35.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( prop[p] === "hide" &amp;&amp; hidden || prop[p] === "show" &amp;&amp; !hidden ) {&nbsp; 
+<br>&nbsp; 36.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //元素在hidden状态下再隐藏或者show状态下再显示&nbsp; 
+<br>&nbsp; 37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return opt.complete.call(this);&nbsp; 
+<br>&nbsp; 38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //不需要任何操作, 直接调用回调函数.&nbsp; 
+<br>&nbsp; 39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 40.&nbsp;&nbsp; 
+<br>&nbsp; 41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( isElement &amp;&amp; ( p === "height" || p === "width" ) ) {&nbsp; 
+<br>&nbsp; 42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果是改变元素的height或者width&nbsp; 
+<br>&nbsp; 43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opt.overflow = [ this.style.overflow, this.style.overflowX, this.style.overflowY ];&nbsp; 
+<br>&nbsp; 44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( jQuery.css( this, "display" ) === "inline" &amp;&amp;&nbsp; 
+<br>&nbsp; 45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery.css( this, "float" ) === "none" ) {&nbsp; 
+<br>&nbsp; 46.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( !jQuery.support.inlineBlockNeedsLayout ) {&nbsp; 
+<br>&nbsp; 47.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //对于不支持inline-block的浏览器,可以加上zoom:1 来hack&nbsp; //http://www.planabc.net/2007/03/11/display_inline-block/&nbsp;&nbsp; 
+<br>&nbsp; 48.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.style.display = "inline-block";&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 49.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {&nbsp; 
+<br>&nbsp; 50.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var display = defaultDisplay(this.nodeName);&nbsp; 
+<br>&nbsp; 51.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( display === "inline" ) {&nbsp; 
+<br>&nbsp; 52.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.style.display = "inline-block";&nbsp; 
+<br>&nbsp; 53.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {&nbsp; 
+<br>&nbsp; 54.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.style.display = "inline";&nbsp; 
+<br>&nbsp; 55.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.style.zoom = 1;&nbsp; 
+<br>&nbsp; 56.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 57.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 58.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 59.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 60.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( jQuery.isArray( prop[p] ) ) {&nbsp; 
+<br>&nbsp; 61.&nbsp;&nbsp;&nbsp;&nbsp; (opt.specialEasing = opt.specialEasing || {})[p] = prop[p][1];&nbsp; 
+<br>&nbsp; 62.&nbsp;&nbsp;&nbsp;&nbsp; // 可以给某个属性单独定制动画算法.&nbsp; 
+<br>&nbsp; 63. //例如$("#div1").animate({"left":["+=100px", "swing"], 1000},&nbsp;&nbsp; 
+<br>&nbsp; 64.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prop[p] = prop[p][0];&nbsp; 
+<br>&nbsp; 65.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //修正prop[p]&nbsp; 
+<br>&nbsp; 66.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 67.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 68.&nbsp;&nbsp; 
+<br>&nbsp; 69.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( opt.overflow != null ) {&nbsp; 
+<br>&nbsp; 70.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.style.overflow = "hidden";&nbsp; 
+<br>&nbsp; 71.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //动画改变元素大小时, overflow设置为hidden, 避免滚动条也跟着不停改变&nbsp; 
+<br>&nbsp; 72.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 73.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opt.curAnim = jQuery.extend({}, prop);&nbsp; 
+<br>&nbsp; 74. //又复制一次prop, opt.curAnim用来记录某个元素中已经完成动画的属性, 比如left和marginLeft的动画并不是同一时间完成的,而只有全部属性的动画都完成之后, 才能触发这个元素的这次动画的callback函数.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 75. jQuery.each( prop, function( name, val ) {&nbsp; 
+<br>&nbsp; 76.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //进入重点, 遍历属性.&nbsp; 
+<br>&nbsp; 77.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var e = new jQuery.fx( self, opt, name );&nbsp; 
+<br>&nbsp; 78.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //fx是个辅助工具类. 为每个属性的动画操作都生成一个fx对象.&nbsp; 
+<br>&nbsp; 79.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //得到一个具有elem(被操作对象), options(包括speed, callback等属性), prop(elem待变化的属性, 比如left, top),&nbsp;&nbsp; 
+<br>&nbsp; 80. //orig为{}， 用来保存属性的原始值&nbsp; 
+<br>&nbsp; 81.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( rfxtypes.test(val) ) {&nbsp; 
+<br>&nbsp; 82.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e[ val === "toggle" ? hidden ? "show" : "hide" : val ]( prop );&nbsp; 
+<br>&nbsp; 83.&nbsp;&nbsp;&nbsp;&nbsp; //动画方式进行show. hide和toggle.&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 84. //比如$("#div1").animate({"width":"hide"}, 1000)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 85. //这里进入是fx.prototype.show，fx.prototype.hide方法&nbsp; 
+<br>&nbsp; 86.&nbsp; //并不是jQuery.fn.show, jQueyr.fn.hide&nbsp; 
+<br>&nbsp; 87.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {&nbsp; 
+<br>&nbsp; 88.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var parts = rfxnum.exec(val),&nbsp; 
+<br>&nbsp; 89.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start = e.cur(true) || 0;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 90.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //修正开始的位置, 如果是一个太大的负数，把它&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 91.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //修正为0&nbsp; 
+<br>&nbsp; 92.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( parts ) {&nbsp; 
+<br>&nbsp; 93.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var end = parseFloat( parts[2] ),&nbsp; 
+<br>&nbsp; 94.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //结束的位置&nbsp; 
+<br>&nbsp; 95.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unit = parts[3] || "px";&nbsp; //修正单位&nbsp; 
+<br>&nbsp; 96.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // We need to compute starting value&nbsp; 
+<br>&nbsp; 97.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( unit !== "px" ) {&nbsp; 
+<br>&nbsp; 98.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.style[ name ] = (end || 1) + unit;&nbsp; 
+<br>&nbsp; 99.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start = ((end || 1) / e.cur(true)) * start;&nbsp; 
+<br> 100.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.style[ name ] = start + unit;&nbsp; 
+<br> 101.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 102.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //修正开始的位置,unit可能为%.&nbsp; 
+<br> 103.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 104.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( parts[1] ) {&nbsp; 
+<br> 105.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end = ((parts[1] === "-=" ? -1 : 1) * end) + start;&nbsp; 
+<br> 106.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //做相对变化时, 计算结束的位置, 比如&nbsp; 
+<br> 107.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //{"left":"+=100px"}， 表示元素右移100个像素&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br> 108.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 109.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e.custom( start, end, unit );&nbsp; 
+<br> 110.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //调用fx类的prototype方法custom, 真正开始动画&nbsp; 
+<br> 111.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {&nbsp; 
+<br> 112.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e.custom( start, val, "" );&nbsp; 
+<br> 113.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 114.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br> 115.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });&nbsp; 
+<br> 116.&nbsp;&nbsp; 
+<br> 117.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // For JS strict compliance&nbsp; 
+<br> 118.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;&nbsp; 
+<br> 119.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });&nbsp; 
+<br> 120.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>animate: function( prop, speed, easing, callback ) {
+<br>		//prop是{"left":"100px", "paddingLeft": "show"}这种形式,可以由用户自己传进来, 在show,&nbsp;&nbsp; hide等方法里, 是由genfx
+<br>//函数转化而来. 
+<br>		var optall = jQuery.speed(speed, easing, callback);
+<br>		//optall是一个包含了修正后的动画执行时间, 动画算法, 回调函数的对象.
+<br>//speed方法把animate函数的参数包装成一个对象方便以后调用，
+<br>//并且修正callback回调函数, 加上dequeue的功能.
+<br>	
+<br>		if ( jQuery.isEmptyObject( prop ) ) {
+<br>		//prop 是个空对象.不需要执行动画,直接调用回调函数.
+<br>			return this.each( optall.complete );
+<br>		}
+<br>		return this[ optall.queue === false ? "each" : "queue" ](function() {
+<br>			//如果参数里指定了queue 为false, 单独执行这次动画,&nbsp;&nbsp; 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //而不是默认的加入队列.
+<br>			var opt = jQuery.extend({}, optall), p,
+<br>			//复制一下optall对象.
+<br>			isElement = this.nodeType === 1,
+<br>			//是否是有效dom节点.
+<br>			hidden = isElement &amp;&amp; jQuery(this).is(":hidden"),
+<br>			//元素的可见性
+<br>			self = this;
+<br>	&nbsp;&nbsp;&nbsp;&nbsp; //保存this的引用, 在下面的闭包中this指向会被改变
+<br>			for ( p in prop ) {
+<br>			//遍历"left", "top"等需要执行动画的属性.
+<br>				var name = jQuery.camelCase( p );
+<br>			//把margin-left之类的属性转换成marginLeft
+<br>				if ( p !== name ) {
+<br>					prop[ name ] = prop[ p ];
+<br>				//把值复制给camelCase转化后的属性
+<br>					delete prop[ p ];
+<br>				//删除已经无用的属性
+<br>					p = name;
+<br>				}
+<br>				if ( prop[p] === "hide" &amp;&amp; hidden || prop[p] === "show" &amp;&amp; !hidden ) {
+<br>				//元素在hidden状态下再隐藏或者show状态下再显示
+<br>					return opt.complete.call(this);
+<br>				//不需要任何操作, 直接调用回调函数.
+<br>				}
+<br>
+<br>				if ( isElement &amp;&amp; ( p === "height" || p === "width" ) ) {
+<br>				//如果是改变元素的height或者width
+<br>					opt.overflow = [ this.style.overflow, this.style.overflowX, this.style.overflowY ];
+<br>					if ( jQuery.css( this, "display" ) === "inline" &amp;&amp;
+<br>							jQuery.css( this, "float" ) === "none" ) {
+<br>						if ( !jQuery.support.inlineBlockNeedsLayout ) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp; //对于不支持inline-block的浏览器,可以加上zoom:1 来hack&nbsp; //http://www.planabc.net/2007/03/11/display_inline-block/ 
+<br>		this.style.display = "inline-block";&nbsp; 
+<br>						} else {
+<br>				var display = defaultDisplay(this.nodeName);
+<br>							if ( display === "inline" ) {
+<br>								this.style.display = "inline-block";
+<br>							} else {
+<br>								this.style.display = "inline";
+<br>								this.style.zoom = 1;
+<br>							}
+<br>						}
+<br>					}
+<br>				}
+<br>				if ( jQuery.isArray( prop[p] ) ) {
+<br>	(opt.specialEasing = opt.specialEasing || {})[p] = prop[p][1];
+<br>	// 可以给某个属性单独定制动画算法.
+<br>//例如$("#div1").animate({"left":["+=100px", "swing"], 1000}, 
+<br>					prop[p] = prop[p][0];
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //修正prop[p]
+<br>				}
+<br>			}
+<br>
+<br>			if ( opt.overflow != null ) {
+<br>				this.style.overflow = "hidden";
+<br>				//动画改变元素大小时, overflow设置为hidden, 避免滚动条也跟着不停改变
+<br>			}
+<br>			opt.curAnim = jQuery.extend({}, prop);
+<br>//又复制一次prop, opt.curAnim用来记录某个元素中已经完成动画的属性, 比如left和marginLeft的动画并不是同一时间完成的,而只有全部属性的动画都完成之后, 才能触发这个元素的这次动画的callback函数.			
+<br>jQuery.each( prop, function( name, val ) {
+<br>			 //进入重点, 遍历属性.
+<br>				var e = new jQuery.fx( self, opt, name );
+<br>			 //fx是个辅助工具类. 为每个属性的动画操作都生成一个fx对象.
+<br>			 //得到一个具有elem(被操作对象), options(包括speed, callback等属性), prop(elem待变化的属性, 比如left, top), 
+<br>//orig为{}， 用来保存属性的原始值
+<br>				if ( rfxtypes.test(val) ) {
+<br>					e[ val === "toggle" ? hidden ? "show" : "hide" : val ]( prop );
+<br>	//动画方式进行show. hide和toggle.&nbsp;&nbsp; 
+<br>//比如$("#div1").animate({"width":"hide"}, 1000)	 			
+<br>//这里进入是fx.prototype.show，fx.prototype.hide方法
+<br> //并不是jQuery.fn.show, jQueyr.fn.hide
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+<br>					var parts = rfxnum.exec(val),
+<br>						start = e.cur(true) || 0;&nbsp; 
+<br>						//修正开始的位置, 如果是一个太大的负数，把它&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //修正为0
+<br>					if ( parts ) {
+<br>						var end = parseFloat( parts[2] ),
+<br>							//结束的位置
+<br>							unit = parts[3] || "px";&nbsp; //修正单位
+<br>						// We need to compute starting value
+<br>						if ( unit !== "px" ) {
+<br>							self.style[ name ] = (end || 1) + unit;
+<br>							start = ((end || 1) / e.cur(true)) * start;
+<br>							self.style[ name ] = start + unit;
+<br>						}
+<br>						//修正开始的位置,unit可能为%.
+<br>	
+<br>						if ( parts[1] ) {
+<br>							end = ((parts[1] === "-=" ? -1 : 1) * end) + start;
+<br>						//做相对变化时, 计算结束的位置, 比如
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //{"left":"+=100px"}， 表示元素右移100个像素&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>						}
+<br>						e.custom( start, end, unit );
+<br>			&nbsp;&nbsp; //调用fx类的prototype方法custom, 真正开始动画
+<br>					} else {
+<br>						e.custom( start, val, "" );
+<br>					}
+<br>				}
+<br>			});
+<br>
+<br>			// For JS strict compliance
+<br>			return true;
+<br>		});
+<br>	}
+<br>
+<br>
+<br>看看animate里的speed函数. 前面说过speed函数是把animate的参数都包装为一个对象. 然后把dequeue加入回调函数.如果animate的第二个参数是object类型,直接复制一次就可以了, 如果不是, 要自己手动包装.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp; speed: function( speed, easing, fn ) {&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var opt = speed &amp;&amp; typeof speed === "object" ? jQuery.extend({}, speed) : {&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete: fn || !fn &amp;&amp; easing ||&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery.isFunction( speed ) &amp;&amp; speed,&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; duration: speed,&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; easing: fn &amp;&amp; easing || easing &amp;&amp; !jQuery.isFunction(easing) &amp;&amp; easing&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opt.duration = jQuery.fx.off ? 0 : typeof opt.duration ===&nbsp;&nbsp; 
+<br>&nbsp; 10. "number" ? opt.duration : opt.duration in jQuery.fx.speeds ? jQuery.fx.speeds[opt.duration] : jQuery.fx.speeds._default;&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //jQuery.fx.off为true时,禁止执行动画,此时任何animate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //的speed都为0&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果speed为"fast","slow"等, 从jQuery.fx.speeds里取&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //值, 分别为600,200.&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opt.old = opt.complete;&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opt.complete = function() {&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //重写回调函数, 把dequeue操作加入回调函数.&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //让动画按顺序执行&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( opt.queue !== false ) {&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //前面的animate方法里已经说过, queue参数为false时,&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 是直接执行此次动画, 不必加入队列.&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery(this).dequeue();&nbsp; 
+<br>&nbsp; 23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( jQuery.isFunction( opt.old ) ) {&nbsp; 
+<br>&nbsp; 25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opt.old.call( this );&nbsp; 
+<br>&nbsp; 26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };&nbsp; 
+<br>&nbsp; 28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return opt;&nbsp; 
+<br>&nbsp; 29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //返回包装后的对象&nbsp; 
+<br>&nbsp; 30.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>	
+<br>&nbsp; speed: function( speed, easing, fn ) {
+<br>		var opt = speed &amp;&amp; typeof speed === "object" ? jQuery.extend({}, speed) : {
+<br>			complete: fn || !fn &amp;&amp; easing ||
+<br>			jQuery.isFunction( speed ) &amp;&amp; speed,
+<br>			duration: speed,
+<br>			easing: fn &amp;&amp; easing || easing &amp;&amp; !jQuery.isFunction(easing) &amp;&amp; easing
+<br>		};
+<br>		opt.duration = jQuery.fx.off ? 0 : typeof opt.duration === 
+<br>"number" ? opt.duration : opt.duration in jQuery.fx.speeds ? jQuery.fx.speeds[opt.duration] : jQuery.fx.speeds._default;
+<br>		&nbsp; //jQuery.fx.off为true时,禁止执行动画,此时任何animate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //的speed都为0
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果speed为"fast","slow"等, 从jQuery.fx.speeds里取
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //值, 分别为600,200.
+<br>		opt.old = opt.complete;
+<br>		opt.complete = function() {
+<br>			//重写回调函数, 把dequeue操作加入回调函数.
+<br>			//让动画按顺序执行
+<br>			if ( opt.queue !== false ) {
+<br>		&nbsp; //前面的animate方法里已经说过, queue参数为false时,
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 是直接执行此次动画, 不必加入队列.
+<br>		jQuery(this).dequeue();
+<br>			}
+<br>			if ( jQuery.isFunction( opt.old ) ) {
+<br>				opt.old.call( this );
+<br>			}
+<br>		};
+<br>		return opt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //返回包装后的对象
+<br>	}
+<br>
+<br>
+<br>jQuery.fx
+<br>再看看fx类的实现. 它的构造方法接受3个从animate函数里传来的参数. 每个实例在构造函数里初始化的时候都会被加上3个属性. 分别是
+<br>options（{“duration”：1000，“easing”：“swing”，“callback”：fn}）
+<br>elem (元素本身)
+<br>prop ({"left": 500, "width": 500})
+<br>这几种形式
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. fx: function( elem, options, prop ) {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options = options;&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.elem = elem;&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.prop = prop;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( !options.orig ) {&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options.orig = {};&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 10. })&nbsp; 
+<br>
+<br>fx: function( elem, options, prop ) {
+<br>		this.options = options;
+<br>		this.elem = elem;
+<br>		this.prop = prop;
+<br>
+<br>		if ( !options.orig ) {
+<br>			options.orig = {};
+<br>		}
+<br>	}
+<br>})
+<br>
+<br>
+<br>另外, 还会给每个对象实例绑定orig属性, 默认是一个空对象{}.用来储存元素的属性原始值, 有了这个值, 可以让动画进行回退.
+<br>
+<br>现在终于到了custom函数. 前面的这么多代码都只是铺垫, 这个函数里才开始真正的进入执行动画. 它主要作用是创建定时器.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. // Start an animation from one number to another&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; custom: function( from, to, unit ) {&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.startTime = jQuery.now();&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.start = from;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.end = to;&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.unit = unit || this.unit || "px";&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.now = this.start;&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.pos = this.state = 0;&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var self = this, fx = jQuery.fx;&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function t( gotoEnd ) {&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return self.step(gotoEnd);&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //一个包裹动画具体执行函数的闭包, 之所以要用闭包包裹起来,&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //是因为执行动画的动作并不一定是发生在当前.&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; t.elem = this.elem;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //保存一个元素的引用. 删除和判断is:animated的时候用到,&nbsp;&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //把timer和元素联系起来&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( t() &amp;&amp; jQuery.timers.push(t) &amp;&amp; !timerId ) {---（1）&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timerId = setInterval(fx.tick, fx.interval);&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 23.&nbsp;&nbsp;&nbsp; 
+<br>
+<br>// Start an animation from one number to another
+<br>	custom: function( from, to, unit ) {
+<br>		this.startTime = jQuery.now();
+<br>		this.start = from;
+<br>		this.end = to;
+<br>		this.unit = unit || this.unit || "px";
+<br>		this.now = this.start;
+<br>		this.pos = this.state = 0;
+<br>
+<br>		var self = this, fx = jQuery.fx;
+<br>		function t( gotoEnd ) {
+<br>			return self.step(gotoEnd);
+<br>		}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; //一个包裹动画具体执行函数的闭包, 之所以要用闭包包裹起来,
+<br>&nbsp;&nbsp;&nbsp;&nbsp; //是因为执行动画的动作并不一定是发生在当前.
+<br>		t.elem = this.elem;&nbsp; 
+<br>		//保存一个元素的引用. 删除和判断is:animated的时候用到, 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; //把timer和元素联系起来
+<br>		if ( t() &amp;&amp; jQuery.timers.push(t) &amp;&amp; !timerId ) {---（1）
+<br>			timerId = setInterval(fx.tick, fx.interval);
+<br>		}
+<br>	}
+<br> 
+<br>
+<br>
+<br>1处这个if语句里包含了很多内容
+<br>首先t()进入.step函数, step函数可以看成动画的某一帧.
+<br>而custom函数至多只负责执行动画的第一帧（其它帧都是在全局定时器里执行的）,然后判断t()的返回值, 即self.step(gotoEnd)的返回值, 如果为false, 表示这个fx动画已经执行完.所以当它为true,也就是还需要继续执行动画的情况下,要把这个包含self.step(gotoEnd)语句的闭包, 存入全局的timers数组. 以便在定时器里循环执行.我在前面的模拟fx类的实现中, 选择的存入fx对象,把判断fx对象执行完毕的操作放在fx.step里面. 效果是一样.不过觉得存fx对象的话, 没有这么难理解.而timerId就是那个全局计时器,用来不停的执行timer数组里残余的动画.只有所有的动画都执行完毕后, 才会关闭timerId定时器.当然如果t()返回false和timerId定时器已经存在的情况下,都不需要再启动定时器.
+<br>
+<br>定时器里的调用的函数是fx.tick. 看看fx.tick的实现.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. tick: function() {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var timers = jQuery.timers;&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //timer里面包括所有当前所有在执行动画的函数.&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( var i = 0; i &lt; timers.length; i++ ) {&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( !timers[i]() ) {&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //timers[i]()就是上面的t()，也就是fx.step(gotoEnd);&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp; //动画如果完成了,fx.step(gotoEnd)是返回false的. 所以这里&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp; //是当某个动画完成之后, 就在全局的timer中删除它&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timers.splice(i--, 1);&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( !timers.length ) {&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //当全部动画完成之后, 清空定时器&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery.fx.stop();&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>tick: function() {
+<br>		var timers = jQuery.timers;
+<br>		//timer里面包括所有当前所有在执行动画的函数.
+<br>		for ( var i = 0; i &lt; timers.length; i++ ) {
+<br>			if ( !timers[i]() ) {
+<br>		//timers[i]()就是上面的t()，也就是fx.step(gotoEnd);
+<br>	//动画如果完成了,fx.step(gotoEnd)是返回false的. 所以这里 
+<br>	//是当某个动画完成之后, 就在全局的timer中删除它
+<br>				timers.splice(i--, 1);
+<br>			}
+<br>		}
+<br>
+<br>		if ( !timers.length ) {
+<br>		//当全部动画完成之后, 清空定时器
+<br>			jQuery.fx.stop();
+<br>		}
+<br>	}
+<br>
+<br>
+<br>jQuery.fx.stop方法很简单
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. stop: function() {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; clearInterval( timerId );&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timerId = null;&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>stop: function() {
+<br>		clearInterval( timerId );
+<br>		timerId = null;
+<br>	}
+<br>
+<br>
+<br>再看下fx的一些原型方法,最重要的就是fx.prototype.step.
+<br>认真分析下这个函数的实现.
+<br>step函数用来执行动画的某一帧, 它有一个可选的参数gotoEnd.
+<br>当gotoEnd为true时,直接让元素转到动画完成的状态.主要用在$('div').stop的时候.
+<br>step函数每次被调用的时候都会根据gotoEnd参数和当前时间跟开始时间加上持续的时间的比值,来判断动画是否结束.如果结束了就返回false. 在定时器下一次的循环里继续执行.
+<br>否则, 会算出元素在这一帧上面的状态, 调用fx.prototype.update来在页面上绘制这一帧.并且返回true,在定时器下一次开始循环timer数组的时候, 把包含这个step函数的闭包给删除掉.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. // Each step of an animation&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; step: function( gotoEnd ) {&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var t = jQuery.now(), done = true;&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( gotoEnd || t &gt;= this.options.duration + this.startTime ) {&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果gotoEnd为true或者已到了动画完成的时间.&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.now = this.end;&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.pos = this.state = 1;&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //动画的确切执行时间总是一个指定的number的倍数, 很难刚好等于要求的动画持续时间,所以一般可能会有小小的误差, 修正下动画最后的属性值.&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.update();&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //进入uptate，重新绘制元素的最后状态.&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.curAnim[ this.prop ] = true;&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //某个属性的动画已经完成.&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( var i in this.options.curAnim ) {&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( this.options.curAnim[i] !== true ) {&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果有一个属性的动画没有完成,都不认为该次animate操&nbsp;&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //作完成, 其实这里完全可以事先用一个number计算出有多&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //少个需要执行动画的属性.每次step完成就减1, 直到等于0.&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //效率明显会高一点.&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; done = false;&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 23.&nbsp;&nbsp; 
+<br>&nbsp; 24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( done ) {&nbsp; 
+<br>&nbsp; 25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 恢复元素的overflow&nbsp; 
+<br>&nbsp; 26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( this.options.overflow != null &amp;&amp; !jQuery.support.shrinkWrapBlocks ) {&nbsp; 
+<br>&nbsp; 27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var elem = this.elem, options = this.options;&nbsp; 
+<br>&nbsp; 28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery.each( [ "", "X", "Y" ], function (index, value) {&nbsp; 
+<br>&nbsp; 29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elem.style[ "overflow" + value ] = options.overflow[index];&nbsp; 
+<br>&nbsp; 30.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } );&nbsp; 
+<br>&nbsp; 31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Hide the element if the "hide" operation was done&nbsp; 
+<br>&nbsp; 33.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( this.options.hide ) {&nbsp; 
+<br>&nbsp; 34.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery(this.elem).hide();&nbsp; 
+<br>&nbsp; 35.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果要求hide, 动画完成后,通过设置display真正隐&nbsp; 
+<br>&nbsp; 36.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //藏元素.动画的最后只是设置width,height等为0.&nbsp; 
+<br>&nbsp; 37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( this.options.hide || this.options.show ) {&nbsp; 
+<br>&nbsp; 39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( var p in this.options.curAnim ) {&nbsp; 
+<br>&nbsp; 40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery.style( this.elem, p, this.options.orig[p] );&nbsp; 
+<br>&nbsp; 41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //hide,show操作完成后,修正属性值. 通过hide/show动&nbsp;&nbsp; 
+<br>&nbsp; 44.&nbsp;&nbsp;&nbsp;&nbsp; //画开始前记录的原始属性值&nbsp; 
+<br>&nbsp; 45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //执行回调函数&nbsp; 
+<br>&nbsp; 46.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.complete.call( this.elem );&nbsp; 
+<br>&nbsp; 47.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 48.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;&nbsp; 
+<br>&nbsp; 49.&nbsp;&nbsp;&nbsp;&nbsp; //动画完成, 返回false&nbsp; 
+<br>&nbsp; 50.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {&nbsp; 
+<br>&nbsp; 51.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //动画还没执行完.&nbsp; 
+<br>&nbsp; 52.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var n = t - this.startTime;&nbsp; 
+<br>&nbsp; 53.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //动画执行完还需要的时间&nbsp; 
+<br>&nbsp; 54.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.state = n / this.options.duration;&nbsp; 
+<br>&nbsp; 55.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //还需要时间的比例&nbsp; 
+<br>&nbsp; 56.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Perform the easing function, defaults to swing&nbsp; 
+<br>&nbsp; 57.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var specialEasing = this.options.specialEasing &amp;&amp; this.options.specialEasing[this.prop];&nbsp; 
+<br>&nbsp; 58.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //某个属性如果指定了额外的动画算法.&nbsp; 
+<br>&nbsp; 59.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var defaultEasing = this.options.easing || (jQuery.easing.swing ? "swing" : "linear");&nbsp; 
+<br>&nbsp; 60.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //所有属性公用的动画算法, 如果没有指定. 默认为"swing"或者"linear"&nbsp; 
+<br>&nbsp; 61.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.pos=jQuery.easing[specialEasing|| defaultEasing](this.state, n, 0, 1, this.options.duration);&nbsp; 
+<br>&nbsp; 62.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //通过动画算法, 计算属性现在的位置.&nbsp; 
+<br>&nbsp; 63.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.now = this.start + ((this.end - this.start) * this.pos);&nbsp; 
+<br>&nbsp; 64.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.update(); //重新绘制元素在这一帧的状态&nbsp; 
+<br>&nbsp; 65.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 66.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;&nbsp;&nbsp; //此fx动画还未结束, 返回true.&nbsp; 
+<br>&nbsp; 67.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 68. };&nbsp; 
+<br>
+<br>// Each step of an animation
+<br>	step: function( gotoEnd ) {
+<br>		var t = jQuery.now(), done = true;
+<br>
+<br>		if ( gotoEnd || t &gt;= this.options.duration + this.startTime ) {
+<br>			//如果gotoEnd为true或者已到了动画完成的时间.
+<br>			this.now = this.end;
+<br>			this.pos = this.state = 1;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //动画的确切执行时间总是一个指定的number的倍数, 很难刚好等于要求的动画持续时间,所以一般可能会有小小的误差, 修正下动画最后的属性值.
+<br>			this.update();
+<br>			//进入uptate，重新绘制元素的最后状态.
+<br>			this.options.curAnim[ this.prop ] = true;
+<br>			//某个属性的动画已经完成.
+<br>			for ( var i in this.options.curAnim ) {
+<br>				if ( this.options.curAnim[i] !== true ) {
+<br>			//如果有一个属性的动画没有完成,都不认为该次animate操 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //作完成, 其实这里完全可以事先用一个number计算出有多&nbsp; 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //少个需要执行动画的属性.每次step完成就减1, 直到等于0.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //效率明显会高一点.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 			done = false;
+<br>				}
+<br>			}
+<br>
+<br>			if ( done ) {
+<br>				// 恢复元素的overflow
+<br>				if ( this.options.overflow != null &amp;&amp; !jQuery.support.shrinkWrapBlocks ) {
+<br>					var elem = this.elem, options = this.options;
+<br>					jQuery.each( [ "", "X", "Y" ], function (index, value) {
+<br>						elem.style[ "overflow" + value ] = options.overflow[index];
+<br>					} );
+<br>				}
+<br>				// Hide the element if the "hide" operation was done
+<br>				if ( this.options.hide ) {
+<br>					jQuery(this.elem).hide();
+<br>				//如果要求hide, 动画完成后,通过设置display真正隐
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //藏元素.动画的最后只是设置width,height等为0.
+<br>				}
+<br>				if ( this.options.hide || this.options.show ) {
+<br>					for ( var p in this.options.curAnim ) {
+<br>						jQuery.style( this.elem, p, this.options.orig[p] );
+<br>					}
+<br>				}
+<br>				//hide,show操作完成后,修正属性值. 通过hide/show动 
+<br>	//画开始前记录的原始属性值
+<br>				//执行回调函数
+<br>				this.options.complete.call( this.elem );
+<br>			}
+<br>			return false;
+<br>	//动画完成, 返回false
+<br>		} else {
+<br>			//动画还没执行完.
+<br>			var n = t - this.startTime;
+<br>			//动画执行完还需要的时间
+<br>			this.state = n / this.options.duration;
+<br>			//还需要时间的比例
+<br>			// Perform the easing function, defaults to swing
+<br>			var specialEasing = this.options.specialEasing &amp;&amp; this.options.specialEasing[this.prop];
+<br>			//某个属性如果指定了额外的动画算法.
+<br>			var defaultEasing = this.options.easing || (jQuery.easing.swing ? "swing" : "linear");
+<br>			//所有属性公用的动画算法, 如果没有指定. 默认为"swing"或者"linear"
+<br>			this.pos=jQuery.easing[specialEasing|| defaultEasing](this.state, n, 0, 1, this.options.duration);
+<br>			//通过动画算法, 计算属性现在的位置.
+<br>			this.now = this.start + ((this.end - this.start) * this.pos);
+<br>			this.update(); //重新绘制元素在这一帧的状态
+<br>		}
+<br>		return true;&nbsp;&nbsp; //此fx动画还未结束, 返回true.
+<br>	}
+<br>};
+<br>
+<br>
+<br>jQuery.fx.update
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. update: function() {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( this.options.step ) { ------------------（1）&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.step.call( this.elem, this.now, this );&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; (jQuery.fx.step[this.prop]||jQuery.fx.step._default)( this )&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp; ------------------（2）&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>update: function() {
+<br>		if ( this.options.step ) { ------------------（1）
+<br>			this.options.step.call( this.elem, this.now, this );
+<br>		}
+<br>	(jQuery.fx.step[this.prop]||jQuery.fx.step._default)( this )
+<br>&nbsp;&nbsp; ------------------（2）
+<br>	}
+<br>
+<br>
+<br>从update方法的（1）处可以看到, 当animate的第二个object类型参数有step 属性, 并且值是一个函数的话,在每一帧动画结束后, 都会执行这个callback函数.
+<br>(2)处绘制元素是调用的jQuery.fx.step, 不是刚才一直在讨论的fx.prototype.step. 看看jQuery.fx.step的代码.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. step: {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opacity: function( fx ) {&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery.style( fx.elem, "opacity", fx.now );&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp; opacity的操作不一样.IE要用filter:alpha .拿出来单独处理.&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; },&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _default: function( fx ) {&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( fx.elem.style &amp;&amp; fx.elem.style[ fx.prop ] != null ) {&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fx.elem.style[ fx.prop ] = (fx.prop === "width" || fx.prop === "height" ? Math.max(0, fx.now) : fx.now) + fx.unit;&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fx.elem[ fx.prop ] = fx.now;&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>step: {
+<br>		opacity: function( fx ) {
+<br>			jQuery.style( fx.elem, "opacity", fx.now );
+<br>		//	opacity的操作不一样.IE要用filter:alpha .拿出来单独处理.
+<br>	},
+<br>		_default: function( fx ) {
+<br>			if ( fx.elem.style &amp;&amp; fx.elem.style[ fx.prop ] != null ) {
+<br>				fx.elem.style[ fx.prop ] = (fx.prop === "width" || fx.prop === "height" ? Math.max(0, fx.now) : fx.now) + fx.unit;
+<br>			} else {
+<br>				fx.elem[ fx.prop ] = fx.now;
+<br>			}
+<br>		}
+<br>	}
+<br>
+<br>
+<br>
+<br>-----------------------分割线-------------------------------
+<br>到这里, fx类的中心实现就基本差不多了. 最后看看另外一些用到过的方法.
+<br>
+<br>jQuery.fn.stop
+<br>这个方法让元素停止动画, 可以传入2个boolean类型的参数, clearQueue和gotoEnd. 作用分别是在stop的同时, 清空元素队列里的动画, 和让元素立即转换到动画结束后应该处在的状态（默认是动画执行一半的时候stop的话, 元素会停留在那个状态）.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. stop: function( clearQueue, gotoEnd ) {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var timers = jQuery.timers;&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( clearQueue ) {&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.queue([]);&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //清空元素的队列&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.each(function() {&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( var i = timers.length - 1; i &gt;= 0; i-- ) {&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //循环全局timers&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( timers[i].elem === this ) {&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //找到timers中的跟这个元素对应的fx闭包,&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //可能有N个.&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (gotoEnd) {&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timers[i](true);&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //调用一次fx.step(true),转到动画执完成的状态&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timers.splice(i, 1);&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //timers数组里删掉这个fx闭包&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });&nbsp; 
+<br>&nbsp; 22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( !gotoEnd ) {&nbsp; 
+<br>&nbsp; 23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.dequeue();&nbsp; 
+<br>&nbsp; 24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this;&nbsp; 
+<br>&nbsp; 26.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>&nbsp; 27. })&nbsp; 
+<br>
+<br>stop: function( clearQueue, gotoEnd ) {
+<br>		var timers = jQuery.timers;
+<br>		if ( clearQueue ) {
+<br>			this.queue([]);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //清空元素的队列
+<br>		}
+<br>		this.each(function() {
+<br>			for ( var i = timers.length - 1; i &gt;= 0; i-- ) {
+<br>				//循环全局timers
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( timers[i].elem === this ) {
+<br>					//找到timers中的跟这个元素对应的fx闭包,
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //可能有N个.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (gotoEnd) {
+<br>						timers[i](true);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //调用一次fx.step(true),转到动画执完成的状态
+<br>					}
+<br>					timers.splice(i, 1);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //timers数组里删掉这个fx闭包
+<br>				}
+<br>			}
+<br>		});
+<br>		if ( !gotoEnd ) {
+<br>			this.dequeue();
+<br>		}
+<br>		return this;
+<br>	}
+<br>})
+<br>
+<br>
+<br>fx.prototype.show和fx.prototype.hide
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. show: function() {&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Remember where we started, so that we can go back to it later&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.orig[this.prop] = jQuery.style( this.elem, this.prop );&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.show = true;&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.custom(this.prop === "width" || this.prop === "height" ? 1 : 0, this.cur());&nbsp; 
+<br>&nbsp;&nbsp; 7. //把width和height设置为一个很小的值, 防止屏幕闪烁.&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Start by showing the element&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jQuery( this.elem ).show();&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp; },&nbsp; 
+<br>&nbsp; 11.&nbsp;&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp; // Simple 'hide' function&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp; hide: function() {&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Remember where we started, so that we can go back to it later&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.orig[this.prop] = jQuery.style( this.elem, this.prop );&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.options.hide = true;&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp; 
+<br>&nbsp; 18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Begin the animation&nbsp; 
+<br>&nbsp; 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.custom(this.cur(), 0);&nbsp; 
+<br>&nbsp; 20.&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp; 
+<br>
+<br>show: function() {
+<br>		 //Remember where we started, so that we can go back to it later
+<br>		this.options.orig[this.prop] = jQuery.style( this.elem, this.prop );
+<br>		this.options.show = true;
+<br>
+<br>		this.custom(this.prop === "width" || this.prop === "height" ? 1 : 0, this.cur());
+<br>//把width和height设置为一个很小的值, 防止屏幕闪烁.
+<br>		// Start by showing the element
+<br>		jQuery( this.elem ).show();
+<br>	},
+<br>
+<br>	// Simple 'hide' function
+<br>	hide: function() {
+<br>		// Remember where we started, so that we can go back to it later
+<br>		this.options.orig[this.prop] = jQuery.style( this.elem, this.prop );
+<br>		this.options.hide = true;
+<br>
+<br>		// Begin the animation
+<br>		this.custom(this.cur(), 0);
+<br>	}
+<br>
+<br>
+<br>这2个方法是用于
+<br>$("#div1").animate({"width":"hide"},{duration:1000}).animate({"width":"show"}, 1000)这种情况.
+<br>当元素hide之前, 需要记录一下原来的width, 以便在接下来的show操作的时候, 回到原来的width.
+<br>
+<br>
+<br>然后是一些常用快捷方法.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. jQuery.each({&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; slideDown: genFx("show", 1),&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp; slideUp: genFx("hide", 1),&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; slideToggle: genFx("toggle", 1),&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; fadeIn: { opacity: "show" },&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp; fadeOut: { opacity: "hide" }&nbsp; 
+<br>&nbsp;&nbsp; 7. }, function( name, props ) {&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp; jQuery.fn[ name ] = function( speed, easing, callback ) {&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this.animate( props, speed, easing, callback );&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp;&nbsp;&nbsp; };&nbsp; 
+<br>&nbsp; 11. })&nbsp; 
+<br>
+<br>jQuery.each({
+<br>	slideDown: genFx("show", 1),
+<br>	slideUp: genFx("hide", 1),
+<br>	slideToggle: genFx("toggle", 1),
+<br>	fadeIn: { opacity: "show" },
+<br>	fadeOut: { opacity: "hide" }
+<br>}, function( name, props ) {
+<br>	jQuery.fn[ name ] = function( speed, easing, callback ) {
+<br>		return this.animate( props, speed, easing, callback );
+<br>	};
+<br>})
+<br>
+<br>
+<br>可以看到, 都是调用的animate函数.
+<br>Java代码
+<br>
+<br>&nbsp;&nbsp; 1. genFx&nbsp; 
+<br>&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; fxAttrs = [&nbsp; 
+<br>&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // height animations&nbsp; 
+<br>&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ "height", "marginTop", "marginBottom", "paddingTop", "paddingBottom" ],&nbsp; 
+<br>&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // width animations&nbsp; 
+<br>&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ "width", "marginLeft", "marginRight", "paddingLeft", "paddingRight" ],&nbsp; 
+<br>&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // opacity animations&nbsp; 
+<br>&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ "opacity" ]&nbsp; 
+<br>&nbsp;&nbsp; 9.&nbsp;&nbsp;&nbsp;&nbsp; ]&nbsp; 
+<br>&nbsp; 10.&nbsp;&nbsp; 
+<br>&nbsp; 11. function genFx( type, num ) {&nbsp; 
+<br>&nbsp; 12.&nbsp;&nbsp;&nbsp;&nbsp; var obj = {};&nbsp; 
+<br>&nbsp; 13.&nbsp;&nbsp;&nbsp;&nbsp; jQuery.each( fxAttrs.concat.apply([], fxAttrs.slice(0,num)), function() {&nbsp; 
+<br>&nbsp; 14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; obj[ this ] = type;&nbsp; 
+<br>&nbsp; 15.&nbsp;&nbsp;&nbsp;&nbsp; });&nbsp; 
+<br>&nbsp; 16.&nbsp;&nbsp; 
+<br>&nbsp; 17.&nbsp;&nbsp;&nbsp;&nbsp; return obj;&nbsp; 
+<br>&nbsp; 18. }&nbsp; 
+<br>
+<br>genFx
+<br>	fxAttrs = [
+<br>		// height animations
+<br>		[ "height", "marginTop", "marginBottom", "paddingTop", "paddingBottom" ],
+<br>		// width animations
+<br>		[ "width", "marginLeft", "marginRight", "paddingLeft", "paddingRight" ],
+<br>		// opacity animations
+<br>		[ "opacity" ]
+<br>	]
+<br>
+<br>function genFx( type, num ) {
+<br>	var obj = {};
+<br>	jQuery.each( fxAttrs.concat.apply([], fxAttrs.slice(0,num)), function() {
+<br>		obj[ this ] = type;
+<br>	});
+<br>
+<br>	return obj;
+<br>}
+<br>
+<br>
+<br>这个方法就是取得进行一些特殊的动画操作时， 元素需要改变的属性.返回的是一个{key: value}类型的对象. 
+  </div>
+
+  
+
+
+  <script type="text/javascript"><!--
+google_ad_client = "pub-1076724771190722";
+/* JE个人博客468x60 */
+google_ad_slot = "5506163105";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><iframe allowtransparency="true" frameborder="0" height="60" hspace="0" marginwidth="0" marginheight="0" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){i+=&#39;.call&#39;;setTimeout(h,0)}else if(h.match){i+=&#39;.nav&#39;;w.location.replace(h)}s.log&amp;&amp;s.log.push(i)}" scrolling="no" vspace="0" width="468" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+  
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type="sina" href="javascript:;" title="分享到新浪微博"><img src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/t_sina.gif"></a>
+      <a data-type="qq" href="javascript:;" title="分享到腾讯微博"><img src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/t_qq.gif"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="http://woshiliulidiyi.iteye.com/blog/795030" class="next" title="JSP学习笔记">JSP学习笔记</a>
+      |
+      <a href="http://woshiliulidiyi.iteye.com/blog/795014" class="pre" title="jquery1.43源码分析之核心部分">jquery1.43源码分析之核心部分</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>23:08</li>
+      <li><a href="http://woshiliulidiyi.iteye.com/blog/795021#comments">评论</a> / 浏览 (0 / 181)</li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/web">Web前端</a></li>      
+      
+      <li class="last"><a href="http://www.iteye.com/wiki/blog/795021" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="http://woshiliulidiyi.iteye.com/login" style="background-color:white;"> <img src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/login_icon.png" style="vertical-align:middle; margin-right: 10px;"></a><a href="http://woshiliulidiyi.iteye.com/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 795021;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'jquery1.43源码分析之动画部分');
+  });
+  $$('#main .blog_comment > div').each(function(comment){// comment
+    var post_id = comment.id.substr(2);
+    $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+      var location = window.location;
+      source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+      source_url += "#" + comment.id;
+      pre.writeAttribute('codeable_id', post_id);
+      pre.writeAttribute('codeable_type', "Post");
+      pre.writeAttribute('source_url', source_url);
+      pre.writeAttribute('pre_index', index);
+      pre.writeAttribute('title', 'jquery1.43源码分析之动画部分');
+    });
+  });
+  code_favorites_init();
+
+  fix_image_size($$('div.blog_content img'), 700);
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+            <div id="blog_owner_logo"><a href="http://woshiliulidiyi.iteye.com/"><img alt="woshiliulidiyi的博客" class="logo" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/user-logo.gif" title="woshiliulidiyi的博客: 自强不息"></a></div>
+            <div id="blog_owner_name">woshiliulidiyi</div>
+          </div>
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 11072 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/icon_minigender_1.gif" title="男"></li>
+              <li>来自: 北京</li>
+              <li><img src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/offline.gif"></li>
+              <li>
+                <a href="http://woshiliulidiyi.iteye.com/blog/profile" class="profile">详细资料</a>
+                <a href="http://woshiliulidiyi.iteye.com/blog/guest_book" class="guest_book">留言簿</a>
+              </li>
+              
+            </ul>
+            <h5>搜索本博客</h5>
+            <form action="http://woshiliulidiyi.iteye.com/blog/search" method="get">              <input class="text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text">
+              <input class="submit" type="submit" value="搜索">
+            </form>          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style="font-weight:normal;font-size:12px;padding-left:30px;"><a href="http://woshiliulidiyi.iteye.com/blog/user_visits">&gt;&gt;更多访客</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://panshaobinsb.iteye.com/" target="_blank"><img alt="panshaobinSB的博客" class="logo" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/user-logo-thumb.gif" title="panshaobinSB的博客: "></a></div>
+                <div class="left"><a href="http://panshaobinsb.iteye.com/" target="_blank">panshaobinSB</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://huagenaruto.iteye.com/" target="_blank"><img alt="huagenaruto的博客" class="logo" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/user-logo-thumb.gif" title="huagenaruto的博客: "></a></div>
+                <div class="left"><a href="http://huagenaruto.iteye.com/" target="_blank">huagenaruto</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://yxandy.iteye.com/" target="_blank"><img alt="yxandy的博客" class="logo" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/user-logo-thumb.gif" title="yxandy的博客: yxandy"></a></div>
+                <div class="left"><a href="http://yxandy.iteye.com/" target="_blank">yxandy</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://internet-study.iteye.com/" target="_blank"><img alt="internet_study的博客" class="logo" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/user-logo-thumb.gif" title="internet_study的博客: "></a></div>
+                <div class="left"><a href="http://internet-study.iteye.com/" target="_blank">internet_study</a></div>
+              </div>
+            
+          </div>
+                      <div id="blog_menu">
+              <h5>博客分类</h5>
+              <ul>
+                <li><a href="http://woshiliulidiyi.iteye.com/">全部博客 (130)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127854">J2EE (6)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127855">AJAX (6)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127856">C++ (0)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127857">Hibernate (14)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127858">Spring (0)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127859">设计模式 (0)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127860">Java性能优化 (3)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127861">Oracle (37)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127862">javascript (3)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/127863">.NET (11)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/128148">Java (8)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/128814">other (2)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/129005">Linux (6)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/129068">数据库 (4)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/129195">JSP (25)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/129197">JQuery (0)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/130951">Eclipse (3)</a></li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/category/133480">CSS (1)</a></li>
+                
+                  <li class="selected"><a href="http://woshiliulidiyi.iteye.com/category/134925">LINQ (1)</a></li>
+                
+              </ul>
+            </div>
+            
+            <div id="guest_books">
+              <h5>我的留言簿 <span style="font-weight:normal;font-size:12px;padding-left:20px;"><a href="http://woshiliulidiyi.iteye.com/blog/guest_book">&gt;&gt;更多留言</a></span></h5>
+              <ul>
+                
+              </ul>
+            </div>
+            <div id="blog_others">
+              <h5>其他分类</h5>
+              <ul>
+                <li><a href="http://woshiliulidiyi.iteye.com/blog/favorite">我的收藏</a> (0)</li>
+                <li><a href="http://woshiliulidiyi.iteye.com/blog/code_favorite">我的代码</a> (0)</li>
+                                                <li><a href="http://woshiliulidiyi.iteye.com/blog/topic">我的论坛主题帖</a> (0)</li>
+                <li><a href="http://woshiliulidiyi.iteye.com/blog/post">我的所有论坛帖</a> (0)</li>
+                <li><a href="http://woshiliulidiyi.iteye.com/blog/article">我的精华良好帖</a> (0)</li>
+                              </ul>
+            </div>
+            <div id="recent_groups">
+              <h5>最近加入群组</h5>
+              <ul>
+                
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档</h5>
+              <ul>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/blog/monthblog/2011-01">2011-01</a> (2)</li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/blog/monthblog/2010-12">2010-12</a> (8)</li>
+                
+                  <li><a href="http://woshiliulidiyi.iteye.com/blog/monthblog/2010-11">2010-11</a> (8)</li>
+                
+                <li><a href="http://woshiliulidiyi.iteye.com/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+              <div id="comments_top">
+                <h5>评论排行榜</h5>
+                <ul>
+                  
+                    <li><a href="http://woshiliulidiyi.iteye.com/blog/795035" title="JSP+JDBC_真分页(基于MySql数据库分页)">JSP+JDBC_真分页(基于MySql数据库分页)</a></li>
+                  
+                </ul>
+              </div>
+            
+            <div id="rss">
+              <ul>
+                <li><a href="http://woshiliulidiyi.iteye.com/rss" target="_blank"><img alt="Rss" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/rss.png"></a></li>
+                <li><a href="http://fusion.google.com/add?feedurl=http://woshiliulidiyi.iteye.com/rss" target="_blank"><img alt="Rss_google" src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/rss_google.gif"></a></li>
+              </ul>
+            </div>
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br>
+          © 2003-2011 ITeye.com.   All rights reserved.  [ 京ICP证110151号 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script><img src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/saved_resource" width="0" height="0">
+
+    
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./jquery1.43源码分析之动画部分 - 自强不息 - ITeye技术网站_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("");
+pageTracker._trackPageview();
+</script>
+      
+  
+
+</body></html>

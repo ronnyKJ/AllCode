@@ -1,0 +1,39 @@
+﻿<html>
+ <head>
+  <script type="application/x-javascript">
+function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+  var des = document.getElementById('des');
+
+  // Create gradients
+  /*
+  var radgrad = ctx.createRadialGradient(45,45,10,94,60,70);
+  radgrad.addColorStop(0, '#A7D30C');
+  radgrad.addColorStop(0.3, '#F00');
+  radgrad.addColorStop(1, 'rgba(1,159,98,0)');
+
+  // draw shapes
+  ctx.fillStyle = radgrad;
+  ctx.fillRect(0,0,150,150);
+  */
+	var n = ctx.createRadialGradient(75,75,25,75,75,50);
+	n.addColorStop(0,"rgba(0,0,0,0.005)");
+	//n.addColorStop(1,"rgba(0,0,0,0)");
+	ctx.fillStyle=n;
+	ctx.fillRect(25,25,100,100);
+	
+	var img = ctx.getImageData(50, 50, 2, 1);
+	var d = img.data;
+	var s="";
+	for(var i=0; i<d.length; i++)
+	{
+		s+=d[i]+" ";
+	}
+	des.innerText = s;
+}
+  </script>
+ </head>
+ <body onload="draw();">
+   <canvas id="canvas" width="150" height="150" style="border: 1px #000 solid;"></canvas><br><span id="des"></span>
+ </body>
+</html>

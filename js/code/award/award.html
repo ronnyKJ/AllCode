@@ -1,0 +1,70 @@
+﻿<html>
+<head><title>Award</title>
+</head>
+<body>
+<input id="btn" type="button" value="进入抽奖" onclick="btnClick(this)" /><input id="chk" type="checkbox" checked="true" onchange="cl()" />重复
+<p id="name"></p>
+<div id="awardedList"></div>
+</body>
+<script type="text/javascript">
+var list = ['001', '002', '003', '004'];
+var b = document.getElementById("btn");
+var n = document.getElementById("name");
+var c = document.getElementById("chk");
+var al = document.getElementById("awardedList");
+
+var state = 0;
+
+function cl()
+{
+	al.innerHTML = '';
+}
+
+function btnClick(obj)
+{
+	if(state == 0)
+	{
+		state = 1;
+		obj.value="开始";
+		
+	}
+	else
+	{
+		state = 0;
+		obj.value="停止";
+		award();
+	}
+}
+
+function award()
+{
+	var i = Math.floor(Math.random()*list.length);
+	n.innerText = list[i];
+		
+	if(state == 0)
+	{
+		setTimeout(arguments.callee, 30);
+	}
+	else
+	{
+		if(c.checked)
+		{
+			al.innerHTML = n.innerText;
+		}
+		else
+		{
+			al.innerHTML += n.innerText + '<br/>';
+			list.splice(i,1);
+		}
+		
+		if(list.length == 0)
+		{
+			if(confirm("名单完。\r\n请刷新"))
+			{
+				location.reload();
+			}
+		}
+	}
+}
+</script>
+</html>

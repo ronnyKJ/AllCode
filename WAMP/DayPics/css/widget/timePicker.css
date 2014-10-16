@@ -1,0 +1,77 @@
+#timePicker
+{
+	position:fixed;
+	top:0;
+	left:0;
+}
+
+#clockTime
+{
+	position:fixed;
+	top:210px;
+	left:250px;
+	background:#EEE;
+	-webkit-border-radius:40px;
+	font-size:140px;
+	height:180px;
+	z-index:3;
+	color:#000;
+	width:440px;
+	text-align:center;
+	opacity: 0.6;
+}
+
+#clockTime span
+{
+	font-size:140px;
+	color:#000;
+}
+
+body
+{
+	overflow-x:hidden;
+}
+
+.mask.tp
+{
+	background:#000;
+	opacity: 0.5;
+	position:fixed;
+	top:0;
+	left:0;
+	right: 0;
+	bottom: 0;
+}
+
+#ampm
+{
+	position:fixed;
+	top:400px;
+	left:350px;
+}
+
+#ampm span
+{
+	font-size:60px;
+	color:#000;
+	margin:0 20px;
+}
+
+#ampm i
+{
+	display:none;
+}
+
+#setTime
+{
+	position:fixed;
+	top:420px;
+	left:800px;
+}
+
+#close
+{
+	position:fixed;
+	top:140px;
+	left:880px;
+}

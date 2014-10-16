@@ -1,0 +1,65 @@
+﻿#logo-100
+{
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	width: 100px;
+	height: 100px;
+	-webkit-animation-name: ro;
+	-webkit-animation-duration: 4s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-direction: alternate;
+}
+
+@-webkit-keyframes ro {
+	0%{-webkit-transform: rotate(-45deg);}
+	100%{-webkit-transform: rotate(45deg);}
+}
+
+#main
+{
+	overflow: auto;
+	padding: 6px;
+}
+
+#demo li
+{
+	position:relative;
+	width: 260px;
+	height: 160px;
+	float: left;
+	margin: 0 106px 70px 0;
+	border: 1px #DDD solid;
+	border-top: 3px #7AD696 solid;
+	border-radius: 4px;
+	background: url('../demo/thumb/bg.png');
+	box-shadow: 0px 0px 5px #000;
+}
+
+#demo li a
+{
+	width: 100%;
+	height: 100%;
+	display: block;
+	margin-bottom: 8px;
+}
+
+#demo li:hover
+{
+	border-top-color: #FE7F7F;
+}
+
+#demo li span.left
+{
+	float: left;
+	margin-left: 10px;
+	text-shadow: 0px 0px 1px #AAA;
+}
+
+#demo li span.right
+{
+	float: right;
+	margin-right: 10px;
+	color: #BBB;
+}

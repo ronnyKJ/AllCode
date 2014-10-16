@@ -1,0 +1,8 @@
+<table class="tbl">
+<tr><th>Name</th><th>E-mail</th><th>Edit</th><th>Log out</th></tr>
+<tr><td>{$username}</td><td>{$email}</td><td>
+<form method="POST" action="__URL__/edit">
+	<input name="id" value="{$id}" type="hidden" /><input value="Edit my data" type="submit" />
+</form>
+</td><td><a href="__URL__/logout">Logout</a></td></tr>
+</table>

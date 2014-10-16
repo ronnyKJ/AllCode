@@ -1,0 +1,40 @@
+﻿<html>
+<head><title>scale</title></head>
+<body>
+<canvas id='map' width='1000' height='800' style='background: #DDD;'></canvas>
+</body>
+<script>
+var m =document.getElementById('map');
+var t = m.getContext('2d');
+t.fillStyle = '#F00';
+t.strokeStyle = '#00F';
+t.lineWidth = 4;
+
+function path(x, y)
+{
+	t.moveTo(x+30, y+30);
+	t.lineTo(x+60, y+30);
+	t.lineTo(x+60, y+60);
+	t.lineTo(x+30, y+60);
+	t.lineTo(x+30, y+30);
+	t.lineTo(x+60, y+30);
+}
+
+function style()
+{
+	t.fill();
+	t.stroke();
+}
+
+path(0, 0);
+style();
+t.beginPath();
+path(40, 40);
+style();
+t.closePath();
+t.beginPath();
+path(80, 40);
+style();
+t.closePath();
+</script>
+</html>

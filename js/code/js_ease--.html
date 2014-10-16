@@ -1,0 +1,426 @@
+﻿<!doctype html>
+<html dir="ltr" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<style type="text/css">
+.taxiway{
+	width:800px;
+	height:100px;
+	background:#E8E8FF;
+}
+.move{
+	width:100px;
+	height:100px;
+	background:#a9ea00;
+}
+#panel {
+	float:left;
+	width:810px
+}
+#panel div{
+	float:left;
+	width:88px;
+	border:1px solid #333;
+	height:20px;
+	font-size:11px;
+}
+div.transition {
+	margin-top: 30px;
+	width: 200px;
+	height: 200px;
+	position: relative;
+	margin-bottom:10px;
+}
+div.transition div {
+	position: absolute;
+	height: 1px;
+	width: 1px;
+	background: #000;
+}
+div.transition span {
+	display: block;
+	position: absolute;
+	border-bottom: 1px solid #dadada;
+	font-size: 10px;
+	color: #888;
+	width: 200px;
+	left: 0px;
+}
+div.transition div#indicator {
+	position:absolute;
+	background-color:#a9ea00;
+	height: 200px;
+	top: 0px;
+	left: 0px;
+}
+div.transition div#marker {
+	background-color: #f00;
+	height: 6px;
+	width: 6px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	left: 0px;
+	margin-bottom: -3px;
+	margin-left: -3px;
+}
+div.transition div#label {
+	background: transparent;
+	color: #ABD474;
+	font-size: 20px;
+	height: 20px;
+	width: 200px;
+	text-align: center;
+	top: 80px;
+	left: 0px;
+	z-index: -1;
+}
+</style>
+<script type="text/javascript">
+var getCoords = function(el){
+	var box = el.getBoundingClientRect(),
+	doc = el.ownerDocument,
+	body = doc.body,
+	html = doc.documentElement,
+	clientTop = html.clientTop || body.clientTop || 0,
+	clientLeft = html.clientLeft || body.clientLeft || 0,
+	top  = box.top  + (self.pageYOffset || html.scrollTop  ||  body.scrollTop ) - clientTop,
+	left = box.left + (self.pageXOffset || html.scrollLeft ||  body.scrollLeft) - clientLeft
+	return { 'top': top, 'left': left };
+};
+
+var getStyle = function(el, style){
+	if(!+"\v1"){
+		style = style.replace(/\-(\w)/g, function(all, letter){
+			return letter.toUpperCase();
+		});
+		var value = el.currentStyle[style];
+		(value == "auto")&&(value = "0px" );
+		return value;
+	}else{
+		return document.defaultView.getComputedStyle(el, null).getPropertyValue(style)
+	}
+}
+
+var tween = {
+	easeInQuad: function(pos){
+		return Math.pow(pos, 2);
+	},
+	easeOutQuad: function(pos){
+		return -(Math.pow((pos-1), 2) -1);
+	},
+	easeInOutQuad: function(pos){
+		if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,2);
+		return -0.5 * ((pos-=2)*pos - 2);
+	},
+	easeInCubic: function(pos){
+		return Math.pow(pos, 3);
+	},
+	easeOutCubic: function(pos){
+		return (Math.pow((pos-1), 3) +1);
+	},
+	easeInOutCubic: function(pos){
+		if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,3);
+			return 0.5 * (Math.pow((pos-2),3) + 2);
+	},
+	easeInQuart: function(pos){
+		return Math.pow(pos, 4);
+	},
+	easeOutQuart: function(pos){
+		return -(Math.pow((pos-1), 4) -1)
+	},
+	easeInOutQuart: function(pos){
+		if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,4);
+			return -0.5 * ((pos-=2)*Math.pow(pos,3) - 2);
+	},
+	easeInQuint: function(pos){
+		return Math.pow(pos, 5);
+	},
+	easeOutQuint: function(pos){
+		return (Math.pow((pos-1), 5) +1);
+	},
+	easeInOutQuint: function(pos){
+		if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,5);
+			return 0.5 * (Math.pow((pos-2),5) + 2);
+	},
+	easeInSine: function(pos){
+		return -Math.cos(pos * (Math.PI/2)) + 1;
+	},
+	easeOutSine: function(pos){
+		return Math.sin(pos * (Math.PI/2));
+	},
+	easeInOutSine: function(pos){
+		return (-.5 * (Math.cos(Math.PI*pos) -1));
+	},
+	easeInExpo: function(pos){
+		return (pos==0) ? 0 : Math.pow(2, 10 * (pos - 1));
+	},
+	easeOutExpo: function(pos){
+		return (pos==1) ? 1 : -Math.pow(2, -10 * pos) + 1;
+	},
+	easeInOutExpo: function(pos){
+		if(pos==0) return 0;
+		if(pos==1) return 1;
+		if((pos/=0.5) < 1) return 0.5 * Math.pow(2,10 * (pos-1));
+			return 0.5 * (-Math.pow(2, -10 * --pos) + 2);
+	},
+	easeInCirc: function(pos){
+		return -(Math.sqrt(1 - (pos*pos)) - 1);
+	},
+	easeOutCirc: function(pos){
+		return Math.sqrt(1 - Math.pow((pos-1), 2))
+	},
+	easeInOutCirc: function(pos){
+		if((pos/=0.5) < 1) return -0.5 * (Math.sqrt(1 - pos*pos) - 1);
+			return 0.5 * (Math.sqrt(1 - (pos-=2)*pos) + 1);
+	},
+	easeOutBounce: function(pos){
+		if ((pos) < (1/2.75)) {
+			return (7.5625*pos*pos);
+		} else if (pos < (2/2.75)) {
+			return (7.5625*(pos-=(1.5/2.75))*pos + .75);
+		} else if (pos < (2.5/2.75)) {
+			return (7.5625*(pos-=(2.25/2.75))*pos + .9375);
+		} else {
+			return (7.5625*(pos-=(2.625/2.75))*pos + .984375);
+		}
+	},
+	easeInBack: function(pos){
+		var s = 1.70158;
+		return (pos)*pos*((s+1)*pos - s);
+	},
+	easeOutBack: function(pos){
+		var s = 1.70158;
+		return (pos=pos-1)*pos*((s+1)*pos + s) + 1;
+	},
+	easeInOutBack: function(pos){
+		var s = 1.70158;
+		if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
+		return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
+	},
+	elastic: function(pos) {
+		return -1 * Math.pow(4,-8*pos) * Math.sin((pos*6-1)*(2*Math.PI)/2) + 1;
+	},
+	swingFromTo: function(pos) {
+		var s = 1.70158;
+		return ((pos/=0.5) < 1) ? 0.5*(pos*pos*(((s*=(1.525))+1)*pos - s)) :
+		0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos + s) + 2);
+	},
+	swingFrom: function(pos) {
+		var s = 1.70158;
+		return pos*pos*((s+1)*pos - s);
+	},
+	swingTo: function(pos) {
+		var s = 1.70158;
+		return (pos-=1)*pos*((s+1)*pos + s) + 1;
+	},
+	bounce: function(pos) {
+		if (pos < (1/2.75)) {
+			return (7.5625*pos*pos);
+		} else if (pos < (2/2.75)) {
+			return (7.5625*(pos-=(1.5/2.75))*pos + .75);
+		} else if (pos < (2.5/2.75)) {
+			return (7.5625*(pos-=(2.25/2.75))*pos + .9375);
+		} else {
+			return (7.5625*(pos-=(2.625/2.75))*pos + .984375);
+		}
+	},
+	bouncePast: function(pos) {
+		if (pos < (1/2.75)) {
+			return (7.5625*pos*pos);
+		} else if (pos < (2/2.75)) {
+			return 2 - (7.5625*(pos-=(1.5/2.75))*pos + .75);
+		} else if (pos < (2.5/2.75)) {
+			return 2 - (7.5625*(pos-=(2.25/2.75))*pos + .9375);
+		} else {
+			return 2 - (7.5625*(pos-=(2.625/2.75))*pos + .984375);
+		}
+	},
+	easeFromTo: function(pos) {
+		if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,4);
+		return -0.5 * ((pos-=2)*Math.pow(pos,3) - 2);
+	},
+	easeFrom: function(pos) {
+		return Math.pow(pos,4);
+	},
+	easeTo: function(pos) {
+		return Math.pow(pos,0.25);
+	},
+	linear:  function(pos) {
+		return pos
+	},
+	sinusoidal: function(pos) {
+		return (-Math.cos(pos*Math.PI)/2) + 0.5;
+	},
+	reverse: function(pos) {
+		return 1 - pos;
+	},
+	mirror: function(pos, transition) {
+		transition = transition || tween.sinusoidal;
+		if(pos<0.5)
+			return transition(pos*2);
+		else
+			return transition(1-(pos-0.5)*2);
+	},
+	flicker: function(pos) {
+		var pos = pos + (Math.random()-0.5)/5;
+		return tween.sinusoidal(pos < 0 ? 0 : pos > 1 ? 1 : pos);
+	},
+	wobble: function(pos) {
+		return (-Math.cos(pos*Math.PI*(9*pos))/2) + 0.5;
+	},
+	pulse: function(pos, pulses) {
+		return (-Math.cos((pos*((pulses||5)-.5)*2)*Math.PI)/2) + .5;
+	},
+	blink: function(pos, blinks) {
+		return Math.round(pos*(blinks||5)) % 2;
+	},
+	spring: function(pos) {
+		return 1 - (Math.cos(pos * 4.5 * Math.PI) * Math.exp(-pos * 6));
+	},
+	none: function(pos){
+		return 0
+	},
+	full: function(pos){
+		return 1
+	}
+}
+
+var _ = function(id){
+	return document.getElementById(id);
+}
+
+var transition = function(el){
+	el.style.position = "absolute";
+	var options = arguments[1] || {},
+	begin =  options.begin,//开始位置
+	change = options.change,//变化量
+	duration = options.duration || 500,//缓动效果持续时间
+	field = options.field,//必须指定，基本上对top,left,width,height这个属性进行设置
+	ftp = options.ftp || 50,
+	onEnd = options.onEnd || function(){},
+	ease = options.ease,//要使用的缓动公式
+	end = begin + change,//结束位置
+	startTime = new Date().getTime();//开始执行的时间
+	(function(){
+	setTimeout(function(){
+			var newTime = new Date().getTime(),//当前帧开始的时间
+			timestamp = newTime - startTime,//逝去时间
+			delta = ease(timestamp / duration);
+			el.style[field] = Math.ceil(begin + delta * change) + "px"
+			if(duration <= timestamp){
+				el.style[field] = end + "px";
+				onEnd();
+			}else{
+				setTimeout(arguments.callee,1000/ftp);
+			}
+		},1000/ftp)
+	})()
+}
+if (typeof Array.prototype['max'] == 'undefined') {
+	Array.prototype.map = function(fn, thisObj) {
+		var scope = thisObj || window;
+		var a = [];
+		for ( var i=0, j=this.length; i < j; ++i ) {
+			a.push(fn.call(scope, this[i], i, this));
+		}
+		return a;
+	};
+	Array.prototype.max = function(){
+		return Math.max.apply({},this)
+	}
+	Array.prototype.min = function(){
+		return Math.min.apply({},this)
+	}
+}
+
+var range = function(start,end){
+	var _range = []
+	for(var i = start,l=end-start;i<l;i++){
+		_range.push(i)
+	}
+	return _range
+}
+
+var draw = function(ease){
+	var demo = _("transition");
+	demo.innerHTML = "";//还原！
+	//***********绘制控制台********************
+	var values = range(0,200).map(function(v){
+		return  tween[ease](v/200) * 200;
+	}),
+	max = Math.max(200, values.max()),
+	min = Math.min(0, values.min());
+	if (min==max) {
+		min = 0;
+		max = 200;
+	}
+	var factor = 200/(max-min),
+	grid = '<span style="bottom:'+Math.round((0-min)*factor)+'px">0</span>'+
+	'<span style="bottom:'+Math.round((200-min)*factor)+'px">1</span>',
+	
+	graph = range(0,200).map(function(v){
+		return '<div style="left:'+v+'px;bottom:'+Math.round((values[v]-min)*factor)+'px;height:1px"></div>';
+	}).join('') + '<div id="indicator" style="display:none">'
+	+'</div><div id="marker" style="display:none"></div><div id="label"></div>';
+	
+	demo.innerHTML = grid + graph;
+	var indicator = _("indicator"),
+	marker = _("marker"),
+	label = _("label"),
+	demoTransition = function(pos){
+		var value = tween[ease](pos);
+		indicator.style.display = "block";
+		marker.style.display = "block";
+		marker.style.left = Math.round((pos*200))+'px';
+		marker.style.bottom = Math.round(((value*200)-min)*factor)+'px';
+		label.innerHTML = Math.round((pos*200))+'px';
+		return value;
+	}
+	transition(indicator,{field:"left",begin:parseFloat(getCoords(demo).left),change:200,
+	ease:demoTransition})
+}
+window.onload = function(){
+	var panelHTML = function(){
+		var builder = [];
+		var _temp = 'Back Circ Cubic Expo Quad Quart Quint Sine'.split(' ');
+		var ease = _temp.map(function(v){
+			return 'easeIn'+v;
+		});
+		ease = ease.concat(_temp.map(function(v){
+			return 'easeOut'+v;
+		}));
+		ease = ease.concat(_temp.map(function(v){
+			return 'easeInOut'+v;
+		}));
+		ease = ease.concat('blink bounce bouncePast easeFrom easeFromTo easeOutBounce easeTo elastic'.split(' '));
+		ease = ease.concat('flicker full linear mirror none pulse reverse sinusoidal spring swingTo swingFrom swingFromTo wobble'.split(' '))
+		for(var i =0,l=ease.length;i<l;i++){
+			builder.push("<div onclick='draw(this.innerHTML)'>");
+			builder.push(ease[i]);
+			builder.push("</div>");
+		}
+		return builder.join('');
+	}
+	var panel = document.createElement("div");
+	panel.id = "panel"
+	panel.innerHTML = panelHTML();
+	_("transition").parentNode.insertBefore(panel,_("transition").nextSibling);
+}
+</script>
+<title>缓动BY司徒正美</title>
+</head>
+<body>
+<div class="taxiway">
+<div class="move" onclick="transition(this,{field:'left',begin:parseFloat(getCoords(this).left),change:700,ease:tween.bouncePast})"></div>
+</div>
+<div class="taxiway">
+<div class="move" onclick="transition(this,{field:'width',begin:parseFloat(getStyle(this,'width')),change:300,ease:tween.spring})"></div>
+</div>
+<span class="clear"></span>
+<h2>请点击下表的格子</h2>
+<div id="transition" class="transition">
+</div>
+</body>
+</html>

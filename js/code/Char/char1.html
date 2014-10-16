@@ -1,0 +1,58 @@
+<html>
+<head><title>Happy New Year</title>
+<style>
+</style>
+</head>
+<body>
+<textarea id="t" height="200" width=200 height=200></textarea>
+<input value="play" type="button" onclick="i=1;clearInterval(siv);play();" />
+<span id="p"></span>
+<br>
+<span id="s"></span>
+</body>
+<script>
+var t = document.getElementById("t");
+var s = document.getElementById("s");
+var p = document.getElementById("p");
+var arr = [{char: "", time: 0}], time = 0, piece = 40;
+function Char(c, t)
+{
+	this.char = c;
+	this.time = t;
+}
+t['oninput'] = function(){
+	var v = this.value;
+	var t = arr[arr.length-1].time;
+	var c = new Char(v, time-t);
+	arr.push(c);
+	show();
+}
+function show()
+{
+	var s1 = [], t;
+	for(var i=0, l=arr.length; i<l; i++)
+	{
+		t = arr[i];
+		s1.push(i + ". " + t.char + " : " + t.time + "<br>");
+	}
+	
+	s.innerHTML = s1.join("");
+}
+
+var i=1;
+function play()
+{
+	var time;
+	t = arr[i];
+	p.innerText = t.char;
+	
+	if(i==arr.length-1) return;
+	
+	i++;
+	setTimeout(function(){
+		play();
+	}, t.time*2)
+}
+var siv = setInterval(function(){time++}, piece);
+</script>
+</html>

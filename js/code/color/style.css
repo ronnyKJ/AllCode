@@ -1,0 +1,145 @@
+﻿body
+{
+	background: #161616;
+	color: #FFF;
+	font: normal 12px/1.5em "Lucida Grande", "Verdana", sans-serif;
+}
+
+#hue
+{
+	position: relative;
+	width: 768px;
+	height: 50px;
+	/*cursor: url('cursor.gif');*/
+}
+
+#hue span
+{
+	display: inline-block;
+	width: 2px;
+	height: 50px;
+}
+
+#bright
+{
+	position: relative;
+	width: 256px;
+	height: 256px;
+	margin-top: 30px;
+	display: inline-block;
+	/*cursor: url('cursor.gif');*/
+}
+
+#mask
+{
+	background: url(c.png);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 256px;
+	height: 256px;
+}
+
+#prevColor
+{
+	width: 100px;
+	height: 100px;
+	border: 3px #DDD solid;
+	margin: 0 0 150px 30px;
+	display: inline-block;
+}
+
+#curColor
+{
+	width: 100px;
+	height: 50px;
+}
+
+#des
+{
+	display: inline-block;
+	margin: 0 0 30px 100px;
+}
+
+.cursor
+{
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: -7px;
+	left: -8px;
+	background: url('cursor.gif');
+}
+
+#data
+{
+	width: 220px;
+	text-align: center;
+}
+
+#data td, #data th
+{
+	height: 20px;
+}
+
+#data th
+{
+	border-bottom: 1px #F00 solid;
+}
+
+#data th#t00
+{
+	width: 40px;
+}
+
+#data th#t01, #data th#t02
+{
+	width: 80px;
+}
+
+#head
+{
+	margin: 0px auto 20px;
+	width: 800px;
+	height: 160px;
+	background: #222;
+}
+
+#head img
+{
+	margin: 50px 60px 0;
+}
+
+#container
+{
+	margin: 0 auto;
+	width: 800px;
+}
+
+#right
+{
+	text-align: center;
+	margin: 40px auto;
+	padding: 10px 0;
+	width: 800px;
+	background: #222;
+}
+
+/*--------------------------------------------*/
+#gradient
+{
+	height: 80px;
+	margin-bottom: 30px;
+}
+
+#gradient span
+{
+	display: inline-block;
+	width: 5px;
+	height: 80px;
+}
+
+input
+{
+	width: 50px;
+}

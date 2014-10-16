@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>索引</title>
+<script src="JavaScript/myJSFrame.js" type="text/javascript"></script>
+<script type="text/javascript">
+if($.Browse.isIE() && $.Browse.IEVer()==6){
+    document.execCommand("BackgroundImageCache", false, true); // 强制缓存css背景图
+}
+function winResize(){
+    $("navBox").style.height = (document.documentElement.clientHeight-95) + "px";
+}
+function toggleExpand(obj){
+	var ul = $(obj).nextElement();
+	if(!ul || ul.tagName!="UL"){return;}	
+	ul.style.display = ul.getStyle("display")=="none" ? "block" : "none";
+	$(obj).toggleClassName("open");
+}
+function makeTab(){
+    $(this).addClassName("active");
+	var wp = window.parent;
+	wp.$("#tabList a[target=content]").each(function(a){a.removeClassName("cur")});
+	var tabTxt = this.innerHTML.stripTags();
+	var tabHref = this.href;
+	var tabID = this.id.substring(1);
+	var tab = wp.tabObject[tabID];
+	if(!tab){
+		wp.tabObject[tabID] = true;
+		var tab = wp.document.createElement("li");		
+		tab.innerHTML = "<a href='javascript:void(0)' class='closeTab' onclick='closeTab(this)'></a><a href='"+tabHref+"' id='tab"+tabID+"' target='content' class='cur' ondblclick='closeTab(this)' onclick='selectThisTab(this)' title='"+tabTxt+"'><em><span>"+tabTxt+"</span></em></a>";
+		wp.$("tabList").appendChild(tab);
+		var oneTabWidth =  132;
+		var TabBoxWidthCanBeUse = wp.$("tabList").clientWidth - (wp.$("#tabList li").length)*132-27;
+		var MaxTab = Math.ceil(TabBoxWidthCanBeUse/oneTabWidth);
+		if(MaxTab<1){
+			wp.$("otherTabHandle").addClassName("tabArrowHigh");
+			wp.$("tabArrow").onmouseover = wp.showOtherTab;
+			wp.$("tabArrow").onmouseout = wp.hideOtherTab;
+			wp.$("otherTabBox").appendChild( wp.$("#tabList li")[0].remove() );
+		}
+		wp.frames["content"].location.href=tabHref;
+	}else{
+		if(document.fireEvent){
+			wp.$("tab"+tabID).fireEvent("onclick");
+		}else{
+			wp.$("tab"+tabID).onclick();
+		}
+	}
+	$("keyword").focus();
+	$("keyword").value = this.innerHTML;
+}
+window.conv = {};
+window.arrSort = [];
+window.aObj = {};
+function init(){
+	var obj = {
+		"docs/default.html":"首页",
+		"docs/$.html":"$ 函数",
+		"docs/$.cssselectors.html":"CSS 选择符",
+		"docs/$.Element.hide.html":"hide",
+		"docs/$.Element.show.html":"show",
+		"docs/$.Element.getStyle.html":"getStyle",
+		"docs/$.Element.setStyle.html":"setStyle",
+		"docs/$.Element.toggle.html":"toggle",
+		"docs/$.Element.remove.html":"remove",
+		"docs/$.Element.hasClassName.html":"hasClassName",
+		"docs/$.Element.addClassName.html":"addClassName",
+		"docs/$.Element.removeClassName.html":"removeClassName",
+		"docs/$.Element.toggleClassName.html":"toggleClassName",
+		"docs/$.Element.getElementsByClassName.html":"getElementsByClassName",
+		"docs/$.Element.getElementsByAttribute.html":"getElementsByAttribute",
+		"docs/$.Element.subTag.html":"subTag",
+		"docs/$.Element.parentIndex.html":"parentIndex",
+		"docs/$.Element.nextElement.html":"nextElement",
+		"docs/$.Element.previousElement.html":"previousElement",
+		"docs/$.Ajax.Ajax.Request.html":"Ajax.Request",
+		"docs/$.Ajax.Request.html":"Request(Ajax)",
+		"docs/$.Ajax.post.html":"post",
+		"docs/$.Ajax.get.html":"get(Ajax)",
+		"docs/$.Ajax.update.html":"update",
+		"docs/$.Cookies.get.html":"get(Cookies)",
+		"docs/$.Cookies.set.html":"set",
+		"docs/$.Cookies.del.html":"del",
+		"docs/$.Form.Form.html":"Form",
+		"docs/$.Form.serialize.html":"serialize",
+		"docs/$.Form.$.Form.serialize.html":"$.Form.serialize",
+		"docs/$.Browse.isIE.html":"isIE",
+		"docs/$.Browse.isFF.html":"isFF",
+		"docs/$.Browse.isOpera.html":"isOpera",
+		"docs/$.Browse.isSafari.html":"isSafari",
+		"docs/$.Browse.isGecko.html":"isGecko",
+		"docs/$.Browse.IEVer.html":"IEVer",
+		"docs/Array.indexOf.html":"indexOf",
+		"docs/Array.each.html":"each",
+		"docs/Array.uniqStr.html":"uniqStr",
+		"docs/String.trim.html":"trim",
+		"docs/String.stripTags.html":"stripTags",
+		"docs/String.cint.html":"cint",
+		"docs/String.format.html":"format",
+		"docs/String.camelize.html":"camelize",
+		"docs/String.hasSubString.html":"hasSubString",
+		"docs/String.hasSubStrInArr.html":"hasSubStrInArr",
+		"docs/String.toXMLString.html":"toXMLString",
+		"docs/StringBuffer.append.html":"append",
+		"docs/StringBuffer.toString.html":"toString",
+		"docs/StringBuffer.length.html":"length",
+		"docs/StringBuffer.clear.html":"clear",
+		"docs/Function.bind.html":"bind",
+		"docs/NameSpace.copyChild.html":"copyChild",
+		"docs/$.Request.html":"Request(URL)",
+		"docs/$.Redirect.html":"Redirect",
+		"docs/$.Import.html":"Import",
+		"docs/$A.html":"$A",
+		"docs/$D.html":"$D",
+		"docs/$E.html":"$E",
+		"docs/$V.html":"$V"
+	};
+
+	var bak = {};
+	var counter = 0;
+	for (var key in obj)
+	{	
+		var t = obj[key].toLowerCase();
+		bak[t] = obj[key]+"|"+counter++;
+		window.arrSort.push(t);
+		window.conv[t] = key;
+	}
+	window.arrSort.sort();
+	var str = new StringBuffer();
+	for (var i=0; i<window.arrSort.length ; i++){
+		var p = bak[window.arrSort[i]].split("|");
+		str.append("<li><a href='"+window.conv[window.arrSort[i]]+"' id='_"+p[1]+"' target='content' onfocus=this.blur()>"+p[0]+"</a></li>");
+	}
+	$("navBox").innerHTML = str.toString();
+	setTimeout(function(){
+		$("#box a[target=content]").each(function(a){
+			a.onclick=makeTab;	
+			a.onmousedown = function(){
+				$("#navBox a").each(function(a){a.removeClassName("active")});
+			}
+			window.aObj[a.innerHTML.toLowerCase()] = a;
+		});
+		$("keyword").focus();
+	},10);
+}
+
+function check(obj,evt){
+    evt = evt?evt:window.event;	
+    if(obj.value==""){
+		$("#navBox a").each(function(a){a.removeClassName("dashed")});
+		return;
+	}	
+	if(evt.keyCode==13){		    
+	    try{
+			$("#navBox a.active")[0].click();
+		}catch(e){$("#navBox a.active")[0].onclick();}
+		$("keyword").value = $("#navBox a.active")[0].innerHTML;
+		return;
+	}
+	if(evt.keyCode==38){
+		if($("#navBox a.active").length==0)return;
+		var pli = $($("#navBox a.active")[0].parentNode).previousElement();
+		if(!pli)return;
+		$("#navBox a.active")[0].removeClassName("active");
+		pli.subTag("a")[0].addClassName("active");
+		return;		
+	}
+	if(evt.keyCode==40){
+		if($("#navBox a.active").length==0)return;
+		var pli = $($("#navBox a.active")[0].parentNode).nextElement();
+		if(!pli)return;
+		$("#navBox a.active")[0].removeClassName("active");
+		pli.subTag("a")[0].addClassName("active");
+		return;
+	}		
+	var v = obj.value.toString().toLowerCase();
+	var len = v.length;
+	for(var i=0,j; j=window.arrSort[i]; i++){
+		if(j.substring(0,len)==v){
+			$("#navBox a").each(function(a){a.removeClassName("active")});
+			$(window.aObj[j]).addClassName("active");
+			$("navBox").scrollTop = 19*i;
+			break;
+		}
+	}
+}
+
+</script>
+<style>
+	* {padding:0; margin:0}
+	html,body { height:100%; overflow:hidden; border:none}
+	body { font-size:12px; background:#ecf2fa}
+	.navBox {
+			scrollbar-face-color: #f2f2f2;
+			scrollbar-highlight-color: #f6faff;
+			scrollbar-shadow-color: #cccccc;
+			scrollbar-3dlight-color: #dddddd;
+			scrollbar-arrow-color: #336000;
+			scrollbar-track-color: #f6faff;
+			scrollbar-darkshadow-color: #ffffff;
+			font-size:12px; font-family:Arial, Helvetica, sans-serif;
+			overflow-y:auto;
+			height:100%;
+			width:93%;
+			border:1px solid #b5b8c8;
+			margin:0 auto;
+			background:#fff;
+			padding:2px;
+	}
+	li {zoom:1; margin-bottom:1px; }
+	input { font-size:12px}
+	ul {list-style:none}
+	.box { zoom:1}
+	a {color:#666; text-decoration:none; display:block; padding:1px 1px 1px 7px; font-size:11px; zoom:1; border:1px solid #fff; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; word-break:break-all}
+	a:hover {border:1px solid #aaccff; background-color:#e9f2ff; color:#000}
+	a:active,a.active { border:1px solid #aaccff; color:#000; background:url(images/arrow_squre.gif) no-repeat 1px center #e9f2ff; font-weight:bold}
+	.keyword {background:url(images/text-bg.gif) repeat-x #fff;border:1px solid #b5b8c8; padding:2px; display:block; margin:0 auto 4px auto; width: 93%}
+	.s {margin:4px 0}	
+	.title { width:93%; padding:10px 2px 2px 2px; text-indent:4px; display:block}
+</style>
+</head>
+<body>
+<div style="zoom:1" id="box">
+<div style="zoom:1">
+	<label class="title">键入要查询的关键字:</label>
+	<input class="keyword" id="keyword" type="text" onkeyup="check(this,event)" />
+</div>
+<ul id="navBox" class='navBox'>
+</ul>
+</div>
+<script type="text/javascript">
+$("box").onresize = winResize;
+$.DOMReady(winResize);
+init();
+</script>
+</body>
+</html>

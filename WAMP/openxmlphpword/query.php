@@ -1,0 +1,10 @@
+﻿<?php
+include("createWord.php");
+for($i=1;$i<9;$i++)
+{
+	$mes['title']=$i."号标题";
+	$mes['content']=$i."号内容哦";
+	createWord($mes,"title.docx",$i.".docx");
+}
+exit("ok");
+?>

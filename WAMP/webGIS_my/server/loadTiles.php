@@ -1,0 +1,1 @@
+<?phpinclude("getUnexistTile.php");$id = $_GET['tile'];$file = 'data/geo_'.$id.'.json';if(file_exists($file)){	echo file_get_contents($file);}else{	//根据id算出偏移量，再请求	echo getUnexistTile();}?>

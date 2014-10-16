@@ -1,0 +1,1 @@
+document.write("<iframe width=760 height=90 noresize scrolling=No frameborder=0 marginheight=0 marginwidth=0 src=\"http://other.51cto.com/ad/art/tonglan/4.htm\" align=\"left\"></iframe>");

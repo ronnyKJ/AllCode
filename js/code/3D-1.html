@@ -1,0 +1,160 @@
+﻿<html>
+<head><title>3D-1</title>
+<style>
+body
+{
+	background: #000;
+}
+
+#xyz, #des
+{
+	color: #DDD;
+	position: absolute;
+}
+
+#des
+{
+	top: 50px;
+}
+</style>
+</head>
+<body><span id="xyz"></span><span id="des"></span><canvas id="c"></canvas></body>
+<script type="text/javascript">
+//基本数据定义
+var w = window;
+var d = document;
+var b = d.body;
+var r = Math.random;
+var c = d.getElementById("c");
+var cl = c.offsetLeft, ct = c.offsetTop;
+var t = c.getContext("2d");
+var canvasW = w.innerWidth - 25;
+var canvasH = w.innerHeight - 25;
+canvasW = getOdd(canvasW);
+canvasH = getOdd(canvasH);
+c.width = canvasW;
+c.height = canvasH;
+var COLOR = '#A9EA00';// "rgba(169, 234, 0, 0.5)";
+t.translate(canvasW/2,canvasH/2);
+
+//-----code-------
+var x_index = 3;
+var x_steps = 10;
+var x_pace = 10;
+var z_dis = 400;
+var z_index = 5;
+var z_steps = 10;
+var z_pace = z_dis/z_steps;
+d.onkeydown = direction;
+var z_pro = 0.2;
+var x_pro = 0.8;
+var near = c.width;
+var far = near*z_pro;
+var l = 600;
+var zSize = function(pos, l, x, x_w)
+{
+	var a = (l*z_pro-l)/z_dis;
+	return xSize(x, a*pos+l, x_w);
+}
+var xSize = function(pos, l, w)
+{
+	(pos<-w/2)&&(pos=(-w/2));
+	(pos>w/2)&&(pos=w/2);
+	var a = (l*x_pro-l)/w;
+	(pos<0)&&(a=(-a));
+	d.getElementById("xyz").innerHTML = pos;
+	return 2*a*pos+l;
+}
+var x_width = function(pos)
+{
+	return near-(pos/z_dis)*(near-far)
+}
+
+redraw();
+function redraw()
+{
+	basement();
+	var zTmp = z_pace*z_index;
+	var x_w = x_width(zTmp);
+	x_pace = x_w/x_steps;
+	var xTmp = x_pace*x_index;
+	path(xTmp, zSize(zTmp, l, xTmp, x_w)/2, xTmp, -zSize(zTmp, l, xTmp, x_w)/2, "rgba(255, 255, 0, 0.6)");
+	
+	d.getElementById("xyz").innerHTML = "x:"+xTmp+" z:"+zTmp+" size:"+zSize(zTmp, l, xTmp, x_w)+" x_dis:"+x_width(zTmp);
+}
+
+//函数定义
+function getOdd(a)
+{
+	(a%2==1)&&(a--);
+	return a;
+}
+
+function circle(x, y, r, type, style)
+{
+	if(type=="stroke")
+	{
+		t.beginPath();
+		t.strokeStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.stroke();
+		t.closePath();
+	}
+	else
+	{
+		t.fillStyle = style;
+		t.arc(x,y,r,0,360,true);
+		t.fill();
+	}
+}
+
+function path(x1, y1, x2, y2, style)
+{
+	t.beginPath();
+	t.strokeStyle = style;
+	t.moveTo(x1,y1);
+	t.lineTo(x2,y2);
+	t.stroke();
+	t.closePath();
+}
+
+function rectangle(x1, y1, x2, y2, x3, y3, x4, y4, style)
+{
+	t.beginPath();
+	t.fillStyle = style;
+	t.moveTo(x1,y1);
+	t.lineTo(x2,y2);
+	t.lineTo(x3,y3);
+	t.lineTo(x4,y4);
+	t.fill();
+	t.closePath();
+}
+
+function direction(evt){
+	t.clearRect(0-c.width/2, 0-c.height/2,c.width, c.height);
+	evt = evt ||window.event; 
+	var key=evt.which||evt.keyCode; 
+	if (key == 37) (--x_index<(-x_steps/2))&&(x_index=-x_steps/2); 
+	if (key == 38) (++z_index>z_steps)&&(z_index=z_steps);
+	if (key == 39) (++x_index>x_steps/2)&&(x_index=x_steps/2); 
+	if (key == 40) (--z_index<0)&&(z_index=0); 
+	redraw();
+}
+
+function basement()
+{
+	path(0, 200, 0, -200, "rgba(39, 156, 0, 0.4)");
+	path(-200, 0, 200, 0, "rgba(39, 156, 0, 0.4)");
+	path(-far/2, l*z_pro/2, -far/2, -l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	path(-far/2, -l*z_pro/2, far/2, -l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	path(far/2, -l*z_pro/2, far/2, l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	path(-far/2, l*z_pro/2, far/2, l*z_pro/2, "rgba(60, 0, 170, 0.8)");
+	
+	path(-far/2, -l*z_pro/2, -canvasW/2, -l/2, "rgba(60, 0, 170, 0.8)");
+	path(-far/2, l*z_pro/2, -canvasW/2, l/2, "rgba(60, 0, 170, 0.8)");
+	path(far/2, -l*z_pro/2, canvasW/2, -l/2, "rgba(60, 0, 170, 0.8)");
+	path(far/2, l*z_pro/2, canvasW/2, l/2, "rgba(60, 0, 170, 0.8)");
+	circle(0, 0, 1, "fill", "800");
+}
+</script>
+</html>

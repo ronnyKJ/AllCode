@@ -1,0 +1,16 @@
+﻿/***************Phone******************/
+.button
+{
+	width: 100px;
+	height: 100px;
+	background: #EEE;
+}
+
+
+/***************PC******************/
+.object
+{
+	width: 100px;
+	height: 100px;
+	background: #800;
+}

@@ -1,0 +1,153 @@
+﻿<html>
+<head><title>Gravity</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+	background: #333;
+}
+
+#c
+{
+	display: block;
+	background: #000;
+	margin: 100px auto;
+}
+
+#r
+{
+	position: relative;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 10px;
+	color: #AAA;
+	margin-top: 0px;
+	text-align: center;
+}
+</style>
+</head>
+<body><canvas id="c"></canvas><div id="r">-- By Ronny 2011 --</div></body>
+<script type="text/javascript">
+var x=y=0;
+var g=0.8;
+var cellArray = [];
+var count = 10;
+r = Math.random;
+Sin = Math.sin;
+Cos = Math.cos;
+PI = Math.PI;
+Atan = Math.atan2;
+for(var i=0; i<count; i++)
+{
+	var initYSpeed = 1-2.5*r();
+	var cell = 
+	{
+		xs: 2*r(),
+		oys: initYSpeed,
+		ys: initYSpeed,
+		x: 50,
+		y: 100*r(),
+		t: 0
+	};
+	cellArray.push(cell);
+}
+
+with(document.body)
+{
+	C = document.getElementById('c');
+	var w = 500;
+	C.width = w;
+	C.height = 400;
+	t = C.getContext("2d");
+}
+
+timer = 0;
+setInterval(function(){
+	C.width = w;
+	
+	t.fillStyle = "rgb(95, 57, 26)";
+	t.fillRect(-10, 350, 520, 150);//下
+	var lean1 = triangle(200, 350, 500, 300, 500, 350, "rgb(0, 0, 201)");
+	var lean2 = triangle(210, 350, 0, 200, 0, 350, "rgb(100, 0, 0)");
+	var lean3 = triangle(300, 350, 500, 200, 500, 350, "rgb(0, 100, 0)");
+
+	timer+=0.4;
+	for(var i=0; i<count; i++)
+	{
+		var cell = cellArray[i];
+		cell.t+=0.04;
+		cell.ys = cell.t*g+cell.oys
+		cell.y += cell.ys;
+		cell.x += cell.xs;
+		
+		var dot = t.getImageData(cell.x, cell.y, 1, 1).data;
+		collision(dot[2], 201, cell, lean1);
+		collision(dot[0], 100, cell, lean2);
+		collision(dot[1], 100, cell, lean3);
+		
+		//边缘碰撞
+		if(cell.x > C.width)
+		{
+			cell.x = C.width
+			cell.xs *= -1;
+		}
+		else if(cell.x < 0)
+		{
+			cell.x = 0;
+			cell.xs *= -1;
+		}
+		//边缘碰撞
+		if(cell.y > 350)
+		{
+			cell.y = 350;
+			cell.oys = cell.ys*0.8*(-1);
+			cell.t = 0;
+		}
+		
+		t.fillStyle = '#A9EA00';
+		t.beginPath();
+		t.arc(cell.x, cell.y, 2*r(), 0, 360, true);
+		t.closePath();
+		t.fill();
+	}
+}, 10);
+
+function triangle(x1, y1, x2, y2, x3, y3, style)
+{
+	t.beginPath();
+	t.fillStyle = style;
+	t.moveTo(x1,y1);
+	t.lineTo(x2,y2);
+	t.lineTo(x3,y3);
+	t.closePath();
+	t.fill();
+	return Math.atan2(y3-y2, x3-x1);
+}
+
+function collision(i, color, obj, angle)
+{
+	if(i == color)
+	{
+		var delY1 = obj.ys*Sin(1.5*PI - 2*angle);
+		var delX1 = obj.ys*Cos(1.5*PI - 2*angle);
+		var delY2 = obj.xs*Sin(2*angle);
+		var delX2 = obj.xs*Cos(2*angle);
+		obj.oys = delY1 + delY2;
+		obj.xs = delX1 + delX2;
+		
+		var j=obj.y;
+		var tmpDot = color;
+		while(tmpDot == color)
+		{
+			tmpDot = t.getImageData(obj.x, (--j), 1, 1).data;
+		}
+		obj.y = j;
+		
+		obj.xs *= 0.8;
+		obj.oys = obj.ys*0.8*(-1);
+		obj.t = 0;
+	}
+}
+</script>
+</html>

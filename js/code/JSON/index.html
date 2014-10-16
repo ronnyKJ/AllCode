@@ -1,0 +1,102 @@
+﻿<html>
+<head><title>JSON</title>
+<script type="text/javascript" src='json.js'></script>
+<script type="text/javascript">
+function show(s){console.log(s)}
+function t_stringify(a){
+	var s = _JSON.stringify(a);
+	show(s+' - '+(s===JSON.stringify(a)));
+}
+
+function t_parse(a){
+	var a1 = _JSON.parse(a);
+	//var a2 = JSON.parse(a);
+	show(a1);
+	//show(JSON.stringify(a1)===JSON.stringify(a2));
+}
+
+/** test stringify*/
+/*
+//string number -- OK
+t_stringify(1);
+t_stringify(1.2222);
+t_stringify('XXX{}');
+//common object -- OK
+var txt = 'txt...';
+var n = 34, m=33.33333;
+var a = {a:1};
+var b = {
+	a: 1,
+	b: 1.22222445,
+	c: 'stringXXX',
+	d: "string...",
+	'e': txt,
+	'F': n,
+	"g": m
+};
+t_stringify(a);
+t_stringify(b);
+//composite object -- OK
+var p = {a:a, b:{f:1},c:a,d:12,e:'dsad',f:{n:a,m:a,k:11}};
+t_stringify(p);
+
+//array
+var a=[0,1,'dsad'];
+t_stringify(a);
+var f=[0,1,'dsad',[0,1,'dsad',[0,1,'dsad']]];
+t_stringify(f);
+//array and object -- OK
+var b=[0,1,{a:1, b:[2,5,8,47,'hgfhfghfg',{v:a}]}];
+t_stringify(b);
+var c=[a,{b:[a,a,a]}];
+t_stringify(c);
+
+
+//** t_stringify parse
+//string number -- OK
+var a = 1;
+var b = 'rsss';
+var c = 1.1255;
+var d = "dasdasd";
+t_stringify(a);
+t_stringify(b);
+t_stringify(c);
+t_stringify(d);
+*/
+
+/** test parse*/
+//string number -- OK
+var a='asdasd';
+var b='"dasdasd"';
+var c='23123';
+var d='"23123"';
+var e='dsa23ff123';
+var f='"dsa23ff123"';
+var g='"23ff123"';
+var h='23ff123';
+var i='23.123';
+var j='23.00';
+/*
+t_parse(a);
+t_parse(b);
+t_parse(c);
+t_parse(d);
+t_parse(e);
+t_parse(f);
+t_parse(g);
+t_parse(h);
+t_parse(i);
+t_parse(j);
+*/
+//string array -- OK
+var a='[0,1,2,3]';
+var b='["qw",  "1231",  "3.3",   3,  "2.00"  , "XXX33",  34324,23.00,  5]';
+var c='[0,1,2, 3, [0 , 1 ,2,3],[0, 1, 2,3,[0,[0,1, 2, 3]  , 1,2,3]]]';
+var c='[0,1,2, 3,[8,9]]';
+//t_parse(a);
+//t_parse(b);
+t_parse(c);
+</script>
+</head>
+<body></body>
+</html>

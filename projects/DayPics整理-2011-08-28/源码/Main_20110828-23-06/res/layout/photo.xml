@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/bg">
+	<ImageView android:layout_height="fill_parent" android:id="@+id/myImage"
+		android:layout_width="fill_parent"></ImageView>
+	<Button android:id="@+id/upload" android:background="@drawable/upload"
+		android:layout_width="102px" android:layout_height="38px" android:layout_above="@+id/words"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="12px"></Button>
+	<EditText android:layout_width="457px" android:id="@+id/words"
+		android:inputType="textMultiLine"
+		android:background="@drawable/words" android:layout_height="124px"
+		android:layout_alignParentBottom="true" 
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="12px"
+		android:paddingLeft="8px" android:paddingRight="8px" android:paddingTop="20px" android:paddingBottom="8px">
+		<requestFocus></requestFocus>
+	</EditText>    
+</RelativeLayout>

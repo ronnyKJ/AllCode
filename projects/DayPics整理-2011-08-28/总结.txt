@@ -1,0 +1,18 @@
+DayPics总结：
+1.用到的知识点
+- HttpConnection(POST, content-type)
+-base64 encode文本 + 图片
+-base64在java中的包需要导入
+-IP访问量统计
+-Ajax
+2.视觉设计
+-logo
+-界面
+-交互设计
+3.架构
+-Android客户端+php服务器+Browser
+4.编程语言
+Java+php+xml+html+css3+js
+5.框架
+-ThinkPHP
+-jQuery

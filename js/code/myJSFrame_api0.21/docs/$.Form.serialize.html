@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.Form.serialize</title>
+<script type="text/javascript" src="../JavaScript/myJSFrame.js"></script>
+<script type="text/javascript">
+if (top.location == self.location) {top.location="../index.html?frameurl="+location.href}
+</script>
+<style type="text/css">
+@import url(../CSS/main.css);
+</style>
+</head>
+<body>
+<h1>$.Form(<em>name</em>).serialize( <em>NameValuePair</em> )</h1>
+<p class="info">
+获取页面中指定表单的所有控件值。
+</p>
+<h2>参数</h2>
+	<dl class="p">
+		<dt><em>NameValuePair</em></dt>
+		<dd>可选项。补充或覆盖表单控件。该参数形式为：{ name1=value, name2=value2, ......}</dd>
+	</dl>
+<h2>返回值</h2>
+	<p class="p">表单序列化后的字符串，其格式如：username=%E5%95%8A%E8%94%A1<strong>&amp;</strong>password=123456</p>	
+    <h2>描述</h2>
+<p class="p">表单中如有 disabled=true 、没有 name 属性、没有被选中的单选控件或者勾选控件等，这些控件将被忽略。同名控件将发送一组同名但不同值的字符串。该方法通常用于 Ajax 的提交参数(parameters)。</p>
+    <h2>示例</h2>
+	<p class="code">&lt;form method=&quot;post&quot; name=&quot;reg&quot; action=&quot;http://localhost&quot;&gt;<br />
+	  &nbsp; &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;<br />
+      &nbsp; &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;<br />
+      &nbsp; &lt;input type=&quot;checkbox&quot; name=&quot;interest&quot; value=&quot;music&quot; /&gt; <span class="comment">//新用户兴趣爱好调查，勾选</span><br />
+&nbsp; &lt;input type=&quot;checkbox&quot; name=&quot;interest&quot; value=&quot;sport&quot; /&gt; <span class="comment">//勾选</span><br />
+&nbsp; &lt;input type=&quot;checkbox&quot; name=&quot;interest&quot; value=&quot;dance&quot; /&gt; <span class="comment">//勾选</span> <br />
+      &nbsp; &lt;input type=&quot;submit&quot; value=&quot;用户注册&quot; /&gt;<br />
+      &nbsp; &lt;input type=&quot;button&quot; value=&quot;用JavaScript提交表单&quot; onclick=&quot;test()&quot; /&gt;<br />
+	  &lt;/form&gt;<br />
+	  &lt;script type=&quot;text/javascript&quot; &gt;<br />
+	  function test(){ <br />
+&nbsp;&nbsp;&nbsp;&nbsp; alert(	<span class="core">$.Form(&quot;reg&quot;).serialize( {&nbsp;regTime:new Date().toGMTString()} )</span> );&nbsp; <span class="comment"> //serizlize 方法补充了一个时间控件，控件的 name 为 regTime，值为当前时间。<br />
+<br />
+//结果：username=%E5%95%8A%E8%94%A1&amp;password=123456&amp;interest=music&amp;interest=sport&amp;interest=dance&amp;regtime=Thu%2C%2027%20Sep%202007%2008%3A35%3A55%20UTC。</span> <br />
+<span class="comment">//注意里面的同名表单</span><br />
+}<br />
+&lt;/script&gt; </p>
+<br />
+<script type="text/javascript" src="../JavaScript/comment.js"></script>
+<div class="footer">&copy;2008 <a href='http://www.happyshow.org' target='_blank'>happyshow.org</a></div>
+
+</body>
+</html>

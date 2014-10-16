@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><title>Happy New Year</title>
+<style>
+body{margin:40px 90px 0}
+*{font-family: 微软雅黑,黑体,宋体,Arial;}
+#txt{overflow:auto;}
+em{font-family: Arial;font-size:160px;color:#AAA;font-style:normal;}
+#p{font-size:22px;color:#888;font-weight:bold;text-indent:2em;margin:-60px 80px 0;}
+#aq{float:right;margin-right:40px;}
+.btn{position:relative;background:#FFF;border:#EEE 1px solid;color:#888;width:60px;padding:8px 12px 10px;top:-94px;top:-79px\9;}
+.btn:hover{background:#F5F5F5;}
+#rt{top:-51px;top:-36px\9;left:-65px;left:-65px\9;}
+#t{background:#FAFAFA;width:500px;height:100px;border:#EEE 1px solid;padding:8px}
+#bt{text-align:right;}
+#sc{position:relative;font-size:12px;display:inline-block;margin-right:30px;color:#888;top:-62px;}
+#cr{text-align:center;font-size:10px;margin-top:20px;color:#BBB;}
+#link{text-align:center;font-size:10px;display:none}
+</style>
+</head>
+<body>
+<div id="txt">
+	<em>“</em>
+	<p id="p"></p>
+	<em id="aq">”</em>
+</div>
+<div id="bt">
+	<span id="sc">写下2012的祝福，复制链接发送给亲人朋友，快快行动吧~<br>Write down your wishes, copy the link to your friends.</span>
+	<textarea id="t"></textarea>
+	<input class="btn" value="play" type="button" onclick="i=0;clearInterval(siv);play(arr);lk.style.display='block';" />
+	<input id="rt" class="btn" value="retry" type="button" onclick="location.reload()" />
+</div>
+<div id="link"><a id="linka" href="#"></a></div>
+<div id="cr">-- By Ronny 2012 --</div>
+</body>
+<script>
+var t = document.getElementById("t");
+var s = document.getElementById("s");
+var p = document.getElementById("p");
+var la = document.getElementById("linka");
+var lk = document.getElementById("link");
+var arr = [], time = 0, piece = 40;
+var h = window.location.href.split("?");
+var link = h[0];
+var para = h[1];
+
+onevt = window.oninput === null?'oninput':'onkeyup';
+
+function Char(c, t)
+{
+	this.str = c;
+	this.time = t;
+}
+
+t[onevt] = function(){
+	var v = this.value;
+	var c = new Char(v, time);
+	arr.push(c);
+}
+
+var i=1;
+function play(arr)
+{
+	var time;
+	t = arr[i];
+	//time = (t.time - arr[i-1].time)*piece;
+	time = (arr[i+1].time - t.time)*piece;
+	p.innerText = t.str;
+	
+	if(i==arr.length-2)
+	{
+		time = (arr[i+1].time - t.time)*piece;		
+		setTimeout(function(){
+			p.innerText = arr[i+1].str;
+		}, time)
+		
+		var l = link+"?"+encodeURIComponent(arr2Para(arr));
+		la.href = l;
+		la.innerText = la;
+		return;
+	}
+	i++;
+	setTimeout(function(){
+		play(arr);
+	}, time)
+}
+
+var initArr = [];
+function para2Arr(para)
+{
+	var p = decodeURIComponent(para);
+	var ar = p.split("&"), tmp, tarr=[];
+	for(var i=0, l=ar.length; i<l;i++)
+	{
+		tmp = ar[i].split("=");
+		tarr.push(new Char(tmp[0], tmp[1]));
+	}
+	return tarr;
+}
+
+function arr2Para(arr)
+{
+	var t, s1=["=0"];
+	for(var i=1, l=arr.length; i<l; i++)
+	{
+		t = arr[i];
+		s1.push("&" + t.str + "=" + t.time);
+	}
+	
+	return s1.join("");
+}
+var siv = setInterval(function(){time++}, piece);
+initArr=para2Arr(para);
+play(initArr);
+</script>
+</html>

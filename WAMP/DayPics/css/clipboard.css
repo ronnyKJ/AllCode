@@ -1,0 +1,62 @@
+﻿#clipboard
+{
+	position: fixed;
+	top: 0;
+	right: -150px;/*和#clipboard #board的宽度一致*/
+	height: 500px;
+}
+
+#clipboard #tabs
+{
+	float: right;
+}
+
+#clipboard #tabs li
+{
+	text-align: right;
+	list-style: none;
+	height: 30px;
+	line-height: 30px;
+	display: none;
+}
+
+#clipboard #tabs li span
+{
+	display: inline-block;
+	height:100%;
+	padding: 0 5px 0 8px;
+	color: #FFF;
+	border-radius: 8px 0px 0px 8px;
+	cursor: pointer;
+}
+
+#clipboard #board
+{
+	float: right;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 150px;/*和#clipboard的宽度一致*/
+	min-height: 200px;
+	border-radius: 0px 0px 0px 8px;
+}
+
+.clipboard_in
+{
+	background: transparent url('../img/pc-clipboard-arrow.png') no-repeat 11px 0;
+	width: 20px;
+}
+
+.clipboard_out
+{
+	background: #7ad696 url('../img/pc-clipboard-arrow.png') no-repeat 11px -30px;
+	width: 20px;
+}
+
+.tab_selected
+{
+	background-color: #fe7f7f ! important;
+}
+
+.tab_unselected
+{
+	background-color: #7f7ffe;
+}

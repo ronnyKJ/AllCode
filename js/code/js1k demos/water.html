@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+function v(b,c){b<<=0;c<<=0;for(var a=c-i;a<c+i;a++)for(var e=b-i;e<b+i;e++)m[j+a*d+e]+=512}var k=document.getElementById("c"),l=k.getContext("2d"),d=400,w=d>>1,A=d*402*2,j=d,n=d*403,i=3,o,m=[],p=[],q,x;k.width=d;k.height=400;with(l){fillStyle="#a2ddf8";fillRect(0,0,d,400);fillStyle="#07b";save();rotate(-0.785);for(var f=0;f<20;f++)fillRect(-d,f*40,d*3,20);restore()}x=l.getImageData(0,0,d,400);q=l.getImageData(0,0,d,400);for(f=0;f<A;f++)p[f]=m[f]=0;k.onmousemove=function(b){v(b.offsetX||b.layerX,b.offsetY||b.layerY)};setInterval(function(){var b,c,a;b=j;j=n;n=b;b=0;o=j;for(var e=d,g=m,h=o,y=n,r=q.data,s=x.data,t=0;t<400;t++)for(var u=0;u<e;u++){a=g[h-e]+g[h+e]+g[h-1]+g[h+1]>>1;a-=g[y+b];a-=a>>5;g[y+b]=a;a=1024-a;c=p[b];p[b]=a;if(c!=a){c=((u-w)*a/1024<<0)+w;a=((t-200)*a/1024<<0)+200;if(c>=e)c=e-1;if(c<0)c=0;if(a>=400)a=399;if(a<0)a=0;a=(c+a*e)*4;c=b*4;r[c]=s[a];r[c+1]=s[a+1];r[c+2]=s[a+2]}++h;++b}o=h;l.putImageData(q,0,0)},30);var z=Math.random;setInterval(function(){v(z()*d,z()*400)},700)
+</script>
+</html>

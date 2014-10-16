@@ -1,0 +1,26 @@
+﻿<html>
+<head><title>ScopeChainTest</title>
+<script type="text/javascript">
+var a = 3;
+
+var f = function(a)
+{
+	var w = a;
+	var window = 4;
+	alert(window);
+}
+
+f(window);
+
+var v = function()
+{
+	var b;
+	return b;
+}
+
+var undefined = 5;
+//alert(window.undefined);
+</script>
+</head>
+<body></body>
+</html>

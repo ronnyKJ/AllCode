@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'>
+<html xmlns=''>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=gb2312' />
+<title>JavaScript 颜色梯度和渐变</title>
+<script type="text/javascript">
+var $ = function (id) {
+  return 'string' == typeof id ? document.getElementById(id) : id;
+};
+var Extend = function(destination, source) {
+ for (var property in source) {
+ destination[property] = source[property];
+ }
+ return destination;
+}
+var Map = function(array, callback, thisObject){
+ if(array.map){
+ return array.map(callback, thisObject);
+ }else{
+ var res = [];
+ for (var i = 0, len = array.length; i < len; i++) { res.push(callback.call(thisObject, array[i], i, array)); }
+ return res;
+ }
+}
+var ColorGrads = function(options){
+ this.SetOptions(options);
+ this.StartColor = this.options.StartColor;
+ this.EndColor = this.options.EndColor;
+ this.Step = Math.abs(this.options.Step);
+};
+ColorGrads.prototype = {
+ //设置默认属怿lt;br /> SetOptions: function(options) {
+  options : {//默认倿lt;br /> StartColor: '#fff',//开始颜艿lt;br /> EndColor: '#000″,//结束颜色
+ Step: 20//渐变级数
+  },
+  Extend(this.options, options || {});
+ },
+ //获取渐变颜色集合
+ Create: function() {
+ var colors = [],
+ startColor = this.GetColor(this.StartColor),
+ endColor = this.GetColor(this.EndColor),
+ stepR = (endColor[0] – startColor[0]) / this.Step,
+ stepG = (endColor[1] – startColor[1]) / this.Step,
+ stepB = (endColor[2] – startColor[2]) / this.Step;
+ //生成颜色集合
+ for(var i = 0, n = this.Step, r = startColor[0], g = startColor[1], b = startColor[2]; i < n; i++){
+ colors.push([r, g, b]); r += stepR; g += stepG; b += stepB;
+ }
+ colors.push(endColor);
+ //修正颜色倿lt;br /> return Map(colors, function(x){ return Map(x, function(x){
+ return Math.min(Math.max(0, Math.floor(x)), 255);
+ });});
+ },
+ //获取颜色数据
+ GetColor: function(color) {
+ if(/^#[0-9a-f]{6}$/i.test(color))
+ {//#rrggbb
+ return Map([color.substr(1, 2), color.substr(3, 2), color.substr(5, 2)],
+  function(x){ return parseInt(x, 16); }
+ )
+ }
+ else if(/^#[0-9a-f]{3}$/i.test(color))
+ {//#rgb
+ return Map([color.substr(1, 1), color.substr(2, 1), color.substr(3, 1)],
+  function(x){ return parseInt(x + x, 16); }
+ )
+ }
+ else if(/^rgb(.*)$/i.test(color))
+ {//rgb(n,n,n) or rgb(n%,n%,n%)
+ return Map(color.match(/d+(.d+)?%?/g),
+  function(x){ return parseInt(x.indexOf('%') > 0 ? parseFloat(x, 10) * 2.55 : x, 10); }
+ )
+ }
+ else
+ {//color
+ var mapping = {'red':'#FF0000″};//畿lt;br /> color = mapping[color.toLowerCase()];
+ if(color){
+  return Map([color.substr(1, 2), color.substr(3, 2), color.substr(5, 2)],
+  function(x){ return parseInt(x, 16); }
+  )
+ }
+ }
+ }
+};
+var CurrentStyle = function(element){
+ return element.currentStyle || document.defaultView.getComputedStyle(element, null);
+}
+var Bind = function(object, fun) {
+ var args = Array.prototype.slice.call(arguments).slice(2);
+ return function() {
+ return fun.apply(object, args.concat(Array.prototype.slice.call(arguments)));
+ }
+}
+//渐变对象
+var ColorTrans = function(obj, options){
+ 
+ this._obj = $(obj);
+ this._timer = null;//定时噿lt;br /> this._index = 0;//索引
+ this._colors = [];//颜色集合
+ this._grads = new ColorGrads();
+ 
+ this.SetOptions(options);
+ 
+ this.Speed = Math.abs(this.options.Speed);
+ this.CssColor = this.options.CssColor;
+ 
+ this._startColor = this.options.StartColor || CurrentStyle(this._obj)[this.CssColor];
+ this._endColor = this.options.EndColor;
+ this._step = Math.abs(this.options.Step);
+ 
+ this.Reset();
+ this.SetColor();
+};
+ColorTrans.prototype = {
+ //设置默认属怿lt;br /> SetOptions: function(options) {
+ this.options = {//默认倿lt;br /> StartColor: '',//开始颜艿lt;br /> EndColor: '#000″,//结束颜色
+ Step: 20,//渐变级数
+ Speed: 20,//渐变速度
+ CssColor: 'color'//设置属性（Scripting属性）
+ };
+  Extend(this.options, options || {});
+ },
+ //重设颜色集合
+ Reset: function(color) {
+ //修改颜色后必须重新获取颜色集吿lt;br /> color = Extend({ StartColor: this._startColor, EndColor: this._endColor, Step: this._step }, color || {});
+ //设置属怿lt;br /> this._grads.StartColor = this._startColor = color.StartColor;
+ this._grads.EndColor = this._endColor = color.EndColor;
+ this._grads.Step = this._step = color.Step;
+ //获取颜色集合
+ this._colors = this._grads.Create();
+ this._index = 0;
+ },
+ //颜色渐入
+ FadeIn: function() {
+ this.Stop(); this._index++; this.SetColor();
+ if(this._index < this._colors.length – 1){
+ this._timer = setTimeout(Bind(this, this.FadeIn), this.Speed);
+ }
+ },
+ //颜色渐出
+ FadeOut: function() {
+ this.Stop(); this._index–; this.SetColor();
+ if(this._index > 0){
+ this._timer = setTimeout(Bind(this, this.FadeOut), this.Speed);
+ }
+ },
+ //颜色设置
+ SetColor: function() {
+ var color = this._colors[Math.min(Math.max(0, this._index), this._colors.length - 1)];
+ this._obj.style[this.CssColor] = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
+ },
+ //停止
+ Stop: function() {
+ clearTimeout(this._timer);
+ }
+};
+</script>
+</head>
+<body>
+<style type='text/css'>
+#idGrads{}
+#idGrads div{ font-size:0;height:1px;}
+</style>
+<div id='idGrads'> </div>
+<script>
+var forEach = function(array, callback, thisObject){
+ if(array.forEach){
+ array.forEach(callback, thisObject);
+ }else{
+ for (var i = 0, len = array.length; i < len; i++) { callback.call(thisObject, array[i], i, array); }
+ }
+}
+var colors = new ColorGrads({ StartColor: '#fff', EndColor: 'rgb(20,127,0)' }).Create();
+forEach(colors.concat().concat(colors.reverse()), function(x){
+ $('idGrads').innerHTML += '<div style="background-color:'+'rgb(' + x[0] + ',' + x[1] + ',' + x[2] + ');"></div>';
+})
+</script>
+<Br />
+<Br />
+<style type='text/css'>
+#idMenu{ background:#DBDBDB;text-align:center;line-height:25px; table-layout:fixed;}
+#idMenu td{ cursor:pointer;}
+</style>
+<table id='idMenu' width='600″ border='0″ cellspacing='5″ cellpadding='0″>
+ <tr>
+ <td onclick='location.href=’http://www.cnblogs.com/cloudgamer/archive/2008/07/21/ImgCropper.html’'>Cropper</td>
+ <td onclick='location.href=’http://www.cnblogs.com/cloudgamer/archive/2009/01/06/Tween.html’'>Tween</td>
+ <td onclick='location.href=’http://www.cnblogs.com/cloudgamer/archive/2008/12/24/Slider.html’'>Slider</td>
+ <td onclick='location.href=’http://www.cnblogs.com/cloudgamer/archive/2008/12/03/Resize.html’'>Resize</td>
+ <td onclick='location.href=’http://www.cnblogs.com/cloudgamer/archive/2008/11/17/Drag.html’'>Drag</td>
+ </tr>
+</table>
+<script>
+forEach($('idMenu').getElementsByTagName('td'), function(x, i){
+ var ct1 = new ColorTrans(x, { StartColor: '#666', EndColor: '#fff' });
+ var ct2 = new ColorTrans(x, { StartColor: '#f6f6f6', EndColor: 'rgb(20,150,0)', CssColor: 'backgroundColor' });
+ 
+ x.onmouseover = function(){ ct1.FadeIn(); ct2.FadeIn(); }
+ x.onmouseout = function(){ ct1.FadeOut(); ct2.FadeOut(); }
+})
+</script>
+<Br />
+<Br />
+<div id='idRandom' style='padding:10px;color:#fff; background-color:#CCC;'>点击随机换颜艿amp;lt;/div>
+<script>
+var ctRandom = new ColorTrans('idRandom', { EndColor: '#CCC', CssColor: 'backgroundColor' })
+$('idRandom').onclick = function(){
+ var rgb = Map([1,1,1], function(){ return Math.floor((Math.random() * 255)); } );
+ ctRandom.Reset({ StartColor: this.style.backgroundColor, EndColor: 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')' })
+ ctRandom.FadeIn();
+}
+</script>
+</body>
+</html>

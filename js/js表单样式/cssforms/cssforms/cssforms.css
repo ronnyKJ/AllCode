@@ -1,0 +1,242 @@
+body
+{
+	background:#CFDFEF;
+	font:12px/150% "Lucida Grande", Arial, Verdana, Helvetica, sans-serif;
+	margin:0;
+	padding:20px 30px;
+}
+
+input,textarea
+{
+	color:#6D93AB;
+	font:12px/17px "Lucida Grande", Arial, Verdana, Helvetica, sans-serif;
+}
+
+label
+{
+	color:#6D93AB;
+	line-height:24px;
+}
+
+div.select_box
+{
+	width:100px;
+	height:24px;
+}
+
+div.tag_select
+{
+	color:#79A2BD;
+	width:80px;
+	height:24px;
+	background:transparent url(ubox-select.gif) no-repeat 0 0;
+	line-height:24px;
+	padding:0 10px;
+}
+
+div.tag_select_hover
+{
+	color:#79A2BD;
+	width:80px;
+	height:24px;
+	background:transparent url(ubox-select.gif) no-repeat 0 -24px;
+	line-height:24px;
+	padding:0 10px;
+}
+
+div.tag_select_open
+{
+	color:#79A2BD;
+	width:80px;
+	height:24px;
+	background:transparent url(ubox-select.gif) no-repeat 0 -48px;
+	line-height:24px;
+	padding:0 10px;
+}
+
+ul.tag_options
+{
+	list-style:none;
+	background:transparent url(ubox-select.gif) no-repeat right bottom;
+	width:100px;
+	margin:0;
+	padding:0 0 5px;
+}
+
+ul.tag_options li
+{
+	background:transparent url(ubox-select.gif) repeat-y -100px 0;
+	width:80px;
+	height:24px;
+	text-decoration:none;
+	line-height:24px;
+	color:#79A2BD;
+	padding:0 10px;
+}
+
+ul.tag_options li.open_hover
+{
+	background:transparent url(ubox-select.gif) no-repeat 0 -72px;
+	color:#fff;
+}
+
+ul.tag_options li.open_selected
+{
+	background:transparent url(ubox-select.gif) no-repeat 0 -96px;
+	color:#fff;
+}
+
+div.type_radio
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat 0 0;
+	display:inline;
+}
+
+div.type_radio_hover
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat 0 -15px;
+	display:inline;
+}
+
+div.type_radio_checked
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat -15px 0;
+	display:inline;
+}
+
+div.type_radio_checked_hover
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat -15px -15px;
+	display:inline;
+}
+
+div.type_checkbox
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat 0 -30px;
+	display:inline;
+}
+
+div.type_checkbox_hover
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat 0 -45px;
+	display:inline;
+}
+
+div.type_checkbox_checked
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat -15px -30px;
+	display:inline;
+}
+
+div.type_checkbox_checked_hover
+{
+	margin:3px 0 0 3px;
+	width:15px;
+	height:15px;
+	background:transparent url(ubox-radio-checkbox.gif) no-repeat -15px -45px;
+	display:inline;
+}
+
+input.type_text
+{
+	width:146px;
+	height:17px;
+	background:transparent url(ubox-text.gif) no-repeat 0 0;
+	border:none;
+	padding:3px 7px;
+}
+
+input.type_text_hover
+{
+	width:146px;
+	height:17px;
+	background:transparent url(ubox-text.gif) no-repeat 0 -23px;
+	border:none;
+	padding:3px 7px;
+}
+
+input.type_text_focus
+{
+	width:146px;
+	height:17px;
+	background:transparent url(ubox-text.gif) no-repeat 0 -46px;
+	border:none;
+	padding:3px 7px;
+}
+
+input.type_submit
+{
+	width:70px;
+	height:25px;
+	background:transparent url(ubox-submit.gif) no-repeat 0 0;
+	border:none;
+	color:#fff;
+}
+
+input.type_submit_hover
+{
+	width:70px;
+	height:25px;
+	background:transparent url(ubox-submit.gif) no-repeat 0 -25px;
+	border:none;
+	color:#fff;
+}
+
+textarea.tag_textarea
+{
+	width:300px;
+	height:150px;
+	background:#fff;
+	border:2px solid #B8CEDD;
+	padding:3px;
+}
+
+textarea.tag_textarea_hover
+{
+	width:300px;
+	height:150px;
+	background:#fff;
+	border:2px solid #6D93AB;
+	padding:3px;
+}
+
+textarea.tag_textarea_focus
+{
+	width:300px;
+	height:150px;
+	background:#fff;
+	border:2px solid #7EAE00;
+	padding:3px;
+}
+
+.transparent
+{
+	filter:alpha(opacity=0);
+	-moz-opacity:0;
+	opacity:0;
+	border:none;
+	background:#FFF;
+	z-index:10;
+	cursor:pointer;
+}

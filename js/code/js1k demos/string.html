@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+var d=document,g=d.body.style,i=d.getElementById("c"),k=i.width=300,l=i.height=innerHeight,m=i.getContext("2d");m.fillRect(0,0,k,l);for(var n=m.getImageData(0,0,k,l),o=n.data,p=Math.cos,q=0,r=[],s=[],u=0;u<l;){r[u]=k;s[u++]=0}g.textAlign="center";g.margin="0px";g.background="#000";g.overflow="hidden";function v(a,e,b,h,t){a=a+b*k<<2;e=e+b*k<<2;for(b=0;a<e;){o[a]=b<3?0:h|0;o[a+1]=o[a+2]=b++<3?0:t|0;a+=4}}setInterval(function(){q+=0.05;for(var a=0;a<l;a++){for(var e=k,b=0,h=k,t=q+4*p(q)*(a/l),j=0;j<=15;j++){var c=6.3*j/15,f=p(c);f=1-0.4*f*f;c=k+k*p(c+t)*f>>1;if(h<c){f=255*f^0;v(h,c,a,f,j%3?f:0)}h=c;e=c<e?c:e;b=c>b?c:b}v(r[a],e,a);v(b,s[a],a);r[a]=e;s[a]=b}m.putImageData(n,0,0)},30)
+</script>
+</html>

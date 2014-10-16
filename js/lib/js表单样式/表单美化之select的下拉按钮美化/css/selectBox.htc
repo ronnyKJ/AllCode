@@ -1,0 +1,495 @@
+﻿<!--
+以下是HTC代码: 用记事本编辑保存时后缀名改成.htc   本文中用到的图
+图片名称:icon_arrow.gif
+-->
+<public:component URN="lyrSelectBox" />
+<public:attach event="ondocumentready" handler="initializeSelectBox" />
+<public:attach event="onpropertychange" handler="eventChangeProperty" />
+<public:attach event="onmousedown" for="document" handler="eventMouseDown" />
+<public:attach event="onkeydown" for="document" handler="eventKeyDown" />
+<public:property name="setColor" put="setupColor" />
+<public:property name="setImage" put="setupImage" />
+<public:property name="setDisplayCount" put="setupDisplayCount" />
+<public:method name="reInitializeSelectBox" />
+
+<script language="JScript">
+var objSelectBox = this;
+var widthObject, widthObjectOriginal, heightObject;
+var tblTitle, tbdTitle, trTitle, tdTitle;
+var objItemWindow, objItemDocument, objItemBody, objItemEvent;
+var tblItem, tbdItem, trItem, tdItem;
+var leftObject, heightItemWindow, heightTitleTable;
+var countMaxItem = 10;
+var countItem = this.length;
+var is_open = false;
+var is_loaded = false;
+var focusElement;
+
+var normal_bgcolor = "#ffffff"; //背景颜色--鼠标未经过
+var normal_color = "#000000";//文字颜色--鼠标未经过
+var active_bgcolor = "#f5f5f5";//背景颜色--鼠标经过       
+var active_color = "#848484";//文字颜色--鼠标经过
+var normal_border_tag = "1 solid #CFCFCF";//列表外边框颜色  1 像素
+var active_border_tag = "1 solid #CFCFCF";//下拉菜单外边框颜色  1 像素
+var font_tag = "normal 12px 宋体";//字体
+var box_h = "18";//下拉菜单的高度
+var arrow_image = "images/icon_arrow.gif";//图片地址13*12--代替下拉菜单的按钮,向下的三角!
+
+function setupColor(color_list){
+    var color_array = color_list.split(",");
+    var color = new Array();
+
+    for(i=0; i<color_array.length; i++){
+        color[i] = color_array[i];
+    }
+
+    if(color[0]) normal_color = color[0];
+    if(color[1]) normal_bgcolor = color[1];
+    if(color[2]) active_color = color[2];
+    if(color[3]) active_bgcolor = color[3];
+    if(color[4]) normal_border_tag = "1 solid "+color[4];
+    if(color[5]) active_border_tag = "1 solid "+color[5];
+}
+
+function setupImage(image_file){
+    if(image_file) arrow_image = image_file;
+}
+
+function setupDisplayCount(max_count){
+    if(max_count) countMaxItem = max_count;
+}
+
+
+function disableScroll(){
+    window.execScript("document.onmousewheel = function(){return false;}");
+    window.execScript("document.onkeydown = function(){return false;}");
+}
+
+function enableScroll(){
+    window.execScript("document.onmousewheel = function(){return true;}");
+    window.execScript("document.onkeydown = function(){return true;}");
+}
+
+//  Mouse Over Event
+function eventMouseOverTT(){
+ if(!objSelectBox.disabled){
+     tblTitle.style.border = active_border_tag;
+  imgArrow.style.filter = '';
+ }
+}
+
+//  Mouse Out Event
+function eventMouseOutTT(){
+    tblTitle.style.border = normal_border_tag;
+//    imgArrow.style.filter = 'gray()';
+}
+
+//  Mouse Over Event
+function eventMouseOverIT(idx){
+    removeItemStyle();
+    tdItem[idx].style.color = active_color;
+    tdItem[idx].style.background = active_bgcolor;
+    focusElement = tdItem[idx];
+}
+
+// onMouseDown Event
+function eventMouseDown(){
+    if(is_open) changeItemWindowDisplay();
+}
+
+//  Focus Event
+function eventFocusSB(){
+ tdTitle_sv.innerHTML = objSelectBox.options[selectedIndex].text;
+ tdTitle_sv.style.color = active_color;
+ tdTitle_sv.style.background = active_bgcolor;
+}
+
+//  Blur Event
+function eventBlurSB(){
+    tdTitle_sv.style.color = normal_color;
+    tdTitle_sv.style.background = normal_bgcolor;
+}
+
+//  Key Down Event
+function eventKeyDownSB(){
+    var keycode = window.event.keyCode ? window.event.keyCode : window.event.which ? window.event.which : window.event.charCode;
+    if(is_open && focusElement && keycode == 13){
+        nowIndex = focusElement.getAttribute("key");
+        changeSelectBoxValue(nowIndex);
+    }
+}
+
+// onKeyDown 
+function eventKeyDown(){
+    var keycode = window.event.keyCode ? window.event.keyCode : window.event.which ? window.event.which : window.event.charCode;
+    var eventElement = window.event.srcElement
+    //if(keycode == 32 && eventElement.type == "select-one" && eventElement.name == this.name){
+    //    changeItemWindowDisplay();
+    //}
+
+    if(is_open && focusElement){
+        var firstIndex = 0;
+        var lastIndex = countItem - 1;
+        var nowIndex = objSelectBox.selectedIndex;
+        var tmpIndex = 0;
+        var change_value_check = false;
+        nowIndex = focusElement.getAttribute("key");
+
+        if(window.event.altKey) closeItemWindow();
+        if(keycode == 38){       
+            tmpIndex = nowIndex - 1;
+            if(tmpIndex < firstIndex) tmpIndex = firstIndex;
+            selectIndex = tmpIndex;
+            change_value_check = true;
+        }else if(keycode == 40){ 
+            tmpIndex = nowIndex + 1;
+            if(tmpIndex > lastIndex) tmpIndex = lastIndex;
+            selectIndex = tmpIndex;
+            change_value_check = true;
+        }else if(keycode == 33){ // Page Up
+            tmpIndex = nowIndex - countMaxItem - 1;
+            if(tmpIndex < firstIndex) tmpIndex = firstIndex;
+            selectIndex = tmpIndex;
+            change_value_check = true;
+        }else if(keycode == 34){ // Page Down
+            tmpIndex = nowIndex + countMaxItem - 1;
+            if(tmpIndex > lastIndex) tmpIndex = lastIndex;
+            selectIndex = tmpIndex;
+            change_value_check = true;
+        }else if(keycode == 36){ // Home 
+            selectIndex = firstIndex;
+            change_value_check = true;
+        }else if(keycode == 35){ // End 
+            selectIndex = lastIndex;
+            change_value_check = true;
+        }else if(keycode == 13){
+            if(focusElement != null) changeSelectBoxValue(nowIndex);
+        }
+
+        if(change_value_check){
+            removeItemStyle();
+            tdItem[selectIndex].style.color = active_color;
+            tdItem[selectIndex].style.background = active_bgcolor;
+            objItemBody.scrollTop = selectIndex * 20;
+            focusElement = tdItem[selectIndex];
+        }
+    }
+}
+
+// onMouseWheel 
+// onMouseWheel 
+function eventMouseWheel(){
+    if(is_open){
+        if(!focusElement) idx = objSelectBox.selectedIndex;
+        else idx = focusElement.key;
+
+        for(i=0; i<window.event.wheelDelta; i+=120) idx--;
+        for(i=0; i>window.event.wheelDelta; i-=120) idx++;
+        idx = Math.max(idx, 0);
+        idx = Math.min(idx, countItem - 1);
+
+        removeItemStyle();
+        tdItem[idx].style.color = active_color;
+        tdItem[idx].style.background = active_bgcolor;
+        objItemBody.scrollTop = idx * 20;
+        focusElement = tdItem[idx];
+    }
+}
+
+// SelectBox Change Property Event
+function eventChangeProperty(){
+    if(window.event.type == "propertychange" && window.event.propertyName == "selectedIndex"){
+        tdTitle_sv.innerHTML = objSelectBox.options[objSelectBox.selectedIndex].text;
+        if(objSelectBox.onchange != null) objSelectBox.onchange();
+    }
+}
+
+function changeItemWindowDisplay(){
+    if(is_open == false){
+        if(countItem && !objSelectBox.disabled) openItemWindow()
+    }else{
+        closeItemWindow();
+    }
+}
+
+function openItemWindow(){
+    eventBlurSB();
+
+    heightScreen = window.screen.height;
+    spaceDown = heightScreen - window.event.screenY - heightTitleTable;
+    spaceUp = heightScreen - spaceDown;
+
+    // Item Window
+    if((objSelectBox.length <= countMaxItem && (objSelectBox.length * 20 + 4) > spaceDown) || (objSelectBox.length > countMaxItem && spaceDown < (countMaxItem * 20 + 4))){
+        objItemWindow.show(0,(0-heightItemWindow),widthObject,heightItemWindow,tblTitle);
+    // Item Window
+    }else{
+        objItemWindow.show(0,heightTitleTable,widthObject,heightItemWindow,tblTitle);
+    }
+
+    var idx = objSelectBox.selectedIndex;
+    tdItem[idx].style.color = active_color;
+    tdItem[idx].style.background = active_bgcolor;
+    objItemBody.scrollTop = idx * 18;
+    focusElement = tdItem[idx];
+    disableScroll();
+    is_open = true;
+}
+
+function closeItemWindow(){
+    objItemWindow.hide();
+    removeItemStyle();
+    enableScroll();
+    objSelectBox.focus();
+    is_open = false;
+}
+
+function initializeSelectBox(){
+    var browser_version = new Number(((window.navigator.appVersion.split('; '))[1].split(' '))[1]);
+
+    if(this.type != "select-one" || this.size != 0){
+        return;
+    }else if(navigator.appName != "Microsoft Internet Explorer" || browser_version < 5.5){
+        return;
+    }else{
+        objSelectBox.attachEvent("onfocus",eventFocusSB);
+        objSelectBox.attachEvent("onblur",eventBlurSB);
+
+        initializeBasicInformation();
+        initializeTitleTable();
+        if(countItem){
+            initializeItemWindow();
+            initializeItemTable();
+        }
+        is_loaded = true;
+    }
+}
+
+function reInitializeSelectBox(){
+    countItem = objSelectBox.length;
+    tblTitle.removeNode(true);
+    initializeBasicInformation();
+    initializeTitleTable();
+    initializeItemWindow();
+    initializeItemTable();
+}
+
+function initializeBasicInformation(){
+    // style.width 
+    // this.offsetWidth 
+    //  getStringPixelWidth()
+    if(is_loaded == false && objSelectBox.style.width){
+        widthObject = parseInt(objSelectBox.style.width);
+        widthObjectOriginal = widthObject;
+    }else if(is_loaded == false && objSelectBox.offsetWidth){
+        widthObject = objSelectBox.offsetWidth;
+    }else{
+        var lengthMax = 0;
+        if(countItem){
+            for(i=0; i<countItem; i++){
+                lengthItem = getStringLength(objSelectBox.options[i].text);
+                if(lengthMax < lengthItem){
+                    lengthMax = lengthItem;
+                    stringMax = objSelectBox.options[i].text;
+                }
+            }
+            widthObject = getStringPixelWidth(stringMax) + 12 + 12 + 2;
+        }
+    }
+    objSelectBox.style.width = "0px";
+
+    heightTitleTable = box_h;
+    if(countItem < countMaxItem){
+        heightItemWindow = countItem * 20 + 2 + 2;
+        widthItemTable = widthObject - 2;
+    }else{
+        heightItemWindow = countMaxItem * 20 + 2 + 2;
+        widthItemTable = widthObject - 18;
+    }
+    heightObject = heightTitleTable + heightItemWindow;
+}
+
+function initializeTitleTable(){
+    if(countItem){
+        if(!objSelectBox.selectedIndex) objSelectBox.selectedIndex = 0;
+        var textDefault = objSelectBox.options[objSelectBox.selectedIndex].text;
+    // 60px
+    }else{
+        var textDefault = "";
+        widthObject=60;
+    }
+    var tooltip = objSelectBox.tooltip;
+
+    tblTitle = document.createElement("TABLE");
+    tblTitle.border = 0;
+    tblTitle.cellSpacing = 1;
+    tblTitle.cellPadding = 0;
+    tblTitle.style.paddingLeft = 2;
+    tblTitle.style.width = widthObject;
+    tblTitle.style.height = heightTitleTable;
+    tblTitle.style.color = normal_color;
+    tblTitle.style.background = normal_bgcolor;
+    tblTitle.style.border = normal_border_tag;
+    tblTitle.style.display = "inline";
+    tblTitle.style.verticalAlign = "bottom";
+    tblTitle.onmouseover = eventMouseOverTT;
+    tblTitle.onmouseout = eventMouseOutTT;
+    if(tooltip != null) tblTitle.title = tooltip;
+
+    tbdTitle = document.createElement("TBODY");
+    tblTitle.appendChild(tbdTitle);
+
+    trTitle = document.createElement("TR");
+    trTitle.onclick = changeItemWindowDisplay;
+    tdTitle_sv = document.createElement("TD");
+    tdTitle_sv.innerHTML = textDefault;
+    tdTitle_sv.width = widthObject - 14 - 4 - 4;
+    tdTitle_sv.valign = "absmiddle";
+    tdTitle_sv.onselectstart = function(){return false;};
+    tdTitle_sv.style.font = font_tag;
+ if(!objSelectBox.disabled) tdTitle_sv.style.color = normal_color;
+ else tdTitle_sv.style.color = disabled_color;
+    tdTitle_sv.style.cursor = "default";
+    tdTitle_sv.style.background = normal_bgcolor;
+    tdTitle_sv.style.verticalAlign = "text-bottom";
+    trTitle.appendChild(tdTitle_sv);
+    tdTitle = document.createElement("TD");
+    tdTitle.width = "14";
+    tdTitle.align = "center";
+    tdTitle.onselectstart = function(){return false;};
+        imgArrow = document.createElement("IMG");
+        imgArrow.src = arrow_image;
+        imgArrow.valign = "bottom";
+//        imgArrow.style.filter = "gray()";
+    tdTitle.appendChild(imgArrow);
+    trTitle.appendChild(tdTitle);
+    tbdTitle.appendChild(trTitle);
+
+    insertAdjacentElement("afterEnd",tblTitle);
+}
+
+function initializeItemWindow(){
+    objItemWindow = createPopup();
+    objItemDocument = objItemWindow.document;
+    objItemBody = objItemDocument.body;
+    with(objItemBody.style){
+        border = normal_border_tag;
+        overflowY = "auto";
+        scrollbarFaceColor = "#3894CF";
+                                //表面颜色
+        scrollbarShadowColor = "#ffffff";
+                              //阴影
+        scrollbarHighlightColor = "#3894CF";
+                                 //高光处
+        scrollbar3dlightColor = "#3894CF";
+                                //3d
+        scrollbarDarkShadowColor = "#3894CF";
+                                 //阴影
+        scrollbarTrackColor = "#3894CF";
+                                // 背景
+        scrollbarArrowColor = "#ffffff";
+                                //三角
+        buttonTextColor = "#ffffff";
+                          //
+    }
+}
+
+function initializeItemTable(){
+    tblItem = objItemDocument.createElement("TABLE");
+    tblItem.cellSpacing = 2;
+    tblItem.cellPadding = 2;
+    tblItem.style.width = widthItemTable;
+    tblItem.style.color = normal_color;
+    tblItem.style.background = normal_bgcolor;
+
+    tbdItem = objItemDocument.createElement("TBODY");
+    tblItem.appendChild(tbdItem);
+
+    trItem = new Array();
+    tdItem = new Array();
+    for(i=0; i<objSelectBox.length; i++){
+        textSelectBox = objSelectBox.options[i].text;
+        valueSelectBox = objSelectBox.options[i].value;
+        var tooltip = objSelectBox.options[i].tooltip;
+
+        trItem[i] = objItemDocument.createElement("TR");
+        tdItem[i] = objItemDocument.createElement("TD");
+        if(tooltip != null) tdItem[i].title = tooltip;
+        tdItem[i].innerHTML = " " + textSelectBox;
+        tdItem[i].setAttribute("key",i);
+        tdItem[i].height = "16";
+        tdItem[i].vAlign = "bottom";
+        tdItem[i].onmouseover = function(){eventMouseOverIT(this.getAttribute("key"))}
+        tdItem[i].onclick = function(){changeSelectBoxValue(this.getAttribute("key"))}
+        tdItem[i].onselectstart = function(){return false;};
+  tdItem[i].style.font = font_tag;
+  tdItem[i].style.color = normal_color;
+  tdItem[i].style.background = normal_bgcolor;
+        tdItem[i].style.cursor = "default";
+        tdItem[i].style.verticalAlign = "bottom";
+        trItem[i].appendChild(tdItem[i]);
+        tbdItem.appendChild(trItem[i]);
+    }
+
+    objItemBody.insertAdjacentElement("beforeEnd",tblItem);
+}
+
+function removeItemStyle(){
+    for(i=0; i<countItem; i++){
+        tdItem[i].style.color = normal_color;
+        tdItem[i].style.background = normal_bgcolor;
+    }
+}
+
+function changeSelectBoxValue(idx){
+    objSelectBox.selectedIndex = idx;
+    tdTitle_sv.innerHTML = objSelectBox.options[idx].text;
+    closeItemWindow()
+}
+
+function getStringLength(string){
+    var i, j=0;
+
+    for(i=0;i<string.length;i++) {
+        lengthString = escape(string.charAt(i)).length;
+        if(lengthString > 4) j++;
+        j++;
+    }
+
+    return j;
+}
+
+function getStringPixelWidth(string_value){
+    var ascii_code;
+    var string_value_length = string_value.length;
+    var character;
+    var character_width;
+    var character_length;
+    var total_width = 0;
+    var total_length = 0;
+
+    var special_char_size = 6;
+    var multibyte_char_size = 12;
+    var base_char_start = 32;
+    var base_char_end =  127;
+    var ascii_char_size = Array(4,4,4,6,6,10,8,4,5,5,6,6,4,6,4,6,6,6,6,6,6,6,6,6,6,6,4,4,8,6,8,6,12,8,8,9,8,8,7,9,8,3,6,8,7,11,9,9,8,9,8,8,8,8,8,10,8,8,8,6,11,6,6,6,4,7,7,7,7,7,3,7,7,3,3,6,3,11,7,7,7,7,4,7,3,7,6,10,7,7,7,6,6,6,9,6);
+
+    for(i=0; i<string_value_length; i++){
+        character = string_value.substring(i,(i+1));
+        ascii_code = character.charCodeAt(0);
+
+        if(ascii_code < base_char_start){
+            character_width = special_char_size;
+        }else if(ascii_code <= base_char_end){
+            idx = ascii_code - base_char_start;
+            character_width = ascii_char_size[idx];
+        }else if(ascii_code > base_char_end){
+            character_width = multibyte_char_size;
+        }
+        total_width += character_width;
+    }
+
+    return total_width;
+}
+</script>
+</public:component>

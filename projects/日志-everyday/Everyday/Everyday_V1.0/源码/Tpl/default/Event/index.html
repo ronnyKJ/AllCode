@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Everyday</title>
+<link href="__ROOT__/Everyday/css/histogram.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+var cur_url = "__URL__";
+</script>
+<script type="text/javascript" src="__ROOT__/Everyday/js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="__ROOT__/Everyday/js/statics.js"></script>
+<script type="text/javascript" src="__ROOT__/Everyday/js/userAction.js"></script>
+</head>
+<body>
+{$username}<a href="__URL__/logout/">退出帐户</a>
+<hr>
+<div id="histogramContainer"></div>
+<hr>
+<form id="eventForm" method='post' action="__URL__/insert">
+	<if condition="(count($cate) neq 0)">
+	<a href="javascript:addEvent();">新增事件</a>
+	<table cellpadding=2 cellspacing=2>
+		<tr>
+			<td>日期: </td>
+			<td><input id="date" type="text" name="date" /></td>
+		</tr>
+		<tr>
+			<td>标题: </td>
+			<td><input id="title" type="text" name="title" /></td>
+		</tr>
+		<tr>
+			<td>时间: </td>
+			<td><input id="starttime" type="text" name="starttime" />-<input id="endtime" type="text" name="endtime" /></td>
+		</tr>
+		<tr id="cRow">
+			<td>分类: </td>
+			<td>
+				<select id="category" name="category">
+					<volist name="cate" id="item">
+						<option value="{$item.cid}">{$item.categoryname}</option>
+					</volist>
+				</select>
+				<a href="__URL__/addCategory">添加分类</a>
+			</td>
+		</tr>
+		<tr><td></td><td id="attributes"></td></tr>
+		<tr>
+			<td>
+				<input type="hidden" name="uid" id="uid" value="{$userid}" />
+				<input type="hidden" name="eventid" id="eventid" />
+			</td>
+			<td><input type="submit" value="确 定"> <input type="reset" value="清 空"></td>
+		</tr>
+	</table>
+	<else/><a href="__URL__/addCategory">添加分类</a>
+	</if>
+	<hr>
+	<table>
+	<if condition="(count($cate) neq 0)">
+		<volist name="cate" id="cate_count">
+			<tr><td>{$cate_count.cid}</td><td>{$cate_count.categoryname}</td><td>{$cate_count.count}</td></tr>
+		</volist>
+	<else/>暂无分类......
+	</if>
+	</table>
+	<hr>
+	<if condition="(count($list) neq 0)">
+	<table>
+		<tr>
+			<th>序号</th>
+			<th>属性内容id</th>
+			<th>事件id</th>
+			<th>属性内容</th>
+			<th>属性id</th>
+			<th>事件id</th>
+			<th>日期</th>
+			<th>标题</th>
+			<th>开始时间</th>
+			<th>结束时间</th>
+			<th>分类id</th>
+			<th>用户id</th>
+			<th>分类id</th>
+			<th>用户id</th>
+			<th>分类名</th>
+			<th>分类事件数</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<volist name="list" id="vo" key="i">
+			<tr>
+				<td>{$i}.</td>
+				<td class="_attrCtId">{$vo.aid}</td>
+				<td class="_evtId">{$vo.eventid}</td>
+				<td class="_attrCt">{$vo.content}</td>
+				<td class="_attrId">{$vo.attributeid}</td>
+				<td>{$vo.id}</td>
+				<td class="_date">{$vo.date}</td>
+				<td class="_title">{$vo.title}</td>
+				<td class="_stTime">{$vo.starttime}</td>
+				<td class="_edTime">{$vo.endtime}</td>
+				<td class="_ctgr">{$vo.categoryid}</td>
+				<td class="_uid">{$vo.userid}</td>
+				<td class="_ctgrId">{$vo.cid}</td>
+				<td>{$vo.uid}</td>
+				<td class="_ctgrNm">{$vo.categoryname}</td>
+				<td class="_cnt">{$vo.count}</td>
+				<td><a href="javascript:;" onclick="edit(this,{$vo.eventid})">编辑</a></td>
+				<td><a href="__URL__/deleteEvt/id/{$vo.id}">删除</a></td>
+			</tr>
+		</volist>
+	<else/>还没添加事件......
+	</if>
+	</table>
+</form>
+ </body>
+</html>

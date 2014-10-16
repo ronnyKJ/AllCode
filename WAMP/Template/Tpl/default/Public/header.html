@@ -1,0 +1,58 @@
+<taglib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+{/*这种是ThinkPHP模板引擎的注释方式一*/}
+{//这种是ThinkPHP模板引擎的注释方式二}
+
+{//模板变量$title输出}
+<title>ThinkPHP示例：<present name="title">{$title}<else />更多特性</present></title>
+
+{//使用html标签库的link标签引入css文件}
+
+{//在模板中，../Public 会自动解释实际路径，指向风格中的Public目录}
+<html:link type="css" href ="../Public/Css/style.css" />
+
+{//html的link标签也可以引入js文件}
+<html:link type="js" href ="../Public/Js/jquery.js" />
+
+{//模板路径地址传值到js文件}
+{//当需要在js文件中应用到路径定义，可以使用这个小技巧}
+{//用consts('public')就可返回需要的路径地址，可以在consts函数中按需添加对象属性}
+<script type="text/javascript">
+function consts(v) {
+    var cons = {
+        public  :   '../Public/'
+    };
+    return cons[v];
+}
+</script>
+<html:link type="js" href ="../Public/Js/thickbox.js" />
+
+<!--这种注释模板缓存时不会删除，所以会占用模板字节-->
+{/*使用模板引擎的注释，在模板缓存时会自动清除，不会增加文件大小，是一种很不错的方法*/}
+
+</head>
+<body>
+<div class="wrap">
+
+{//页首 header}
+<div class="header">
+    <h1>ThinkPHP内置模板引擎使用：  <strong><present name="title">{$title}<else />更多特性</present></strong> </h1>
+</div>
+
+{//比较标签的使用}
+{//如果当前模块不是Index则显示}
+<neq name="Think.const.MODULE_NAME" value="Index">
+<p style="text-align:right">
+    <a href="__APP__/Index/" title="返回首页">Index/index</a>&nbsp;&nbsp;
+    <a href="__APP__/Demo/" title="批量赋值输出">Demo/index</a>&nbsp;&nbsp;
+    <a href="__APP__/Demo/loop1" title="循环输出">Demo/loop1</a>&nbsp;&nbsp;
+    <a href="__APP__/Demo/loop2" title="多层嵌套">Demo/loop2</a>&nbsp;&nbsp;
+    <a href="__APP__/Demo/mytags" title="自定义标签示例">Demo/mytags</a>
+</p>
+</neq>
+
+<div class="content">

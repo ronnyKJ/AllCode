@@ -1,0 +1,10 @@
+﻿<html>
+<head><title>Oil</title>
+<style>
+</style>
+</head>
+<body><canvas id="c"></canvas></body>
+<script type="text/javascript">
+c=document.getElementById("c");W=window;H=W.innerHeight-24;W=W.innerWidth-24;c.width=W;c.height=H;c=c.getContext("2d");M=Math;C=M.cos;S=M.sin;R=M.random;P=M.PI;ox=oy=120;cr=cu=cf=sU=sF=m=0;cU=cF=n=dy=1;dx=2;function init(i,o){r=30+(i%36)*2;U=(i%36)/35*P*2;F=i/683*P;e=S(F);o.x=r*e*C(U);o.y=r*e*S(U);o.z=r*C(F);calc(o);return o;}function calc(o){X=-o.x*sU+o.y*cU;Y=-o.x*cU*cF-o.y*sU*cF+o.z*sF;Z=-o.x*sF*cU-o.y*sU*sF-o.z*cF+240;hx=X*C(cr)-Y*S(cr);Y=X*S(cr)+Y*C(cr);X=hx;o.sX=ox+X;o.sY=oy+Y;if(Z!=0){o.sX=ox+180*X/Z;o.sY=oy-180*Y/Z;}}M=684;p=new Array(M);for(i=0;i<M;i++)p[i]=init(i,{});function l(){c.fillStyle="rgba(0,0,0,0.7)";c.fillRect(0,0,W,H);m+=n;if(m>254||m<1)n=-n;for(i=0;i<M;i++){c.fillStyle="rgb("+m+","+(i/4)+",128)";c.fillRect(p[i].sX,p[i].sY,2,2);}cu+=0.017;cf-=0.017;cr+=0.017;sU=S(cu);cU=C(cu);sF=S(cf);cF=C(cf);ox+=dx;oy+=dy;if((ox>W-90)||(ox<90))dx=-dx;if((oy>H-90)||(oy<90))dy=-dy;for(i=0;i<M;i++)calc(p[i]);setTimeout('l()',10);}l();
+</script>
+</html>

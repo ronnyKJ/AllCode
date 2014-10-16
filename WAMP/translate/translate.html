@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>google翻译</title>  
+</head>  
+<body>  
+内容:<input type="text" id="source" x-webkit-speech onchange="translate()"><br>
+<br><br>  
+翻译结果：<div id="results_body"></div>  
+<script type="text/javascript">
+	function show(result)
+	{
+		console.log(result);
+		document.getElementById("results_body").innerHTML = result.translation[0];
+	}
+	
+	function translate()  
+	{
+		var newScript = document.createElement('script');
+		newScript.type = 'text/javascript';
+		var sourceText = escape(document.getElementById("source").value);
+		var source = 'http://fanyi.youdao.com/openapi.do?keyfrom=ronaldinhokj&key=1478216563&type=data&doctype=jsonp&callback=show&version=1.1&q=' + sourceText;
+		newScript.src = source;
+		document.getElementsByTagName('head')[0].appendChild(newScript);
+	}
+</script>  
+</body>  
+</html> 
